@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --animate-marquee: marquee 30s linear infinite;
+
+  /* Primary */
+  --color-primary: #E84910;
+  --color-primary-hover: #C93D0A;
+  --color-primary-light: #FFF0E8;
+
+  /* Navigation */
+  --color-nav: #FFCA00;
+
+  /* Dark sections */
+  --color-dark: #0F1A2E;
+  --color-dark-card: #1A2A42;
+
+  /* Accent */
+  --color-gold: #C8A84E;
+
+  /* Text */
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #5A6377;
+  --color-text-light: #8E99B0;
+
+  /* Status */
+  --color-success: #2E7D32;
+  --color-error: #C62828;
+  --color-warning: #F9A825;
+
+  /* UI */
+  --color-link: #1E88E5;
+  --color-border: #E2E5EC;
+  --color-section: #F7F8FA;
+  --color-white: #FFFFFF;
+
+  /* Fonts */
+  --font-primary: "Open Sans", sans-serif;
+  --font-secondary: Roboto, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  to {
+    transform: translateX(-50%);
+  }
 }
