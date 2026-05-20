@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "Exchange C Review",
-  description: "Detailed review of Exchange C — regulated in EU and Asia, advanced charting tools, OTC trading desk, and cold storage security.",
+  description: "Detailed review of Exchange C â€” regulated in EU and Asia, advanced charting tools, OTC trading desk, and cold storage security.",
 };
 
 const pros = ["Regulated in EU and Asia", "Advanced charting tools", "OTC trading desk for large orders", "Cold storage assets", "Competitive fees (0.15%)", "Professional trading interface"];
 const cons = ["Smaller coin selection (200+)", "Not ideal for absolute beginners", "Higher minimum deposit for OTC"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 16, 2026", title: "Exchange C Receives New Regulatory License in Singapore", excerpt: "Exchange C has obtained a Major Payment Institution license from the Monetary Authority of Singapore.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
-  { category: "Cryptocurrency", date: "May 11, 2026", title: "Exchange C Launches Advanced Trading Suite", excerpt: "New professional trading suite with advanced charting, real-time data, and algorithmic trading support.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
-  { category: "Cryptocurrency", date: "May 6, 2026", title: "OTC Trading: A Guide for Large Investors", excerpt: "How OTC desks like Exchange C's help large investors execute trades without impacting market prices.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 16, 2026", title: "Exchange C Receives New Regulatory License in Singapore", excerpt: "Exchange C has obtained a Major Payment Institution license from the Monetary Authority of Singapore.", href: "/news", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 11, 2026", title: "Exchange C Launches Advanced Trading Suite", excerpt: "New professional trading suite with advanced charting, real-time data, and algorithmic trading support.", href: "/news", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 6, 2026", title: "OTC Trading: A Guide for Large Investors", excerpt: "How OTC desks like Exchange C's help large investors execute trades without impacting market prices.", href: "/news", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
 ];
 
 export default function ExchangeC() {
@@ -24,7 +25,7 @@ export default function ExchangeC() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/crypto-exchange" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Crypto Exchanges</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Crypto Exchanges", href: "/crypto-exchange" }, { label: "Exchange C" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-600 to-teal-800 flex items-center justify-center">
               <span className="text-white font-bold text-xl">C</span>
@@ -68,7 +69,7 @@ export default function ExchangeC() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

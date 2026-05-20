@@ -3,6 +3,7 @@ import { Open_Sans, Roboto } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PriceTicker from "@/components/PriceTicker";
+import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -20,6 +21,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://trantamcapital.vercel.app"),
   title: {
     default: "TrantamCapital — Trade Smarter, Invest Wiser",
     template: "%s | TrantamCapital",
@@ -31,6 +33,10 @@ export const metadata: Metadata = {
     description:
       "Expert forex broker reviews, crypto exchange comparisons, and market analysis.",
     type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -45,10 +51,17 @@ export default function RootLayout({
       className={`${openSans.variable} ${roboto.variable}`}
     >
       <body className="min-h-screen flex flex-col font-sans text-text-primary">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-bold"
+        >
+          Skip to main content
+        </a>
         <Header />
         <PriceTicker />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

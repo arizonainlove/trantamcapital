@@ -14,12 +14,15 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
-### Site Structure (20 pages)
+### Site Structure (31 routes)
 
-#### Utility Pages (3)
+#### Utility Pages (6)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
 - `/privacy-policy` — GDPR compliance, data collection (email), cookies, user rights
 - `/terms-of-service` — Risk disclaimer, no financial advice, liability limitation
+- `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
+- `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
+- `/api/contact` — Contact form POST endpoint with validation
 
 #### Main Pages (10)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
@@ -41,3 +44,14 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/crypto-exchange/exchange-b` — Exchange B review + 3 articles
 - `/crypto-exchange/exchange-c` — Exchange C review + 3 articles
 - `/binary-option/platform-a` — BinaryPlatform A review + 3 articles
+
+#### Dynamic Routes (9)
+- `/news/[slug]` — 9 article detail pages, statically generated via `generateStaticParams`
+
+#### New Components
+- `BackToTop.tsx` — Floating button (appears after 400px scroll)
+- `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
+- `NewsletterForm.tsx` — Email subscription form with validation
+
+#### Shared Data
+- `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata

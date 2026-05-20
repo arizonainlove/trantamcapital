@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "ForexBroker C Review",
-  description: "Detailed review of ForexBroker C — FCA regulated with social trading and copy trading features.",
+  description: "Detailed review of ForexBroker C â€” FCA regulated with social trading and copy trading features.",
 };
 
 const pros = ["FCA regulated", "Social & copy trading", "Competitive spreads", "Low minimum deposit ($50)", "Excellent mobile app", "Negative balance protection"];
 const cons = ["Limited leverage (1:30 max)", "Fewer currency pairs than competitors", "Withdrawal processing can be slow"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 17, 2026", title: "ForexBroker C Enhances Copy Trading Platform", excerpt: "New updates to ForexBroker C's copy trading platform make it easier to follow top-performing traders.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
-  { category: "Forex", date: "May 12, 2026", title: "Social Trading: The Future of Forex", excerpt: "How social trading platforms like ForexBroker C are changing the way beginners learn to trade.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
-  { category: "Forex", date: "May 7, 2026", title: "FCA Regulation: Why It Matters", excerpt: "Why FCA regulation matters when choosing a forex broker and how it protects your funds.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 17, 2026", title: "ForexBroker C Enhances Copy Trading Platform", excerpt: "New updates to ForexBroker C's copy trading platform make it easier to follow top-performing traders.", href: "/news", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 12, 2026", title: "Social Trading: The Future of Forex", excerpt: "How social trading platforms like ForexBroker C are changing the way beginners learn to trade.", href: "/news", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 7, 2026", title: "FCA Regulation: Why It Matters", excerpt: "Why FCA regulation matters when choosing a forex broker and how it protects your funds.", href: "/news", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
 ];
 
 export default function BrokerC() {
@@ -24,7 +25,7 @@ export default function BrokerC() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/forex-broker" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Forex Brokers</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Forex Brokers", href: "/forex-broker" }, { label: "ForexBroker C" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center">
               <span className="text-white font-bold text-xl">C</span>
@@ -68,7 +69,7 @@ export default function BrokerC() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

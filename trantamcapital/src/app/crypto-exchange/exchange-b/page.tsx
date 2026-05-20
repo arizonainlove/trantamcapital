@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "Exchange B Review",
-  description: "Detailed review of Exchange B — user-friendly interface, staking rewards, NFT marketplace, and institutional-grade security.",
+  description: "Detailed review of Exchange B â€” user-friendly interface, staking rewards, NFT marketplace, and institutional-grade security.",
 };
 
 const pros = ["Very user-friendly interface", "Staking rewards available", "Built-in NFT marketplace", "Institutional-grade security", "Excellent mobile app", "Educational resources for beginners"];
 const cons = ["Higher fees than competitors (0.2%)", "Limited altcoin selection", "Futures not available in all regions"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 18, 2026", title: "Exchange B NFT Marketplace Hits $1B Volume", excerpt: "Exchange B's NFT marketplace has reached $1 billion in total trading volume since its launch.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
-  { category: "Cryptocurrency", date: "May 13, 2026", title: "Exchange B Increases Staking Rewards for ETH", excerpt: "Exchange B has announced increased staking rewards for Ethereum, offering 5.5% APY for ETH stakers.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
-  { category: "Cryptocurrency", date: "May 8, 2026", title: "Best Crypto Exchanges for Beginners", excerpt: "Our guide to the most beginner-friendly crypto exchanges, with Exchange B ranked #1 for ease of use.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 18, 2026", title: "Exchange B NFT Marketplace Hits $1B Volume", excerpt: "Exchange B's NFT marketplace has reached $1 billion in total trading volume since its launch.", href: "/news", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 13, 2026", title: "Exchange B Increases Staking Rewards for ETH", excerpt: "Exchange B has announced increased staking rewards for Ethereum, offering 5.5% APY for ETH stakers.", href: "/news", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 8, 2026", title: "Best Crypto Exchanges for Beginners", excerpt: "Our guide to the most beginner-friendly crypto exchanges, with Exchange B ranked #1 for ease of use.", href: "/news", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
 ];
 
 export default function ExchangeB() {
@@ -24,7 +25,7 @@ export default function ExchangeB() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/crypto-exchange" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Crypto Exchanges</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Crypto Exchanges", href: "/crypto-exchange" }, { label: "Exchange B" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center">
               <span className="text-white font-bold text-xl">B</span>
@@ -68,7 +69,7 @@ export default function ExchangeB() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

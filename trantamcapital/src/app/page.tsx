@@ -5,33 +5,15 @@ import NewsCard from "@/components/NewsCard";
 import BrokerCard from "@/components/BrokerCard";
 import Card from "@/components/Card";
 import NewsletterForm from "@/components/NewsletterForm";
+import { allNews } from "@/data/news";
 
-const featuredNews = [
-  {
-    category: "Cryptocurrency",
-    date: "May 20, 2026",
-    title: "Bitcoin Surges Past $100K: What This Means for the Market",
-    excerpt:
-      "Bitcoin has reached a new all-time high, crossing the $100,000 mark for the first time. Analysts weigh in on what this means for the broader cryptocurrency market and retail investors.",
-    href: "#",
-  },
-  {
-    category: "Forex",
-    date: "May 19, 2026",
-    title: "Central Bank Rate Decisions: Impact on Major Currency Pairs",
-    excerpt:
-      "With multiple central banks announcing rate decisions this quarter, forex traders are bracing for increased volatility across major currency pairs. Our analysis covers the key levels to watch.",
-    href: "#",
-  },
-  {
-    category: "Binary Options",
-    date: "May 18, 2026",
-    title: "Binary Options Trading Strategies for Volatile Markets",
-    excerpt:
-      "Discover proven binary options trading strategies that perform well in volatile market conditions. From straddles to trend-following approaches, we cover the essentials.",
-    href: "#",
-  },
-];
+const featuredNews = allNews.slice(0, 3).map((a) => ({
+  category: a.category,
+  date: a.date,
+  title: a.title,
+  excerpt: a.excerpt,
+  href: `/news/${a.slug}`,
+}));
 
 const featuredBrokers = [
   {
@@ -141,9 +123,27 @@ const whyUs = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "TrantamCapital",
+  url: "https://trantamcapital.vercel.app",
+  description:
+    "Expert forex broker reviews, crypto exchange comparisons, and binary options education.",
+  provider: {
+    "@type": "Organization",
+    name: "TrantamCapital",
+    description: "Financial market information and education platform",
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Section 1: Hero */}
       <section className="bg-dark relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-dark" />

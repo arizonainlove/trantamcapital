@@ -88,7 +88,7 @@ export default function ForexBroker() {
             <table className="w-full text-sm bg-white rounded-lg border border-border">
               <thead>
                 <tr className="bg-dark text-white">
-                  <th className="text-left py-3 px-4 font-semibold">Broker</th>
+                  <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Broker</th>
                   <th className="text-left py-3 px-4 font-semibold">Regulation</th>
                   <th className="text-center py-3 px-4 font-semibold">Min Deposit</th>
                   <th className="text-center py-3 px-4 font-semibold">Spread</th>
@@ -99,7 +99,7 @@ export default function ForexBroker() {
               <tbody>
                 {comparisonData.map((row, i) => (
                   <tr key={row.name} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
-                    <td className="py-3 px-4 font-semibold text-text-primary">{row.name}</td>
+                    <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>{row.name}</td>
                     <td className="py-3 px-4 text-text-secondary">{row.regulation}</td>
                     <td className="py-3 px-4 text-center text-text-secondary">{row.minDeposit}</td>
                     <td className="py-3 px-4 text-center text-text-secondary">{row.spread}</td>

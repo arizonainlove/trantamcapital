@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "ForexBroker A Review",
-  description: "Detailed review of ForexBroker A — regulation, spreads, leverage, platforms, and features. Read our expert analysis.",
+  description: "Detailed review of ForexBroker A â€” regulation, spreads, leverage, platforms, and features. Read our expert analysis.",
 };
 
 const pros = ["FCA & CySEC regulated", "0.0 pip spreads on major pairs", "MT4, MT5, and cTrader support", "1:500 leverage available", "Negative balance protection", "24/7 multilingual support"];
 const cons = ["Higher commission on ECN accounts", "No cryptocurrency trading", "Inactivity fee after 6 months"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 19, 2026", title: "ForexBroker A Introduces New Trading Tools Suite", excerpt: "ForexBroker A has launched a comprehensive suite of trading tools including advanced charting and risk management features.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
-  { category: "Forex", date: "May 15, 2026", title: "ForexBroker A Review: Six Months Later", excerpt: "An updated look at ForexBroker A after six months of real-world trading experience with the platform.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
-  { category: "Forex", date: "May 10, 2026", title: "Top 5 Forex Brokers for Scalping in 2026", excerpt: "We rank the best brokers for scalping strategies, with ForexBroker A taking the top spot for tight spreads.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 19, 2026", title: "ForexBroker A Introduces New Trading Tools Suite", excerpt: "ForexBroker A has launched a comprehensive suite of trading tools including advanced charting and risk management features.", href: "/news", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 15, 2026", title: "ForexBroker A Review: Six Months Later", excerpt: "An updated look at ForexBroker A after six months of real-world trading experience with the platform.", href: "/news", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 10, 2026", title: "Top 5 Forex Brokers for Scalping in 2026", excerpt: "We rank the best brokers for scalping strategies, with ForexBroker A taking the top spot for tight spreads.", href: "/news", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
 ];
 
 export default function BrokerA() {
@@ -24,9 +25,7 @@ export default function BrokerA() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/forex-broker" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">
-            &larr; Back to Forex Brokers
-          </Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Forex Brokers", href: "/forex-broker" }, { label: "ForexBroker A" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-link to-blue-800 flex items-center justify-center">
               <span className="text-white font-bold text-xl">A</span>
@@ -94,7 +93,7 @@ export default function BrokerA() {
                     <ul className="space-y-2">
                       {cons.map((c) => (
                         <li key={c} className="text-sm text-text-secondary flex items-start gap-2">
-                          <span className="text-error mt-0.5 shrink-0">✕</span>
+                          <span className="text-error mt-0.5 shrink-0">âœ•</span>
                           <span>{c}</span>
                         </li>
                       ))}

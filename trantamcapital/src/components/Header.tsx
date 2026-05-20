@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
 
 const menuItems = [
@@ -61,6 +62,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -115,20 +117,35 @@ export default function Header() {
                 className="relative group h-full"
                 onMouseEnter={() => setPlatformOpen(true)}
                 onMouseLeave={() => setPlatformOpen(false)}
+                onFocus={() => setPlatformOpen(true)}
+                onBlur={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    setPlatformOpen(false);
+                  }
+                }}
               >
-                <button className="h-full px-3 text-sm text-text-primary hover:text-primary flex items-center gap-1 transition-colors">
+                <button
+                  className="h-full px-3 text-sm text-text-primary hover:text-primary flex items-center gap-1 transition-colors"
+                  aria-haspopup="true"
+                  aria-expanded={platformOpen}
+                >
                   {item.label}
                   <HiChevronDown
                     className={`text-xs transition-transform ${platformOpen ? "rotate-180" : ""}`}
                   />
                 </button>
                 {platformOpen && (
-                  <div className="absolute top-full left-0 bg-white border border-border rounded-md shadow-lg min-w-[180px] z-50">
+                  <div
+                    className="absolute top-full left-0 bg-white border border-border rounded-md shadow-lg min-w-[180px] z-50"
+                    role="menu"
+                  >
                     {item.dropdown.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
+                        role="menuitem"
                         className="block px-4 py-2.5 text-sm text-text-primary hover:text-primary hover:bg-primary-light transition-colors"
+                        aria-current={pathname === sub.href ? "page" : undefined}
                       >
                         {sub.label}
                       </Link>
@@ -141,6 +158,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href!}
                 className="h-full px-3 text-sm text-text-primary hover:text-primary flex items-center transition-colors"
+                aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.label}
               </Link>
@@ -240,6 +258,7 @@ export default function Header() {
                   href={item.href!}
                   className="block py-2.5 text-sm text-text-primary hover:text-primary border-b border-border last:border-0 transition-colors"
                   onClick={() => setMobileOpen(false)}
+                  aria-current={pathname === item.href ? "page" : undefined}
                 >
                   {item.label}
                 </Link>

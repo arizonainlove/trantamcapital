@@ -53,7 +53,7 @@
 
 ## PHẦN 4: COMPONENT GLOBAL
 
-- [x] `src/components/Header.tsx` — Nav bar vàng #FFCA00, 10 menu, search icon, mobile hamburger
+- [x] `src/components/Header.tsx` — Nav bar vàng #FFCA00, 10 menu, search icon + overlay, sticky header, mobile hamburger
 - [x] `src/components/PriceTicker.tsx` — CoinGecko API, 12 coins, marquee, cleanup interval
 - [x] `src/components/Footer.tsx` — 4 cột (About, Links, Markets, Contact), risk disclaimer
 - [x] `src/components/SectionTitle.tsx` — Title + subtitle + underline cam
@@ -344,4 +344,44 @@
 | 20. Deploy | 16 | ✅ 15 / 16 |
 | 21. Domain setup | 11 | ⬜ 0 / 11 |
 | 22. Sau deploy | 6 | ⬜ 0 / 6 |
-| **Tổng** | **136 mục** | **✅ 118 / 136** |
+| 23. SEO & UX/UI | 18 | ✅ 14 / 18 |
+| **Tổng** | **154 mục** | **✅ 132 / 154** |
+
+---
+
+## PHẦN 23: CHUẨN SEO & UX/UI
+
+### SEO
+- [x] `robots.ts` — cho phép crawl, link sitemap
+- [x] `metadataBase` — canonical URL trong layout.tsx
+- [x] `robots` metadata — index, follow
+- [x] JSON-LD structured data (WebSite + Organization) — trang chủ
+
+### UX/UI
+- [x] `error.tsx` — global error boundary với Try Again button
+- [x] `loading.tsx` — global loading spinner
+- [x] Skip-to-content link — layout.tsx, first focusable element
+
+### Accessibility
+- [x] `aria-current="page"` — nav links desktop + mobile
+- [x] Dropdown keyboard — onFocus/onBlur, aria-haspopup, aria-expanded, role=menu
+- [x] NewsletterForm — label + htmlFor + inline error + aria-invalid
+
+### Sửa lỗi code hiện tại
+- [x] `href="#"` news articles → tạo `news/[slug]/page.tsx` với 9 bài viết thật
+- [x] `href="#"` sub-pages relatedNews → đổi thành link `/news`
+- [x] `href="#"` tools page → xóa Link wrapper, render card tĩnh
+- [x] Back to Top button — component + layout.tsx
+- [x] Pagination + filter tabs news page — state + onClick hoạt động
+- [x] Color contrast `text-text-light (#8E99B0)` → `#6B7A99`
+- [x] NewsCard `text-white/30` category → `text-white/80`
+- [x] Breadcrumb — component + 7 sub-pages (thay "Back to" link)
+- [x] Sticky column — comparison tables forex-broker + crypto-exchange
+- [x] ContactForm API call + honeypot + name min-length + email regex
+- [x] API route `/api/contact` — POST handler với validation
+
+### Còn lại
+- [ ] Open Graph image (1200x630px) — cần thiết kế file ảnh
+- [ ] JSON-LD Article schema — cho trang news
+- [ ] JSON-LD BreadcrumbList schema — cho sub pages
+- [ ] `loading="lazy"` — cho tất cả ảnh dưới fold

@@ -14,6 +14,8 @@ description: Global component library, file structure, and live price widget spe
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
 | `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros |
 | `ContactForm.tsx` | Contact form (name, email, subject, message) |
+| `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
+| `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
 
 ### Live Price Widget — PriceTicker
 
@@ -46,7 +48,14 @@ trantamcapital/
 │   │   ├── privacy-policy/page.tsx
 │   │   ├── terms-of-service/page.tsx
 │   │   ├── not-found.tsx
-│   │   └── sitemap.ts
+│   │   ├── sitemap.ts
+│   │   ├── robots.ts
+│   │   ├── error.tsx
+│   │   ├── loading.tsx
+│   │   ├── news/[slug]/page.tsx
+│   │   └── api/contact/route.ts
+│   ├── data/
+│   │   └── news.ts
 │   └── components/
 │       ├── Header.tsx
 │       ├── Footer.tsx
@@ -55,7 +64,10 @@ trantamcapital/
 │       ├── Card.tsx
 │       ├── NewsCard.tsx
 │       ├── BrokerCard.tsx
-│       └── ContactForm.tsx
+│       ├── ContactForm.tsx
+│       ├── NewsletterForm.tsx
+│       ├── BackToTop.tsx
+│       └── Breadcrumb.tsx
 ├── public/
 │   └── images/
 ├── .claude/

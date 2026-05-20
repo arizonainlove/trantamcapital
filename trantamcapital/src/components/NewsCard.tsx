@@ -25,7 +25,7 @@ export default function NewsCard({
           className="h-48 flex items-center justify-center"
           style={{ background: imageGradient }}
         >
-          <span className="text-white/30 text-sm font-medium uppercase tracking-wider">
+          <span className="text-white/80 text-sm font-medium uppercase tracking-wider">
             {category}
           </span>
         </div>

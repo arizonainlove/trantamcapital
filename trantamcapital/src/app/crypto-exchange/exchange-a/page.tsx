@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "Exchange A Review",
-  description: "Detailed review of Exchange A — 500+ cryptocurrencies, low fees, futures trading, and strong security.",
+  description: "Detailed review of Exchange A â€” 500+ cryptocurrencies, low fees, futures trading, and strong security.",
 };
 
 const pros = ["500+ cryptocurrencies available", "Low trading fees (0.1%)", "Futures and margin trading", "Strong security track record", "High liquidity", "24/7 customer support"];
 const cons = ["Complex for beginners", "Withdrawal fees can be high", "Not available in all countries"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 19, 2026", title: "Exchange A Adds 50 New Altcoins to Platform", excerpt: "Exchange A has expanded its offering with 50 new cryptocurrency listings, including several promising DeFi projects.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
-  { category: "Cryptocurrency", date: "May 14, 2026", title: "Exchange A Launches Institutional Trading Desk", excerpt: "New institutional-grade trading desk with dedicated account managers and customized liquidity solutions.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
-  { category: "Cryptocurrency", date: "May 9, 2026", title: "Top 5 Crypto Exchanges for Altcoin Trading", excerpt: "Our ranking of the best exchanges for altcoin trading, with Exchange A taking the top spot for variety.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 19, 2026", title: "Exchange A Adds 50 New Altcoins to Platform", excerpt: "Exchange A has expanded its offering with 50 new cryptocurrency listings, including several promising DeFi projects.", href: "/news", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 14, 2026", title: "Exchange A Launches Institutional Trading Desk", excerpt: "New institutional-grade trading desk with dedicated account managers and customized liquidity solutions.", href: "/news", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 9, 2026", title: "Top 5 Crypto Exchanges for Altcoin Trading", excerpt: "Our ranking of the best exchanges for altcoin trading, with Exchange A taking the top spot for variety.", href: "/news", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
 ];
 
 export default function ExchangeA() {
@@ -24,7 +25,7 @@ export default function ExchangeA() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/crypto-exchange" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Crypto Exchanges</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Crypto Exchanges", href: "/crypto-exchange" }, { label: "Exchange A" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-600 to-yellow-800 flex items-center justify-center">
               <span className="text-white font-bold text-xl">A</span>
@@ -68,7 +69,7 @@ export default function ExchangeA() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

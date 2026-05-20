@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "BinaryPlatform A Review",
-  description: "Detailed review of BinaryPlatform A — user-friendly binary options trading with multiple asset classes and demo account.",
+  description: "Detailed review of BinaryPlatform A â€” user-friendly binary options trading with multiple asset classes and demo account.",
 };
 
 const pros = ["Very user-friendly platform", "Multiple asset classes available", "Free demo account", "Fast withdrawals", "Competitive payouts up to 92%", "Educational resources"];
 const cons = ["Limited expiry times", "Not available in all countries", "Higher minimum trade amount"];
 
 const relatedNews = [
-  { category: "Binary Options", date: "May 16, 2026", title: "BinaryPlatform A Launches New Asset Classes", excerpt: "BinaryPlatform A has expanded its offering with new asset classes including ETFs and major indices.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
-  { category: "Binary Options", date: "May 11, 2026", title: "BinaryPlatform A Review: Updated for 2026", excerpt: "An updated comprehensive review of BinaryPlatform A covering new features, payout structures, and user experience.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
-  { category: "Binary Options", date: "May 5, 2026", title: "Best Binary Options Platforms for Beginners", excerpt: "Our ranking of the best binary options platforms for new traders, highlighting BinaryPlatform A's excellent demo account.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 16, 2026", title: "BinaryPlatform A Launches New Asset Classes", excerpt: "BinaryPlatform A has expanded its offering with new asset classes including ETFs and major indices.", href: "/news", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 11, 2026", title: "BinaryPlatform A Review: Updated for 2026", excerpt: "An updated comprehensive review of BinaryPlatform A covering new features, payout structures, and user experience.", href: "/news", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 5, 2026", title: "Best Binary Options Platforms for Beginners", excerpt: "Our ranking of the best binary options platforms for new traders, highlighting BinaryPlatform A's excellent demo account.", href: "/news", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
 ];
 
 export default function PlatformA() {
@@ -24,7 +25,7 @@ export default function PlatformA() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/binary-option" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Binary Options</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Binary Options", href: "/binary-option" }, { label: "Platform A" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
               <span className="text-white font-bold text-xl">B</span>
@@ -58,7 +59,7 @@ export default function PlatformA() {
 
               <div className="p-4 bg-warning/10 border border-warning/30 rounded-md">
                 <p className="text-xs text-text-secondary leading-relaxed">
-                  <strong className="text-warning">⚠ Risk Warning:</strong> Binary options trading involves significant risk. You could lose your entire investment. Trade only with money you can afford to lose.
+                  <strong className="text-warning">âš  Risk Warning:</strong> Binary options trading involves significant risk. You could lose your entire investment. Trade only with money you can afford to lose.
                 </p>
               </div>
 
@@ -74,7 +75,7 @@ export default function PlatformA() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
+import Breadcrumb from '@/components/Breadcrumb';
 import NewsCard from "@/components/NewsCard";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "ForexBroker B Review",
-  description: "Detailed review of ForexBroker B — ASIC regulated, competitive spreads, and excellent educational resources.",
+  description: "Detailed review of ForexBroker B â€” ASIC regulated, competitive spreads, and excellent educational resources.",
 };
 
 const pros = ["ASIC regulated", "Negative balance protection", "Excellent educational resources", "User-friendly platforms", "Fast execution speeds", "No deposit fees"];
 const cons = ["Limited leverage (1:30 for retail)", "No cryptocurrency trading", "Withdrawal fees after first monthly withdrawal"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 18, 2026", title: "ForexBroker B Launches New Educational Platform", excerpt: "ForexBroker B has unveiled a comprehensive educational platform with video courses, webinars, and interactive quizzes.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
-  { category: "Forex", date: "May 14, 2026", title: "Best Forex Brokers for Beginners in 2026", excerpt: "Our guide to the best brokers for new traders, featuring ForexBroker B's excellent educational resources.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
-  { category: "Forex", date: "May 9, 2026", title: "ASIC Regulation: What It Means for Traders", excerpt: "Understanding ASIC regulation and how it protects traders when using brokers like ForexBroker B.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 18, 2026", title: "ForexBroker B Launches New Educational Platform", excerpt: "ForexBroker B has unveiled a comprehensive educational platform with video courses, webinars, and interactive quizzes.", href: "/news", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 14, 2026", title: "Best Forex Brokers for Beginners in 2026", excerpt: "Our guide to the best brokers for new traders, featuring ForexBroker B's excellent educational resources.", href: "/news", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 9, 2026", title: "ASIC Regulation: What It Means for Traders", excerpt: "Understanding ASIC regulation and how it protects traders when using brokers like ForexBroker B.", href: "/news", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
 ];
 
 export default function BrokerB() {
@@ -24,7 +25,7 @@ export default function BrokerB() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4">
-          <Link href="/forex-broker" className="text-sm text-text-light hover:text-primary mb-4 inline-block transition-colors">&larr; Back to Forex Brokers</Link>
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Forex Brokers", href: "/forex-broker" }, { label: "ForexBroker B" }]} />
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-success to-green-800 flex items-center justify-center">
               <span className="text-white font-bold text-xl">B</span>
@@ -68,7 +69,7 @@ export default function BrokerB() {
                   <div>
                     <h4 className="text-sm font-bold text-error mb-3">Cons</h4>
                     <ul className="space-y-2">
-                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">✕</span><span>{c}</span></li>))}
+                      {cons.map((c) => (<li key={c} className="text-sm text-text-secondary flex items-start gap-2"><span className="text-error mt-0.5 shrink-0">âœ•</span><span>{c}</span></li>))}
                     </ul>
                   </div>
                 </div>

@@ -24,18 +24,20 @@ export default function ContactForm() {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
 
     if (!form.name.trim()) {
       newErrors.name = "Name is required";
+    } else if (form.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
     }
 
     if (!form.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    } else if (!/^[^\s@]+@[^\s@]{2,}\.[a-zA-Z]{2,}$/.test(form.email)) {
       newErrors.email = "Please enter a valid email";
     }
 
@@ -53,10 +55,22 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
+    if (!validate()) return;
+
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      setStatus("success");
+    } catch {
+      setStatus("error");
     }
   };
 
@@ -67,11 +81,11 @@ export default function ContactForm() {
     }
   };
 
-  if (submitted) {
+  if (status === "success") {
     return (
-      <div className="rounded-lg border border-border bg-white p-8 text-center">
+      <div className="rounded-lg border border-border bg-white p-8 text-center" role="status">
         <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-8 h-8 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -85,6 +99,12 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* Honeypot — hidden from users, bots fill it */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       {/* Name */}
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-text-primary mb-1.5">
@@ -99,8 +119,10 @@ export default function ContactForm() {
             errors.name ? "border-error" : "border-border"
           }`}
           placeholder="Your name"
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
-        {errors.name && <p className="text-xs text-error mt-1">{errors.name}</p>}
+        {errors.name && <p id="name-error" className="text-xs text-error mt-1" role="alert">{errors.name}</p>}
       </div>
 
       {/* Email */}
@@ -117,8 +139,10 @@ export default function ContactForm() {
             errors.email ? "border-error" : "border-border"
           }`}
           placeholder="your@email.com"
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
         />
-        {errors.email && <p className="text-xs text-error mt-1">{errors.email}</p>}
+        {errors.email && <p id="email-error" className="text-xs text-error mt-1" role="alert">{errors.email}</p>}
       </div>
 
       {/* Subject */}
@@ -135,8 +159,10 @@ export default function ContactForm() {
             errors.subject ? "border-error" : "border-border"
           }`}
           placeholder="How can we help?"
+          aria-invalid={!!errors.subject}
+          aria-describedby={errors.subject ? "subject-error" : undefined}
         />
-        {errors.subject && <p className="text-xs text-error mt-1">{errors.subject}</p>}
+        {errors.subject && <p id="subject-error" className="text-xs text-error mt-1" role="alert">{errors.subject}</p>}
       </div>
 
       {/* Message */}
@@ -153,15 +179,25 @@ export default function ContactForm() {
             errors.message ? "border-error" : "border-border"
           }`}
           placeholder="Your message..."
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
-        {errors.message && <p className="text-xs text-error mt-1">{errors.message}</p>}
+        {errors.message && <p id="message-error" className="text-xs text-error mt-1" role="alert">{errors.message}</p>}
       </div>
+
+      {/* Error banner */}
+      {status === "error" && (
+        <div className="bg-error/10 border border-error rounded p-3 text-sm text-error" role="alert">
+          Failed to send message. Please try again later.
+        </div>
+      )}
 
       <button
         type="submit"
-        className="w-full text-sm font-bold text-white bg-primary hover:bg-primary-hover px-6 py-3 rounded transition-colors min-h-[44px] shadow-[0_2px_8px_rgba(232,73,16,0.3)] hover:shadow-[0_4px_12px_rgba(232,73,16,0.4)]"
+        disabled={status === "submitting"}
+        className="w-full text-sm font-bold text-white bg-primary hover:bg-primary-hover disabled:bg-primary/60 disabled:cursor-not-allowed px-6 py-3 rounded transition-colors min-h-[44px] shadow-[0_2px_8px_rgba(232,73,16,0.3)] hover:shadow-[0_4px_12px_rgba(232,73,16,0.4)]"
       >
-        Send Message
+        {status === "submitting" ? "Sending..." : "Send Message"}
       </button>
     </form>
   );
