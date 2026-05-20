@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
 
@@ -35,9 +35,32 @@ const mobileMenuItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+const searchablePages = [
+  { label: "Home", href: "/" },
+  { label: "News", href: "/news" },
+  { label: "For Beginners", href: "/for-beginners" },
+  { label: "Investment Analysis", href: "/investment-analysis" },
+  { label: "Forex Broker", href: "/forex-broker" },
+  { label: "Forex Broker A", href: "/forex-broker/broker-a" },
+  { label: "Forex Broker B", href: "/forex-broker/broker-b" },
+  { label: "Forex Broker C", href: "/forex-broker/broker-c" },
+  { label: "Crypto Exchange", href: "/crypto-exchange" },
+  { label: "Exchange A", href: "/crypto-exchange/exchange-a" },
+  { label: "Exchange B", href: "/crypto-exchange/exchange-b" },
+  { label: "Exchange C", href: "/crypto-exchange/exchange-c" },
+  { label: "Binary Option", href: "/binary-option" },
+  { label: "Platform A", href: "/binary-option/platform-a" },
+  { label: "Tools", href: "/tools" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [platformOpen, setPlatformOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -49,8 +72,32 @@ export default function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Focus search input when opened
+  useEffect(() => {
+    if (searchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [searchOpen]);
+
+  // Close search on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSearchOpen(false);
+    };
+    if (searchOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [searchOpen]);
+
+  const filteredPages = searchQuery
+    ? searchablePages.filter((page) =>
+        page.label.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : searchablePages;
+
   return (
-    <header className="bg-nav h-12 relative z-50">
+    <header className="bg-nav h-12 sticky top-0 z-50">
       <div className="max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -106,6 +153,7 @@ export default function Header() {
           <button
             aria-label="Search"
             className="w-11 h-11 flex items-center justify-center text-text-primary hover:text-primary transition-colors"
+            onClick={() => setSearchOpen(true)}
           >
             <HiSearch className="text-xl" />
           </button>
@@ -118,6 +166,53 @@ export default function Header() {
           </button>
         </div>
       </div>
+
+      {/* Search Overlay */}
+      {searchOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[100] flex items-start justify-center pt-[15vh]"
+          onClick={() => setSearchOpen(false)}
+        >
+          <div
+            className="bg-white rounded-lg shadow-2xl w-full max-w-lg mx-4 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 px-4 border-b border-border">
+              <HiSearch className="text-xl text-text-light shrink-0" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search pages..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 h-12 outline-none text-sm text-text-primary placeholder:text-text-light"
+              />
+              <button
+                aria-label="Close search"
+                className="w-11 h-11 flex items-center justify-center text-text-light hover:text-text-primary"
+                onClick={() => setSearchOpen(false)}
+              >
+                <HiX className="text-xl" />
+              </button>
+            </div>
+            <div className="max-h-80 overflow-y-auto">
+              {filteredPages.map((page) => (
+                <Link
+                  key={page.href}
+                  href={page.href}
+                  className="block px-4 py-3 text-sm text-text-primary hover:bg-primary-light hover:text-primary transition-colors border-b border-border last:border-0"
+                  onClick={() => {
+                    setSearchOpen(false);
+                    setSearchQuery("");
+                  }}
+                >
+                  {page.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Menu */}
       {mobileOpen && (
