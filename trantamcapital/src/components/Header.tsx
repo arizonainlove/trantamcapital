@@ -40,7 +40,7 @@ export default function Header() {
   const [platformOpen, setPlatformOpen] = useState(false);
 
   return (
-    <header className="bg-nav h-12">
+    <header className="bg-nav h-12 relative z-50">
       <div className="max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -111,7 +111,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-border shadow-lg">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-border shadow-lg z-50">
           <nav className="max-w-[1200px] mx-auto px-4 py-2">
             {mobileMenuItems.map((item) => (
               <Link
