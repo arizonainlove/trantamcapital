@@ -127,7 +127,7 @@ export default function Header() {
             className="fixed inset-0 bg-black/50 z-40"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="fixed top-0 right-0 w-1/2 h-full bg-white shadow-xl z-50 overflow-y-auto">
+          <div className="fixed top-0 right-0 w-1/2 bg-white shadow-xl z-50 overflow-y-auto max-h-screen">
             <div className="flex items-center justify-between px-4 h-12 border-b border-border">
               <span className="text-sm font-bold text-text-primary">Menu</span>
               <button
