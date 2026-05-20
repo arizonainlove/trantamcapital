@@ -14,7 +14,12 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
-### Site Structure (17 pages)
+### Site Structure (20 pages)
+
+#### Utility Pages (3)
+- `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
+- `/privacy-policy` — GDPR compliance, data collection (email), cookies, user rights
+- `/terms-of-service` — Risk disclaimer, no financial advice, liability limitation
 
 #### Main Pages (10)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter

@@ -4,11 +4,12 @@ Financial market information website covering cryptocurrency, forex, and binary 
 
 ## Quick Links
 
-- [Project Overview](.claude/rules/project-overview.md) — Tech stack, site structure (17 pages)
+- [Project Overview](.claude/rules/project-overview.md) — Tech stack, site structure (20 pages)
 - [Design System](.claude/rules/design-system.md) — Colors, typography, components, responsive
 - [Components](.claude/rules/components.md) — Component library, price ticker, file structure
 - [CMS — Decap CMS](.claude/rules/cms-decap.md) — Content management setup
-- [Build & Deploy](.claude/rules/build-deploy.md) — Commands, paths, verification
+- [Build & Deploy](.claude/rules/build-deploy.md) — Commands, next.config.js, paths, verification
+- [Code Reviewer](.claude/rules/code-reviewer.md) — Code quality & security review specs
 
 ## TL;DR
 
@@ -16,7 +17,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 |------|---------|
 | Stack | Next.js 14 + TypeScript + Tailwind CSS |
 | Design | Premium Financial — cam `#E84910`, navy `#0F1A2E`, gold `#C8A84E` |
-| Pages | 10 main + 7 sub = 17 pages, English |
+| Pages | 10 main + 7 sub + privacy/terms/404 = 20 pages, English |
 | CMS | Decap CMS (git-based, free) via `/admin` |
 | Live prices | CoinGecko API, 12 coins, 60s refresh |
 | Deploy | Vercel (free), GitHub auto-deploy |

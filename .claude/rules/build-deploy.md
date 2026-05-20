@@ -25,6 +25,38 @@ npm run lint         # Run ESLint
 - Content (CMS): `trantamcapital\src\content\`
 - CMS config: `trantamcapital\public\admin\`
 
+### next.config.js — Required Config
+
+```js
+// next.config.js — PHẢI CÓ trước khi build/deploy
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.coingecko.com',  // CoinGecko icons
+      },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          // HSTS — bắt buộc HTTPS, chặn MITM
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+        ],
+      },
+    ],
+  },
+};
+```
+
+**Ghi chú:**
+- `images.remotePatterns` — 🔴 **bắt buộc** nếu dùng PriceTicker (CoinGecko icon)
+- HSTS — 🟡 nên có, nhất là website tài chính
+- CSP (Content Security Policy) — ⏸️ **chưa cần**, khi nào tích hợp Decap CMS mới thêm. Dễ block nhầm nếu config sai.
+
 ### Deployment (Vercel)
 1. Push code to GitHub repository
 2. Import repository in Vercel dashboard
@@ -46,8 +78,13 @@ npm run lint         # Run ESLint
 
 ### Verification Checklist
 - [ ] `npm run build` completes without errors
-- [ ] All 17 routes render correctly
+- [ ] 404 page renders correctly on invalid routes
+- [ ] All routes render correctly
 - [ ] Navigation works on mobile (hamburger menu) and desktop
 - [ ] Price ticker loads and updates
 - [ ] Pages are responsive at 375px, 768px, 1024px, 1440px
+- [ ] Privacy Policy and Terms of Service pages exist and are linked in footer
+- [ ] Risk disclaimer displayed in footer
 - [ ] Contact form UI displays correctly
+- [ ] `next.config.js` has `images.remotePatterns` for CoinGecko
+- [ ] HSTS headers are set in `next.config.js`

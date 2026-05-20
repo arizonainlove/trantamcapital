@@ -43,6 +43,9 @@ trantamcapital/
 │   │   ├── tools/page.tsx
 │   │   ├── about/page.tsx
 │   │   ├── contact/page.tsx
+│   │   ├── privacy-policy/page.tsx
+│   │   ├── terms-of-service/page.tsx
+│   │   ├── not-found.tsx
 │   │   └── sitemap.ts
 │   └── components/
 │       ├── Header.tsx
