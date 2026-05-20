@@ -9,20 +9,22 @@ interface MarketCoin {
   symbol: string;
   name: string;
   image: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-  market_cap: number;
+  current_price: number | null;
+  price_change_percentage_24h: number | null;
+  market_cap: number | null;
 }
 
 const TOP_COINS = "bitcoin,ethereum,binancecoin,solana,ripple,cardano,dogecoin,polkadot";
 
-const formatPrice = (price: number) => {
+const formatPrice = (price: number | null) => {
+  if (price === null) return "$0.00";
   if (price >= 1) return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   if (price >= 0.01) return `$${price.toFixed(4)}`;
   return `$${price.toFixed(6)}`;
 };
 
-const formatMarketCap = (cap: number) => {
+const formatMarketCap = (cap: number | null) => {
+  if (cap === null) return "$0";
   if (cap >= 1e12) return `$${(cap / 1e12).toFixed(2)}T`;
   if (cap >= 1e9) return `$${(cap / 1e9).toFixed(2)}B`;
   if (cap >= 1e6) return `$${(cap / 1e6).toFixed(2)}M`;
@@ -53,6 +55,11 @@ export default function MarketOverview() {
     const interval = setInterval(fetchCoins, 60000);
     return () => clearInterval(interval);
   }, [fetchCoins]);
+
+  const changeIsPositive = (val: number | null) => val !== null && val >= 0;
+  const changeClass = (val: number | null) => changeIsPositive(val) ? "text-success" : "text-error";
+  const changeArrow = (val: number | null) => changeIsPositive(val) ? <HiArrowSmUp className="text-xs" /> : <HiArrowSmDown className="text-xs" />;
+  const changeText = (val: number | null) => val !== null ? `${Math.abs(val).toFixed(2)}%` : "0.00%";
 
   if (loading) {
     return (
@@ -98,18 +105,10 @@ export default function MarketOverview() {
                 <td className="py-3 px-4 text-right font-semibold text-text-primary">
                   {formatPrice(coin.current_price)}
                 </td>
-                <td
-                  className={`py-3 px-4 text-right font-semibold ${
-                    coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
-                  }`}
-                >
+                <td className={`py-3 px-4 text-right font-semibold ${changeClass(coin.price_change_percentage_24h)}`}>
                   <span className="flex items-center justify-end gap-1">
-                    {coin.price_change_percentage_24h >= 0 ? (
-                      <HiArrowSmUp className="text-xs" />
-                    ) : (
-                      <HiArrowSmDown className="text-xs" />
-                    )}
-                    {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                    {changeArrow(coin.price_change_percentage_24h)}
+                    {changeText(coin.price_change_percentage_24h)}
                   </span>
                 </td>
                 <td className="py-3 px-4 text-right text-text-secondary">
@@ -145,17 +144,9 @@ export default function MarketOverview() {
               {formatPrice(coin.current_price)}
             </p>
             <div className="flex items-center justify-between">
-              <span
-                className={`text-sm font-semibold flex items-center gap-0.5 ${
-                  coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
-                }`}
-              >
-                {coin.price_change_percentage_24h >= 0 ? (
-                  <HiArrowSmUp />
-                ) : (
-                  <HiArrowSmDown />
-                )}
-                {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+              <span className={`text-sm font-semibold flex items-center gap-0.5 ${changeClass(coin.price_change_percentage_24h)}`}>
+                {changeArrow(coin.price_change_percentage_24h)}
+                {changeText(coin.price_change_percentage_24h)}
               </span>
               <span className="text-xs text-text-light">{formatMarketCap(coin.market_cap)}</span>
             </div>

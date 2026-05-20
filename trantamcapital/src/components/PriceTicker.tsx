@@ -39,7 +39,8 @@ export default function PriceTicker() {
     return () => clearInterval(interval);
   }, [fetchPrices]);
 
-  const formatPrice = (price: number) => {
+  const formatPrice = (price: number | null) => {
+    if (price === null) return "$0.00";
     if (price >= 1) return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     if (price >= 0.01) return `$${price.toFixed(4)}`;
     return `$${price.toFixed(6)}`;
@@ -78,15 +79,15 @@ export default function PriceTicker() {
             <span className="text-sm text-white">{formatPrice(coin.current_price)}</span>
             <span
               className={`text-xs flex items-center gap-0.5 ${
-                coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
+                coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
               }`}
             >
-              {coin.price_change_percentage_24h >= 0 ? (
+              {coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? (
                 <HiArrowSmUp className="text-xs" />
               ) : (
                 <HiArrowSmDown className="text-xs" />
               )}
-              {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+              {coin.price_change_percentage_24h !== null ? `${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%` : "0.00%"}
             </span>
           </div>
         ))}
