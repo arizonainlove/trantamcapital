@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
 
@@ -38,6 +38,16 @@ const mobileMenuItems = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [platformOpen, setPlatformOpen] = useState(false);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
     <header className="bg-nav h-12 relative z-50">
@@ -111,20 +121,37 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-border shadow-lg z-50">
-          <nav className="max-w-[1200px] mx-auto px-4 py-2">
-            {mobileMenuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href!}
-                className="block py-3 text-sm text-text-primary hover:text-primary border-b border-border last:border-0 transition-colors"
+        <>
+          {/* Overlay backdrop — click to close */}
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="fixed top-0 right-0 w-1/2 h-full bg-white shadow-xl z-50 overflow-y-auto">
+            <div className="flex items-center justify-between px-4 h-12 border-b border-border">
+              <span className="text-sm font-bold text-text-primary">Menu</span>
+              <button
+                aria-label="Close menu"
+                className="w-11 h-11 flex items-center justify-center text-text-primary hover:text-primary"
                 onClick={() => setMobileOpen(false)}
               >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
+                <HiX className="text-xl" />
+              </button>
+            </div>
+            <nav className="px-4 py-2">
+              {mobileMenuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href!}
+                  className="block py-2.5 text-sm text-text-primary hover:text-primary border-b border-border last:border-0 transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

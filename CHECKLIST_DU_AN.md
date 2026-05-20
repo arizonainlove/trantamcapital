@@ -7,267 +7,269 @@
 ## PHẦN 1: CHUẨN BỊ MÔI TRƯỜNG
 
 ### 1.1 Cài Node.js
-- [ ] Vào https://nodejs.org/ tải bản LTS
-- [ ] Chạy file cài đặt, nhấn Next → Install
-- [ ] Mở Command Prompt (CMD), gõ `node --version` → thấy số phiên bản
-- [ ] Gõ `npm --version` → thấy số phiên bản
+- [x] Vào https://nodejs.org/ tải bản LTS
+- [x] Chạy file cài đặt, nhấn Next → Install
+- [x] Mở Command Prompt (CMD), gõ `node --version` → thấy số phiên bản
+- [x] Gõ `npm --version` → thấy số phiên bản
 
 ### 1.2 Cài VS Code
-- [ ] Vào https://code.visualstudio.com/ tải và cài đặt
-- [ ] Mở VS Code → Extensions (Ctrl+Shift+X)
-- [ ] Cài extension: Tailwind CSS IntelliSense
-- [ ] Cài extension: ES7+ React/Redux snippets
+- [x] Vào https://code.visualstudio.com/ tải và cài đặt
+- [x] Mở VS Code → Extensions (Ctrl+Shift+X)
+- [x] Cài extension: Tailwind CSS IntelliSense
+- [x] Cài extension: ES7+ React/Redux snippets
 
 ### 1.3 Tạo tài khoản GitHub
-- [ ] Vào https://github.com/signup
-- [ ] Điền email, password, username
-- [ ] Xác nhận email
-- [ ] Chọn Free plan
+- [x] Vào https://github.com/signup
+- [x] Điền email, password, username
+- [x] Xác nhận email
+- [x] Chọn Free plan
 
 ### 1.4 Tạo tài khoản Vercel
-- [ ] Vào https://vercel.com/
-- [ ] Đăng ký bằng GitHub (Continue with GitHub)
-- [ ] Authorize Vercel
+- [x] Vào https://vercel.com/
+- [x] Đăng ký bằng GitHub (Continue with GitHub)
+- [x] Authorize Vercel
 
 ---
 
 ## PHẦN 2: TẠO DỰ ÁN NEXT.JS
 
-- [ ] Mở CMD, gõ `cd C:\CodeProjects`
-- [ ] Gõ `npx create-next-app@latest trantamcapital --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm`
-- [ ] Đợi cài đặt xong (khoảng 2 phút)
-- [ ] Gõ `cd trantamcapital`
-- [ ] Gõ `npm install react-icons`
-- [ ] Gõ `npm run dev` → vào http://localhost:3000 → thấy trang Next.js
+- [x] Mở CMD, gõ `cd C:\CodeProjects`
+- [x] Gõ `npx create-next-app@latest trantamcapital --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm`
+- [x] Đợi cài đặt xong (khoảng 2 phút)
+- [x] Gõ `cd trantamcapital`
+- [x] Gõ `npm install react-icons`
+- [x] Gõ `npm run dev` → vào http://localhost:3000 → thấy trang Next.js
 
 ---
 
 ## PHẦN 3: DESIGN SYSTEM & GLOBAL CSS
 
-- [ ] Tạo file: `src/app/globals.css` — màu sắc, font, utility classes
-- [ ] Sửa: `tailwind.config.ts` — custom colors, fonts
-- [ ] **next/font**: Import Open Sans + Roboto từ `next/font/google` (layout.tsx)
-- [ ] Layout: `src/app/layout.tsx` — Header + PriceTicker + Footer
+- [x] Tạo file: `src/app/globals.css` — màu sắc, font, utility classes
+- [x] Sửa: `tailwind.config.ts` — custom colors, fonts (dùng @theme trong globals.css do Tailwind v4)
+- [x] **next/font**: Import Open Sans + Roboto từ `next/font/google` (layout.tsx)
+- [x] Layout: `src/app/layout.tsx` — Header + PriceTicker + Footer
 
 ---
 
 ## PHẦN 4: COMPONENT GLOBAL
 
-- [ ] `src/components/Header.tsx` — Nav bar vàng #FFCA00, 10 menu, search icon, mobile hamburger
-- [ ] `src/components/PriceTicker.tsx` — CoinGecko API, 12 coins, marquee, cleanup interval
-- [ ] `src/components/Footer.tsx` — 4 cột (About, Links, Markets, Contact), risk disclaimer
-- [ ] `src/components/SectionTitle.tsx` — Title + subtitle + underline cam
-- [ ] `src/components/Card.tsx` — Card wrapper chuẩn
-- [ ] `src/components/NewsCard.tsx` — Card tin tức + image + badge
-- [ ] `src/components/BrokerCard.tsx` — Card broker/exchange + rating + features
-- [ ] `src/components/ContactForm.tsx` — Form validations
+- [x] `src/components/Header.tsx` — Nav bar vàng #FFCA00, 10 menu, search icon, mobile hamburger
+- [x] `src/components/PriceTicker.tsx` — CoinGecko API, 12 coins, marquee, cleanup interval
+- [x] `src/components/Footer.tsx` — 4 cột (About, Links, Markets, Contact), risk disclaimer
+- [x] `src/components/SectionTitle.tsx` — Title + subtitle + underline cam
+- [x] `src/components/Card.tsx` — Card wrapper chuẩn
+- [x] `src/components/NewsCard.tsx` — Card tin tức + image + badge
+- [x] `src/components/BrokerCard.tsx` — Card broker/exchange + rating + features
+- [x] `src/components/ContactForm.tsx` — Form validations
+- [x] `src/components/MarketOverview.tsx` — Bảng giá 8 coin (desktop table + mobile scroll)
+- [x] `src/components/NewsletterForm.tsx` — Form đăng ký email
 
 ---
 
 ## PHẦN 5: CẤU HÌNH BẢO MẬT & HIỆU SUẤT
 
 ### next.config.js
-- [ ] `images.remotePatterns` cho assets.coingecko.com
-- [ ] HSTS headers (Strict-Transport-Security)
+- [x] `images.remotePatterns` cho assets.coingecko.com + coin-images.coingecko.com
+- [x] HSTS headers (Strict-Transport-Security)
 
 ### SEO
-- [ ] `src/app/sitemap.ts` — tạo sitemap.xml
+- [x] `src/app/sitemap.ts` — tạo sitemap.xml
 
 ### Kiểm tra build
-- [ ] Chạy `npm run build` — 0 lỗi
+- [x] Chạy `npm run build` — 0 lỗi
 
 ---
 
 ## PHẦN 6: TRANG CHỦ — Home (/)
 
 ### Section 1: Hero
-- [ ] Background navy #0F1A2E + gradient cam
-- [ ] Headline: "Trade Smarter, Invest Wiser"
-- [ ] Subheadline: mô tả website
-- [ ] Trust Bar: "50+ Brokers Reviewed | $2B+ Volume | 100K+ Readers"
-- [ ] 3 CTA buttons: Start Trading → Compare Brokers → Latest News
+- [x] Background navy #0F1A2E + gradient cam
+- [x] Headline: "Trade Smarter, Invest Wiser"
+- [x] Subheadline: mô tả website
+- [x] Trust Bar: "50+ Brokers Reviewed | $2B+ Volume | 100K+ Readers"
+- [x] 3 CTA buttons: Start Trading → Compare Brokers → Latest News
 
 ### Section 2: Market Overview
-- [ ] Bảng 8 coin (BTC, ETH, BNB, SOL, XRP, ADA, DOGE, DOT)
-- [ ] Cột: Name, Price, 24h Change, Market Cap
-- [ ] Màu xanh/đỏ cho tăng/giảm
-- [ ] Mobile: card scroll ngang (swipeable)
+- [x] Bảng 8 coin (BTC, ETH, BNB, SOL, XRP, ADA, DOGE, DOT)
+- [x] Cột: Name, Price, 24h Change, Market Cap
+- [x] Màu xanh/đỏ cho tăng/giảm
+- [x] Mobile: card scroll ngang (swipeable)
 
 ### Section 3: Featured Brokers & Exchanges
-- [ ] 7 sàn: 3 Forex + 3 Crypto + 1 Binary
-- [ ] Mỗi card: Logo, Tên, Rating, Tags, "Read Review"
-- [ ] Link đến trang chi tiết từng sàn
+- [x] 7 sàn: 3 Forex + 3 Crypto + 1 Binary
+- [x] Mỗi card: Logo, Tên, Rating, Tags, "Read Review"
+- [x] Link đến trang chi tiết từng sàn
 
 ### Section 4: Featured News
-- [ ] 3 bài viết (Crypto, Forex, Binary)
-- [ ] Card: Image + Category badge + Date + Title + Excerpt
-- [ ] "View All News" → /news
+- [x] 3 bài viết (Crypto, Forex, Binary)
+- [x] Card: Image + Category badge + Date + Title + Excerpt
+- [x] "View All News" → /news
 
 ### Section 5: Trading Platforms
-- [ ] 4 card: Forex, Crypto, Binary, Tools
-- [ ] Icon + Title + Description
-- [ ] Link đến trang tương ứng
+- [x] 4 card: Forex, Crypto, Binary, Tools
+- [x] Icon + Title + Description
+- [x] Link đến trang tương ứng
 
 ### Section 6: Why TrantamCapital
-- [ ] 4 lý do: Expert Analysis, Coverage, Education, Trust
-- [ ] Nền navy #0F1A2E
+- [x] 4 lý do: Expert Analysis, Coverage, Education, Trust
+- [x] Nền navy #0F1A2E
 
 ### Section 7: Newsletter
-- [ ] Email input + Subscribe button
-- [ ] Nền cam #E84910
+- [x] Email input + Subscribe button
+- [x] Nền cam #E84910
 
 ---
 
 ## PHẦN 7: TRANG TIN TỨC — News (/news)
 
-- [ ] Page Header: navy, "Market News"
-- [ ] Filter tabs: All, Crypto, Forex, Binary, Markets
-- [ ] 9 bài viết dạng list (image trái, content phải)
-- [ ] Sidebar: Categories + Recent Posts + Newsletter widget
-- [ ] Pagination: [1] [2] [3]
+- [x] Page Header: navy, "Market News"
+- [x] Filter tabs: All, Crypto, Forex, Binary, Markets
+- [x] 9 bài viết dạng grid 2 cột (image + content)
+- [x] Sidebar: Categories + Recent Posts + Newsletter widget
+- [x] Pagination: [1] [2] [3]
 
 ---
 
 ## PHẦN 8: DÀNH CHO NGƯỜI MỚI — For Beginners (/for-beginners)
 
-- [ ] Page Header
-- [ ] 3 cards giới thiệu: What is Crypto / Forex / Binary Options
-- [ ] Getting Started: 7 steps
-- [ ] Glossary: 15+ thuật ngữ (Ask, Bid, Spread, Leverage...)
+- [x] Page Header
+- [x] 3 cards giới thiệu: What is Crypto / Forex / Binary Options
+- [x] Getting Started: 7 steps
+- [x] Glossary: 15+ thuật ngữ (Ask, Bid, Spread, Leverage...)
 
 ---
 
 ## PHẦN 9: PHÂN TÍCH ĐẦU TƯ — Investment Analysis (/investment-analysis)
 
-- [ ] Page Header
-- [ ] Market Overview cards: Crypto, Forex, Commodities
-- [ ] Today's Market Report
-- [ ] Technical Analysis Tools section
+- [x] Page Header
+- [x] Market Overview cards: Crypto, Forex, Commodities
+- [x] Today's Market Report
+- [x] Technical Analysis Tools section
 
 ---
 
 ## PHẦN 10: FOREX BROKER (/forex-broker)
 
-- [ ] Page Header
-- [ ] 6 brokers grid: card + rating + features + "Read Review" + "Visit Site"
-- [ ] Comparison table: Regulation, Min Deposit, Spread, Leverage, Platforms
-- [ ] How to Choose a Broker guide
+- [x] Page Header
+- [x] 6 brokers grid: card + rating + features + "Read Review" + "Visit Site"
+- [x] Comparison table: Regulation, Min Deposit, Spread, Leverage, Platforms
+- [x] How to Choose a Broker guide
 
 ---
 
 ## PHẦN 11: CRYPTO EXCHANGE (/crypto-exchange)
 
-- [ ] Page Header
-- [ ] 6 exchanges grid
-- [ ] Comparison table
+- [x] Page Header
+- [x] 6 exchanges grid
+- [x] Comparison table
 
 ---
 
 ## PHẦN 12: BINARY OPTION (/binary-option)
 
-- [ ] Page Header
-- [ ] Risk warning (nền vàng)
-- [ ] 3 platforms grid
-- [ ] How Binary Options Work: 4 bước
+- [x] Page Header
+- [x] Risk warning (nền vàng)
+- [x] 3 platforms grid
+- [x] How Binary Options Work: 4 bước
 
 ---
 
 ## PHẦN 13: TRANG CHI TIẾT SÀN (Sub Pages)
 
 ### Forex Broker Sub Pages
-- [ ] `/forex-broker/broker-a` — Review + 3 bài viết
-- [ ] `/forex-broker/broker-b` — Review + 3 bài viết
-- [ ] `/forex-broker/broker-c` — Review + 3 bài viết
+- [x] `/forex-broker/broker-a` — Review + 3 bài viết
+- [x] `/forex-broker/broker-b` — Review + 3 bài viết
+- [x] `/forex-broker/broker-c` — Review + 3 bài viết
 
 ### Crypto Exchange Sub Pages
-- [ ] `/crypto-exchange/exchange-a` — Review + 3 bài viết
-- [ ] `/crypto-exchange/exchange-b` — Review + 3 bài viết
-- [ ] `/crypto-exchange/exchange-c` — Review + 3 bài viết
+- [x] `/crypto-exchange/exchange-a` — Review + 3 bài viết
+- [x] `/crypto-exchange/exchange-b` — Review + 3 bài viết
+- [x] `/crypto-exchange/exchange-c` — Review + 3 bài viết
 
 ### Binary Option Sub Pages
-- [ ] `/binary-option/platform-a` — Review + 3 bài viết
+- [x] `/binary-option/platform-a` — Review + 3 bài viết
 
 ---
 
 ## PHẦN 14: TOOLS (/tools)
 
-- [ ] Page Header
-- [ ] 6 tools grid: Economic Calendar, Position Size, Profit/Loss, Currency Converter, Margin, Pip
+- [x] Page Header
+- [x] 6 tools grid: Economic Calendar, Position Size, Profit/Loss, Currency Converter, Margin, Pip
 
 ---
 
 ## PHẦN 15: TRANG ABOUT (/about)
 
-- [ ] Page Header
-- [ ] Our Story section
-- [ ] Mission & Vision
-- [ ] Core Values: Integrity, Education, Innovation, Community
-- [ ] Team: 3 members
-- [ ] Timeline: 2024 → 2025 → 2026
+- [x] Page Header
+- [x] Our Story section
+- [x] Mission & Vision
+- [x] Core Values: Integrity, Education, Innovation, Community
+- [x] Team: 3 members
+- [x] Timeline: 2024 → 2025 → 2026
 
 ---
 
 ## PHẦN 16: TRANG CONTACT (/contact)
 
-- [ ] Page Header
-- [ ] Form: Name, Email, Subject, Message + validation
-- [ ] Contact info: email, phone, address, hours
+- [x] Page Header
+- [x] Form: Name, Email, Subject, Message + validation
+- [x] Contact info: email, phone, address, hours
 
 ---
 
 ## PHẦN 17: TRANG PHÁP LÝ
 
-- [ ] `/privacy-policy` — Nội dung từ generator
-- [ ] `/terms-of-service` — Nội dung từ generator
-- [ ] Link 2 trang trong Footer
+- [x] `/privacy-policy` — Nội dung từ generator
+- [x] `/terms-of-service` — Nội dung từ generator
+- [x] Link 2 trang trong Footer
 
 ---
 
 ## PHẦN 18: TRANG 404
 
-- [ ] `not-found.tsx` — "404 - Page Not Found" + "Back to Home" button
+- [x] `not-found.tsx` — "404 - Page Not Found" + "Back to Home" button
 
 ---
 
 ## PHẦN 19: MOBILE RESPONSIVE
 
-- [ ] Mobile: hamburger menu hoạt động
-- [ ] Mobile: nav gom Platforms ▼ thành dropdown
-- [ ] Mobile: cards 1 cột, padding 16px
-- [ ] Mobile: Market Overview thành card scroll ngang
-- [ ] Tablet: 2-3 cột
-- [ ] Touch targets: tất cả nút ≥ 44x44px
+- [x] Mobile: hamburger menu hoạt động
+- [x] Mobile: nav gom Platforms ▼ thành dropdown
+- [x] Mobile: cards 1 cột, padding 16px
+- [x] Mobile: Market Overview thành card scroll ngang
+- [x] Tablet: 2-3 cột
+- [x] Touch targets: tất cả nút ≥ 44x44px
 
 ---
 
 ## PHẦN 20: DEPLOY & KIỂM TRA
 
 ### Push code lên GitHub
-- [ ] `git init`
-- [ ] `git add .`
-- [ ] `git commit -m "Initial commit"`
-- [ ] `git branch -M main`
-- [ ] `git remote add origin https://github.com/YOUR_USERNAME/trantamcapital.git`
-- [ ] `git push -u origin main`
+- [x] `git init`
+- [x] `git add .`
+- [x] `git commit -m "Initial commit"`
+- [x] `git branch -M main`
+- [x] `git remote add origin https://github.com/YOUR_USERNAME/trantamcapital.git`
+- [x] `git push -u origin main`
 
 ### Deploy lên Vercel
-- [ ] Vào https://vercel.com → Add New → Project
-- [ ] Chọn repo trantamcapital → Deploy
-- [ ] Đợi build xong → click link
+- [x] Vào https://vercel.com → Add New → Project
+- [x] Chọn repo trantamcapital → Deploy
+- [x] Đợi build xong → click link
 
 ### Kiểm tra sau deploy
-- [ ] Home: hero, giá coin, news đều hiển thị
-- [ ] Tất cả link menu: không 404
-- [ ] News: bài viết + sidebar + pagination
-- [ ] Forex Broker: grid + comparison table
-- [ ] Crypto Exchange: grid
-- [ ] Binary Option: grid + risk warning
-- [ ] Tools: 6 cards
-- [ ] About: story, team, timeline
-- [ ] Contact: form + info
-- [ ] Privacy Policy + Terms: hiển thị
-- [ ] 404: vào link sai → trang 404
-- [ ] Mobile: menu hamburger, responsive
+- [x] Home: hero, giá coin, news đều hiển thị
+- [x] Tất cả link menu: không 404
+- [x] News: bài viết + sidebar + pagination
+- [x] Forex Broker: grid + comparison table
+- [x] Crypto Exchange: grid
+- [x] Binary Option: grid + risk warning
+- [x] Tools: 6 cards
+- [x] About: story, team, timeline
+- [x] Contact: form + info
+- [x] Privacy Policy + Terms: hiển thị
+- [x] 404: vào link sai → trang 404
+- [x] Mobile: menu hamburger, responsive
 - [ ] Vào https://pagespeed.web.dev/ → điểm ≥90
 
 ---
@@ -320,26 +322,26 @@
 
 | Phần | Số mục | Hoàn thành |
 |------|--------|-----------|
-| 1. Chuẩn bị | 11 | □ / 11 |
-| 2. Tạo dự án | 6 | □ / 6 |
-| 3. Design System | 4 | □ / 4 |
-| 4. Components | 8 | □ / 8 |
-| 5. Config & SEO | 4 | □ / 4 |
-| 6. Home | 20 | □ / 20 |
-| 7. News | 5 | □ / 5 |
-| 8. For Beginners | 4 | □ / 4 |
-| 9. Investment Analysis | 4 | □ / 4 |
-| 10. Forex Broker | 4 | □ / 4 |
-| 11. Crypto Exchange | 2 | □ / 2 |
-| 12. Binary Option | 4 | □ / 4 |
-| 13. Sub Pages | 7 | □ / 7 |
-| 14. Tools | 2 | □ / 2 |
-| 15. About | 6 | □ / 6 |
-| 16. Contact | 3 | □ / 3 |
-| 17. Pháp lý | 3 | □ / 3 |
-| 18. 404 | 1 | □ / 1 |
-| 19. Responsive | 5 | □ / 5 |
-| 20. Deploy | 16 | □ / 16 |
-| 21. Domain setup | 11 | □ / 11 |
-| 22. Sau deploy | 6 | □ / 6 |
-| **Tổng** | **~130 mục** | **□ / 130** |
+| 1. Chuẩn bị | 11 | ✅ 11 / 11 |
+| 2. Tạo dự án | 6 | ✅ 6 / 6 |
+| 3. Design System | 4 | ✅ 4 / 4 |
+| 4. Components | 8 | ✅ 8 / 8 |
+| 5. Config & SEO | 4 | ✅ 4 / 4 |
+| 6. Home | 20 | ✅ 20 / 20 |
+| 7. News | 5 | ✅ 5 / 5 |
+| 8. For Beginners | 4 | ✅ 4 / 4 |
+| 9. Investment Analysis | 4 | ✅ 4 / 4 |
+| 10. Forex Broker | 4 | ✅ 4 / 4 |
+| 11. Crypto Exchange | 2 | ✅ 2 / 2 |
+| 12. Binary Option | 4 | ✅ 4 / 4 |
+| 13. Sub Pages | 7 | ✅ 7 / 7 |
+| 14. Tools | 2 | ✅ 2 / 2 |
+| 15. About | 6 | ✅ 6 / 6 |
+| 16. Contact | 3 | ✅ 3 / 3 |
+| 17. Pháp lý | 3 | ✅ 3 / 3 |
+| 18. 404 | 1 | ✅ 1 / 1 |
+| 19. Responsive | 5 | ✅ 5 / 5 |
+| 20. Deploy | 16 | ✅ 15 / 16 |
+| 21. Domain setup | 11 | ⬜ 0 / 11 |
+| 22. Sau deploy | 6 | ⬜ 0 / 6 |
+| **Tổng** | **136 mục** | **✅ 118 / 136** |
