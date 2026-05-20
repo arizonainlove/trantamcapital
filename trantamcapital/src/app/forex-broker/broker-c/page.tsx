@@ -14,9 +14,9 @@ const pros = ["FCA regulated", "Social & copy trading", "Competitive spreads", "
 const cons = ["Limited leverage (1:30 max)", "Fewer currency pairs than competitors", "Withdrawal processing can be slow"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 17, 2026", title: "ForexBroker C Enhances Copy Trading Platform", excerpt: "New updates to ForexBroker C's copy trading platform make it easier to follow top-performing traders.", href: "/news/broker-c-copy", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
-  { category: "Forex", date: "May 12, 2026", title: "Social Trading: The Future of Forex", excerpt: "How social trading platforms like ForexBroker C are changing the way beginners learn to trade.", href: "/news/social-trading", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
-  { category: "Forex", date: "May 7, 2026", title: "FCA Regulation: Why It Matters", excerpt: "Why FCA regulation matters when choosing a forex broker and how it protects your funds.", href: "/news/fca-regulation", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 17, 2026", title: "ForexBroker C Enhances Copy Trading Platform", excerpt: "New updates to ForexBroker C's copy trading platform make it easier to follow top-performing traders.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 12, 2026", title: "Social Trading: The Future of Forex", excerpt: "How social trading platforms like ForexBroker C are changing the way beginners learn to trade.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
+  { category: "Forex", date: "May 7, 2026", title: "FCA Regulation: Why It Matters", excerpt: "Why FCA regulation matters when choosing a forex broker and how it protects your funds.", href: "#", imageGradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)" },
 ];
 
 export default function BrokerC() {

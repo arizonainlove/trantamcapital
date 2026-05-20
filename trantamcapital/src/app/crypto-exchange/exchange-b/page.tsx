@@ -14,9 +14,9 @@ const pros = ["Very user-friendly interface", "Staking rewards available", "Buil
 const cons = ["Higher fees than competitors (0.2%)", "Limited altcoin selection", "Futures not available in all regions"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 18, 2026", title: "Exchange B NFT Marketplace Hits $1B Volume", excerpt: "Exchange B's NFT marketplace has reached $1 billion in total trading volume since its launch.", href: "/news/exchange-b-nft", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
-  { category: "Cryptocurrency", date: "May 13, 2026", title: "Exchange B Increases Staking Rewards for ETH", excerpt: "Exchange B has announced increased staking rewards for Ethereum, offering 5.5% APY for ETH stakers.", href: "/news/exchange-b-staking", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
-  { category: "Cryptocurrency", date: "May 8, 2026", title: "Best Crypto Exchanges for Beginners", excerpt: "Our guide to the most beginner-friendly crypto exchanges, with Exchange B ranked #1 for ease of use.", href: "/news/beginners-crypto", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 18, 2026", title: "Exchange B NFT Marketplace Hits $1B Volume", excerpt: "Exchange B's NFT marketplace has reached $1 billion in total trading volume since its launch.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 13, 2026", title: "Exchange B Increases Staking Rewards for ETH", excerpt: "Exchange B has announced increased staking rewards for Ethereum, offering 5.5% APY for ETH stakers.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
+  { category: "Cryptocurrency", date: "May 8, 2026", title: "Best Crypto Exchanges for Beginners", excerpt: "Our guide to the most beginner-friendly crypto exchanges, with Exchange B ranked #1 for ease of use.", href: "#", imageGradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)" },
 ];
 
 export default function ExchangeB() {

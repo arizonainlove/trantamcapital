@@ -14,9 +14,9 @@ const pros = ["Very user-friendly platform", "Multiple asset classes available",
 const cons = ["Limited expiry times", "Not available in all countries", "Higher minimum trade amount"];
 
 const relatedNews = [
-  { category: "Binary Options", date: "May 16, 2026", title: "BinaryPlatform A Launches New Asset Classes", excerpt: "BinaryPlatform A has expanded its offering with new asset classes including ETFs and major indices.", href: "/news/platform-a-assets", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
-  { category: "Binary Options", date: "May 11, 2026", title: "BinaryPlatform A Review: Updated for 2026", excerpt: "An updated comprehensive review of BinaryPlatform A covering new features, payout structures, and user experience.", href: "/news/platform-a-update", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
-  { category: "Binary Options", date: "May 5, 2026", title: "Best Binary Options Platforms for Beginners", excerpt: "Our ranking of the best binary options platforms for new traders, highlighting BinaryPlatform A's excellent demo account.", href: "/news/best-binary-beginners", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 16, 2026", title: "BinaryPlatform A Launches New Asset Classes", excerpt: "BinaryPlatform A has expanded its offering with new asset classes including ETFs and major indices.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 11, 2026", title: "BinaryPlatform A Review: Updated for 2026", excerpt: "An updated comprehensive review of BinaryPlatform A covering new features, payout structures, and user experience.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
+  { category: "Binary Options", date: "May 5, 2026", title: "Best Binary Options Platforms for Beginners", excerpt: "Our ranking of the best binary options platforms for new traders, highlighting BinaryPlatform A's excellent demo account.", href: "#", imageGradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)" },
 ];
 
 export default function PlatformA() {

@@ -13,7 +13,7 @@ const featuredNews = [
     title: "Bitcoin Surges Past $100K: What This Means for the Market",
     excerpt:
       "Bitcoin has reached a new all-time high, crossing the $100,000 mark for the first time. Analysts weigh in on what this means for the broader cryptocurrency market and retail investors.",
-    href: "/news/bitcoin-surges",
+    href: "#",
   },
   {
     category: "Forex",
@@ -21,7 +21,7 @@ const featuredNews = [
     title: "Central Bank Rate Decisions: Impact on Major Currency Pairs",
     excerpt:
       "With multiple central banks announcing rate decisions this quarter, forex traders are bracing for increased volatility across major currency pairs. Our analysis covers the key levels to watch.",
-    href: "/news/central-bank-rates",
+    href: "#",
   },
   {
     category: "Binary Options",
@@ -29,7 +29,7 @@ const featuredNews = [
     title: "Binary Options Trading Strategies for Volatile Markets",
     excerpt:
       "Discover proven binary options trading strategies that perform well in volatile market conditions. From straddles to trend-following approaches, we cover the essentials.",
-    href: "/news/binary-strategies",
+    href: "#",
   },
 ];
 

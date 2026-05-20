@@ -14,9 +14,9 @@ const pros = ["ASIC regulated", "Negative balance protection", "Excellent educat
 const cons = ["Limited leverage (1:30 for retail)", "No cryptocurrency trading", "Withdrawal fees after first monthly withdrawal"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 18, 2026", title: "ForexBroker B Launches New Educational Platform", excerpt: "ForexBroker B has unveiled a comprehensive educational platform with video courses, webinars, and interactive quizzes.", href: "/news/broker-b-education", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
-  { category: "Forex", date: "May 14, 2026", title: "Best Forex Brokers for Beginners in 2026", excerpt: "Our guide to the best brokers for new traders, featuring ForexBroker B's excellent educational resources.", href: "/news/beginners-brokers", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
-  { category: "Forex", date: "May 9, 2026", title: "ASIC Regulation: What It Means for Traders", excerpt: "Understanding ASIC regulation and how it protects traders when using brokers like ForexBroker B.", href: "/news/asic-regulation", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 18, 2026", title: "ForexBroker B Launches New Educational Platform", excerpt: "ForexBroker B has unveiled a comprehensive educational platform with video courses, webinars, and interactive quizzes.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 14, 2026", title: "Best Forex Brokers for Beginners in 2026", excerpt: "Our guide to the best brokers for new traders, featuring ForexBroker B's excellent educational resources.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
+  { category: "Forex", date: "May 9, 2026", title: "ASIC Regulation: What It Means for Traders", excerpt: "Understanding ASIC regulation and how it protects traders when using brokers like ForexBroker B.", href: "#", imageGradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)" },
 ];
 
 export default function BrokerB() {

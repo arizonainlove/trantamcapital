@@ -14,9 +14,9 @@ const pros = ["500+ cryptocurrencies available", "Low trading fees (0.1%)", "Fut
 const cons = ["Complex for beginners", "Withdrawal fees can be high", "Not available in all countries"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 19, 2026", title: "Exchange A Adds 50 New Altcoins to Platform", excerpt: "Exchange A has expanded its offering with 50 new cryptocurrency listings, including several promising DeFi projects.", href: "/news/exchange-a-listings", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
-  { category: "Cryptocurrency", date: "May 14, 2026", title: "Exchange A Launches Institutional Trading Desk", excerpt: "New institutional-grade trading desk with dedicated account managers and customized liquidity solutions.", href: "/news/exchange-a-institutional", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
-  { category: "Cryptocurrency", date: "May 9, 2026", title: "Top 5 Crypto Exchanges for Altcoin Trading", excerpt: "Our ranking of the best exchanges for altcoin trading, with Exchange A taking the top spot for variety.", href: "/news/altcoin-exchanges", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 19, 2026", title: "Exchange A Adds 50 New Altcoins to Platform", excerpt: "Exchange A has expanded its offering with 50 new cryptocurrency listings, including several promising DeFi projects.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 14, 2026", title: "Exchange A Launches Institutional Trading Desk", excerpt: "New institutional-grade trading desk with dedicated account managers and customized liquidity solutions.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
+  { category: "Cryptocurrency", date: "May 9, 2026", title: "Top 5 Crypto Exchanges for Altcoin Trading", excerpt: "Our ranking of the best exchanges for altcoin trading, with Exchange A taking the top spot for variety.", href: "#", imageGradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)" },
 ];
 
 export default function ExchangeA() {

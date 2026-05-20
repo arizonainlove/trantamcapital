@@ -14,9 +14,9 @@ const pros = ["FCA & CySEC regulated", "0.0 pip spreads on major pairs", "MT4, M
 const cons = ["Higher commission on ECN accounts", "No cryptocurrency trading", "Inactivity fee after 6 months"];
 
 const relatedNews = [
-  { category: "Forex", date: "May 19, 2026", title: "ForexBroker A Introduces New Trading Tools Suite", excerpt: "ForexBroker A has launched a comprehensive suite of trading tools including advanced charting and risk management features.", href: "/news/broker-a-tools", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
-  { category: "Forex", date: "May 15, 2026", title: "ForexBroker A Review: Six Months Later", excerpt: "An updated look at ForexBroker A after six months of real-world trading experience with the platform.", href: "/news/broker-a-update", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
-  { category: "Forex", date: "May 10, 2026", title: "Top 5 Forex Brokers for Scalping in 2026", excerpt: "We rank the best brokers for scalping strategies, with ForexBroker A taking the top spot for tight spreads.", href: "/news/scalping-brokers", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 19, 2026", title: "ForexBroker A Introduces New Trading Tools Suite", excerpt: "ForexBroker A has launched a comprehensive suite of trading tools including advanced charting and risk management features.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 15, 2026", title: "ForexBroker A Review: Six Months Later", excerpt: "An updated look at ForexBroker A after six months of real-world trading experience with the platform.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
+  { category: "Forex", date: "May 10, 2026", title: "Top 5 Forex Brokers for Scalping in 2026", excerpt: "We rank the best brokers for scalping strategies, with ForexBroker A taking the top spot for tight spreads.", href: "#", imageGradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)" },
 ];
 
 export default function BrokerA() {

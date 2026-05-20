@@ -14,9 +14,9 @@ const pros = ["Regulated in EU and Asia", "Advanced charting tools", "OTC tradin
 const cons = ["Smaller coin selection (200+)", "Not ideal for absolute beginners", "Higher minimum deposit for OTC"];
 
 const relatedNews = [
-  { category: "Cryptocurrency", date: "May 16, 2026", title: "Exchange C Receives New Regulatory License in Singapore", excerpt: "Exchange C has obtained a Major Payment Institution license from the Monetary Authority of Singapore.", href: "/news/exchange-c-license", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
-  { category: "Cryptocurrency", date: "May 11, 2026", title: "Exchange C Launches Advanced Trading Suite", excerpt: "New professional trading suite with advanced charting, real-time data, and algorithmic trading support.", href: "/news/exchange-c-suite", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
-  { category: "Cryptocurrency", date: "May 6, 2026", title: "OTC Trading: A Guide for Large Investors", excerpt: "How OTC desks like Exchange C's help large investors execute trades without impacting market prices.", href: "/news/otc-trading", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 16, 2026", title: "Exchange C Receives New Regulatory License in Singapore", excerpt: "Exchange C has obtained a Major Payment Institution license from the Monetary Authority of Singapore.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 11, 2026", title: "Exchange C Launches Advanced Trading Suite", excerpt: "New professional trading suite with advanced charting, real-time data, and algorithmic trading support.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
+  { category: "Cryptocurrency", date: "May 6, 2026", title: "OTC Trading: A Guide for Large Investors", excerpt: "How OTC desks like Exchange C's help large investors execute trades without impacting market prices.", href: "#", imageGradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)" },
 ];
 
 export default function ExchangeC() {
