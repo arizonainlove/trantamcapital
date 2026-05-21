@@ -59,7 +59,7 @@ export function getAllBrokers(): Broker[] {
     .readdirSync(contentDir)
     .filter((f) => f.endsWith(".md"));
 
-  return files.map((file) => {
+  const brokers = files.map((file) => {
     const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
     const { data } = matter(raw);
     return {
@@ -85,8 +85,19 @@ export function getAllBrokers(): Broker[] {
       payout: parseOptional(data, "payout"),
       expiryTypes: parseOptional(data, "expiryTypes"),
       assets: parseOptional(data, "assets"),
+      order: data.order ? Number(data.order) : undefined,
     } as Broker;
   });
+
+  // Sort by order field (ascending), fallback to name for items without order
+  brokers.sort((a, b) => {
+    if (a.order !== undefined && b.order !== undefined) return a.order - b.order;
+    if (a.order !== undefined) return -1;
+    if (b.order !== undefined) return 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  return brokers;
 }
 
 export function getRecentPosts(count: number = 4): NewsArticle[] {
