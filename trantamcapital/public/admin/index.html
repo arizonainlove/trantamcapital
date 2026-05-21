@@ -6,43 +6,6 @@
   <title>Content Manager - TrantamCapital</title>
 </head>
 <body>
-  <div id="cms-root"></div>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-    window.CMS_CONFIG = {
-      load_config_file: false,
-      backend: {
-        name: "github",
-        repo: "arizonainlove/trantamcapital",
-        branch: "main",
-        base_url: "https://trantamcapital.vercel.app",
-        auth_endpoint: "api/auth",
-      },
-      media_folder: "public/images/uploads",
-      public_folder: "/images/uploads",
-      collections: [
-        {
-          name: "news",
-          label: "News Articles",
-          folder: "src/content/news",
-          create: true,
-          slug: "{{slug}}",
-          fields: [
-            { label: "Title", name: "title", widget: "string" },
-            { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false },
-            { label: "Category", name: "category", widget: "select", options: ["Cryptocurrency", "Forex", "Binary Options", "Markets"] },
-            { label: "Author", name: "author", widget: "string", default: "TrantamCapital" },
-            { label: "Image", name: "image", widget: "image", required: false },
-            { label: "Excerpt", name: "excerpt", widget: "text", pattern: ["^.{10,}$", "Must be at least 10 characters"] },
-            { label: "Body", name: "body", widget: "markdown" },
-          ],
-        },
-      ],
-    };
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({ config: window.CMS_CONFIG });
-  </script>
 </body>
 </html>
