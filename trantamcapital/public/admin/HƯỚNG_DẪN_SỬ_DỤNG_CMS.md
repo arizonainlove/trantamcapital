@@ -6,26 +6,43 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 
 ---
 
-## Đăng nhập
-
-1. Click **Login with GitHub**
-2. Cửa sổ hiện ra yêu cầu nhập **GitHub Personal Access Token**
-
-### Tạo token (làm 1 lần)
+## Bước 1: Tạo GitHub OAuth App (làm 1 lần)
 
 1. Vào **GitHub.com** → Click avatar góc phải → **Settings**
 2. Kéo xuống cuối sidebar trái → **Developer settings**
-3. Click **Personal access tokens** → **Tokens (classic)**
-4. Click **Generate new token** → **Generate new token (classic)**
-5. Điền:
-   - **Note**: `TrantamCapital CMS`
-   - **Expiration**: chọn **No expiration**
-   - **Scopes**: tick **`repo`** (Full control of private repositories)
-6. Kéo xuống cuối → Click **Generate token**
-7. **Copy token** (dạng `ghp_...`) — Sau đó paste vào cửa sổ CMS
-8. Click **OK** → vào được giao diện CMS
+3. Click **OAuth Apps** → **New OAuth App**
+4. Điền:
+   - **Application name**: `TrantamCapital CMS`
+   - **Homepage URL**: `https://trantamcapital.vercel.app`
+   - **Authorization callback URL**: `https://trantamcapital.vercel.app/api/auth`
+5. Click **Register application**
+6. Màn hình hiện ra:
+   - **Client ID** → Copy giữ lại
+   - **Client Secret** → Click **Generate a new client secret** → Copy giữ lại
 
-> Giữ token an toàn, không chia sẻ với ai. Nếu mất token, tạo cái mới.
+---
+
+## Bước 2: Thêm Client ID và Secret vào Vercel
+
+1. Vào **https://vercel.com** → Dashboard → **trantamcapital**
+2. Vào tab **Settings** → **Environment Variables**
+3. Thêm 2 biến:
+   - `GITHUB_CLIENT_ID` = Client ID vừa copy
+   - `GITHUB_CLIENT_SECRET` = Client Secret vừa copy
+4. **Add** → chọn **Production**
+5. Sau đó vào **Deployments** → chọn deployment gần nhất → **Redeploy**
+   (đợi ~2 phút cho deploy xong)
+
+---
+
+## Bước 3: Đăng nhập CMS
+
+1. Vào **`https://trantamcapital.vercel.app/admin`**
+2. Click **Login with GitHub**
+3. Cửa sổ mới hiện ra → GitHub yêu cầu Authorize → Click **Authorize**
+4. Tự động quay lại CMS — đã đăng nhập thành công
+
+> Chỉ cần làm Bước 1 + 2 một lần duy nhất. Lần sau vào `/admin` → Login → Authorize là dùng được.
 
 ---
 
@@ -42,7 +59,7 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 | **Author** | Tác giả | TrantamCapital (mặc định) |
 | **Image** | Ảnh đại diện (không bắt buộc) | Kéo thả hoặc upload |
 | **Excerpt** | Mô tả ngắn, 1-2 câu | Bitcoin has reached a new all-time high... |
-| **Body** | Nội dung chính — viết bằng Markdown | Xem hướng dẫn Markdown bên dưới |
+| **Body** | Nội dung chính — viết bằng Markdown | Xem hướng dẫn bên dưới |
 
 ---
 
