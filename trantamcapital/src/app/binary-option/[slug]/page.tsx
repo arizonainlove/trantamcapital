@@ -4,6 +4,8 @@ import { getAllBrokers } from "@/lib/content";
 import { getReviewBySlug } from "@/lib/reviews";
 import ReviewPage from "@/components/ReviewPage";
 
+export const dynamic = "force-static";
+
 interface Props {
   params: { slug: string };
 }
