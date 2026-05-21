@@ -2,6 +2,7 @@
 name: "Exness"
 type: "Forex Broker"
 rating: 4.8
+order: 4
 features:
   - "FCA & CySEC regulated"
   - "0.0 pip spreads"
