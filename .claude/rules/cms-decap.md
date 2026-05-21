@@ -11,7 +11,8 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 - No database required — all content stored as Markdown files in the repo
 
 ### Content Storage
-- Content files: `src/content/news/` (Markdown with frontmatter)
+- News articles: `src/content/news/` (Markdown with frontmatter)
+- Brokers: `src/content/brokers/` (Markdown with frontmatter)
 - Image uploads: `trantamcapital/public/images/uploads/` (via GitHub API)
 - Workflow: Write in admin → auto-commits `.md` file to GitHub → Vercel rebuilds
 
@@ -24,10 +25,11 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Feature | Description |
 |---------|-------------|
 | Login | GitHub OAuth via popup → saves token to localStorage |
-| Dashboard | Lists all articles in a table with Edit/Delete actions |
-| Editor | Form-based: title, date, category, author, image upload, excerpt, body |
+| Dashboard | Tab-based: **News Articles** and **Brokers** tabs |
+| Article Editor | Form-based: title, date, category, author, image upload, excerpt, body |
+| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, gradient |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
-| Create | Generates slug from title, creates `.md` with frontmatter |
+| Create | Generates slug from title/name, creates `.md` with frontmatter |
 | Edit | Reads existing file, updates content via GitHub API |
 | Delete | Removes file via GitHub API with confirmation |
 
@@ -49,6 +51,21 @@ image: string (raw GitHub URL to image)
 excerpt: text
 ---
 Body content (Markdown)
+```
+
+### Broker Frontmatter (`src/content/brokers/*.md`)
+```
+---
+name: string
+type: enum [Forex Broker, Crypto Exchange, Binary Options]
+rating: number (0–5)
+features:
+  - "Feature one"
+  - "Feature two"
+reviewHref: string (URL path)
+visitHref: string (URL path)
+gradient: string (CSS gradient, optional)
+---
 ```
 
 ### Build Integration

@@ -55,3 +55,5 @@ Financial market information website covering cryptocurrency, forex, and binary 
 
 #### Shared Data
 - `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata
+- `data/brokers.ts` — Broker interface + 7 default brokers/exchanges (fallback when no CMS data)
+- `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data
