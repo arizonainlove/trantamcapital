@@ -4,94 +4,38 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - TrantamCapital</title>
-  <style>
-    body { margin: 0; font-family: system-ui, sans-serif; background: #F7F8FA; }
-    .auth-popup {
-      display: none;
-      position: fixed; inset: 0;
-      z-index: 9999;
-      background: #F7F8FA;
-      align-items: center;
-      justify-content: center;
-    }
-    .auth-popup.show { display: flex; }
-    .auth-inner { text-align: center; padding: 40px; }
-    .auth-inner h2 { color: #2E7D32; margin: 0 0 8px; font-size: 20px; }
-    .auth-inner p { color: #5A6377; margin: 0; font-size: 14px; }
-    .spinner {
-      border: 3px solid #E2E5EC;
-      border-top-color: #E84910;
-      border-radius: 50%;
-      width: 32px; height: 32px;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
 </head>
 <body>
-  <!-- Auth popup overlay: shown when this is a popup with access_token -->
-  <div id="auth-popup" class="auth-popup show">
-    <div class="auth-inner">
-      <div class="spinner"></div>
-      <h2>Authentication successful</h2>
-      <p>This window will close automatically.</p>
-    </div>
-  </div>
-
   <script>
-    // Fix OAuth hash — Vercel can add leading chars before access_token=
-    (function() {
-      var hash = window.location.hash;
-      if (hash.indexOf("access_token=") > 1) {
-        window.location.hash = "#" + hash.substring(hash.indexOf("access_token="));
-      }
-    })();
-  </script>
-
-  <script>
-    // If NOT an auth callback popup, configure and init CMS normally
-    if (!(window.opener && window.location.hash.includes("access_token"))) {
-      document.getElementById('auth-popup').classList.remove('show');
-
-      window.CMS_CONFIG = {
-        backend: {
-          name: "github",
-          repo: "arizonainlove/trantamcapital",
-          branch: "main",
-          base_url: "https://trantamcapital.vercel.app",
-          auth_endpoint: "api/auth",
+    window.CMS_CONFIG = {
+      backend: {
+        name: "github",
+        repo: "arizonainlove/trantamcapital",
+        branch: "main",
+        auth_type: "implicit",
+      },
+      media_folder: "public/images/uploads",
+      public_folder: "/images/uploads",
+      collections: [
+        {
+          name: "news",
+          label: "News Articles",
+          folder: "src/content/news",
+          create: true,
+          slug: "{{slug}}",
+          fields: [
+            { label: "Title", name: "title", widget: "string" },
+            { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false },
+            { label: "Category", name: "category", widget: "select", options: ["Cryptocurrency", "Forex", "Binary Options", "Markets"] },
+            { label: "Author", name: "author", widget: "string", default: "TrantamCapital" },
+            { label: "Image", name: "image", widget: "image", required: false },
+            { label: "Excerpt", name: "excerpt", widget: "text", pattern: ["^.{10,}$", "Must be at least 10 characters"] },
+            { label: "Body", name: "body", widget: "markdown" },
+          ],
         },
-        media_folder: "public/images/uploads",
-        public_folder: "/images/uploads",
-        collections: [
-          {
-            name: "news",
-            label: "News Articles",
-            folder: "src/content/news",
-            create: true,
-            slug: "{{slug}}",
-            fields: [
-              { label: "Title", name: "title", widget: "string" },
-              { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false },
-              { label: "Category", name: "category", widget: "select", options: ["Cryptocurrency", "Forex", "Binary Options", "Markets"] },
-              { label: "Author", name: "author", widget: "string", default: "TrantamCapital" },
-              { label: "Image", name: "image", widget: "image", required: false },
-              { label: "Excerpt", name: "excerpt", widget: "text", pattern: ["^.{10,}$", "Must be at least 10 characters"] },
-              { label: "Body", name: "body", widget: "markdown" },
-            ],
-          },
-        ],
-      };
-    }
+      ],
+    };
   </script>
-
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
-
-  <script>
-    if (window.CMS_CONFIG && typeof CMS !== "undefined") {
-      CMS.init({ config: window.CMS_CONFIG });
-    }
-  </script>
 </body>
 </html>

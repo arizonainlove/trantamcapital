@@ -17,7 +17,7 @@ Vào **`https://trantamcapital.vercel.app/admin`**
    - **Expiration**: chọn **No expiration**
    - **Scopes**: tick **`repo`** (Full control of private repositories)
 6. Kéo xuống cuối → Click **Generate token**
-7. **Copy token** (dạng `ghp_...`)
+7. **Copy token** (dạng `ghp_...`) — **lưu lại chỗ an toàn**, chỉ hiện 1 lần
 
 ---
 
@@ -25,8 +25,10 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 
 1. Vào **`https://trantamcapital.vercel.app/admin`**
 2. Click **Login with GitHub**
-3. Cửa sổ hiện ra yêu cầu nhập token → Paste token vừa tạo vào
+3. Một hộp thoại nhỏ hiện ra yêu cầu nhập token → **Paste token** vừa tạo vào
 4. Click **OK** → Vào được giao diện CMS
+
+> Lưu ý: Chỉ cần nhập token 1 lần. Lần sau vào CMS sẽ tự động đăng nhập.
 
 ---
 
