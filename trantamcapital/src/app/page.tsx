@@ -28,6 +28,7 @@ const featuredBrokers = (() => {
     reviewHref: b.reviewHref,
     visitHref: b.visitHref,
     gradient: b.gradient,
+    logo: b.logo,
   }));
 })();
 

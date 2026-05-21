@@ -6,7 +6,7 @@ export interface Broker {
   features: string[];
   reviewHref: string;
   visitHref: string;
-  logo?: string;
+  logo?: string;           // Broker's own brand logo (NOT the TrantamCapital website logo)
   gradient?: string;
   // Comparison fields — type-specific, used in auto comparison tables
   regulation?: string;
