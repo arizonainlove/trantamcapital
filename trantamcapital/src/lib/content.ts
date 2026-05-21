@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { allNews as staticNews, type NewsArticle } from "@/data/news";
+import type { Broker } from "@/data/brokers";
 
 function loadCmsArticles(): NewsArticle[] {
   const contentDir = path.join(process.cwd(), "src/content/news");
@@ -48,6 +49,30 @@ export function getArticleBySlug(slug: string): NewsArticle | undefined {
 }
 
 export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets"];
+
+export function getAllBrokers(): Broker[] {
+  const contentDir = path.join(process.cwd(), "src/content/brokers");
+  if (!fs.existsSync(contentDir)) return [];
+
+  const files = fs
+    .readdirSync(contentDir)
+    .filter((f) => f.endsWith(".md"));
+
+  return files.map((file) => {
+    const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
+    const { data } = matter(raw);
+    return {
+      slug: file.replace(/\.md$/, ""),
+      name: data.name || "Untitled",
+      type: data.type || "Forex Broker",
+      rating: typeof data.rating === "number" ? data.rating : 0,
+      features: Array.isArray(data.features) ? data.features : [],
+      reviewHref: data.reviewHref || "#",
+      visitHref: data.visitHref || "#",
+      gradient: data.gradient || undefined,
+    } as Broker;
+  });
+}
 
 export function getRecentPosts(count: number = 4): NewsArticle[] {
   return getAllNews().slice(0, count);

@@ -139,20 +139,51 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 /* Dashboard */
 #screen-dashboard { min-height: calc(100vh - 48px); }
 .dashboard-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 24px 24px 0;
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
 }
-.dashboard-header h1 { font-size: 20px; font-weight: 700; }
+.dashboard-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
 .dashboard-content {
   padding: 20px 24px 40px;
   max-width: 1100px;
   margin: 0 auto;
   width: 100%;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 3px;
+}
+.tab {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+.tab-active {
+  background: var(--white);
+  color: var(--primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
 /* Button */
@@ -203,8 +234,8 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .btn-delete { background: #FFF0F0; color: var(--error); }
 .btn-delete:hover { background: #FFE0E0; }
 
-/* Article Table */
-.article-table {
+/* Table */
+.data-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -213,7 +244,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   border-radius: var(--radius);
   overflow: hidden;
 }
-.article-table th {
+.data-table th {
   padding: 12px 16px;
   text-align: left;
   font-size: 12px;
@@ -224,18 +255,21 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
-.article-table td {
+.data-table td {
   padding: 14px 16px;
   font-size: 14px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
-.article-table tr:last-child td { border-bottom: none; }
-.article-table tr:hover td { background: #FAFBFC; }
-.article-table .title-cell { font-weight: 600; color: var(--text); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.article-table .date-cell { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
-.article-table .actions-cell { text-align: right; white-space: nowrap; }
-.article-table .actions-cell .btn-sm + .btn-sm { margin-left: 6px; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: #FAFBFC; }
+.data-table .title-cell { font-weight: 600; color: var(--text); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.data-table .date-cell { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
+.data-table .actions-cell { text-align: right; white-space: nowrap; }
+.data-table .actions-cell .btn-sm + .btn-sm { margin-left: 6px; }
+.data-table .features-cell { color: var(--text-secondary); font-size: 13px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.data-table .rating-cell { white-space: nowrap; }
+.data-table .type-cell { white-space: nowrap; }
 
 /* Badge */
 .badge {
@@ -249,9 +283,13 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .badge-forex { background: #E8F0FF; color: #1E88E5; }
 .badge-binary-options { background: #FFF8E0; color: #B8860B; }
 .badge-markets { background: #E8F5E9; color: var(--success); }
+.badge-forex-broker { background: #E8F0FF; color: #1E88E5; }
+.badge-crypto-exchange { background: #FFF0E8; color: var(--primary); }
+.badge-binary-options-plain { background: #FFF8E0; color: #B8860B; }
 
 /* Editor */
-#screen-editor { min-height: calc(100vh - 48px); }
+#screen-editor,
+#screen-broker-editor { min-height: calc(100vh - 48px); }
 .editor-header {
   display: flex;
   align-items: center;
@@ -415,8 +453,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .state-box .state-text { font-size: 15px; }
 .state-box .state-sub { font-size: 13px; color: var(--text-light); margin-top: 4px; }
 
-.loading { composes: state-box; }
-.loading::after {
+.loading-spinner::after {
   content: '';
   display: inline-block;
   width: 24px;
@@ -485,21 +522,25 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 @media (max-width: 768px) {
   .login-card { padding: 32px 24px; }
   .form-row { grid-template-columns: 1fr; }
-  .dashboard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .dashboard-header .btn { width: 100%; justify-content: center; }
-  .admin-header { padding: 0 16px; }
+  .dashboard-header { padding: 16px 16px 0; }
+  .dashboard-title-row { flex-wrap: wrap; }
+  .dashboard-title-row .btn { width: 100%; justify-content: center; }
   .dashboard-content { padding: 16px; }
   .editor-content { padding: 16px; }
   .form-card { padding: 20px; }
-  .article-table { font-size: 13px; }
-  .article-table td, .article-table th { padding: 10px 12px; }
-  .article-table .title-cell { max-width: 160px; }
+  .data-table { font-size: 13px; }
+  .data-table td, .data-table th { padding: 10px 12px; }
+  .data-table .title-cell { max-width: 160px; }
+  .data-table .features-cell { display: none; }
   .toast { right: 16px; left: 16px; max-width: none; }
   .header-actions .user-badge { display: none; }
+  .tabs { width: 100%; }
+  .tab { flex: 1; text-align: center; padding: 8px 12px; }
 }
 @media (max-width: 480px) {
-  .article-table .date-cell { display: none; }
-  .article-table .badge { font-size: 11px; padding: 1px 8px; }
+  .data-table .date-cell { display: none; }
+  .data-table .badge { font-size: 11px; padding: 1px 8px; }
+  .data-table .rating-cell { display: none; }
 }
 </style>
 </head>
@@ -527,7 +568,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       Login with GitHub
     </button>
     <p class="login-note">
-      Authorize with GitHub to manage news articles.<br>
+      Authorize with GitHub to manage content.<br>
       Repository: <code>arizonainlove/trantamcapital</code><br>
       Popup blockers must be disabled for this site.
     </p>
@@ -537,17 +578,23 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 <!-- ============ DASHBOARD SCREEN ============ -->
 <section id="screen-dashboard" class="screen">
   <div class="dashboard-header">
-    <h1>News Articles</h1>
-    <button class="btn btn-primary" onclick="showEditor()">+ New Article</button>
+    <div class="dashboard-title-row">
+      <div class="tabs">
+        <button class="tab tab-active" data-tab="articles" onclick="switchTab('articles')">News Articles</button>
+        <button class="tab" data-tab="brokers" onclick="switchTab('brokers')">Brokers</button>
+      </div>
+      <button class="btn btn-primary" id="btn-new-article" onclick="showEditor()">+ New Article</button>
+      <button class="btn btn-primary" id="btn-new-broker" onclick="showBrokerEditor()" style="display:none">+ New Broker</button>
+    </div>
   </div>
   <div class="dashboard-content">
-    <div id="article-list">
-      <div class="state-box"><div class="loading"></div><div class="state-text">Loading articles...</div></div>
+    <div id="dashboard-list">
+      <div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading...</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ EDITOR SCREEN ============ -->
+<!-- ============ ARTICLE EDITOR SCREEN ============ -->
 <section id="screen-editor" class="screen">
   <div class="editor-header">
     <h1 id="editor-title">Create Article</h1>
@@ -629,6 +676,61 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   </div>
 </section>
 
+<!-- ============ BROKER EDITOR SCREEN ============ -->
+<section id="screen-broker-editor" class="screen">
+  <div class="editor-header">
+    <h1 id="broker-editor-title">Create Broker</h1>
+    <button class="btn btn-secondary" onclick="showDashboard()">Back</button>
+  </div>
+  <div class="editor-content">
+    <div class="form-card">
+      <form id="broker-editor-form" onsubmit="return false">
+        <div class="form-group">
+          <label for="broker-field-name">Name <span class="required">*</span></label>
+          <input type="text" id="broker-field-name" required placeholder="e.g. ForexBroker A">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="broker-field-type">Type</label>
+            <select id="broker-field-type">
+              <option value="Forex Broker">Forex Broker</option>
+              <option value="Crypto Exchange">Crypto Exchange</option>
+              <option value="Binary Options">Binary Options</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="broker-field-rating">Rating (0–5)</label>
+            <input type="number" id="broker-field-rating" min="0" max="5" step="0.1" placeholder="4.5">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="broker-field-features">Features (one per line)</label>
+          <textarea id="broker-field-features" rows="4" placeholder="Regulated by FCA &amp; CySEC&#10;0.0 pip spreads&#10;MT4 &amp; MT5 supported"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="broker-field-reviewHref">Review URL</label>
+            <input type="text" id="broker-field-reviewHref" placeholder="/forex-broker/broker-a">
+          </div>
+          <div class="form-group">
+            <label for="broker-field-visitHref">Visit URL</label>
+            <input type="text" id="broker-field-visitHref" placeholder="#">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="broker-field-gradient">Gradient (optional)</label>
+          <input type="text" id="broker-field-gradient" placeholder="linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)">
+          <p class="form-help">CSS gradient for the logo background. Leave empty for default orange.</p>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-broker-save" class="btn btn-primary" onclick="handleBrokerSave()">Create Broker</button>
+          <button type="button" class="btn btn-secondary" onclick="showDashboard()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <script>
 (function() {
   'use strict';
@@ -638,6 +740,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   const CONFIG = {
     repo: 'arizonainlove/trantamcapital',
     newsPath: 'trantamcapital/src/content/news',
+    brokersPath: 'trantamcapital/src/content/brokers',
     apiBase: 'https://api.github.com',
     tokenKey: 'trantam_admin_token',
   };
@@ -646,6 +749,9 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   let token = localStorage.getItem(CONFIG.tokenKey) || null;
   let articles = [];
   let editingArticle = null; // { slug, sha, attrs, body } when editing
+  let brokers = [];
+  let editingBroker = null; // { slug, sha, attrs } when editing
+  let activeTab = 'articles';
 
   // ======================== UTILITY ========================
   function escapeHtml(text) {
@@ -691,12 +797,38 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     var yaml = match[1];
     var body = match[2].trim();
     var attrs = {};
+    var currentKey = null;
+    var inArray = false;
 
     yaml.split('\n').forEach(function(line) {
+      // Array item (indented, starts with -)
+      var arrayMatch = line.match(/^\s+-\s+(.*)$/);
+      if (arrayMatch && inArray && currentKey) {
+        var val = arrayMatch[1].trim();
+        if (val.length >= 2) {
+          var first = val[0];
+          var last = val[val.length - 1];
+          if ((first === '"' && last === '"') || (first === "'" && last === "'")) {
+            val = val.slice(1, -1);
+          }
+        }
+        attrs[currentKey].push(val);
+        return;
+      }
+
+      inArray = false;
       var idx = line.indexOf(':');
-      if (idx === -1) return;
+      if (idx === -1) { currentKey = null; return; }
       var key = line.slice(0, idx).trim();
       var val = line.slice(idx + 1).trim();
+      currentKey = key;
+
+      if (val === '') {
+        inArray = true;
+        attrs[key] = [];
+        return;
+      }
+
       if (val.length >= 2) {
         var first = val[0];
         var last = val[val.length - 1];
@@ -710,21 +842,55 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     return { attrs: attrs, body: body };
   }
 
-  function generateFrontmatter(attrs) {
+  function generateFrontmatter(attrs, order) {
     var yaml = '---\n';
-    var order = ['title', 'date', 'category', 'author', 'image', 'excerpt'];
-    order.forEach(function(key) {
-      if (attrs[key] !== undefined && attrs[key] !== null && attrs[key] !== '') {
-        yaml += key + ': "' + String(attrs[key]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
-      }
-    });
-    for (var key in attrs) {
-      if (attrs.hasOwnProperty(key) && order.indexOf(key) === -1) {
-        if (attrs[key] !== undefined && attrs[key] !== null && attrs[key] !== '') {
-          yaml += key + ': "' + String(attrs[key]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+    var allKeys = Object.keys(attrs);
+    var ordered = order || allKeys;
+
+    if (order) {
+      ordered.forEach(function(key) {
+        if (allKeys.indexOf(key) === -1) return;
+        var val = attrs[key];
+        if (val === undefined || val === null || val === '') return;
+        if (Array.isArray(val)) {
+          yaml += key + ':\n';
+          for (var j = 0; j < val.length; j++) {
+            yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          }
+        } else {
+          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
         }
-      }
+      });
+      // Extra keys not in order
+      allKeys.forEach(function(key) {
+        if (ordered.indexOf(key) !== -1) return;
+        var val = attrs[key];
+        if (val === undefined || val === null || val === '') return;
+        if (Array.isArray(val)) {
+          yaml += key + ':\n';
+          for (var j = 0; j < val.length; j++) {
+            yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          }
+        } else {
+          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+        }
+      });
+    } else {
+      // No order specified — just output all keys
+      allKeys.forEach(function(key) {
+        var val = attrs[key];
+        if (val === undefined || val === null || val === '') return;
+        if (Array.isArray(val)) {
+          yaml += key + ':\n';
+          for (var j = 0; j < val.length; j++) {
+            yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          }
+        } else {
+          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+        }
+      });
     }
+
     yaml += '---\n';
     return yaml;
   }
@@ -760,6 +926,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   function logout() {
     token = null;
     editingArticle = null;
+    editingBroker = null;
     localStorage.removeItem(CONFIG.tokenKey);
     document.getElementById('header-actions').style.display = 'none';
     showScreen('screen-login');
@@ -789,6 +956,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
+  // ======================== ARTICLES — API ========================
   function listArticles() {
     return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.newsPath).then(function(files) {
       if (!Array.isArray(files)) return [];
@@ -832,7 +1000,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     if (articleData.image) attrs.image = articleData.image;
     if (articleData.excerpt) attrs.excerpt = articleData.excerpt;
 
-    var content = generateFrontmatter(attrs) + (articleData.body || '');
+    var content = generateFrontmatter(attrs, ['title', 'date', 'category', 'author', 'image', 'excerpt']) + (articleData.body || '');
     var encoded = base64Encode(content);
     var isNew = !articleData.existingSha;
 
@@ -860,6 +1028,78 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
+  // ======================== BROKERS — API ========================
+  function listBrokers() {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.brokersPath).then(function(files) {
+      if (!Array.isArray(files)) return [];
+      var mdFiles = files.filter(function(f) {
+        return f.name.endsWith('.md') && f.name !== '.gitkeep';
+      });
+      return Promise.all(mdFiles.map(function(file) {
+        return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.brokersPath + '/' + file.name)
+          .then(function(data) {
+            var content = base64Decode(data.content);
+            var parsed = parseFrontmatter(content);
+            return {
+              slug: file.name.replace(/\.md$/, ''),
+              sha: data.sha,
+              attrs: parsed.attrs,
+            };
+          });
+      }));
+    }).then(function(items) {
+      items.sort(function(a, b) {
+        return (a.attrs.name || a.slug).localeCompare(b.attrs.name || b.slug);
+      });
+      brokers = items;
+      return items;
+    });
+  }
+
+  function saveBrokerToGitHub(brokerData) {
+    var slug = toSlug(brokerData.name);
+    var filePath = CONFIG.brokersPath + '/' + slug + '.md';
+
+    var attrs = {
+      name: brokerData.name,
+      type: brokerData.type,
+      rating: parseFloat(brokerData.rating),
+    };
+    if (brokerData.features && brokerData.features.length > 0) {
+      attrs.features = brokerData.features;
+    }
+    if (brokerData.reviewHref) attrs.reviewHref = brokerData.reviewHref;
+    if (brokerData.visitHref) attrs.visitHref = brokerData.visitHref;
+    if (brokerData.gradient) attrs.gradient = brokerData.gradient;
+
+    var content = generateFrontmatter(attrs, ['name', 'type', 'rating', 'features', 'reviewHref', 'visitHref', 'gradient']);
+    var encoded = base64Encode(content);
+    var isNew = !brokerData.existingSha;
+
+    var body = {
+      message: isNew ? 'Create broker: ' + brokerData.name : 'Update broker: ' + brokerData.name,
+      content: encoded,
+    };
+    if (brokerData.existingSha) body.sha = brokerData.existingSha;
+
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }).then(function(result) {
+      return { slug: slug, sha: result.content.sha };
+    });
+  }
+
+  function deleteBrokerFromGitHub(slug, sha) {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.brokersPath + '/' + slug + '.md', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        message: 'Delete broker: ' + slug,
+        sha: sha,
+      }),
+    });
+  }
+
   // ======================== SCREEN MANAGEMENT ========================
   function showScreen(screenId) {
     var screens = document.querySelectorAll('.screen');
@@ -877,21 +1117,48 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   function showDashboard() {
     document.getElementById('header-actions').style.display = 'flex';
     editingArticle = null;
+    editingBroker = null;
     showScreen('screen-dashboard');
-    loadAndRenderArticles();
+    if (activeTab === 'articles') {
+      loadAndRenderArticles();
+    } else {
+      loadAndRenderBrokers();
+    }
   }
 
   function showEditor(article) {
+    activeTab = 'articles';
     document.getElementById('header-actions').style.display = 'flex';
     editingArticle = article || null;
     showScreen('screen-editor');
     populateEditor(article);
   }
 
-  // ======================== DASHBOARD ========================
+  function showBrokerEditor(broker) {
+    activeTab = 'brokers';
+    document.getElementById('header-actions').style.display = 'flex';
+    editingBroker = broker || null;
+    showScreen('screen-broker-editor');
+    populateBrokerEditor(broker);
+  }
+
+  function switchTab(tab) {
+    activeTab = tab;
+    // Update tab button styles
+    var tabs = document.querySelectorAll('.tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.toggle('tab-active', tabs[i].getAttribute('data-tab') === tab);
+    }
+    // Toggle new buttons
+    document.getElementById('btn-new-article').style.display = tab === 'articles' ? 'inline-flex' : 'none';
+    document.getElementById('btn-new-broker').style.display = tab === 'brokers' ? 'inline-flex' : 'none';
+    showDashboard();
+  }
+
+  // ======================== ARTICLES — DASHBOARD ========================
   function loadAndRenderArticles() {
-    var listEl = document.getElementById('article-list');
-    listEl.innerHTML = '<div class="state-box"><div class="loading"></div><div class="state-text">Loading articles...</div></div>';
+    var listEl = document.getElementById('dashboard-list');
+    listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading articles...</div></div>';
 
     listArticles().then(function(items) {
       renderArticleList(items);
@@ -911,7 +1178,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   function renderArticleList(items) {
-    var listEl = document.getElementById('article-list');
+    var listEl = document.getElementById('dashboard-list');
 
     if (!items || items.length === 0) {
       listEl.innerHTML =
@@ -923,7 +1190,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       return;
     }
 
-    var html = '<table class="article-table">' +
+    var html = '<table class="data-table">' +
       '<thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead><tbody>';
 
     for (var i = 0; i < items.length; i++) {
@@ -941,8 +1208,8 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         '<td><span class="badge badge-' + catClass + '">' + escapeHtml(catLabel) + '</span></td>' +
         '<td class="date-cell">' + formattedDate + '</td>' +
         '<td class="actions-cell">' +
-        '<button class="btn-sm btn-edit" data-slug="' + a.slug + '">Edit</button>' +
-        '<button class="btn-sm btn-delete" data-slug="' + a.slug + '">Delete</button>' +
+        '<button class="btn-sm btn-edit" data-slug="' + a.slug + '" data-type="article">Edit</button>' +
+        '<button class="btn-sm btn-delete" data-slug="' + a.slug + '" data-type="article">Delete</button>' +
         '</td>' +
         '</tr>';
     }
@@ -950,20 +1217,98 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     html += '</tbody></table>';
     listEl.innerHTML = html;
 
-    // Attach event listeners
-    listEl.querySelectorAll('.btn-edit').forEach(function(btn) {
+    listEl.querySelectorAll('.btn-edit[data-type="article"]').forEach(function(btn) {
       btn.addEventListener('click', function() {
         editArticle(this.getAttribute('data-slug'));
       });
     });
-    listEl.querySelectorAll('.btn-delete').forEach(function(btn) {
+    listEl.querySelectorAll('.btn-delete[data-type="article"]').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        confirmDelete(this.getAttribute('data-slug'));
+        confirmDeleteArticle(this.getAttribute('data-slug'));
       });
     });
   }
 
-  // ======================== EDITOR ========================
+  // ======================== BROKERS — DASHBOARD ========================
+  function loadAndRenderBrokers() {
+    var listEl = document.getElementById('dashboard-list');
+    listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading brokers...</div></div>';
+
+    listBrokers().then(function(items) {
+      renderBrokerList(items);
+    }).catch(function(err) {
+      if (err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('Bad credentials') !== -1)) {
+        showToast('Session expired. Please login again.', 'error');
+        logout();
+        return;
+      }
+      listEl.innerHTML =
+        '<div class="error-box">' +
+        '<div class="error-icon">⚠</div>' +
+        '<div class="error-text">Failed to load brokers: ' + escapeHtml(err.message) + '</div>' +
+        '<button class="error-retry" onclick="loadAndRenderBrokers()">Retry</button>' +
+        '</div>';
+    });
+  }
+
+  function renderBrokerList(items) {
+    var listEl = document.getElementById('dashboard-list');
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML =
+        '<div class="state-box">' +
+        '<div class="state-icon">🏢</div>' +
+        '<div class="state-text">No brokers yet</div>' +
+        '<div class="state-sub">Add your first broker/exchange to get started.</div>' +
+        '</div>';
+      return;
+    }
+
+    var html = '<table class="data-table">' +
+      '<thead><tr><th>Name</th><th>Type</th><th>Rating</th><th>Features</th><th>Actions</th></tr></thead><tbody>';
+
+    for (var i = 0; i < items.length; i++) {
+      var b = items[i];
+      var escapedName = escapeHtml(b.attrs.name || b.slug);
+      var typeVal = b.attrs.type || '';
+      var badgeClass = (typeVal || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '') || 'forex-broker';
+      var features = Array.isArray(b.attrs.features) ? b.attrs.features : [];
+      var featuresText = features.join(', ');
+      var stars = '';
+      var rating = parseFloat(b.attrs.rating) || 0;
+      var fullStars = Math.floor(rating);
+      for (var s = 0; s < 5; s++) {
+        stars += s < fullStars ? '★' : '☆';
+      }
+
+      html += '<tr>' +
+        '<td class="title-cell" title="' + escapedName + '">' + escapedName + '</td>' +
+        '<td class="type-cell"><span class="badge badge-' + badgeClass + '">' + escapeHtml(typeVal) + '</span></td>' +
+        '<td class="rating-cell" title="' + rating + '/5"><span class="text-gold" style="color:var(--gold)">' + stars + '</span> <span style="color:var(--text-secondary);font-size:13px">' + rating + '</span></td>' +
+        '<td class="features-cell" title="' + escapeHtml(featuresText) + '">' + escapeHtml(featuresText) + '</td>' +
+        '<td class="actions-cell">' +
+        '<button class="btn-sm btn-edit" data-slug="' + b.slug + '" data-type="broker">Edit</button>' +
+        '<button class="btn-sm btn-delete" data-slug="' + b.slug + '" data-type="broker">Delete</button>' +
+        '</td>' +
+        '</tr>';
+    }
+
+    html += '</tbody></table>';
+    listEl.innerHTML = html;
+
+    listEl.querySelectorAll('.btn-edit[data-type="broker"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        editBroker(this.getAttribute('data-slug'));
+      });
+    });
+    listEl.querySelectorAll('.btn-delete[data-type="broker"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        confirmDeleteBroker(this.getAttribute('data-slug'));
+      });
+    });
+  }
+
+  // ======================== ARTICLE — EDITOR ========================
   function populateEditor(article) {
     var titleEl = document.getElementById('editor-title');
     var saveBtn = document.getElementById('btn-save');
@@ -1028,7 +1373,66 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== ARTICLE ACTIONS ========================
+  // ======================== BROKER — EDITOR ========================
+  function populateBrokerEditor(broker) {
+    var titleEl = document.getElementById('broker-editor-title');
+    var saveBtn = document.getElementById('btn-broker-save');
+
+    if (broker) {
+      titleEl.textContent = 'Edit Broker';
+      saveBtn.textContent = 'Update Broker';
+    } else {
+      titleEl.textContent = 'Create Broker';
+      saveBtn.textContent = 'Create Broker';
+    }
+
+    document.getElementById('broker-field-name').value = broker ? (broker.attrs.name || '') : '';
+    document.getElementById('broker-field-type').value = broker ? (broker.attrs.type || 'Forex Broker') : 'Forex Broker';
+    document.getElementById('broker-field-rating').value = broker ? (broker.attrs.rating || '') : '';
+    var features = broker && Array.isArray(broker.attrs.features) ? broker.attrs.features.join('\n') : '';
+    document.getElementById('broker-field-features').value = features;
+    document.getElementById('broker-field-reviewHref').value = broker ? (broker.attrs.reviewHref || '') : '';
+    document.getElementById('broker-field-visitHref').value = broker ? (broker.attrs.visitHref || '') : '';
+    document.getElementById('broker-field-gradient').value = broker ? (broker.attrs.gradient || '') : '';
+    saveBtn.disabled = false;
+  }
+
+  function handleBrokerSave() {
+    var name = document.getElementById('broker-field-name').value.trim();
+    if (!name) { showToast('Name is required', 'error'); return; }
+
+    var featuresText = document.getElementById('broker-field-features').value;
+    var features = featuresText
+      .split('\n')
+      .map(function(f) { return f.trim(); })
+      .filter(function(f) { return f.length > 0; });
+
+    var brokerData = {
+      name: name,
+      type: document.getElementById('broker-field-type').value,
+      rating: document.getElementById('broker-field-rating').value,
+      features: features,
+      reviewHref: document.getElementById('broker-field-reviewHref').value.trim(),
+      visitHref: document.getElementById('broker-field-visitHref').value.trim(),
+      gradient: document.getElementById('broker-field-gradient').value.trim(),
+      existingSha: editingBroker ? editingBroker.sha : null,
+    };
+
+    var saveBtn = document.getElementById('btn-broker-save');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    saveBrokerToGitHub(brokerData).then(function(result) {
+      showToast('Broker saved successfully!', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to save: ' + err.message, 'error');
+      saveBtn.disabled = false;
+      saveBtn.textContent = editingBroker ? 'Update Broker' : 'Create Broker';
+    });
+  }
+
+  // ======================== ARTICLE — ACTIONS ========================
   function editArticle(slug) {
     for (var i = 0; i < articles.length; i++) {
       if (articles[i].slug === slug) {
@@ -1039,7 +1443,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     showToast('Article not found', 'error');
   }
 
-  function confirmDelete(slug) {
+  function confirmDeleteArticle(slug) {
     var article = null;
     for (var i = 0; i < articles.length; i++) {
       if (articles[i].slug === slug) {
@@ -1055,6 +1459,39 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
     deleteArticleFromGitHub(slug, sha).then(function() {
       showToast('Article deleted', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to delete: ' + err.message, 'error');
+    });
+  }
+
+  // ======================== BROKER — ACTIONS ========================
+  function editBroker(slug) {
+    for (var i = 0; i < brokers.length; i++) {
+      if (brokers[i].slug === slug) {
+        showBrokerEditor(brokers[i]);
+        return;
+      }
+    }
+    showToast('Broker not found', 'error');
+  }
+
+  function confirmDeleteBroker(slug) {
+    var broker = null;
+    for (var i = 0; i < brokers.length; i++) {
+      if (brokers[i].slug === slug) {
+        broker = brokers[i];
+        break;
+      }
+    }
+    var label = broker && broker.attrs.name ? broker.attrs.name : slug;
+    if (!confirm('Are you sure you want to delete "' + label + '"?\n\nThis action cannot be undone.')) return;
+
+    var sha = broker ? broker.sha : null;
+    if (!sha) { showToast('Cannot delete: file SHA not found', 'error'); return; }
+
+    deleteBrokerFromGitHub(slug, sha).then(function() {
+      showToast('Broker deleted', 'success');
       showDashboard();
     }).catch(function(err) {
       showToast('Failed to delete: ' + err.message, 'error');
@@ -1079,7 +1516,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
     var reader = new FileReader();
     reader.onload = function(e) {
-      var base64 = e.target.result.split(',')[1]; // strip data:image/...;base64,
+      var base64 = e.target.result.split(',')[1];
       var ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
       if (!ext) ext = 'png';
       var filename = Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '').slice(0, 60);
@@ -1120,9 +1557,13 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   W.login = login;
   W.logout = logout;
   W.showEditor = showEditor;
+  W.showBrokerEditor = showBrokerEditor;
   W.showDashboard = showDashboard;
   W.handleSave = handleSave;
+  W.handleBrokerSave = handleBrokerSave;
   W.loadAndRenderArticles = loadAndRenderArticles;
+  W.loadAndRenderBrokers = loadAndRenderBrokers;
+  W.switchTab = switchTab;
 
   // ======================== INIT ========================
   if (token) {
