@@ -1,7 +1,7 @@
 ---
 name: "Coinbase"
 type: "Crypto Exchange"
-rating: "4.6"
+rating: 4.6
 features:
   - "Nasdaq listed (COIN)"
   - "User-friendly interface"
@@ -9,7 +9,7 @@ features:
   - "Regulated US exchange"
 reviewHref: "/crypto-exchange/exchange-b"
 visitHref: "https://www.coinbase.com/"
-gradient: "linear-gradient(135deg, #0052FF 0%, #0033CC 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779366960658-logocoinbase.png"
 tradingFees: "0.5%"
 security: "Very High"
 exchangeFeatures: "Spot, Staking, NFT"
