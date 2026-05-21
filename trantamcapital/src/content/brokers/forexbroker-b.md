@@ -2,6 +2,7 @@
 name: "IC Markets"
 type: "Forex Broker"
 rating: 4.7
+order: 5
 features:
   - "ASIC regulated"
   - "True ECN pricing"
