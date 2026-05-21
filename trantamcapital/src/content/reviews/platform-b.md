@@ -1,5 +1,7 @@
 ---
 brokerSlug: "binaryplatform-b"
+brokerName: "BinaryPlatform B"
+brokerType: "Binary Options"
 pros:
   - "High payouts up to 95%"
   - "Mobile trading app"

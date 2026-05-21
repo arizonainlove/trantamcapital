@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-c"
+brokerName: "Exchange C"
+brokerType: "Crypto Exchange"
 pros:
   - "Up to 100x leverage"
   - "400+ trading pairs"

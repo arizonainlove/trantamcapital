@@ -11,6 +11,8 @@ function parseReviewFile(filePath: string): ReviewContent | null {
     return {
       slug: path.basename(filePath, ".md"),
       brokerSlug: data.brokerSlug || "",
+      brokerName: data.brokerName || undefined,
+      brokerType: data.brokerType || undefined,
       pros: Array.isArray(data.pros) ? data.pros : [],
       cons: Array.isArray(data.cons) ? data.cons : [],
       keyFeatures: Array.isArray(data.keyFeatures) ? data.keyFeatures as ReviewFeature[] : [],

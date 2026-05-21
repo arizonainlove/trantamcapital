@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllBrokers } from "@/lib/content";
 import { getReviewBySlug } from "@/lib/reviews";
-import { defaultBrokerData } from "@/data/brokers";
+import { defaultBrokerData, type Broker } from "@/data/brokers";
 import ReviewPage from "@/components/ReviewPage";
 
 export const dynamic = "force-static";
@@ -41,6 +41,9 @@ export default async function ForexBrokerReview({ params }: Props) {
   if (!review) notFound();
   let broker = brokers.find((b) => b.slug === review.brokerSlug);
   if (!broker) broker = defaultBrokerData.find((b) => b.slug === review.brokerSlug);
+  if (!broker && review.brokerName) {
+    broker = { slug: review.brokerSlug, name: review.brokerName, type: "Forex Broker", rating: 0, features: [], reviewHref: "", visitHref: "#" };
+  }
   if (broker && broker.type !== "Forex Broker") notFound();
 
   return (

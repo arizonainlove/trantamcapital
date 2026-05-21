@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-d"
+brokerName: "Exchange D"
+brokerType: "Crypto Exchange"
 pros:
   - "Decentralized exchange"
   - "Self-custody funds"

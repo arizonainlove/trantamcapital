@@ -1,5 +1,7 @@
 ---
 brokerSlug: "binaryplatform-a"
+brokerName: "BinaryPlatform A"
+brokerType: "Binary Options"
 pros:
   - "Very user-friendly platform"
   - "Multiple asset classes available"

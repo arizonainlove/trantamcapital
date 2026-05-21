@@ -1,5 +1,7 @@
 ---
 brokerSlug: "binaryplatform-c"
+brokerName: "BinaryPlatform C"
+brokerType: "Binary Options"
 pros:
   - "Turbo options available"
   - "Range of expiry times"

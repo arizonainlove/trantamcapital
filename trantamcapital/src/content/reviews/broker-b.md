@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-b"
+brokerName: "ForexBroker B"
+brokerType: "Forex Broker"
 pros:
   - "ASIC regulated"
   - "True ECN pricing"

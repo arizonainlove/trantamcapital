@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-b"
+brokerName: "Exchange B"
+brokerType: "Crypto Exchange"
 pros:
   - "Regulated US exchange (Nasdaq listed)"
   - "User-friendly interface"

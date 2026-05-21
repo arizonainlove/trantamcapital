@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-a"
+brokerName: "ForexBroker A"
+brokerType: "Forex Broker"
 pros:
   - "FCA & CySEC regulated"
   - "0.0 pip spreads on major pairs"

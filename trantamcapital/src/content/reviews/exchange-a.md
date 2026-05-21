@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-a"
+brokerName: "Exchange A"
+brokerType: "Crypto Exchange"
 pros:
   - "500+ cryptocurrencies available"
   - "Low trading fees (0.1%)"

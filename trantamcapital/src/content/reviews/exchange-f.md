@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-f"
+brokerName: "Exchange F"
+brokerType: "Crypto Exchange"
 pros:
   - "Copy trading features"
   - "Low futures fees"

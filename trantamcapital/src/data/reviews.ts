@@ -11,6 +11,8 @@ export interface ReviewRating {
 export interface ReviewContent {
   slug: string;
   brokerSlug: string;
+  brokerName?: string;
+  brokerType?: string;
   pros: string[];
   cons: string[];
   keyFeatures: ReviewFeature[];
@@ -22,7 +24,7 @@ export interface ReviewContent {
 export const defaultReviews: ReviewContent[] = [
   // ── Forex Brokers ──
   {
-    slug: "broker-a", brokerSlug: "forexbroker-a",
+    slug: "broker-a", brokerSlug: "forexbroker-a", brokerName: "ForexBroker A", brokerType: "Forex Broker",
     pros: ["FCA & CySEC regulated", "0.0 pip spreads on major pairs", "MT4, MT5, and cTrader support", "1:500 leverage available", "Negative balance protection", "24/7 multilingual support"],
     cons: ["Higher commission on ECN accounts", "No cryptocurrency trading", "Inactivity fee after 6 months"],
     keyFeatures: [
@@ -44,7 +46,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "ForexBroker A is a well-established forex broker regulated by both the Financial Conduct Authority (FCA) in the UK and the Cyprus Securities and Exchange Commission (CySEC). With over a decade of operation, they have built a reputation for reliability, competitive pricing, and excellent customer service.\n\nThe broker offers tight spreads starting from 0.0 pips on ECN accounts, making them an excellent choice for scalpers and high-volume traders. They support the industry-standard MetaTrader 4 and 5 platforms, as well as cTrader for those seeking advanced charting capabilities.",
   },
   {
-    slug: "broker-b", brokerSlug: "forexbroker-b",
+    slug: "broker-b", brokerSlug: "forexbroker-b", brokerName: "ForexBroker B", brokerType: "Forex Broker",
     pros: ["ASIC regulated", "True ECN pricing", "Competitive spreads", "Wide range of currency pairs", "Fast order execution", "No requotes"],
     cons: ["No bonuses or promotions", "Inactivity fee", "Limited educational resources"],
     keyFeatures: [
@@ -66,7 +68,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "ForexBroker B is a globally recognized forex broker known for its true ECN pricing model and ultra-tight spreads. Regulated by ASIC, they have built a strong reputation among active traders and scalpers who demand fast execution and deep liquidity.\n\nWith over 60 currency pairs and access to major indices and commodities, ForexBroker B offers a comprehensive trading environment. Their use of MetaTrader 4, MT5, and cTrader ensures traders have access to industry-leading tools and charting capabilities.",
   },
   {
-    slug: "broker-c", brokerSlug: "forexbroker-c",
+    slug: "broker-c", brokerSlug: "forexbroker-c", brokerName: "ForexBroker C", brokerType: "Forex Broker",
     pros: ["Multi-regulated (ASIC, FCA, CySEC)", "Razor spreads from 0.0 pips", "1200+ tradable instruments", "Fast execution with No Dealing Desk", "Excellent customer support", "Advanced trading tools"],
     cons: ["Higher fees for inactive accounts", "Limited product range for US clients", "No cTrader platform"],
     keyFeatures: [
@@ -90,7 +92,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Crypto Exchanges ──
   {
-    slug: "exchange-a", brokerSlug: "exchange-a",
+    slug: "exchange-a", brokerSlug: "exchange-a", brokerName: "Exchange A", brokerType: "Crypto Exchange",
     pros: ["500+ cryptocurrencies available", "Low trading fees (0.1%)", "Futures and margin trading", "Strong security track record", "High liquidity", "24/7 customer support"],
     cons: ["Complex for beginners", "Withdrawal fees can be high", "Not available in all countries"],
     keyFeatures: [
@@ -112,7 +114,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "Exchange A is one of the world's largest and most trusted cryptocurrency exchanges, offering over 500 cryptocurrencies for trading. With industry-leading security measures and deep liquidity, they serve both retail and institutional clients across the globe.\n\nThe exchange charges a competitive 0.1% trading fee and offers advanced trading features including futures, margin trading, and staking. Their security infrastructure includes cold storage for the majority of funds, two-factor authentication, and regular security audits.",
   },
   {
-    slug: "exchange-b", brokerSlug: "exchange-b",
+    slug: "exchange-b", brokerSlug: "exchange-b", brokerName: "Exchange B", brokerType: "Crypto Exchange",
     pros: ["Regulated US exchange (Nasdaq listed)", "User-friendly interface", "High security standards", "Educational resources", "Recurring buys", "Insurance on funds"],
     cons: ["Higher fees than competitors", "Limited altcoin selection", "Advanced trading features limited"],
     keyFeatures: [
@@ -134,7 +136,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "Exchange B is a publicly traded cryptocurrency exchange (NASDAQ: COIN) known for its user-friendly interface and regulatory compliance. As one of the most trusted on-ramps for new crypto investors, they offer a secure platform for buying, selling, and storing digital assets.\n\nWith over 200 cryptocurrencies available, Exchange B prioritizes security and regulatory compliance above all else. They offer staking rewards, an NFT marketplace, and educational resources for traders of all levels. While fees are higher than some competitors, the platform's ease of use and security make it a top choice for beginners.",
   },
   {
-    slug: "exchange-c", brokerSlug: "exchange-c",
+    slug: "exchange-c", brokerSlug: "exchange-c", brokerName: "Exchange C", brokerType: "Crypto Exchange",
     pros: ["Up to 100x leverage", "400+ trading pairs", "Copy trading features", "Advanced derivatives", "Low fees", "Strong liquidity"],
     cons: ["Not available in US", "Complex for beginners", "Customer support response times"],
     keyFeatures: [
@@ -158,7 +160,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Binary Options Platforms ──
   {
-    slug: "platform-a", brokerSlug: "binaryplatform-a",
+    slug: "platform-a", brokerSlug: "binaryplatform-a", brokerName: "BinaryPlatform A", brokerType: "Binary Options",
     pros: ["Very user-friendly platform", "Multiple asset classes available", "Free demo account", "Fast withdrawals", "Competitive payouts up to 92%", "Educational resources"],
     cons: ["Limited expiry times", "Not available in all countries", "Higher minimum trade amount"],
     keyFeatures: [
@@ -182,7 +184,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Additional Forex Brokers D–F ──
   {
-    slug: "broker-d", brokerSlug: "forexbroker-d",
+    slug: "broker-d", brokerSlug: "forexbroker-d", brokerName: "ForexBroker D", brokerType: "Forex Broker",
     pros: ["CySEC regulated", "Islamic accounts available", "PAMM account support", "Low minimum deposit of $100", "MT4 and MT5 platforms", "Multi-language support"],
     cons: ["Limited product range", "Average spreads", "No FCA regulation"],
     keyFeatures: [
@@ -204,7 +206,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "ForexBroker D is a CySEC-regulated forex broker catering primarily to European and international traders. With a focus on accessibility, they offer a low minimum deposit of just $100 and support for Islamic accounts.\n\nThe broker provides the industry-standard MetaTrader 4 and MetaTrader 5 platforms and offers PAMM account support for investors looking to allocate funds to professional managers.",
   },
   {
-    slug: "broker-e", brokerSlug: "forexbroker-e",
+    slug: "broker-e", brokerSlug: "forexbroker-e", brokerName: "ForexBroker E", brokerType: "Forex Broker",
     pros: ["FSA regulated", "Crypto CFDs available", "EA compatible platforms", "Competitive commissions", "High leverage up to 1:1000", "Low minimum deposit"],
     cons: ["Offshore regulation", "Limited investor protection", "No negative balance protection"],
     keyFeatures: [
@@ -226,7 +228,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "ForexBroker E is an offshore-regulated forex broker offering high leverage of up to 1:1000 and competitive commissions. They support MetaTrader 4 and a proprietary WebTrader platform, providing flexibility for traders who prefer browser-based trading.",
   },
   {
-    slug: "broker-f", brokerSlug: "forexbroker-f",
+    slug: "broker-f", brokerSlug: "forexbroker-f", brokerName: "ForexBroker F", brokerType: "Forex Broker",
     pros: ["Instant withdrawals", "High leverage 1:1000", "Multi-language support", "Low minimum deposit", "Mobile trading app", "24/7 customer support"],
     cons: ["Offshore regulation", "Limited platform choice", "Higher spreads"],
     keyFeatures: [
@@ -250,7 +252,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Additional Crypto Exchanges D–F ──
   {
-    slug: "exchange-d", brokerSlug: "exchange-d",
+    slug: "exchange-d", brokerSlug: "exchange-d", brokerName: "Exchange D", brokerType: "Crypto Exchange",
     pros: ["Decentralized exchange", "Self-custody funds", "Low gas fees", "Cross-chain swaps", "No KYC required", "Community governed"],
     cons: ["Limited advanced trading features", "Lower liquidity than CEXs", "Complex for beginners"],
     keyFeatures: [
@@ -272,7 +274,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "Exchange D is a decentralized exchange (DEX) that prioritizes user sovereignty and self-custody of funds. The platform supports cross-chain swaps and offers competitive gas fees through optimized smart contract architecture.",
   },
   {
-    slug: "exchange-e", brokerSlug: "exchange-e",
+    slug: "exchange-e", brokerSlug: "exchange-e", brokerName: "Exchange E", brokerType: "Crypto Exchange",
     pros: ["Beginner friendly interface", "Recurring buys feature", "Educational content", "24/7 customer support", "Strong regulatory compliance", "Easy fiat on-ramp"],
     cons: ["Higher trading fees", "Limited coin selection", "No advanced trading tools"],
     keyFeatures: [
@@ -294,7 +296,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "Exchange E is a beginner-friendly cryptocurrency exchange designed to make crypto investing accessible to everyone. With a clean, intuitive interface and features like recurring buys, they make it easy for newcomers to build their crypto portfolio over time.",
   },
   {
-    slug: "exchange-f", brokerSlug: "exchange-f",
+    slug: "exchange-f", brokerSlug: "exchange-f", brokerName: "Exchange F", brokerType: "Crypto Exchange",
     pros: ["Copy trading features", "Low futures fees", "API trading support", "Active community", "Competitive leverage options", "Fast order execution"],
     cons: ["Medium security rating", "Not available in all countries", "Complex fee structure"],
     keyFeatures: [
@@ -318,7 +320,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Additional Binary Platforms B–C ──
   {
-    slug: "platform-b", brokerSlug: "binaryplatform-b",
+    slug: "platform-b", brokerSlug: "binaryplatform-b", brokerName: "BinaryPlatform B", brokerType: "Binary Options",
     pros: ["High payouts up to 95%", "Mobile trading app", "60-second options available", "24/7 customer support", "Wide range of expiry times", "Multiple asset classes"],
     cons: ["Limited educational resources", "Not available in all countries", "Higher minimum deposit"],
     keyFeatures: [
@@ -340,7 +342,7 @@ export const defaultReviews: ReviewContent[] = [
     content: "BinaryPlatform B is a binary options trading platform known for its high payouts of up to 95% and user-friendly mobile trading app. With 60-second options and a range of expiry times, they cater to traders who prefer fast-paced trading environments.",
   },
   {
-    slug: "platform-c", brokerSlug: "binaryplatform-c",
+    slug: "platform-c", brokerSlug: "binaryplatform-c", brokerName: "BinaryPlatform C", brokerType: "Binary Options",
     pros: ["Turbo options available", "Range of expiry times", "Built-in technical indicators", "Video tutorials", "Demo account", "Competitive payouts"],
     cons: ["Limited asset classes", "No cryptocurrency options", "Restricted in some regions"],
     keyFeatures: [
@@ -364,7 +366,7 @@ export const defaultReviews: ReviewContent[] = [
 
   // ── Pocket Option ──
   {
-    slug: "pocket-option", brokerSlug: "pocket-option",
+    slug: "pocket-option", brokerSlug: "pocket-option", brokerName: "Pocket Option", brokerType: "Binary Options",
     pros: ["Low $5 minimum deposit", "100+ trading assets", "High payouts up to 98%", "Social trading features", "Demo account with $10K", "Fast withdrawals"],
     cons: ["Limited regulation", "Not available in all countries", "Withdrawal fees may apply"],
     keyFeatures: [

@@ -1219,12 +1219,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
     var attrs = {
       brokerSlug: reviewData.brokerSlug,
+      brokerName: reviewData.brokerName || '',
+      brokerType: reviewData.brokerType || '',
     };
     if (reviewData.pros && reviewData.pros.length > 0) attrs.pros = reviewData.pros;
     if (reviewData.cons && reviewData.cons.length > 0) attrs.cons = reviewData.cons;
     if (reviewData.trustScore) attrs.trustScore = parseFloat(reviewData.trustScore);
 
-    var content = generateFrontmatter(attrs, ['brokerSlug', 'pros', 'cons', 'trustScore']) + (reviewData.content || '');
+    var content = generateFrontmatter(attrs, ['brokerSlug', 'brokerName', 'brokerType', 'pros', 'cons', 'trustScore']) + (reviewData.content || '');
     var encoded = base64Encode(content);
     var isNew = !reviewData.existingSha;
 
@@ -1512,7 +1514,9 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     for (var i = 0; i < items.length; i++) {
       var r = items[i];
       var brokerSlug = r.attrs.brokerSlug || '—';
-      var escapedBroker = escapeHtml(brokerSlug);
+      var brokerName = r.attrs.brokerName || '';
+      var displayName = brokerName ? brokerName + ' (' + brokerSlug + ')' : brokerSlug;
+      var escapedBroker = escapeHtml(displayName);
 
       html += '<tr>' +
         '<td class="title-cell">' + escapedBroker + '</td>' +
@@ -1619,6 +1623,17 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       if (!slug) slug = brokerSlug;
     }
 
+    // Look up broker name and type for the review
+    var brokerName = '';
+    var brokerType = '';
+    for (var i = 0; i < brokers.length; i++) {
+      if (brokers[i].slug === brokerSlug) {
+        brokerName = brokers[i].attrs.name || '';
+        brokerType = brokers[i].attrs.type || '';
+        break;
+      }
+    }
+
     var prosText = document.getElementById('review-field-pros').value;
     var prosList = prosText.split('\n').map(function(f) { return f.trim(); }).filter(function(f) { return f.length > 0; });
     var consText = document.getElementById('review-field-cons').value;
@@ -1627,6 +1642,8 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     var reviewData = {
       slug: slug,
       brokerSlug: brokerSlug,
+      brokerName: brokerName,
+      brokerType: brokerType,
       pros: prosList,
       cons: consList,
       trustScore: document.getElementById('review-field-trustScore').value,

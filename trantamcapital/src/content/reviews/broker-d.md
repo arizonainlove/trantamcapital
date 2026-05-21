@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-d"
+brokerName: "ForexBroker D"
+brokerType: "Forex Broker"
 pros:
   - "CySEC regulated"
   - "Islamic accounts available"

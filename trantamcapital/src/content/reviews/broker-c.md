@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-c"
+brokerName: "ForexBroker C"
+brokerType: "Forex Broker"
 pros:
   - "Multi-regulated (ASIC, FCA, CySEC)"
   - "Razor spreads from 0.0 pips"

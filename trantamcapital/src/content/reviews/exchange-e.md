@@ -1,5 +1,7 @@
 ---
 brokerSlug: "exchange-e"
+brokerName: "Exchange E"
+brokerType: "Crypto Exchange"
 pros:
   - "Beginner friendly interface"
   - "Recurring buys feature"

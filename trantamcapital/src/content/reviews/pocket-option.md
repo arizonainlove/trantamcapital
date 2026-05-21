@@ -1,5 +1,7 @@
 ---
 brokerSlug: "pocket-option"
+brokerName: "Pocket Option"
+brokerType: "Binary Options"
 pros:
   - "Low $5 minimum deposit"
   - "100+ trading assets"

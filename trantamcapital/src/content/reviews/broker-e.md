@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-e"
+brokerName: "ForexBroker E"
+brokerType: "Forex Broker"
 pros:
   - "FSA regulated"
   - "Crypto CFDs available"

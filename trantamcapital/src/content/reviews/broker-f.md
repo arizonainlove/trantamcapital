@@ -1,5 +1,7 @@
 ---
 brokerSlug: "forexbroker-f"
+brokerName: "ForexBroker F"
+brokerType: "Forex Broker"
 pros:
   - "Instant withdrawals"
   - "High leverage 1:1000"
