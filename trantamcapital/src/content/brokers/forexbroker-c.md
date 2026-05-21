@@ -2,6 +2,7 @@
 name: "Pepperstone"
 type: "Forex Broker"
 rating: 4.6
+order: 6
 features:
   - "ASIC/FCA/CMA regulated"
   - "Razor spreads from 0.0 pips"
