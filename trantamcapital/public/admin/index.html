@@ -582,9 +582,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       <div class="tabs">
         <button class="tab tab-active" data-tab="articles" onclick="switchTab('articles')">News Articles</button>
         <button class="tab" data-tab="brokers" onclick="switchTab('brokers')">Brokers</button>
+        <button class="tab" data-tab="reviews" onclick="switchTab('reviews')">Reviews</button>
       </div>
       <button class="btn btn-primary" id="btn-new-article" onclick="showEditor()">+ New Article</button>
       <button class="btn btn-primary" id="btn-new-broker" onclick="showBrokerEditor()" style="display:none">+ New Broker</button>
+      <button class="btn btn-primary" id="btn-new-review" onclick="showReviewEditor()" style="display:none">+ New Review</button>
     </div>
   </div>
   <div class="dashboard-content">
@@ -722,8 +724,79 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
           <input type="text" id="broker-field-gradient" placeholder="linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)">
           <p class="form-help">CSS gradient for the logo background. Leave empty for default orange.</p>
         </div>
+        <!-- Comparison Data -->
+        <div class="form-group" style="border-top:1px solid var(--border);padding-top:20px;margin-top:8px">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:4px">Comparison Data</h3>
+          <p class="form-help" style="margin-bottom:12px">Shown in comparison tables on the listing pages. Fill according to broker type.</p>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-regulation">Regulation (Forex)</label><input type="text" id="broker-field-regulation" placeholder="e.g. FCA, CySEC"></div>
+            <div class="form-group"><label for="broker-field-minDeposit">Min Deposit (Forex)</label><input type="text" id="broker-field-minDeposit" placeholder="e.g. $100"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-spread">Spread (Forex)</label><input type="text" id="broker-field-spread" placeholder="e.g. 0.0 pips"></div>
+            <div class="form-group"><label for="broker-field-leverage">Leverage (Forex)</label><input type="text" id="broker-field-leverage" placeholder="e.g. 1:500"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-platforms">Platforms (Forex)</label><input type="text" id="broker-field-platforms" placeholder="e.g. MT4, MT5, cTrader"></div>
+            <div class="form-group"><label for="broker-field-tradingFees">Trading Fees (Crypto)</label><input type="text" id="broker-field-tradingFees" placeholder="e.g. 0.1%"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-security">Security (Crypto)</label><input type="text" id="broker-field-security" placeholder="e.g. Very High"></div>
+            <div class="form-group"><label for="broker-field-exchangeFeatures">Features (Crypto)</label><input type="text" id="broker-field-exchangeFeatures" placeholder="e.g. Spot, Futures, Staking"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-coins">Coins (Crypto)</label><input type="text" id="broker-field-coins" placeholder="e.g. 500+"></div>
+            <div class="form-group"><label for="broker-field-payout">Max Payout (Binary)</label><input type="text" id="broker-field-payout" placeholder="e.g. Up to 92%"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="broker-field-expiryTypes">Expiry Times (Binary)</label><input type="text" id="broker-field-expiryTypes" placeholder="e.g. 60s — End of Day"></div>
+            <div class="form-group"><label for="broker-field-assets">Assets (Binary)</label><input type="text" id="broker-field-assets" placeholder="e.g. Forex, Stocks, Crypto"></div>
+          </div>
+        </div>
+
         <div class="form-actions">
           <button type="submit" id="btn-broker-save" class="btn btn-primary" onclick="handleBrokerSave()">Create Broker</button>
+          <button type="button" class="btn btn-secondary" onclick="showDashboard()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEW EDITOR SCREEN ============ -->
+<section id="screen-review-editor" class="screen">
+  <div class="editor-header">
+    <h1 id="review-editor-title">Create Review</h1>
+    <button class="btn btn-secondary" onclick="showDashboard()">Back</button>
+  </div>
+  <div class="editor-content">
+    <div class="form-card">
+      <form id="review-editor-form" onsubmit="return false">
+        <div class="form-group">
+          <label for="review-field-brokerSlug">Broker <span class="required">*</span></label>
+          <select id="review-field-brokerSlug">
+            <option value="">— Select Broker —</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="review-field-pros">Pros (one per line)</label>
+          <textarea id="review-field-pros" rows="4" placeholder="FCA &amp; CySEC regulated&#10;0.0 pip spreads on major pairs"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="review-field-cons">Cons (one per line)</label>
+          <textarea id="review-field-cons" rows="3" placeholder="Higher commission on ECN accounts"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="review-field-trustScore">Trust Score (0–100)</label>
+          <input type="number" id="review-field-trustScore" min="0" max="100" placeholder="90">
+        </div>
+        <div class="form-group">
+          <label for="review-field-content">Overview <span class="required">*</span></label>
+          <textarea id="review-field-content" rows="10" placeholder="Write the overview content in Markdown..."></textarea>
+          <p class="form-help">Use blank lines to separate paragraphs. First paragraph will appear before the "continue reading" break.</p>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-review-save" class="btn btn-primary" onclick="handleReviewSave()">Create Review</button>
           <button type="button" class="btn btn-secondary" onclick="showDashboard()">Cancel</button>
         </div>
       </form>
@@ -741,6 +814,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     repo: 'arizonainlove/trantamcapital',
     newsPath: 'trantamcapital/src/content/news',
     brokersPath: 'trantamcapital/src/content/brokers',
+    reviewsPath: 'trantamcapital/src/content/reviews',
     apiBase: 'https://api.github.com',
     tokenKey: 'trantam_admin_token',
   };
@@ -751,6 +825,8 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   let editingArticle = null; // { slug, sha, attrs, body } when editing
   let brokers = [];
   let editingBroker = null; // { slug, sha, attrs } when editing
+  let reviews = [];
+  let editingReview = null; // { slug, sha, attrs, body } when editing
   let activeTab = 'articles';
 
   // ======================== UTILITY ========================
@@ -1071,8 +1147,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     if (brokerData.reviewHref) attrs.reviewHref = brokerData.reviewHref;
     if (brokerData.visitHref) attrs.visitHref = brokerData.visitHref;
     if (brokerData.gradient) attrs.gradient = brokerData.gradient;
+    // Comparison fields
+    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
+    for (var ci = 0; ci < compareFields.length; ci++) {
+      var key = compareFields[ci];
+      if (brokerData[key]) attrs[key] = brokerData[key];
+    }
 
-    var content = generateFrontmatter(attrs, ['name', 'type', 'rating', 'features', 'reviewHref', 'visitHref', 'gradient']);
+    var content = generateFrontmatter(attrs, ['name', 'type', 'rating', 'features', 'reviewHref', 'visitHref', 'gradient'].concat(compareFields));
     var encoded = base64Encode(content);
     var isNew = !brokerData.existingSha;
 
@@ -1100,6 +1182,76 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
+  // ======================== REVIEWS — API ========================
+  function listReviews() {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.reviewsPath).then(function(files) {
+      if (!Array.isArray(files)) return [];
+      var mdFiles = files.filter(function(f) {
+        return f.name.endsWith('.md') && f.name !== '.gitkeep';
+      });
+      return Promise.all(mdFiles.map(function(file) {
+        return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.reviewsPath + '/' + file.name)
+          .then(function(data) {
+            var content = base64Decode(data.content);
+            var parsed = parseFrontmatter(content);
+            return {
+              slug: file.name.replace(/\.md$/, ''),
+              sha: data.sha,
+              attrs: parsed.attrs,
+              body: parsed.body,
+            };
+          });
+      }));
+    }).then(function(items) {
+      items.sort(function(a, b) {
+        var nameA = a.attrs.brokerSlug || a.slug;
+        var nameB = b.attrs.brokerSlug || b.slug;
+        return nameA.localeCompare(nameB);
+      });
+      reviews = items;
+      return items;
+    });
+  }
+
+  function saveReviewToGitHub(reviewData) {
+    var slug = reviewData.existingSlug || reviewData.slug;
+    var filePath = CONFIG.reviewsPath + '/' + slug + '.md';
+
+    var attrs = {
+      brokerSlug: reviewData.brokerSlug,
+    };
+    if (reviewData.pros && reviewData.pros.length > 0) attrs.pros = reviewData.pros;
+    if (reviewData.cons && reviewData.cons.length > 0) attrs.cons = reviewData.cons;
+    if (reviewData.trustScore) attrs.trustScore = parseFloat(reviewData.trustScore);
+
+    var content = generateFrontmatter(attrs, ['brokerSlug', 'pros', 'cons', 'trustScore']) + (reviewData.content || '');
+    var encoded = base64Encode(content);
+    var isNew = !reviewData.existingSha;
+
+    var body = {
+      message: isNew ? 'Create review: ' + slug : 'Update review: ' + slug,
+      content: encoded,
+    };
+    if (reviewData.existingSha) body.sha = reviewData.existingSha;
+
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }).then(function(result) {
+      return { slug: slug, sha: result.content.sha };
+    });
+  }
+
+  function deleteReviewFromGitHub(slug, sha) {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.reviewsPath + '/' + slug + '.md', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        message: 'Delete review: ' + slug,
+        sha: sha,
+      }),
+    });
+  }
+
   // ======================== SCREEN MANAGEMENT ========================
   function showScreen(screenId) {
     var screens = document.querySelectorAll('.screen');
@@ -1121,9 +1273,19 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     showScreen('screen-dashboard');
     if (activeTab === 'articles') {
       loadAndRenderArticles();
-    } else {
+    } else if (activeTab === 'brokers') {
       loadAndRenderBrokers();
+    } else {
+      loadAndRenderReviews();
     }
+  }
+
+  function showReviewEditor(review) {
+    activeTab = 'reviews';
+    document.getElementById('header-actions').style.display = 'flex';
+    editingReview = review || null;
+    showScreen('screen-review-editor');
+    populateReviewEditor(review);
   }
 
   function showEditor(article) {
@@ -1152,6 +1314,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     // Toggle new buttons
     document.getElementById('btn-new-article').style.display = tab === 'articles' ? 'inline-flex' : 'none';
     document.getElementById('btn-new-broker').style.display = tab === 'brokers' ? 'inline-flex' : 'none';
+    document.getElementById('btn-new-review').style.display = tab === 'reviews' ? 'inline-flex' : 'none';
     showDashboard();
   }
 
@@ -1308,6 +1471,217 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
+  // ======================== REVIEWS — DASHBOARD ========================
+  function loadAndRenderReviews() {
+    var listEl = document.getElementById('dashboard-list');
+    listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading reviews...</div></div>';
+
+    listReviews().then(function(items) {
+      renderReviewList(items);
+    }).catch(function(err) {
+      if (err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('Bad credentials') !== -1)) {
+        showToast('Session expired. Please login again.', 'error');
+        logout();
+        return;
+      }
+      listEl.innerHTML =
+        '<div class="error-box">' +
+        '<div class="error-icon">⚠</div>' +
+        '<div class="error-text">Failed to load reviews: ' + escapeHtml(err.message) + '</div>' +
+        '<button class="error-retry" onclick="loadAndRenderReviews()">Retry</button>' +
+        '</div>';
+    });
+  }
+
+  function renderReviewList(items) {
+    var listEl = document.getElementById('dashboard-list');
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML =
+        '<div class="state-box">' +
+        '<div class="state-icon">📋</div>' +
+        '<div class="state-text">No reviews yet</div>' +
+        '<div class="state-sub">Add your first broker review to get started.</div>' +
+        '</div>';
+      return;
+    }
+
+    var html = '<table class="data-table">' +
+      '<thead><tr><th>Broker</th><th>Slug</th><th>Actions</th></tr></thead><tbody>';
+
+    for (var i = 0; i < items.length; i++) {
+      var r = items[i];
+      var brokerSlug = r.attrs.brokerSlug || '—';
+      var escapedBroker = escapeHtml(brokerSlug);
+
+      html += '<tr>' +
+        '<td class="title-cell">' + escapedBroker + '</td>' +
+        '<td style="color:var(--text-secondary);font-size:13px">' + escapeHtml(r.slug) + '</td>' +
+        '<td class="actions-cell">' +
+        '<button class="btn-sm btn-edit" data-slug="' + r.slug + '" data-type="review">Edit</button>' +
+        '<button class="btn-sm btn-delete" data-slug="' + r.slug + '" data-type="review">Delete</button>' +
+        '</td>' +
+        '</tr>';
+    }
+
+    html += '</tbody></table>';
+    listEl.innerHTML = html;
+
+    listEl.querySelectorAll('.btn-edit[data-type="review"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        editReview(this.getAttribute('data-slug'));
+      });
+    });
+    listEl.querySelectorAll('.btn-delete[data-type="review"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        confirmDeleteReview(this.getAttribute('data-slug'));
+      });
+    });
+  }
+
+  // ======================== REVIEW — EDITOR ========================
+  function populateReviewEditor(review) {
+    var titleEl = document.getElementById('review-editor-title');
+    var saveBtn = document.getElementById('btn-review-save');
+    var brokerSelect = document.getElementById('review-field-brokerSlug');
+
+    if (review) {
+      titleEl.textContent = 'Edit Review';
+      saveBtn.textContent = 'Update Review';
+    } else {
+      titleEl.textContent = 'Create Review';
+      saveBtn.textContent = 'Create Review';
+    }
+
+    // Populate broker dropdown (from global brokers array if available)
+    if (brokerSelect.options.length <= 1) {
+      var seen = {};
+      var allBrokers = [];
+      // Combine loaded brokers + potential defaults
+      for (var bi = 0; bi < brokers.length; bi++) {
+        var brokerName = brokers[bi].attrs.name || brokers[bi].slug;
+        var brokerSlug = brokers[bi].slug;
+        if (!seen[brokerSlug]) {
+          seen[brokerSlug] = true;
+          allBrokers.push({ slug: brokerSlug, name: brokerName });
+        }
+      }
+      // Also add slugs from the review list that might reference brokers not yet loaded
+      for (var ri = 0; ri < reviews.length; ri++) {
+        var bs = reviews[ri].attrs.brokerSlug;
+        if (bs && !seen[bs]) {
+          seen[bs] = true;
+          allBrokers.push({ slug: bs, name: bs });
+        }
+      }
+      allBrokers.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      for (var bj = 0; bj < allBrokers.length; bj++) {
+        var opt = document.createElement('option');
+        opt.value = allBrokers[bj].slug;
+        opt.textContent = allBrokers[bj].name + ' (' + allBrokers[bj].slug + ')';
+        brokerSelect.appendChild(opt);
+      }
+    }
+
+    document.getElementById('review-field-brokerSlug').value = review ? (review.attrs.brokerSlug || '') : '';
+    var pros = review && Array.isArray(review.attrs.pros) ? review.attrs.pros.join('\n') : '';
+    document.getElementById('review-field-pros').value = pros;
+    var cons = review && Array.isArray(review.attrs.cons) ? review.attrs.cons.join('\n') : '';
+    document.getElementById('review-field-cons').value = cons;
+    document.getElementById('review-field-trustScore').value = review ? (review.attrs.trustScore || '') : '';
+    document.getElementById('review-field-content').value = review ? (review.body || '') : '';
+    saveBtn.disabled = false;
+  }
+
+  function handleReviewSave() {
+    var brokerSlug = document.getElementById('review-field-brokerSlug').value;
+    if (!brokerSlug) { showToast('Please select a broker', 'error'); return; }
+
+    var content = document.getElementById('review-field-content').value.trim();
+    if (!content) { showToast('Overview is required', 'error'); return; }
+
+    // Determine slug from broker's reviewHref or brokerSlug
+    var slug = null;
+    if (editingReview) {
+      slug = editingReview.slug;
+    } else {
+      // Look up broker to get reviewHref
+      for (var i = 0; i < brokers.length; i++) {
+        if (brokers[i].slug === brokerSlug) {
+          var href = brokers[i].attrs.reviewHref || '';
+          if (href) {
+            var parts = href.replace(/\/+$/,'').split('/');
+            slug = parts[parts.length - 1];
+          }
+          break;
+        }
+      }
+      if (!slug) slug = brokerSlug;
+    }
+
+    var prosText = document.getElementById('review-field-pros').value;
+    var prosList = prosText.split('\n').map(function(f) { return f.trim(); }).filter(function(f) { return f.length > 0; });
+    var consText = document.getElementById('review-field-cons').value;
+    var consList = consText.split('\n').map(function(f) { return f.trim(); }).filter(function(f) { return f.length > 0; });
+
+    var reviewData = {
+      slug: slug,
+      brokerSlug: brokerSlug,
+      pros: prosList,
+      cons: consList,
+      trustScore: document.getElementById('review-field-trustScore').value,
+      content: content,
+      existingSlug: editingReview ? editingReview.slug : null,
+      existingSha: editingReview ? editingReview.sha : null,
+    };
+
+    var saveBtn = document.getElementById('btn-review-save');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    saveReviewToGitHub(reviewData).then(function(result) {
+      showToast('Review saved successfully!', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to save: ' + err.message, 'error');
+      saveBtn.disabled = false;
+      saveBtn.textContent = editingReview ? 'Update Review' : 'Create Review';
+    });
+  }
+
+  // ======================== REVIEW — ACTIONS ========================
+  function editReview(slug) {
+    for (var i = 0; i < reviews.length; i++) {
+      if (reviews[i].slug === slug) {
+        showReviewEditor(reviews[i]);
+        return;
+      }
+    }
+    showToast('Review not found', 'error');
+  }
+
+  function confirmDeleteReview(slug) {
+    var review = null;
+    for (var i = 0; i < reviews.length; i++) {
+      if (reviews[i].slug === slug) {
+        review = reviews[i];
+        break;
+      }
+    }
+    var label = review && review.attrs.brokerSlug ? review.attrs.brokerSlug : slug;
+    if (!confirm('Are you sure you want to delete the review for "' + label + '"?\n\nThis action cannot be undone.')) return;
+
+    var sha = review ? review.sha : null;
+    if (!sha) { showToast('Cannot delete: file SHA not found', 'error'); return; }
+
+    deleteReviewFromGitHub(slug, sha).then(function() {
+      showToast('Review deleted', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to delete: ' + err.message, 'error');
+    });
+  }
+
   // ======================== ARTICLE — EDITOR ========================
   function populateEditor(article) {
     var titleEl = document.getElementById('editor-title');
@@ -1395,6 +1769,13 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     document.getElementById('broker-field-reviewHref').value = broker ? (broker.attrs.reviewHref || '') : '';
     document.getElementById('broker-field-visitHref').value = broker ? (broker.attrs.visitHref || '') : '';
     document.getElementById('broker-field-gradient').value = broker ? (broker.attrs.gradient || '') : '';
+    // Comparison fields
+    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
+    for (var ci = 0; ci < compareFields.length; ci++) {
+      var fieldId = 'broker-field-' + compareFields[ci];
+      var el = document.getElementById(fieldId);
+      if (el) el.value = broker ? (broker.attrs[compareFields[ci]] || '') : '';
+    }
     saveBtn.disabled = false;
   }
 
@@ -1416,6 +1797,19 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       reviewHref: document.getElementById('broker-field-reviewHref').value.trim(),
       visitHref: document.getElementById('broker-field-visitHref').value.trim(),
       gradient: document.getElementById('broker-field-gradient').value.trim(),
+      // Comparison fields
+      regulation: document.getElementById('broker-field-regulation').value.trim(),
+      minDeposit: document.getElementById('broker-field-minDeposit').value.trim(),
+      spread: document.getElementById('broker-field-spread').value.trim(),
+      leverage: document.getElementById('broker-field-leverage').value.trim(),
+      platforms: document.getElementById('broker-field-platforms').value.trim(),
+      tradingFees: document.getElementById('broker-field-tradingFees').value.trim(),
+      security: document.getElementById('broker-field-security').value.trim(),
+      exchangeFeatures: document.getElementById('broker-field-exchangeFeatures').value.trim(),
+      coins: document.getElementById('broker-field-coins').value.trim(),
+      payout: document.getElementById('broker-field-payout').value.trim(),
+      expiryTypes: document.getElementById('broker-field-expiryTypes').value.trim(),
+      assets: document.getElementById('broker-field-assets').value.trim(),
       existingSlug: editingBroker ? editingBroker.slug : null,
       existingSha: editingBroker ? editingBroker.sha : null,
     };
@@ -1560,11 +1954,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   W.logout = logout;
   W.showEditor = showEditor;
   W.showBrokerEditor = showBrokerEditor;
+  W.showReviewEditor = showReviewEditor;
   W.showDashboard = showDashboard;
   W.handleSave = handleSave;
   W.handleBrokerSave = handleBrokerSave;
+  W.handleReviewSave = handleReviewSave;
   W.loadAndRenderArticles = loadAndRenderArticles;
   W.loadAndRenderBrokers = loadAndRenderBrokers;
+  W.loadAndRenderReviews = loadAndRenderReviews;
   W.switchTab = switchTab;
 
   // ======================== INIT ========================

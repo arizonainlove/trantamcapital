@@ -1,61 +1,30 @@
 import type { Metadata } from "next";
 import SectionTitle from "@/components/SectionTitle";
 import BrokerCard from "@/components/BrokerCard";
+import { getAllBrokers } from "@/lib/content";
+import { cryptoComparisonFields, type Broker } from "@/data/brokers";
 
 export const metadata: Metadata = {
   title: "Crypto Exchange Reviews",
   description: "Compare top cryptocurrency exchanges. Read expert reviews on fees, security, features, and trading experience.",
 };
 
-const exchanges = [
-  {
-    name: "Exchange A", type: "Crypto Exchange", rating: 4.7,
-    features: ["500+ cryptocurrencies", "Low fees 0.1%", "Futures & margin", "Security track record"],
-    reviewHref: "/crypto-exchange/exchange-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)",
-  },
-  {
-    name: "Exchange B", type: "Crypto Exchange", rating: 4.5,
-    features: ["User-friendly interface", "Staking rewards", "NFT marketplace", "Institutional security"],
-    reviewHref: "/crypto-exchange/exchange-b", visitHref: "#",
-    gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)",
-  },
-  {
-    name: "Exchange C", type: "Crypto Exchange", rating: 4.4,
-    features: ["Regulated EU & Asia", "Advanced charting", "OTC trading desk", "Cold storage assets"],
-    reviewHref: "/crypto-exchange/exchange-c", visitHref: "#",
-    gradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)",
-  },
-  {
-    name: "Exchange D", type: "Crypto Exchange", rating: 4.3,
-    features: ["Decentralized exchange", "Self-custody funds", "Low gas fees", "Cross-chain swaps"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-  },
-  {
-    name: "Exchange E", type: "Crypto Exchange", rating: 4.2,
-    features: ["Beginner friendly", "Recurring buys", "Educational content", "24/7 support"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)",
-  },
-  {
-    name: "Exchange F", type: "Crypto Exchange", rating: 4.1,
-    features: ["Copy trading", "Low futures fees", "API trading", "Active community"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)",
-  },
-];
-
-const comparisonData = [
-  { name: "Exchange A", fees: "0.1%", security: "Very High", features: "Spot, Futures, Margin", coins: "500+" },
-  { name: "Exchange B", fees: "0.2%", security: "High", features: "Spot, Staking, NFT", coins: "350+" },
-  { name: "Exchange C", fees: "0.15%", security: "Very High", features: "Spot, OTC, Margin", coins: "200+" },
-  { name: "Exchange D", fees: "0.3%", security: "High", features: "DEX, Swaps", coins: "100+" },
-  { name: "Exchange E", fees: "0.5%", security: "High", features: "Spot, Recurring", coins: "50+" },
-  { name: "Exchange F", fees: "0.02%", security: "Medium", features: "Futures, Copy", coins: "150+" },
-];
+function SecurityBadge({ value }: { value?: string }) {
+  if (!value) return <span className="text-text-secondary">—</span>;
+  const color =
+    value === "Very High" ? "bg-success/10 text-success" :
+    value === "High" ? "bg-link/10 text-link" :
+    "bg-warning/10 text-warning";
+  return (
+    <span className={`text-xs font-semibold px-2 py-1 rounded ${color}`}>
+      {value}
+    </span>
+  );
+}
 
 export default function CryptoExchange() {
+  const exchanges = getAllBrokers().filter((b) => b.type === "Crypto Exchange");
+
   return (
     <>
       <section className="bg-dark py-16">
@@ -71,52 +40,56 @@ export default function CryptoExchange() {
       <section className="py-12">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionTitle title="Top Crypto Exchanges" subtitle="Find the best platform for your trading needs" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {exchanges.map((exchange) => (
-              <BrokerCard key={exchange.name} {...exchange} />
-            ))}
-          </div>
+          {exchanges.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {exchanges.map((exchange) => (
+                <BrokerCard key={exchange.slug} {...exchange} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-text-secondary py-8">No crypto exchanges available.</p>
+          )}
         </div>
       </section>
 
       {/* Comparison Table */}
-      <section className="py-12 bg-section">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <SectionTitle title="Exchange Comparison" subtitle="Key features at a glance" />
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm bg-white rounded-lg border border-border">
-              <thead>
-                <tr className="bg-dark text-white">
-                  <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Exchange</th>
-                  <th className="text-center py-3 px-4 font-semibold">Trading Fees</th>
-                  <th className="text-center py-3 px-4 font-semibold">Security</th>
-                  <th className="text-left py-3 px-4 font-semibold">Features</th>
-                  <th className="text-center py-3 px-4 font-semibold">Coins</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((row, i) => (
-                  <tr key={row.name} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
-                    <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>{row.name}</td>
-                    <td className="py-3 px-4 text-center text-text-secondary">{row.fees}</td>
-                    <td className="py-3 px-4 text-center">
-                      <span className={`text-xs font-semibold px-2 py-1 rounded ${
-                        row.security === "Very High" ? "bg-success/10 text-success" :
-                        row.security === "High" ? "bg-link/10 text-link" :
-                        "bg-warning/10 text-warning"
-                      }`}>
-                        {row.security}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-text-secondary">{row.features}</td>
-                    <td className="py-3 px-4 text-center text-text-secondary">{row.coins}</td>
+      {exchanges.length > 0 && (
+        <section className="py-12 bg-section">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <SectionTitle title="Exchange Comparison" subtitle="Key features at a glance" />
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm bg-white rounded-lg border border-border">
+                <thead>
+                  <tr className="bg-dark text-white">
+                    <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Exchange</th>
+                    {cryptoComparisonFields.map((f) => (
+                      <th key={f.key} className="text-center py-3 px-4 font-semibold">{f.label}</th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {exchanges.map((row, i) => (
+                    <tr key={row.slug} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
+                      <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>
+                        {row.name}
+                      </td>
+                      {cryptoComparisonFields.map((f) => (
+                        <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
+                          {f.key === "security" ? (
+                            <SecurityBadge value={(row as unknown as Record<string, string | undefined>)[f.key]} />
+                          ) : (
+                            (row as unknown as Record<string, string | undefined>)[f.key] || "—"
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

@@ -2,32 +2,13 @@ import type { Metadata } from "next";
 import SectionTitle from "@/components/SectionTitle";
 import BrokerCard from "@/components/BrokerCard";
 import Card from "@/components/Card";
+import { getAllBrokers } from "@/lib/content";
+import { binaryComparisonFields, type Broker } from "@/data/brokers";
 
 export const metadata: Metadata = {
   title: "Binary Options Platforms",
   description: "Explore binary options trading platforms. Expert reviews, risk warnings, and educational resources for binary options traders.",
 };
-
-const platforms = [
-  {
-    name: "BinaryPlatform A", type: "Binary Options", rating: 4.3,
-    features: ["User-friendly platform", "Multiple asset classes", "Demo account available", "Fast withdrawals"],
-    reviewHref: "/binary-option/platform-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)",
-  },
-  {
-    name: "BinaryPlatform B", type: "Binary Options", rating: 4.1,
-    features: ["High payouts up to 95%", "Mobile trading app", "60-second options", "24/7 support"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)",
-  },
-  {
-    name: "BinaryPlatform C", type: "Binary Options", rating: 4.0,
-    features: ["Turbo options", "Range of expiry times", "Technical indicators", "Video tutorials"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-  },
-];
 
 const steps = [
   { number: "01", title: "Choose an Asset", description: "Select the asset you want to trade — currency pairs, stocks, commodities, or cryptocurrencies." },
@@ -37,6 +18,8 @@ const steps = [
 ];
 
 export default function BinaryOption() {
+  const platforms = getAllBrokers().filter((b) => b.type === "Binary Options");
+
   return (
     <>
       <section className="bg-dark py-16">
@@ -53,7 +36,7 @@ export default function BinaryOption() {
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="p-5 bg-warning/10 border-2 border-warning/50 rounded-lg">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">⚠️</span>
+              <span className="text-2xl">&#9888;&#65039;</span>
               <div>
                 <h3 className="text-lg font-bold text-warning mb-1">High Risk Warning</h3>
                 <p className="text-sm text-text-secondary leading-relaxed">
@@ -72,13 +55,52 @@ export default function BinaryOption() {
       <section className="py-12">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionTitle title="Top Binary Options Platforms" subtitle="Compare leading binary options trading platforms" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {platforms.map((platform) => (
-              <BrokerCard key={platform.name} {...platform} />
-            ))}
-          </div>
+          {platforms.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {platforms.map((platform) => (
+                <BrokerCard key={platform.slug} {...platform} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-text-secondary py-8">No binary options platforms available.</p>
+          )}
         </div>
       </section>
+
+      {/* Comparison Table */}
+      {platforms.length > 0 && (
+        <section className="py-12 bg-section">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <SectionTitle title="Platform Comparison" subtitle="Key features at a glance" />
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm bg-white rounded-lg border border-border">
+                <thead>
+                  <tr className="bg-dark text-white">
+                    <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Platform</th>
+                    {binaryComparisonFields.map((f) => (
+                      <th key={f.key} className="text-center py-3 px-4 font-semibold">{f.label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {platforms.map((row, i) => (
+                    <tr key={row.slug} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
+                      <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>
+                        {row.name}
+                      </td>
+                      {binaryComparisonFields.map((f) => (
+                        <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
+                          {(row as unknown as Record<string, string | undefined>)[f.key] || "—"}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* How Binary Options Work */}
       <section className="py-12 bg-section">

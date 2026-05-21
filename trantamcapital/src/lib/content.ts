@@ -46,6 +46,11 @@ export function getArticleBySlug(slug: string): NewsArticle | undefined {
 
 export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets"];
 
+function parseOptional(data: Record<string, unknown>, key: string): string | undefined {
+  const val = data[key];
+  return val && typeof val === "string" && val.length > 0 ? val : undefined;
+}
+
 export function getAllBrokers(): Broker[] {
   const contentDir = path.join(process.cwd(), "src/content/brokers");
   if (!fs.existsSync(contentDir)) return [];
@@ -66,6 +71,19 @@ export function getAllBrokers(): Broker[] {
       reviewHref: data.reviewHref || "#",
       visitHref: data.visitHref || "#",
       gradient: data.gradient || undefined,
+      // Comparison fields
+      regulation: parseOptional(data, "regulation"),
+      minDeposit: parseOptional(data, "minDeposit"),
+      spread: parseOptional(data, "spread"),
+      leverage: parseOptional(data, "leverage"),
+      platforms: parseOptional(data, "platforms"),
+      tradingFees: parseOptional(data, "tradingFees"),
+      security: parseOptional(data, "security"),
+      exchangeFeatures: parseOptional(data, "exchangeFeatures"),
+      coins: parseOptional(data, "coins"),
+      payout: parseOptional(data, "payout"),
+      expiryTypes: parseOptional(data, "expiryTypes"),
+      assets: parseOptional(data, "assets"),
     } as Broker;
   });
 }

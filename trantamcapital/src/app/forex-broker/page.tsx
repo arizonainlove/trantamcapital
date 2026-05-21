@@ -2,61 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import BrokerCard from "@/components/BrokerCard";
+import { getAllBrokers } from "@/lib/content";
+import { forexComparisonFields, type Broker } from "@/data/brokers";
 
 export const metadata: Metadata = {
   title: "Forex Broker Reviews",
   description: "Compare top regulated forex brokers. Read expert reviews, compare spreads, leverage, and trading platforms.",
 };
 
-const brokers = [
-  {
-    name: "ForexBroker A", type: "Forex Broker", rating: 4.8,
-    features: ["FCA & CySEC regulated", "0.0 pip spreads", "MT4 & MT5 supported", "1:500 leverage"],
-    reviewHref: "/forex-broker/broker-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)",
-  },
-  {
-    name: "ForexBroker B", type: "Forex Broker", rating: 4.6,
-    features: ["ASIC regulated", "Negative balance protection", "Free education", "24/7 support"],
-    reviewHref: "/forex-broker/broker-b", visitHref: "#",
-    gradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)",
-  },
-  {
-    name: "ForexBroker C", type: "Forex Broker", rating: 4.5,
-    features: ["FCA regulated", "Social trading", "Copy trading", "Competitive spreads"],
-    reviewHref: "/forex-broker/broker-c", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-  },
-  {
-    name: "ForexBroker D", type: "Forex Broker", rating: 4.4,
-    features: ["CySEC regulated", "Islamic accounts", "PAMM accounts", "Low minimum deposit"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)",
-  },
-  {
-    name: "ForexBroker E", type: "Forex Broker", rating: 4.3,
-    features: ["FSA regulated", "Crypto CFDs available", "EA compatible", "Competitive commissions"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)",
-  },
-  {
-    name: "ForexBroker F", type: "Forex Broker", rating: 4.2,
-    features: [" offshore regulated", "High leverage 1:1000", "Instant withdrawals", "Multi-language support"],
-    reviewHref: "#", visitHref: "#",
-    gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)",
-  },
-];
-
-const comparisonData = [
-  { name: "ForexBroker A", regulation: "FCA, CySEC", minDeposit: "$100", spread: "0.0 pips", leverage: "1:500", platforms: "MT4, MT5, cTrader" },
-  { name: "ForexBroker B", regulation: "ASIC", minDeposit: "$200", spread: "0.5 pips", leverage: "1:500", platforms: "MT4, MT5" },
-  { name: "ForexBroker C", regulation: "FCA", minDeposit: "$50", spread: "0.8 pips", leverage: "1:30", platforms: "MT4, MT5, WebTrader" },
-  { name: "ForexBroker D", regulation: "CySEC", minDeposit: "$100", spread: "1.0 pips", leverage: "1:200", platforms: "MT4, MT5" },
-  { name: "ForexBroker E", regulation: "FSA", minDeposit: "$10", spread: "1.2 pips", leverage: "1:1000", platforms: "MT4, WebTrader" },
-  { name: "ForexBroker F", regulation: "Offshore", minDeposit: "$50", spread: "1.5 pips", leverage: "1:1000", platforms: "MT4, Mobile App" },
-];
-
 export default function ForexBroker() {
+  const brokers = getAllBrokers().filter((b) => b.type === "Forex Broker");
+
   return (
     <>
       <section className="bg-dark py-16">
@@ -72,46 +28,52 @@ export default function ForexBroker() {
       <section className="py-12">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionTitle title="Top Forex Brokers" subtitle="Compare the best forex brokers side by side" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {brokers.map((broker) => (
-              <BrokerCard key={broker.name} {...broker} />
-            ))}
-          </div>
+          {brokers.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {brokers.map((broker) => (
+                <BrokerCard key={broker.slug} {...broker} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-text-secondary py-8">No forex brokers available.</p>
+          )}
         </div>
       </section>
 
       {/* Comparison Table */}
-      <section className="py-12 bg-section">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <SectionTitle title="Comparison Table" subtitle="Side-by-side comparison of key features" />
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm bg-white rounded-lg border border-border">
-              <thead>
-                <tr className="bg-dark text-white">
-                  <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Broker</th>
-                  <th className="text-left py-3 px-4 font-semibold">Regulation</th>
-                  <th className="text-center py-3 px-4 font-semibold">Min Deposit</th>
-                  <th className="text-center py-3 px-4 font-semibold">Spread</th>
-                  <th className="text-center py-3 px-4 font-semibold">Leverage</th>
-                  <th className="text-left py-3 px-4 font-semibold">Platforms</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((row, i) => (
-                  <tr key={row.name} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
-                    <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>{row.name}</td>
-                    <td className="py-3 px-4 text-text-secondary">{row.regulation}</td>
-                    <td className="py-3 px-4 text-center text-text-secondary">{row.minDeposit}</td>
-                    <td className="py-3 px-4 text-center text-text-secondary">{row.spread}</td>
-                    <td className="py-3 px-4 text-center text-text-secondary">{row.leverage}</td>
-                    <td className="py-3 px-4 text-text-secondary">{row.platforms}</td>
+      {brokers.length > 0 && (
+        <section className="py-12 bg-section">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <SectionTitle title="Comparison Table" subtitle="Side-by-side comparison of key features" />
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm bg-white rounded-lg border border-border">
+                <thead>
+                  <tr className="bg-dark text-white">
+                    <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Broker</th>
+                    {forexComparisonFields.map((f) => (
+                      <th key={f.key} className="text-center py-3 px-4 font-semibold">{f.label}</th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {brokers.map((row, i) => (
+                    <tr key={row.slug} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
+                      <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>
+                        {row.name}
+                      </td>
+                      {forexComparisonFields.map((f) => (
+                        <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
+                          {(row as unknown as Record<string, string | undefined>)[f.key] || "—"}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Guide */}
       <section className="py-12">

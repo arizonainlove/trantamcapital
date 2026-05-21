@@ -10,4 +10,7 @@ features:
 reviewHref: "/binary-option/platform-a"
 visitHref: "https://iqoption.com/vi"
 gradient: "linear-gradient(135deg, #8E24AA 0%, #6A1B9A 100%)"
+payout: "Up to 92%"
+expiryTypes: "60s — End of Day"
+assets: "Forex, Stocks, Crypto, Commodities"
 ---

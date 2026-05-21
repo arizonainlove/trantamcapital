@@ -10,4 +10,8 @@ features:
 reviewHref: "/crypto-exchange/exchange-c"
 visitHref: "https://www.bybit.com/vi-VN/"
 gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)"
+tradingFees: "0.1%"
+security: "High"
+exchangeFeatures: "Derivatives, Copy, Spot"
+coins: "400+"
 ---

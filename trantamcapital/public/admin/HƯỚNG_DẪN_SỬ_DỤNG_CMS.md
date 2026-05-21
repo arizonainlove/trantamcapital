@@ -19,9 +19,10 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 
 ## Chuyển đổi tab quản lý
 
-Trang admin có 2 tab ở đầu màn hình:
+Trang admin có 3 tab ở đầu màn hình:
 - **News Articles** — Quản lý bài viết tin tức
 - **Brokers** — Quản lý sàn giao dịch / broker
+- **Reviews** — Quản lý nội dung review chi tiết cho từng broker
 
 Click vào tab tương ứng để chuyển đổi.
 
@@ -130,6 +131,17 @@ Tab Brokers hiện danh sách dạng bảng:
 | **Review URL** | ❌ Không | Đường dẫn đến trang review chi tiết |
 | **Visit URL** | ❌ Không | Đường dẫn đến trang web của sàn |
 | **Gradient** | ❌ Không | Màu nền logo (CSS gradient), để trống dùng màu mặc định |
+| **Comparison Data** | ❌ Không | Dữ liệu bảng so sánh (xem bên dưới) |
+
+#### So sánh (Comparison Data)
+
+Các trường hiển thị trong bảng so sánh ở trang danh sách. Chỉ cần nhập các trường phù hợp với loại broker:
+
+**Forex Broker:** Regulation, Min Deposit, Spread, Leverage, Platforms
+**Crypto Exchange:** Trading Fees, Security, Features, Coins
+**Binary Options:** Max Payout, Expiry Times, Asset Classes
+
+<!-- rest stays the same -->
 
 3. Click **Create Broker** → Lưu lên GitHub
 4. Đợi ~1-2 phút → Trang chủ cập nhật
@@ -147,6 +159,42 @@ Tab Brokers hiện danh sách dạng bảng:
 3. Broker biến mất khỏi trang chủ sau khi Vercel rebuild
 
 > Lưu ý: Dữ liệu mặc định (7 broker) sẽ hiện lại nếu xóa hết broker trong CMS. Để thay đổi hoàn toàn, hãy tạo broker mới sau khi xóa.
+
+## Quản lý Reviews
+
+Tab **Reviews** cho phép quản lý nội dung trang review chi tiết cho từng broker (ví dụ: `trantamcapital.com/forex-broker/broker-a`).
+
+### Xem danh sách Reviews
+
+Tab Reviews hiện danh sách:
+- **Broker**: Tên/slug của broker
+- **Actions**: Nút Edit (sửa) / Delete (xóa)
+
+### Tạo Review mới
+
+1. Click **+ New Review**
+2. Chọn **Broker** từ dropdown (danh sách broker đã có trong hệ thống)
+3. Điền thông tin:
+
+| Trường | Bắt buộc | Mô tả |
+|--------|----------|-------|
+| **Broker** | ✅ Có | Chọn broker từ danh sách |
+| **Pros** | ❌ Không | Các ưu điểm, mỗi dòng một mục |
+| **Cons** | ❌ Không | Các nhược điểm, mỗi dòng một mục |
+| **Trust Score** | ❌ Không | Điểm tin cậy 0–100 |
+| **Overview** | ✅ Có | Nội dung tổng quan, viết Markdown. Xuống dòng 2 lần để tạo đoạn mới. |
+
+4. Click **Create Review**
+5. Mỗi broker chỉ nên có 1 review
+
+> Ghi chú: Slug của review tự động lấy từ reviewHref của broker.
+
+### Sửa / Xóa Review
+
+- Click **Edit** để sửa review
+- Click **Delete** để xóa (không thể hoàn tác)
+
+---
 
 ## Cách hoạt động
 
@@ -167,4 +215,6 @@ Tab Brokers hiện danh sách dạng bảng:
 | "Session expired" | Login lại |
 | "Failed to load articles" | Kiểm tra kết nối internet, thử Retry |
 | "Failed to load brokers" | Kiểm tra kết nối internet, thử Retry |
+| "Failed to load reviews" | Kiểm tra kết nối internet, thử Retry |
+| Review không hiện sau khi tạo | Đợi 1-2 phút cho Vercel build xong. Kiểm tra broker có reviewHref hợp lệ không |
 | Không thấy bài viết/broker mới | Đợi 1-2 phút cho Vercel build xong |
