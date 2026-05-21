@@ -3,9 +3,9 @@ title: "Crypto Market Outlook: May 2026"
 date: "2026-05-21"
 category: "Cryptocurrency"
 author: "TrantamCapital"
+image: "/images/uploads/1779335686770-anhtestcryto.png"
 excerpt: "A comprehensive look at the cryptocurrency market trends, key support levels, and what to watch in the coming weeks."
 ---
-
 The cryptocurrency market continues to show resilience as we move through May 2026, with several key developments shaping the landscape for traders and investors alike.
 
 ## Market Overview
