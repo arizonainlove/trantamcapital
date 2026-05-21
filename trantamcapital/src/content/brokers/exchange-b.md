@@ -1,13 +1,13 @@
 ---
-name: "Exchange B"
+name: "Coinbase"
 type: "Crypto Exchange"
-rating: 4.5
+rating: "4.6"
 features:
+  - "Nasdaq listed (COIN)"
   - "User-friendly interface"
-  - "Staking rewards"
-  - "NFT marketplace"
-  - "Institutional security"
+  - "200+ assets"
+  - "Regulated US exchange"
 reviewHref: "/crypto-exchange/exchange-b"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)"
+visitHref: "https://www.coinbase.com/"
+gradient: "linear-gradient(135deg, #0052FF 0%, #0033CC 100%)"
 ---
