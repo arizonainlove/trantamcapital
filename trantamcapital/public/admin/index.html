@@ -1804,7 +1804,10 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 	    if (logoUrl) {
 	      document.getElementById('broker-logo-preview-img').src = logoUrl;
 	      document.getElementById('broker-logo-preview').style.display = 'inline-flex';
+	    } else {
+	      document.getElementById('broker-logo-preview').style.display = 'none';
 	    }
+	    document.getElementById('broker-field-logo-file').value = '';
     // Comparison fields
     var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
     for (var ci = 0; ci < compareFields.length; ci++) {
