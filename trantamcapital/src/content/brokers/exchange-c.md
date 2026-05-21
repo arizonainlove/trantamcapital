@@ -1,7 +1,7 @@
 ---
 name: "Bybit"
 type: "Crypto Exchange"
-rating: "4.7"
+rating: 4.7
 features:
   - "400+ trading pairs"
   - "Up to 100x leverage"
@@ -9,7 +9,7 @@ features:
   - "Advanced derivatives"
 reviewHref: "/crypto-exchange/exchange-c"
 visitHref: "https://www.bybit.com/vi-VN/"
-gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779366818075-logobybit.png"
 tradingFees: "0.1%"
 security: "High"
 exchangeFeatures: "Derivatives, Copy, Spot"
