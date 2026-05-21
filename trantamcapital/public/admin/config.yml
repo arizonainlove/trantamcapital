@@ -11,7 +11,7 @@ public_folder: /images/uploads
 collections:
   - name: "news"
     label: "News Articles"
-    folder: "src/content/news"
+    folder: "trantamcapital/src/content/news"
     create: true
     slug: "{{slug}}"
     fields:
