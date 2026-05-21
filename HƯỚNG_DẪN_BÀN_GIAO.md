@@ -280,4 +280,122 @@ Mọi thắc mắc, vui lòng liên hệ người phát triển để được h
 
 ---
 
+## 10. Hướng dẫn tự cập nhật — Dành cho khách hàng sau bàn giao
+
+> Sau khi bàn giao, bạn có thể tự chỉnh sửa nội dung và code. Phần này hướng dẫn từ A-Z.
+
+### 10.1 Cập nhật nội dung qua Admin (không cần chạy code)
+
+Đây là cách đơn giản nhất — chỉ cần vào website:
+
+1. Vào `https://trantamcapital.com/admin`
+2. Đăng nhập GitHub
+3. Thêm/sửa/xóa **Bài viết**, **Broker**, **Review** tuỳ ý
+4. Lưu — tự động deploy sau ~1-2 phút
+
+Không cần cài đặt gì trên máy tính.
+
+### 10.2 Cập nhật hình ảnh (logo, ảnh bài viết)
+
+- Upload trực tiếp qua Admin (tab News/Brokers → chọn file ảnh)
+- Ảnh tự động lưu lên GitHub và hiển thị trên website
+
+### 10.3 Chỉnh sửa code trên máy tính (nâng cao)
+
+Nếu muốn tự sửa code (thay đổi màu sắc, thêm nội dung, sửa lỗi):
+
+#### Bước 1 — Cài đặt công cụ
+
+| Công cụ | Link tải | Ghi chú |
+|---------|----------|---------|
+| **Node.js** (bản LTS) | https://nodejs.org | Kiểm tra: mở CMD gõ `node --version` |
+| **VS Code** | https://code.visualstudio.com | Soạn thảo code |
+| **Git** | https://git-scm.com/downloads | Quản lý code, thường có sẵn trên Windows |
+
+#### Bước 2 — Clone code từ GitHub về máy
+
+```bash
+# Mở CMD hoặc Terminal, gõ:
+git clone https://github.com/arizonainlove/trantamcapital.git
+cd trantamcapital/trantamcapital
+npm install
+```
+
+> **Lưu ý:** Nếu đã chuyển repository sang tài khoản riêng, thay URL GitHub ở trên bằng URL repo của bạn.
+
+#### Bước 3 — Chạy thử trên máy tính
+
+```bash
+npm run dev
+```
+
+Mở trình duyệt vào `http://localhost:3000` — bạn sẽ thấy website chạy local.
+
+#### Bước 4 — Chỉnh sửa code
+
+Dùng VS Code mở thư mục `trantamcapital` và sửa các file cần thay đổi:
+
+| Bạn muốn | Sửa file nào |
+|----------|-------------|
+| Đổi màu sắc, font chữ | `src/app/globals.css` |
+| Sửa nội dung trang chủ | `src/app/page.tsx` |
+| Sửa menu header | `src/components/Header.tsx` |
+| Sửa footer | `src/components/Footer.tsx` |
+| Thêm/xoá coin trong bảng giá | `src/components/MarketOverview.tsx` |
+| Thêm/xoá coin trong ticker | `src/components/PriceTicker.tsx` |
+| Sửa nội dung tĩnh (About, Tools...) | `src/app/about/page.tsx`, `src/app/tools/page.tsx` |
+
+> **Mẹo:** Cứ sửa file → lưu (Ctrl+S) → ra trình duyệt xem kết quả liền. `npm run dev` tự động reload.
+
+#### Bước 5 — Kiểm tra trước khi đưa lên website thật
+
+```bash
+npm run build
+```
+
+Phải thấy `✓ Compiled successfully` và không có lỗi. Nếu có lỗi, đọc dòng báo lỗi để sửa.
+
+#### Bước 6 — Đưa code lên website thật
+
+```bash
+# Trong thư mục trantamcapital (thư mục chứa file package.json)
+git add .
+git commit -m "Mô tả ngắn về thay đổi"
+git push
+```
+
+Sau khi push, Vercel tự động build lại website. Đợi ~1-2 phút, vào website kiểm tra.
+
+### 10.4 Lưu ý quan trọng
+
+- **Luôn chạy `npm run build`** trước khi `git push` — nếu build lỗi thì website sẽ bị lỗi sau khi deploy
+- **Không sửa file trong `src/content/`** bằng tay — các file đó do Admin quản lý, sửa qua Admin là đủ
+- **Không xoá file `.gitkeep`** trong các thư mục content
+- **Sao lưu**: Code đã được lưu trên GitHub, nếu mất máy tính thì clone lại từ GitHub
+- **Cần hỗ trợ**: Nếu gặp lỗi không tự sửa được, liên hệ người phát triển
+
+### 10.5 Luồng làm việc đề xuất
+
+```
+Sửa nội dung (Admin) ──────────────────────→ Website cập nhật sau 1-2p
+                                              (không cần chạy code)
+
+Sửa giao diện/tính năng (Code + Commit) ───→ Vercel rebuild → Website mới
+  Clone → npm install → npm run dev
+  → Sửa code → npm run build (kiểm tra)
+  → git add / commit / push
+```
+
+### 10.6 Các lệnh thường dùng (tổng kết)
+
+| Lệnh | Chạy khi nào |
+|------|-------------|
+| `npm run dev` | Muốn chạy thử website trên máy tính |
+| `npm run build` | Muốn kiểm tra code có lỗi không |
+| `git add .` | Sau khi sửa code xong, chuẩn bị đẩy lên |
+| `git commit -m "nội dung"` | Đóng gói thay đổi kèm mô tả |
+| `git push` | Đẩy lên GitHub → Vercel tự động deploy |
+
+---
+
 *Cập nhật lần cuối — 21/05/2026*
