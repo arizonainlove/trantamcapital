@@ -1,7 +1,7 @@
 ---
 name: "IQ Option"
 type: "Binary Options"
-rating: "4.5"
+rating: 4.5
 features:
   - "Intuitive platform"
   - "100+ assets"
@@ -9,7 +9,7 @@ features:
   - "Fast withdrawals"
 reviewHref: "/binary-option/platform-a"
 visitHref: "https://iqoption.com/vi"
-gradient: "linear-gradient(135deg, #8E24AA 0%, #6A1B9A 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779361515948-logoiqoption.png"
 payout: "Up to 92%"
 expiryTypes: "60s — End of Day"
 assets: "Forex, Stocks, Crypto, Commodities"
