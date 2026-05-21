@@ -71,6 +71,7 @@ export function getAllBrokers(): Broker[] {
       reviewHref: data.reviewHref || "#",
       visitHref: data.visitHref || "#",
       gradient: data.gradient || undefined,
+      logo: parseOptional(data, "logo"),
       // Comparison fields
       regulation: parseOptional(data, "regulation"),
       minDeposit: parseOptional(data, "minDeposit"),

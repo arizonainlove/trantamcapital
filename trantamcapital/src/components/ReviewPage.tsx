@@ -41,12 +41,18 @@ export default function ReviewPage({
         <div className="max-w-[1200px] mx-auto px-4">
           <Breadcrumb items={breadcrumbItems} />
           <div className="flex items-center gap-4 mb-4">
-            <div
-              className="w-16 h-16 rounded-xl flex items-center justify-center"
-              style={{ background: gradient }}
-            >
-              <span className="text-white font-bold text-xl">{badgeLetter}</span>
-            </div>
+            {broker?.logo ? (
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-white border border-border p-1">
+                <img src={broker.logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+              </div>
+            ) : (
+              <div
+                className="w-16 h-16 rounded-xl flex items-center justify-center"
+                style={{ background: gradient }}
+              >
+                <span className="text-white font-bold text-xl">{badgeLetter}</span>
+              </div>
+            )}
             <div>
               <h1 className="text-[28px] md:text-[36px] font-extrabold text-white">{name}</h1>
               <div className="flex items-center gap-2 mt-1">

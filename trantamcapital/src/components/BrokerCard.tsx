@@ -9,6 +9,7 @@ interface BrokerCardProps {
   reviewHref: string;
   visitHref: string;
   gradient?: string;
+  logo?: string;
 }
 
 export default function BrokerCard({
@@ -19,16 +20,23 @@ export default function BrokerCard({
   reviewHref,
   visitHref,
   gradient = "linear-gradient(135deg, #E84910 0%, #FF6B35 100%)",
+  logo,
 }: BrokerCardProps) {
   return (
     <div className="rounded-lg border border-border bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_6px_rgba(0,0,0,0.1)] transition-shadow p-6">
-      {/* Logo placeholder */}
-      <div
-        className="w-16 h-16 rounded-lg flex items-center justify-center mb-4"
-        style={{ background: gradient }}
-      >
-        <span className="text-white font-bold text-lg">{name.charAt(0)}</span>
-      </div>
+      {/* Logo */}
+      {logo ? (
+        <div className="w-16 h-16 rounded-lg flex items-center justify-center mb-4 bg-white border border-border p-1">
+          <img src={logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+        </div>
+      ) : (
+        <div
+          className="w-16 h-16 rounded-lg flex items-center justify-center mb-4"
+          style={{ background: gradient }}
+        >
+          <span className="text-white font-bold text-lg">{name.charAt(0)}</span>
+        </div>
+      )}
 
       {/* Name + Type */}
       <h3 className="text-lg font-bold text-text-primary mb-1">{name}</h3>

@@ -6,6 +6,7 @@ export interface Broker {
   features: string[];
   reviewHref: string;
   visitHref: string;
+  logo?: string;
   gradient?: string;
   // Comparison fields — type-specific, used in auto comparison tables
   regulation?: string;
