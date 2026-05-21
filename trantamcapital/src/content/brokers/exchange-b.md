@@ -2,6 +2,7 @@
 name: "Coinbase"
 type: "Crypto Exchange"
 rating: 4.6
+order: 3
 features:
   - "Nasdaq listed (COIN)"
   - "User-friendly interface"
