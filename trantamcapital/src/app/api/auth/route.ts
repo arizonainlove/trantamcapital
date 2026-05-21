@@ -35,10 +35,9 @@ export async function GET(request: Request) {
 
     if (data.access_token) {
       // Redirect back to CMS with token in URL hash
+      const redirectTarget = `${origin}/admin#access_token=${data.access_token}&token_type=bearer`;
       return new Response(
-        `<html><body><script>
-          window.location.href = "${origin}/admin#access_token=${data.access_token}&token_type=bearer";
-        </script></body></html>`,
+        `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=${redirectTarget}"></head><body><script>window.location.replace("${redirectTarget}");</script></body></html>`,
         { status: 200, headers: { "Content-Type": "text/html" } }
       );
     }

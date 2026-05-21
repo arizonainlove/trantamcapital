@@ -8,6 +8,12 @@
 <body>
   <script>
     window.CMS_MANUAL_INIT = true;
+    // Normalize OAuth callback hash for Decap CMS
+    (function() {
+      if (window.location.hash.startsWith("#/")) {
+        window.location.hash = window.location.hash.replace(/^#\//, "#");
+      }
+    })();
   </script>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
   <script>
