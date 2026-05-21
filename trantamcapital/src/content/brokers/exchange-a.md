@@ -9,7 +9,7 @@ features:
   - "Staking & earn"
 reviewHref: "/crypto-exchange/exchange-a"
 visitHref: "https://www.binance.com/vi"
-logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779361371203-Logobinance.png"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779361963112-Logobinance.png"
 tradingFees: "0.1%"
 security: "Very High"
 exchangeFeatures: "Spot, Futures, Margin, Staking"
