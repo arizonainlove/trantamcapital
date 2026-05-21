@@ -1,7 +1,7 @@
 ---
 name: "Pepperstone"
 type: "Forex Broker"
-rating: "4.6"
+rating: 4.6
 features:
   - "ASIC/FCA/CMA regulated"
   - "Razor spreads from 0.0 pips"
@@ -9,7 +9,7 @@ features:
   - "Fast execution"
 reviewHref: "/forex-broker/broker-c"
 visitHref: "https://pepperstone.com/vi-vn/"
-gradient: "linear-gradient(135deg, #E65100 0%, #BF360C 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367308116-logopepperstone.png"
 regulation: "ASIC, FCA, CMA"
 minDeposit: "$200"
 spread: "From 0.0 pips"
