@@ -5,9 +5,9 @@ import NewsCard from "@/components/NewsCard";
 import BrokerCard from "@/components/BrokerCard";
 import Card from "@/components/Card";
 import NewsletterForm from "@/components/NewsletterForm";
-import { allNews } from "@/data/news";
+import { getAllNews } from "@/lib/content";
 
-const featuredNews = allNews.slice(0, 3).map((a) => ({
+const featuredNews = getAllNews().slice(0, 3).map((a) => ({
   category: a.category,
   date: a.date,
   title: a.title,

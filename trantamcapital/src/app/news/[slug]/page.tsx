@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { allNews, getArticleBySlug } from "@/data/news";
+import { getAllNews, getArticleBySlug } from "@/lib/content";
 import NewsletterForm from "@/components/NewsletterForm";
+
+const allNews = getAllNews();
 
 export async function generateStaticParams() {
   return allNews.map((article) => ({ slug: article.slug }));

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAllNews, getRecentPosts, categories } from "@/lib/content";
 import NewsContent from "./NewsContent";
 
 export const metadata: Metadata = {
@@ -7,5 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function NewsPage() {
-  return <NewsContent />;
+  const allNews = getAllNews();
+  const recentPosts = getRecentPosts(4);
+  return <NewsContent allNews={allNews} categories={categories} recentPosts={recentPosts} />;
 }

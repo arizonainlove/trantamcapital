@@ -4,13 +4,23 @@ import { useState } from "react";
 import Link from "next/link";
 import NewsCard from "@/components/NewsCard";
 import NewsletterForm from "@/components/NewsletterForm";
-import { allNews, categories } from "@/data/news";
+import type { NewsArticle } from "@/data/news";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function NewsContent() {
+const defaultCategories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets"];
+
+type Props = {
+  allNews: NewsArticle[];
+  categories?: string[];
+  recentPosts?: NewsArticle[];
+};
+
+export default function NewsContent({ allNews, categories, recentPosts }: Props) {
   const [activeCategory, setActiveCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const cats = categories ?? defaultCategories;
 
   const filteredNews =
     activeCategory === "All"
@@ -23,7 +33,7 @@ export default function NewsContent() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  const recentPosts = allNews.slice(0, 4);
+  const recent = recentPosts ?? allNews.slice(0, 4);
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
@@ -48,7 +58,7 @@ export default function NewsContent() {
             <div className="flex-1">
               {/* Filter Tabs */}
               <div className="flex flex-wrap gap-2 mb-8">
-                {categories.map((cat) => (
+                {cats.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => handleCategoryChange(cat)}
@@ -103,7 +113,7 @@ export default function NewsContent() {
               <div className="rounded-lg border border-border bg-white p-5 mb-6">
                 <h3 className="text-lg font-bold text-text-primary mb-4">Categories</h3>
                 <ul className="space-y-2">
-                  {categories.filter((c) => c !== "All").map((cat) => (
+                  {cats.filter((c) => c !== "All").map((cat) => (
                     <li key={cat}>
                       <button
                         onClick={() => handleCategoryChange(cat)}
@@ -121,7 +131,7 @@ export default function NewsContent() {
               <div className="rounded-lg border border-border bg-white p-5 mb-6">
                 <h3 className="text-lg font-bold text-text-primary mb-4">Recent Posts</h3>
                 <ul className="space-y-4">
-                  {recentPosts.map((post) => (
+                  {recent.map((post) => (
                     <li key={post.slug}>
                       <Link href={`/news/${post.slug}`} className="group">
                         <p className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-2">
