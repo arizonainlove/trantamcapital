@@ -1,4 +1,4 @@
-# Hướng Dẫn Sử Dụng — Quản Lý Bài Viết
+# Hướng Dẫn Sử Dụng — Quản Lý Nội Dung
 
 ## Truy cập
 
@@ -17,9 +17,19 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 
 ---
 
+## Chuyển đổi tab quản lý
+
+Trang admin có 2 tab ở đầu màn hình:
+- **News Articles** — Quản lý bài viết tin tức
+- **Brokers** — Quản lý sàn giao dịch / broker
+
+Click vào tab tương ứng để chuyển đổi.
+
+---
+
 ## Xem danh sách bài viết
 
-Sau khi đăng nhập, bạn sẽ thấy danh sách tất cả bài viết dạng bảng:
+Sau khi đăng nhập, tab **News Articles** hiện danh sách tất cả bài viết dạng bảng:
 - **Title**: Tiêu đề bài viết
 - **Category**: Danh mục (Cryptocurrency, Forex, Binary Options, Markets)
 - **Date**: Ngày đăng
@@ -93,12 +103,59 @@ Phần **Body** dùng định dạng Markdown:
 
 ---
 
+## Quản lý Brokers / Sàn giao dịch
+
+Chuyển sang tab **Brokers** để quản lý các sàn giao dịch hiển thị trên trang chủ (mục "Featured Brokers & Exchanges").
+
+### Xem danh sách Brokers
+
+Tab Brokers hiện danh sách dạng bảng:
+- **Name**: Tên sàn
+- **Type**: Loại (Forex Broker, Crypto Exchange, Binary Options)
+- **Rating**: Đánh giá sao
+- **Features**: Các tính năng chính
+- **Actions**: Nút Edit (sửa) / Delete (xóa)
+
+### Thêm Broker mới
+
+1. Click nút **+ New Broker**
+2. Điền thông tin:
+
+| Trường | Bắt buộc | Mô tả |
+|--------|----------|-------|
+| **Name** | ✅ Có | Tên sàn giao dịch |
+| **Type** | ❌ Không | Forex Broker / Crypto Exchange / Binary Options |
+| **Rating** | ❌ Không | Đánh giá từ 0–5 (ví dụ: 4.5) |
+| **Features** | ❌ Không | Các tính năng, mỗi dòng một tính năng |
+| **Review URL** | ❌ Không | Đường dẫn đến trang review chi tiết |
+| **Visit URL** | ❌ Không | Đường dẫn đến trang web của sàn |
+| **Gradient** | ❌ Không | Màu nền logo (CSS gradient), để trống dùng màu mặc định |
+
+3. Click **Create Broker** → Lưu lên GitHub
+4. Đợi ~1-2 phút → Trang chủ cập nhật
+
+### Sửa Broker
+
+1. Trong tab Brokers, click **Edit** ở broker muốn sửa
+2. Sửa thông tin
+3. Click **Update Broker**
+
+### Xóa Broker
+
+1. Trong tab Brokers, click **Delete** ở broker muốn xóa
+2. Xác nhận **OK**
+3. Broker biến mất khỏi trang chủ sau khi Vercel rebuild
+
+> Lưu ý: Dữ liệu mặc định (7 broker) sẽ hiện lại nếu xóa hết broker trong CMS. Để thay đổi hoàn toàn, hãy tạo broker mới sau khi xóa.
+
 ## Cách hoạt động
 
-- Bài viết được lưu dưới dạng file Markdown (`.md`) trong thư mục `trantamcapital/src/content/news/` trên GitHub
-- Mỗi bài viết là một file riêng, tên file tự động tạo từ tiêu đề
+- **Bài viết** lưu dạng `.md` trong `trantamcapital/src/content/news/` trên GitHub
+- **Brokers** lưu dạng `.md` trong `trantamcapital/src/content/brokers/` trên GitHub
+- Mỗi mục là một file riêng, tên file tự động tạo từ tiêu đề/tên
 - Khi có thay đổi, Vercel phát hiện và tự động build lại website
-- Bài viết mới nhất sẽ hiện trên trang chủ và trang tin tức
+- Bài viết mới nhất hiện trên trang chủ và trang tin tức
+- Broker mới/thay đổi hiện trên trang chủ mục "Featured Brokers & Exchanges"
 
 ---
 
@@ -109,4 +166,5 @@ Phần **Body** dùng định dạng Markdown:
 | "Popup was blocked" | Cho phép popup cho trang web này |
 | "Session expired" | Login lại |
 | "Failed to load articles" | Kiểm tra kết nối internet, thử Retry |
-| Không thấy bài viết mới | Đợi 1-2 phút cho Vercel build xong |
+| "Failed to load brokers" | Kiểm tra kết nối internet, thử Retry |
+| Không thấy bài viết/broker mới | Đợi 1-2 phút cho Vercel build xong |
