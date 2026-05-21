@@ -38,53 +38,21 @@ export async function GET(request: Request) {
 <html>
 <head><meta charset="utf-8"></head>
 <body style="font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#F7F8FA;">
-<div style="text-align:center;padding:40px;max-width:420px;">
-  <div id="spinner" style="border:4px solid #E2E5EC;border-top-color:#E84910;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
-  <h2 id="title" style="color:#2E7D32;margin:0 0 8px;font-size:20px;">Authentication successful</h2>
-  <p id="desc" style="color:#5A6377;margin:0;font-size:14px;">Connecting to CMS...</p>
-  <p id="status" style="color:#8E99B0;margin:12px 0 0;font-size:12px;"></p>
+<div style="text-align:center;padding:40px;">
+  <div style="border:4px solid #E2E5EC;border-top-color:#E84910;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
+  <h2 style="color:#2E7D32;margin:0 0 8px;font-size:20px;">Authentication successful</h2>
+  <p style="color:#5A6377;margin:0;font-size:14px;">You can close this window.</p>
   <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 </div>
 <script>
 (function(){
   var token = ${JSON.stringify(data.access_token)};
-  var opener = window.opener;
-  var status = document.getElementById('status');
-
-  if (!opener) {
-    status.textContent = 'ERROR: no parent window';
-    return;
-  }
-
-  // Luon luu token vao localStorage phong ho
   try {
-    if (typeof opener.__authComplete === 'function') {
-      opener.__authComplete(token);
+    if (window.opener && typeof window.opener.__authComplete === 'function') {
+      window.opener.__authComplete(token);
     }
   } catch(e) {}
-
-  // postMessage protocol — day la cach CMS xac thuc chinh thuc
-  // CMS lang nghe "authorizing:github", echo lai, roi minh gui token
-  status.textContent = 'Sending auth via postMessage...';
-  try {
-    opener.postMessage("authorizing:github", "*");
-  } catch(e) {
-    status.textContent = 'postMessage error: ' + e.message;
-  }
-
-  function handler(e) {
-    if (e.data === "authorizing:github") {
-      window.removeEventListener("message", handler);
-      var authData = JSON.stringify({ token: token, provider: "github" });
-      opener.postMessage("authorization:github:success:" + authData, "*");
-      status.textContent = 'Token sent to CMS. Closing...';
-      setTimeout(function() { window.close(); }, 200);
-    }
-  }
-  window.addEventListener("message", handler);
-
-  // Tu dong dong sau 5s neu CMS khong echo lai
-  setTimeout(function() { window.close(); }, 5000);
+  setTimeout(function() { window.close(); }, 1500);
 })();
 <\/script>
 </body>

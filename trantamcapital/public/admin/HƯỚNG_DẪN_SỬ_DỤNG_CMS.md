@@ -1,61 +1,60 @@
-# Hướng Dẫn Sử Dụng Decap CMS — Đăng Bài Viết Mới
+# Hướng Dẫn Sử Dụng — Quản Lý Bài Viết
 
-## Truy cập CMS
+## Truy cập
 
 Vào **`https://trantamcapital.vercel.app/admin`**
 
 ---
 
-## Bước 1: Tạo GitHub Personal Access Token (làm 1 lần)
-
-1. Vào **GitHub.com** → Click avatar góc phải → **Settings**
-2. Kéo xuống cuối sidebar trái → **Developer settings**
-3. Click **Personal access tokens** → **Tokens (classic)**
-4. Click **Generate new token** → **Generate new token (classic)**
-5. Điền:
-   - **Note**: `TrantamCapital CMS`
-   - **Expiration**: chọn **No expiration**
-   - **Scopes**: tick **`repo`** (Full control of private repositories)
-6. Kéo xuống cuối → Click **Generate token**
-7. **Copy token** (dạng `ghp_...`) — **lưu lại chỗ an toàn**, chỉ hiện 1 lần
-
----
-
-## Bước 2: Đăng nhập CMS
+## Đăng nhập
 
 1. Vào **`https://trantamcapital.vercel.app/admin`**
-2. Click **Login with GitHub**
-3. Một hộp thoại nhỏ hiện ra yêu cầu nhập token → **Paste token** vừa tạo vào
-4. Click **OK** → Vào được giao diện CMS
+2. Click nút **Login with GitHub**
+3. Cửa sổ mới hiện ra → Click **Authorize** để cấp quyền
+4. Cửa sổ tự động đóng → Trang admin hiện danh sách bài viết
 
-> Lưu ý: Chỉ cần nhập token 1 lần. Lần sau vào CMS sẽ tự động đăng nhập.
-
----
-
-## Viết bài mới
-
-1. Trong mục **News Articles**, click **New Article**
-2. Điền các trường:
-
-| Trường | Mô tả | Ví dụ |
-|--------|-------|-------|
-| **Title** | Tiêu đề bài viết | Bitcoin Surges Past $100K |
-| **Publish Date** | Ngày đăng | 2026-05-21 |
-| **Category** | Chọn danh mục | Cryptocurrency / Forex / Binary Options / Markets |
-| **Author** | Tác giả | TrantamCapital (mặc định) |
-| **Image** | Ảnh đại diện (không bắt buộc) | Kéo thả hoặc upload |
-| **Excerpt** | Mô tả ngắn, 1-2 câu | Bitcoin has reached a new all-time high... |
-| **Body** | Nội dung chính — viết bằng Markdown | Xem hướng dẫn bên dưới |
+> Lưu ý: Nếu cửa sổ không hiện ra, hãy cho phép popup cho trang này.
 
 ---
 
-## Viết nội dung bằng Markdown
+## Xem danh sách bài viết
 
-Body dùng định dạng Markdown:
+Sau khi đăng nhập, bạn sẽ thấy danh sách tất cả bài viết dạng bảng:
+- **Title**: Tiêu đề bài viết
+- **Category**: Danh mục (Cryptocurrency, Forex, Binary Options, Markets)
+- **Date**: Ngày đăng
+- **Actions**: Nút Edit (sửa) / Delete (xóa)
 
-```
-# Tiêu đề lớn
-## Tiêu đề phụ
+---
+
+## Tạo bài viết mới
+
+1. Click nút **+ New Article** (góc trên bên phải)
+2. Điền thông tin:
+
+| Trường | Bắt buộc | Mô tả |
+|--------|----------|-------|
+| **Title** | ✅ Có | Tiêu đề bài viết |
+| **Publish Date** | ❌ Không | Ngày đăng, mặc định là hôm nay |
+| **Category** | ❌ Không | Chọn danh mục |
+| **Author** | ❌ Không | Tác giả, mặc định "TrantamCapital" |
+| **Image URL** | ❌ Không | Link ảnh đại diện (nếu có) |
+| **Excerpt** | ❌ Không | Mô tả ngắn, 1-2 câu |
+| **Body** | ✅ Có | Nội dung chính — viết bằng Markdown |
+
+3. Click **Create Article** → Bài viết được lưu lên GitHub
+4. Đợi ~1-2 phút → Vào **`https://trantamcapital.vercel.app/news`** kiểm tra
+
+---
+
+## Hướng dẫn viết Markdown
+
+Phần **Body** dùng định dạng Markdown:
+
+```markdown
+# Tiêu đề lớn (H1)
+## Tiêu đề phụ (H2)
+### Tiêu đề nhỏ (H3)
 
 **Chữ đậm**
 *Chữ nghiêng*
@@ -63,36 +62,51 @@ Body dùng định dạng Markdown:
 - Danh sách bullet
 - Mục thứ hai
 
-1. Danh sách số
+1. Danh sách có số
 2. Mục thứ hai
 
-[Link text](https://example.com)
+[Text hiển thị](https://example.com)
 
 > Trích dẫn
+
+--- (đường kẻ ngang)
 ```
 
 ---
 
-## Xuất bản
+## Sửa bài viết
 
-1. Click **Publish** (hoặc **Save** để lưu nháp)
-2. Đợi ~1-2 phút
-3. Vào **`https://trantamcapital.vercel.app/news`** kiểm tra bài viết mới
-
-> CMS tự động commit file lên GitHub, Vercel phát hiện thay đổi và build lại.
-
----
-
-## Chỉnh sửa / Xóa bài
-
-- Vào mục **News Articles** → Chọn bài muốn sửa
-- Click **Edit** → Sửa nội dung → **Publish**
-- Hoặc click **Delete** để xóa
+1. Trong danh sách, click **Edit** ở bài muốn sửa
+2. Sửa nội dung
+3. Click **Update Article**
+4. Bài viết được cập nhật trên GitHub
 
 ---
 
-## Lưu ý
+## Xóa bài viết
 
-- Bài viết mới nhất sẽ hiện trên **trang chủ** mục Latest News
-- Khi có nhiều bài, phân trang tự động hoạt động
-- Ảnh upload sẽ được lưu tại thư mục `public/images/uploads/` trên GitHub
+1. Trong danh sách, click **Delete** ở bài muốn xóa
+2. Xác nhận **OK** trong hộp thoại
+3. Bài viết bị xóa khỏi GitHub
+
+> Cảnh báo: Hành động này không thể hoàn tác.
+
+---
+
+## Cách hoạt động
+
+- Bài viết được lưu dưới dạng file Markdown (`.md`) trong thư mục `trantamcapital/src/content/news/` trên GitHub
+- Mỗi bài viết là một file riêng, tên file tự động tạo từ tiêu đề
+- Khi có thay đổi, Vercel phát hiện và tự động build lại website
+- Bài viết mới nhất sẽ hiện trên trang chủ và trang tin tức
+
+---
+
+## Xử lý lỗi thường gặp
+
+| Lỗi | Cách xử lý |
+|-----|-----------|
+| "Popup was blocked" | Cho phép popup cho trang web này |
+| "Session expired" | Login lại |
+| "Failed to load articles" | Kiểm tra kết nối internet, thử Retry |
+| Không thấy bài viết mới | Đợi 1-2 phút cho Vercel build xong |

@@ -1,47 +1,985 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager - TrantamCapital</title>
-  <style>
-    body { margin: 0; font-family: system-ui, sans-serif; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Manager — TrantamCapital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #E84910;
+  --primary-hover: #C93D0A;
+  --primary-light: #FFF0E8;
+  --nav-bg: #FFCA00;
+  --dark: #0F1A2E;
+  --dark-card: #1A2A42;
+  --gold: #C8A84E;
+  --success: #2E7D32;
+  --error: #C62828;
+  --warning: #F9A825;
+  --text: #1A1A2E;
+  --text-secondary: #5A6377;
+  --text-light: #8E99B0;
+  --border: #E2E5EC;
+  --bg: #F7F8FA;
+  --white: #FFFFFF;
+  --font: 'Open Sans', system-ui, sans-serif;
+  --font-mono: 'Roboto', monospace;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.12);
+  --radius: 7px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); color: var(--text); background: var(--bg); min-height: 100vh; line-height: 1.5; }
+
+/* Header */
+.admin-header {
+  background: var(--nav-bg);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+.admin-header .brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.admin-header .brand span { color: var(--text-secondary); font-weight: 400; font-size: 14px; }
+.admin-header .header-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.user-badge { font-size: 13px; color: var(--text-secondary); }
+.header-btn {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.header-btn:hover { background: rgba(0,0,0,0.08); }
+.header-btn-logout { color: var(--error); }
+.header-btn-logout:hover { background: rgba(198,40,40,0.1); }
+
+/* Screens */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Login Screen */
+#screen-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 48px);
+  padding: 24px;
+}
+.login-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+.login-card .logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.login-card .subtitle {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.login-card .login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--dark);
+  color: var(--white);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  height: 48px;
+  transition: background 0.15s;
+}
+.login-card .login-btn:hover { background: #1A2A42; }
+.login-card .login-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.login-card .login-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-light);
+}
+.login-card .login-note code {
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* Dashboard */
+#screen-dashboard { min-height: calc(100vh - 48px); }
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+.dashboard-header h1 { font-size: 20px; font-weight: 700; }
+.dashboard-content {
+  padding: 20px 24px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(232,73,16,0.3);
+}
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); box-shadow: 0 4px 12px rgba(232,73,16,0.4); }
+.btn-secondary {
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover:not(:disabled) { border-color: var(--text-light); }
+.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  height: 30px;
+}
+.btn-edit { background: var(--primary-light); color: var(--primary); }
+.btn-edit:hover { background: #FFE0D0; }
+.btn-delete { background: #FFF0F0; color: var(--error); }
+.btn-delete:hover { background: #FFE0E0; }
+
+/* Article Table */
+.article-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.article-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.article-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.article-table tr:last-child td { border-bottom: none; }
+.article-table tr:hover td { background: #FAFBFC; }
+.article-table .title-cell { font-weight: 600; color: var(--text); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.article-table .date-cell { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
+.article-table .actions-cell { text-align: right; white-space: nowrap; }
+.article-table .actions-cell .btn-sm + .btn-sm { margin-left: 6px; }
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-cryptocurrency { background: #FFF0E8; color: var(--primary); }
+.badge-forex { background: #E8F0FF; color: #1E88E5; }
+.badge-binary-options { background: #FFF8E0; color: #B8860B; }
+.badge-markets { background: #E8F5E9; color: var(--success); }
+
+/* Editor */
+#screen-editor { min-height: calc(100vh - 48px); }
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+.editor-header h1 { font-size: 20px; font-weight: 700; }
+.editor-content {
+  padding: 20px 24px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Form */
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.form-group label .required { color: var(--error); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.15s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(232,73,16,0.12);
+}
+.form-group textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-light); }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+.form-help {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+.markdown-hint {
+  font-size: 12px;
+  color: var(--text-light);
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 4px;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+.markdown-hint code {
+  background: var(--border);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+/* Loading / Empty / Error states */
+.state-box {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.state-box .state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+.state-box .state-text { font-size: 15px; }
+.state-box .state-sub { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+
+.loading { composes: state-box; }
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-box {
+  text-align: center;
+  padding: 40px 20px;
+}
+.error-box .error-icon { font-size: 36px; margin-bottom: 8px; }
+.error-box .error-text { color: var(--error); font-size: 14px; }
+.error-box .error-retry {
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+/* Notification Toast */
+.toast {
+  position: fixed;
+  top: 60px;
+  right: 24px;
+  z-index: 999;
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  max-width: 400px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { background: #E8F5E9; color: #1B5E20; border-left: 4px solid var(--success); }
+.toast.error { background: #FFEBEE; color: #B71C1C; border-left: 4px solid var(--error); }
+
+/* Markdown table in the editor preview */
+.markdown-guide {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.markdown-guide table { width: 100%; border-collapse: collapse; }
+.markdown-guide td { padding: 3px 12px; border: 1px solid var(--border); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-card { padding: 32px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .dashboard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .dashboard-header .btn { width: 100%; justify-content: center; }
+  .admin-header { padding: 0 16px; }
+  .dashboard-content { padding: 16px; }
+  .editor-content { padding: 16px; }
+  .form-card { padding: 20px; }
+  .article-table { font-size: 13px; }
+  .article-table td, .article-table th { padding: 10px 12px; }
+  .article-table .title-cell { max-width: 160px; }
+  .toast { right: 16px; left: 16px; max-width: none; }
+  .header-actions .user-badge { display: none; }
+}
+@media (max-width: 480px) {
+  .article-table .date-cell { display: none; }
+  .article-table .badge { font-size: 11px; padding: 1px 8px; }
+}
+</style>
 </head>
 <body>
-  <div id="cms-root"></div>
-  <script>
-    window.__authComplete = function(token) {
-      localStorage.setItem('dcms_token', token);
-    };
-  </script>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-    window.CMS_CONFIG = {
-      backend: {
-        name: "github",
-        repo: "arizonainlove/trantamcapital",
-        branch: "main",
-        base_url: "https://trantamcapital.vercel.app",
-        auth_endpoint: "api/auth",
+
+<!-- Notification Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Header -->
+<header class="admin-header">
+  <div class="brand">TrantamCapital <span>Content Manager</span></div>
+  <div class="header-actions" id="header-actions" style="display:none">
+    <span class="user-badge" id="user-badge"></span>
+    <button class="header-btn header-btn-logout" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<section id="screen-login" class="screen">
+  <div class="login-card">
+    <div class="logo">TrantamCapital</div>
+    <div class="subtitle">Content Management System</div>
+    <button class="login-btn" onclick="login()">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Login with GitHub
+    </button>
+    <p class="login-note">
+      Authorize with GitHub to manage news articles.<br>
+      Repository: <code>arizonainlove/trantamcapital</code><br>
+      Popup blockers must be disabled for this site.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD SCREEN ============ -->
+<section id="screen-dashboard" class="screen">
+  <div class="dashboard-header">
+    <h1>News Articles</h1>
+    <button class="btn btn-primary" onclick="showEditor()">+ New Article</button>
+  </div>
+  <div class="dashboard-content">
+    <div id="article-list">
+      <div class="state-box"><div class="loading"></div><div class="state-text">Loading articles...</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDITOR SCREEN ============ -->
+<section id="screen-editor" class="screen">
+  <div class="editor-header">
+    <h1 id="editor-title">Create Article</h1>
+    <button class="btn btn-secondary" onclick="showDashboard()">Back</button>
+  </div>
+  <div class="editor-content">
+    <div class="form-card">
+      <form id="editor-form" onsubmit="return false">
+        <div class="form-group">
+          <label for="field-title">Title <span class="required">*</span></label>
+          <input type="text" id="field-title" required placeholder="e.g. Bitcoin Surges Past $100K">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-date">Publish Date</label>
+            <input type="date" id="field-date">
+          </div>
+          <div class="form-group">
+            <label for="field-category">Category</label>
+            <select id="field-category">
+              <option value="">— Select Category —</option>
+              <option value="Cryptocurrency">Cryptocurrency</option>
+              <option value="Forex">Forex</option>
+              <option value="Binary Options">Binary Options</option>
+              <option value="Markets">Markets</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-author">Author</label>
+            <input type="text" id="field-author" placeholder="TrantamCapital">
+          </div>
+          <div class="form-group">
+            <label for="field-image">Image URL</label>
+            <input type="url" id="field-image" placeholder="https://example.com/image.jpg">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="field-excerpt">Excerpt</label>
+          <textarea id="field-excerpt" rows="3" placeholder="Brief description of the article (1-2 sentences)"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="field-body">Body <span class="required">*</span></label>
+          <textarea id="field-body" rows="16" placeholder="Write your article content in Markdown..."></textarea>
+          <div class="markdown-hint">
+            <strong>Markdown guide:</strong>
+            <code># Heading</code> ·
+            <code>**bold**</code> ·
+            <code>*italic*</code> ·
+            <code>[Link](url)</code> ·
+            <code>- list item</code> ·
+            <code>1. numbered</code> ·
+            <code>&gt; quote</code> ·
+            <code>---</code> horizontal rule
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-save" class="btn btn-primary" onclick="handleSave()">Create Article</button>
+          <button type="button" class="btn btn-secondary" onclick="showDashboard()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  // ======================== CONFIG ========================
+  const CONFIG = {
+    repo: 'arizonainlove/trantamcapital',
+    newsPath: 'trantamcapital/src/content/news',
+    apiBase: 'https://api.github.com',
+    tokenKey: 'trantam_admin_token',
+  };
+
+  // ======================== STATE ========================
+  let token = localStorage.getItem(CONFIG.tokenKey) || null;
+  let articles = [];
+  let editingArticle = null; // { slug, sha, attrs, body } when editing
+
+  // ======================== UTILITY ========================
+  function escapeHtml(text) {
+    if (!text) return '';
+    var d = document.createElement('div');
+    d.textContent = text;
+    return d.innerHTML;
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+      var d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch(e) { return dateStr; }
+  }
+
+  function todayStr() {
+    return new Date().toISOString().split('T')[0];
+  }
+
+  function toSlug(title) {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/[\s_]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || 'untitled';
+  }
+
+  function base64Encode(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function base64Decode(str) {
+    return decodeURIComponent(escape(atob(str.replace(/\n/g, ''))));
+  }
+
+  function parseFrontmatter(content) {
+    var match = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+    if (!match) return { attrs: {}, body: content.trim() };
+
+    var yaml = match[1];
+    var body = match[2].trim();
+    var attrs = {};
+
+    yaml.split('\n').forEach(function(line) {
+      var idx = line.indexOf(':');
+      if (idx === -1) return;
+      var key = line.slice(0, idx).trim();
+      var val = line.slice(idx + 1).trim();
+      if (val.length >= 2) {
+        var first = val[0];
+        var last = val[val.length - 1];
+        if ((first === '"' && last === '"') || (first === "'" && last === "'")) {
+          val = val.slice(1, -1);
+        }
+      }
+      attrs[key] = val;
+    });
+
+    return { attrs: attrs, body: body };
+  }
+
+  function generateFrontmatter(attrs) {
+    var yaml = '---\n';
+    var order = ['title', 'date', 'category', 'author', 'image', 'excerpt'];
+    order.forEach(function(key) {
+      if (attrs[key] !== undefined && attrs[key] !== null && attrs[key] !== '') {
+        yaml += key + ': "' + String(attrs[key]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+      }
+    });
+    for (var key in attrs) {
+      if (attrs.hasOwnProperty(key) && order.indexOf(key) === -1) {
+        if (attrs[key] !== undefined && attrs[key] !== null && attrs[key] !== '') {
+          yaml += key + ': "' + String(attrs[key]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+        }
+      }
+    }
+    yaml += '---\n';
+    return yaml;
+  }
+
+  // ======================== TOAST ========================
+  var toastTimer = null;
+
+  function showToast(message, type) {
+    var el = document.getElementById('toast');
+    el.textContent = message;
+    el.className = 'toast ' + type + ' show';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+      el.classList.remove('show');
+    }, 3500);
+  }
+
+  // ======================== AUTH ========================
+  window.__authComplete = function(t) {
+    token = t;
+    localStorage.setItem(CONFIG.tokenKey, t);
+    showToast('Login successful', 'success');
+    showDashboard();
+  };
+
+  function login() {
+    var w = window.open('/api/auth', 'login', 'width=800,height=700');
+    if (!w || w.closed) {
+      alert('Popup was blocked. Please allow popups for this site and try again.');
+    }
+  }
+
+  function logout() {
+    token = null;
+    editingArticle = null;
+    localStorage.removeItem(CONFIG.tokenKey);
+    document.getElementById('header-actions').style.display = 'none';
+    showScreen('screen-login');
+  }
+
+  // ======================== GITHUB API ========================
+  function apiFetch(path, options) {
+    options = options || {};
+    return fetch(CONFIG.apiBase + path, {
+      method: options.method || 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
       },
-      collections: [
-        {
-          name: "news",
-          label: "News Articles",
-          folder: "trantamcapital/src/content/news",
-          create: true,
-          fields: [
-            { label: "Title", name: "title", widget: "string" },
-            { label: "Body", name: "body", widget: "markdown" },
-          ],
-        },
-      ],
+      body: options.body || null,
+    }).then(function(res) {
+      if (!res.ok) {
+        return res.json().then(function(err) {
+          var msg = (err && err.message) || ('HTTP ' + res.status);
+          throw new Error(msg);
+        }, function() {
+          throw new Error('HTTP ' + res.status);
+        });
+      }
+      return res.json();
+    });
+  }
+
+  function listArticles() {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.newsPath).then(function(files) {
+      if (!Array.isArray(files)) return [];
+      var mdFiles = files.filter(function(f) {
+        return f.name.endsWith('.md');
+      });
+      return Promise.all(mdFiles.map(function(file) {
+        return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.newsPath + '/' + file.name)
+          .then(function(data) {
+            var content = base64Decode(data.content);
+            var parsed = parseFrontmatter(content);
+            return {
+              slug: file.name.replace(/\.md$/, ''),
+              sha: data.sha,
+              attrs: parsed.attrs,
+              body: parsed.body,
+            };
+          });
+      }));
+    }).then(function(items) {
+      items.sort(function(a, b) {
+        var dateA = a.attrs.date ? new Date(a.attrs.date).getTime() : 0;
+        var dateB = b.attrs.date ? new Date(b.attrs.date).getTime() : 0;
+        if (dateA !== dateB) return dateB - dateA;
+        return a.slug.localeCompare(b.slug);
+      });
+      articles = items;
+      return items;
+    });
+  }
+
+  function saveArticleToGitHub(articleData) {
+    var slug = toSlug(articleData.title);
+    var filePath = CONFIG.newsPath + '/' + slug + '.md';
+
+    var attrs = {};
+    if (articleData.title) attrs.title = articleData.title;
+    if (articleData.date) attrs.date = articleData.date;
+    if (articleData.category) attrs.category = articleData.category;
+    if (articleData.author) attrs.author = articleData.author;
+    if (articleData.image) attrs.image = articleData.image;
+    if (articleData.excerpt) attrs.excerpt = articleData.excerpt;
+
+    var content = generateFrontmatter(attrs) + (articleData.body || '');
+    var encoded = base64Encode(content);
+    var isNew = !articleData.existingSha;
+
+    var body = {
+      message: isNew ? 'Create article: ' + articleData.title : 'Update article: ' + articleData.title,
+      content: encoded,
     };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({ config: window.CMS_CONFIG });
-  </script>
+    if (articleData.existingSha) body.sha = articleData.existingSha;
+
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }).then(function(result) {
+      return { slug: slug, sha: result.content.sha };
+    });
+  }
+
+  function deleteArticleFromGitHub(slug, sha) {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.newsPath + '/' + slug + '.md', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        message: 'Delete article: ' + slug,
+        sha: sha,
+      }),
+    });
+  }
+
+  // ======================== SCREEN MANAGEMENT ========================
+  function showScreen(screenId) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) {
+      screens[i].classList.remove('active');
+    }
+    document.getElementById(screenId).classList.add('active');
+  }
+
+  function showLogin() {
+    document.getElementById('header-actions').style.display = 'none';
+    showScreen('screen-login');
+  }
+
+  function showDashboard() {
+    document.getElementById('header-actions').style.display = 'flex';
+    editingArticle = null;
+    showScreen('screen-dashboard');
+    loadAndRenderArticles();
+  }
+
+  function showEditor(article) {
+    document.getElementById('header-actions').style.display = 'flex';
+    editingArticle = article || null;
+    showScreen('screen-editor');
+    populateEditor(article);
+  }
+
+  // ======================== DASHBOARD ========================
+  function loadAndRenderArticles() {
+    var listEl = document.getElementById('article-list');
+    listEl.innerHTML = '<div class="state-box"><div class="loading"></div><div class="state-text">Loading articles...</div></div>';
+
+    listArticles().then(function(items) {
+      renderArticleList(items);
+    }).catch(function(err) {
+      if (err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('Bad credentials') !== -1)) {
+        showToast('Session expired. Please login again.', 'error');
+        logout();
+        return;
+      }
+      listEl.innerHTML =
+        '<div class="error-box">' +
+        '<div class="error-icon">⚠</div>' +
+        '<div class="error-text">Failed to load articles: ' + escapeHtml(err.message) + '</div>' +
+        '<button class="error-retry" onclick="loadAndRenderArticles()">Retry</button>' +
+        '</div>';
+    });
+  }
+
+  function renderArticleList(items) {
+    var listEl = document.getElementById('article-list');
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML =
+        '<div class="state-box">' +
+        '<div class="state-icon">📝</div>' +
+        '<div class="state-text">No articles yet</div>' +
+        '<div class="state-sub">Create your first article to get started.</div>' +
+        '</div>';
+      return;
+    }
+
+    var html = '<table class="article-table">' +
+      '<thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead><tbody>';
+
+    for (var i = 0; i < items.length; i++) {
+      var a = items[i];
+      var catClass = (a.attrs.category || 'other')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/-+$/, '');
+      var catLabel = a.attrs.category || '—';
+      var escapedTitle = escapeHtml(a.attrs.title || a.slug);
+      var formattedDate = formatDate(a.attrs.date);
+
+      html += '<tr>' +
+        '<td class="title-cell" title="' + escapedTitle + '">' + escapedTitle + '</td>' +
+        '<td><span class="badge badge-' + catClass + '">' + escapeHtml(catLabel) + '</span></td>' +
+        '<td class="date-cell">' + formattedDate + '</td>' +
+        '<td class="actions-cell">' +
+        '<button class="btn-sm btn-edit" data-slug="' + a.slug + '">Edit</button>' +
+        '<button class="btn-sm btn-delete" data-slug="' + a.slug + '">Delete</button>' +
+        '</td>' +
+        '</tr>';
+    }
+
+    html += '</tbody></table>';
+    listEl.innerHTML = html;
+
+    // Attach event listeners
+    listEl.querySelectorAll('.btn-edit').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        editArticle(this.getAttribute('data-slug'));
+      });
+    });
+    listEl.querySelectorAll('.btn-delete').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        confirmDelete(this.getAttribute('data-slug'));
+      });
+    });
+  }
+
+  // ======================== EDITOR ========================
+  function populateEditor(article) {
+    var titleEl = document.getElementById('editor-title');
+    var saveBtn = document.getElementById('btn-save');
+
+    if (article) {
+      titleEl.textContent = 'Edit Article';
+      saveBtn.textContent = 'Update Article';
+    } else {
+      titleEl.textContent = 'Create Article';
+      saveBtn.textContent = 'Create Article';
+    }
+
+    document.getElementById('field-title').value = article ? (article.attrs.title || '') : '';
+    document.getElementById('field-date').value = article ? (article.attrs.date || '') : todayStr();
+    document.getElementById('field-category').value = article ? (article.attrs.category || '') : '';
+    document.getElementById('field-author').value = article ? (article.attrs.author || '') : 'TrantamCapital';
+    document.getElementById('field-image').value = article ? (article.attrs.image || '') : '';
+    document.getElementById('field-excerpt').value = article ? (article.attrs.excerpt || '') : '';
+    document.getElementById('field-body').value = article ? (article.body || '') : '';
+    saveBtn.disabled = false;
+  }
+
+  function handleSave() {
+    var title = document.getElementById('field-title').value.trim();
+    var body = document.getElementById('field-body').value;
+
+    if (!title) { showToast('Title is required', 'error'); return; }
+    if (!body) { showToast('Body is required', 'error'); return; }
+
+    var articleData = {
+      title: title,
+      date: document.getElementById('field-date').value,
+      category: document.getElementById('field-category').value,
+      author: document.getElementById('field-author').value.trim(),
+      image: document.getElementById('field-image').value.trim(),
+      excerpt: document.getElementById('field-excerpt').value.trim(),
+      body: body,
+      existingSha: editingArticle ? editingArticle.sha : null,
+    };
+
+    var saveBtn = document.getElementById('btn-save');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    saveArticleToGitHub(articleData).then(function(result) {
+      showToast('Article saved successfully!', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to save: ' + err.message, 'error');
+      saveBtn.disabled = false;
+      saveBtn.textContent = editingArticle ? 'Update Article' : 'Create Article';
+    });
+  }
+
+  // ======================== ARTICLE ACTIONS ========================
+  function editArticle(slug) {
+    for (var i = 0; i < articles.length; i++) {
+      if (articles[i].slug === slug) {
+        showEditor(articles[i]);
+        return;
+      }
+    }
+    showToast('Article not found', 'error');
+  }
+
+  function confirmDelete(slug) {
+    var article = null;
+    for (var i = 0; i < articles.length; i++) {
+      if (articles[i].slug === slug) {
+        article = articles[i];
+        break;
+      }
+    }
+    var label = article && article.attrs.title ? article.attrs.title : slug;
+    if (!confirm('Are you sure you want to delete "' + label + '"?\n\nThis action cannot be undone.')) return;
+
+    var sha = article ? article.sha : null;
+    if (!sha) { showToast('Cannot delete: file SHA not found', 'error'); return; }
+
+    deleteArticleFromGitHub(slug, sha).then(function() {
+      showToast('Article deleted', 'success');
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to delete: ' + err.message, 'error');
+    });
+  }
+
+  // ======================== INIT ========================
+  if (token) {
+    document.getElementById('header-actions').style.display = 'flex';
+    showDashboard();
+  } else {
+    showLogin();
+  }
+
+})();
+</script>
 </body>
 </html>
