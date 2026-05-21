@@ -858,7 +858,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
           }
         } else {
-          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          if (typeof val === 'number') { yaml += key + ': ' + val + '\n'; } else { yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n'; }
         }
       });
       // Extra keys not in order
@@ -872,7 +872,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
           }
         } else {
-          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          if (typeof val === 'number') { yaml += key + ': ' + val + '\n'; } else { yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n'; }
         }
       });
     } else {
@@ -886,7 +886,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             yaml += '  - "' + String(val[j]).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
           }
         } else {
-          yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n';
+          if (typeof val === 'number') { yaml += key + ': ' + val + '\n'; } else { yaml += key + ': "' + String(val).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"\n'; }
         }
       });
     }

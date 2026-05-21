@@ -61,7 +61,7 @@ export function getAllBrokers(): Broker[] {
       slug: file.replace(/\.md$/, ""),
       name: data.name || "Untitled",
       type: data.type || "Forex Broker",
-      rating: typeof data.rating === "number" ? data.rating : 0,
+      rating: Number(data.rating) || 0,
       features: Array.isArray(data.features) ? data.features : [],
       reviewHref: data.reviewHref || "#",
       visitHref: data.visitHref || "#",
