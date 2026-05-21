@@ -11,31 +11,34 @@
 <body>
   <div id="cms-root"></div>
   <script>
+    // Áp dụng token vào CMS backend (chờ CMS sẵn sàng)
+    function applyToken(token) {
+      if (!token) return;
+      var retry = setInterval(function() {
+        if (window.CMS && window.CMS.getBackend) {
+          clearInterval(retry);
+          window.CMS.getBackend().then(function(backend) {
+            if (backend && backend.authenticate) {
+              backend.authenticate({ token: token }).catch(function(){});
+            }
+          });
+        }
+      }, 200);
+    }
+
     // Hàm này được popup auth gọi trực tiếp (cùng origin)
     window.__authComplete = function(token) {
-      // Lưu token để dùng sau khi reload
-      sessionStorage.setItem('dcms_token', token);
-
-      // Nếu CMS backend đã sẵn sàng, set token trực tiếp
-      if (window.CMS && window.CMS.getBackend) {
-        window.CMS.getBackend().then(function(backend) {
-          if (backend && backend.authenticate) {
-            backend.authenticate({ token: token }).then(function() {
-              // Reload để CMS render dashboard
-              window.location.reload();
-            });
-          }
-        });
-      }
+      localStorage.setItem('dcms_token', token);
+      applyToken(token);
     };
-  </script>
-  <script>
-    // Nếu có token từ sessionStorage, dùng nó trước
-    var savedToken = sessionStorage.getItem('dcms_token');
-    if (savedToken) {
-      sessionStorage.removeItem('dcms_token');
-      window.__authComplete(savedToken);
-    }
+
+    // Khi trang load, khôi phục token từ localStorage
+    (function() {
+      var savedToken = localStorage.getItem('dcms_token');
+      if (savedToken) {
+        applyToken(savedToken);
+      }
+    })();
   </script>
   <script>
     window.CMS_MANUAL_INIT = true;
@@ -47,7 +50,7 @@
         base_url: "https://trantamcapital.vercel.app",
         auth_endpoint: "api/auth",
       },
-      media_folder: "public/images/uploads",
+      media_folder: "trantamcapital/public/images/uploads",
       public_folder: "/images/uploads",
       collections: [
         {
