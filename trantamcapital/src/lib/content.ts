@@ -35,13 +35,9 @@ function loadCmsArticles(): NewsArticle[] {
 
 export function getAllNews(): NewsArticle[] {
   const cmsArticles = loadCmsArticles();
-  const seen = new Set<string>();
-  // CMS articles take precedence over static ones
-  return [...cmsArticles, ...staticNews].filter((a) => {
-    if (seen.has(a.slug)) return false;
-    seen.add(a.slug);
-    return true;
-  });
+  // If CMS has articles, use ONLY CMS (static is fallback when no CMS)
+  if (cmsArticles.length > 0) return cmsArticles;
+  return staticNews;
 }
 
 export function getArticleBySlug(slug: string): NewsArticle | undefined {

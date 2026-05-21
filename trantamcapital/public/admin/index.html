@@ -989,7 +989,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   function saveArticleToGitHub(articleData) {
-    var slug = toSlug(articleData.title);
+    var slug = articleData.existingSlug || toSlug(articleData.title);
     var filePath = CONFIG.newsPath + '/' + slug + '.md';
 
     var attrs = {};
@@ -1057,7 +1057,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   function saveBrokerToGitHub(brokerData) {
-    var slug = toSlug(brokerData.name);
+    var slug = brokerData.existingSlug || toSlug(brokerData.name);
     var filePath = CONFIG.brokersPath + '/' + slug + '.md';
 
     var attrs = {
@@ -1356,6 +1356,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       image: document.getElementById('field-image').value.trim(),
       excerpt: document.getElementById('field-excerpt').value.trim(),
       body: body,
+      existingSlug: editingArticle ? editingArticle.slug : null,
       existingSha: editingArticle ? editingArticle.sha : null,
     };
 
@@ -1415,6 +1416,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       reviewHref: document.getElementById('broker-field-reviewHref').value.trim(),
       visitHref: document.getElementById('broker-field-visitHref').value.trim(),
       gradient: document.getElementById('broker-field-gradient').value.trim(),
+      existingSlug: editingBroker ? editingBroker.slug : null,
       existingSha: editingBroker ? editingBroker.sha : null,
     };
 
