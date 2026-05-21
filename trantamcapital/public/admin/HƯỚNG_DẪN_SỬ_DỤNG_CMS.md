@@ -130,7 +130,7 @@ Tab Brokers hiện danh sách dạng bảng:
 | **Features** | ❌ Không | Các tính năng, mỗi dòng một tính năng |
 | **Review URL** | ❌ Không | Đường dẫn đến trang review chi tiết |
 | **Visit URL** | ❌ Không | Đường dẫn đến trang web của sàn |
-| **Gradient** | ❌ Không | Màu nền logo (CSS gradient), để trống dùng màu mặc định |
+| **Logo** | ❌ Không | Upload logo thương hiệu của broker (hỗ trợ PNG, JPG). Click nút **Upload** để chọn ảnh |
 | **Comparison Data** | ❌ Không | Dữ liệu bảng so sánh (xem bên dưới) |
 
 #### So sánh (Comparison Data)

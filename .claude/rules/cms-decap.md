@@ -29,7 +29,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Login | GitHub OAuth via popup → saves token to localStorage |
 | Dashboard | Tab-based: **News Articles**, **Brokers**, and **Reviews** tabs |
 | Article Editor | Form-based: title, date, category, author, image upload, excerpt, body |
-| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, gradient, **+12 comparison fields** |
+| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, **+12 comparison fields** |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
 | Create | Generates slug from title/name, creates `.md` with frontmatter |
@@ -66,7 +66,7 @@ features:
   - "Feature one"
 reviewHref: string (URL path)
 visitHref: string (URL path)
-gradient: string (CSS gradient, optional)
+logo: string (raw GitHub URL to uploaded broker logo)
 # Comparison fields (type-specific, used in auto comparison tables)
 regulation: string         # Forex
 minDeposit: string         # Forex
