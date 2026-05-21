@@ -1,7 +1,7 @@
 ---
 name: "Pocket Option"
 type: "Binary Options"
-rating: "4.3"
+rating: 4.3
 features:
   - "Low $5 min deposit"
   - "100+ assets"
@@ -9,5 +9,5 @@ features:
   - "Social trading"
 reviewHref: "/binary-option/pocket-option"
 visitHref: "https://pocketoption.com/vt"
-gradient: "linear-gradient(135deg, #FF6F00 0%, #E65100 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367563253-logopocketoption.png"
 ---
