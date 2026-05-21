@@ -3,6 +3,7 @@ title: "Central Bank Rate Decisions: Impact on Major Currency Pairs"
 date: "2026-05-19"
 category: "Forex"
 author: "TrantamCapital Analysis Team"
+image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349498074-centralbank.png"
 excerpt: "With multiple central banks announcing rate decisions this quarter, forex traders are bracing for increased volatility across major currency pairs. Our analysis covers the key levels to watch."
 ---
 The current quarter presents a crucial period for forex traders as major central banks across the globe announce their latest monetary policy decisions. The Federal Reserve, European Central Bank, and Bank of Japan are all scheduled to release rate decisions that could significantly impact currency markets.
