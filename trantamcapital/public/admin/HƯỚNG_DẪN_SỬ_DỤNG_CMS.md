@@ -38,7 +38,7 @@ Sau khi đăng nhập, bạn sẽ thấy danh sách tất cả bài viết dạn
 | **Publish Date** | ❌ Không | Ngày đăng, mặc định là hôm nay |
 | **Category** | ❌ Không | Chọn danh mục |
 | **Author** | ❌ Không | Tác giả, mặc định "TrantamCapital" |
-| **Image URL** | ❌ Không | Link ảnh đại diện (nếu có) |
+| **Image URL** | ❌ Không | Link ảnh đại diện (nếu có). Khuyến nghị 1200×630px, 16:9 |
 | **Excerpt** | ❌ Không | Mô tả ngắn, 1-2 câu |
 | **Body** | ✅ Có | Nội dung chính — viết bằng Markdown |
 
