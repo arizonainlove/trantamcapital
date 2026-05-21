@@ -6,6 +6,6 @@ features:
   - "Low fees 0.1%"
   - "Futures & margin trading"
   - "Staking & earn"
-reviewHref: "/crypto-exchange/exchange-d"
+reviewHref: "/crypto-exchange/exchange-test"
 gradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)"
 ---
