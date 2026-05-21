@@ -2,6 +2,7 @@
 name: "Binance"
 type: "Crypto Exchange"
 rating: 4.8
+order: 1
 features:
   - "600+ cryptocurrencies"
   - "Low fees 0.1%"
