@@ -7,7 +7,7 @@ import ReviewPage from "@/components/ReviewPage";
 export const dynamic = "force-static";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -21,8 +21,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const brokers = getAllBrokers();
-  const review = getReviewBySlug(params.slug);
+  const review = getReviewBySlug(slug);
   const broker = review ? brokers.find((b) => b.slug === review.brokerSlug) : undefined;
   return {
     title: `${broker?.name || "Forex Broker"} Review`,
@@ -30,9 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ForexBrokerReview({ params }: Props) {
+export default async function ForexBrokerReview({ params }: Props) {
+  const { slug } = await params;
   const brokers = getAllBrokers();
-  const review = getReviewBySlug(params.slug);
+  const review = getReviewBySlug(slug);
   if (!review) notFound();
   const broker = brokers.find((b) => b.slug === review.brokerSlug);
   if (broker && broker.type !== "Forex Broker") notFound();
