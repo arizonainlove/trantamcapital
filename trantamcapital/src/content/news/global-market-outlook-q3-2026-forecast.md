@@ -3,6 +3,7 @@ title: "Global Market Outlook: Q3 2026 Forecast"
 date: "2026-05-17"
 category: "Markets"
 author: "TrantamCapital Analysis Team"
+image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349786455-globalmarket.png"
 excerpt: "Our comprehensive Q3 2026 market outlook covers key trends, potential risks, and opportunities across cryptocurrency, forex, and traditional markets."
 ---
 As we enter the third quarter of 2026, global markets present a complex landscape of opportunities and challenges. Our comprehensive outlook examines the key factors that are likely to shape trading conditions across multiple asset classes.
