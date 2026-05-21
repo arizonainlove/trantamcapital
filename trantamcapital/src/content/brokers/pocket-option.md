@@ -2,6 +2,7 @@
 name: "Pocket Option"
 type: "Binary Options"
 rating: 4.3
+order: 8
 features:
   - "Low $5 min deposit"
   - "100+ assets"
