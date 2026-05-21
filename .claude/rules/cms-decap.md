@@ -1,68 +1,57 @@
 ---
-description: Decap CMS (formerly Netlify CMS) configuration for content management
+description: Custom Admin UI for content management (replaces Decap CMS)
 ---
 
-## Decap CMS — Git-Based Content Management
+## Custom Admin UI — Content Management
 
 ### Overview
-- Type: Open-source, git-based CMS (free)
+- Type: Self-contained SPA, no CMS dependency
 - Access URL: `/admin` on the live site
-- Authentication: GitHub OAuth
+- Authentication: GitHub OAuth via `/api/auth` route
 - No database required — all content stored as Markdown files in the repo
 
 ### Content Storage
-- Content files: `src/content/` (Markdown with frontmatter)
-- Media uploads: `public/images/uploads/`
-- Workflow: Write in CMS → auto-creates `.md` file → commits to GitHub → Vercel rebuilds
+- Content files: `src/content/news/` (Markdown with frontmatter)
+- Image uploads: `trantamcapital/public/images/uploads/` (via GitHub API)
+- Workflow: Write in admin → auto-commits `.md` file to GitHub → Vercel rebuilds
 
-### Configuration Files
-- `public/admin/config.yml` — CMS collections and settings
-- `public/admin/index.html` — CMS entry point and identity widget
+### Key Files
+- `public/admin/index.html` — Single-file SPA with login, dashboard, editor
+- `public/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md` — User guide (Vietnamese)
+- `src/app/api/auth/route.ts` — GitHub OAuth endpoint
 
-### Collections
+### Admin Features
+| Feature | Description |
+|---------|-------------|
+| Login | GitHub OAuth via popup → saves token to localStorage |
+| Dashboard | Lists all articles in a table with Edit/Delete actions |
+| Editor | Form-based: title, date, category, author, image upload, excerpt, body |
+| Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
+| Create | Generates slug from title, creates `.md` with frontmatter |
+| Edit | Reads existing file, updates content via GitHub API |
+| Delete | Removes file via GitHub API with confirmation |
 
-#### News Articles (`src/content/news/`)
+### How It Works
+1. User opens popup to `/api/auth` → GitHub OAuth → token saved to localStorage
+2. Admin reads GitHub Contents API to list/read articles
+3. Admin writes GitHub Contents API to create/update/delete articles
+4. All operations create commits on GitHub (triggers Vercel rebuild)
+5. Image URLs stored as raw GitHub URLs: `https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/{filename}`
+
+### Article Frontmatter (`src/content/news/*.md`)
 ```
 ---
 title: string
 date: date
 category: enum [Cryptocurrency, Forex, Binary Options, Markets]
 author: string
-image: string (path to image)
+image: string (raw GitHub URL to image)
 excerpt: text
 ---
 Body content (Markdown)
 ```
 
-#### Broker Reviews (`src/content/brokers/`)
-```
----
-broker_name: string
-rating: number (1-5)
-regulation: string
-min_deposit: string
-spread: string
-leverage: string
-platforms: string
-features: list
-pros: list
-cons: list
----
-Body content (Markdown)
-```
-
-#### Exchange Reviews (`src/content/exchanges/`)
-Same structure as broker reviews, adapted for crypto exchanges.
-
-#### Static Pages (`src/content/pages/`)
-```
----
-title: string
----
-Body content (Markdown)
-```
-
 ### Build Integration
-- Content fetched at build time using `fs` or `gray-matter` to parse `.md` files
-- Pages rebuilt on every git push (auto-triggered by CMS commit)
+- Content fetched at build time using `gray-matter` to parse `.md` files
+- Pages rebuilt on every git push to main
 - Uses Next.js static generation (SSG) for content pages
