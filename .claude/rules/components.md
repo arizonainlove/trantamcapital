@@ -16,6 +16,7 @@ description: Global component library, file structure, and live price widget spe
 | `ContactForm.tsx` | Contact form (name, email, subject, message) |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
 | `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
+| `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar) |
 
 ### Live Price Widget — PriceTicker
 
@@ -39,9 +40,15 @@ trantamcapital/
 │   │   ├── news/page.tsx
 │   │   ├── for-beginners/page.tsx
 │   │   ├── investment-analysis/page.tsx
-│   │   ├── forex-broker/page.tsx
-│   │   ├── crypto-exchange/page.tsx
-│   │   ├── binary-option/page.tsx
+│   │   ├── forex-broker/
+│   │   │   ├── page.tsx              # CMS-driven broker grid + comparison
+│   │   │   └── [slug]/page.tsx       # Dynamic review page
+│   │   ├── crypto-exchange/
+│   │   │   ├── page.tsx              # CMS-driven exchange grid + comparison
+│   │   │   └── [slug]/page.tsx       # Dynamic review page
+│   │   ├── binary-option/
+│   │   │   ├── page.tsx              # CMS-driven platform grid + comparison
+│   │   │   └── [slug]/page.tsx       # Dynamic review page
 │   │   ├── tools/page.tsx
 │   │   ├── about/page.tsx
 │   │   ├── contact/page.tsx
@@ -55,7 +62,12 @@ trantamcapital/
 │   │   ├── news/[slug]/page.tsx
 │   │   └── api/contact/route.ts
 │   ├── data/
-│   │   └── news.ts
+│   │   ├── news.ts
+│   │   ├── brokers.ts                # Broker interface + 15 defaults + comparison field sets
+│   │   └── reviews.ts                # ReviewContent interface + 16 defaults
+│   ├── lib/
+│   │   ├── content.ts                # Reads news/broker .md files at build time
+│   │   └── reviews.ts                # Reads review .md files at build time
 │   └── components/
 │       ├── Header.tsx
 │       ├── Footer.tsx
@@ -67,14 +79,17 @@ trantamcapital/
 │       ├── ContactForm.tsx
 │       ├── NewsletterForm.tsx
 │       ├── BackToTop.tsx
-│       └── Breadcrumb.tsx
+│       ├── Breadcrumb.tsx
+│       └── ReviewPage.tsx             # Shared review page component
+├── content/                           # CMS content (.md files)
+│   ├── news/
+│   ├── brokers/
+│   └── reviews/
 ├── public/
-│   └── images/
+│   ├── images/
+│   └── admin/                         # Custom Admin SPA
 ├── .claude/
 │   └── rules/
 ├── CLAUDE.md
-├── HUONG_DAN_CHI_TIET.md
-├── CAU_TRUC_NOI_DUNG.md
-├── TU_VAN_MAU_SAC.md
 └── tailwind.config.ts
 ```

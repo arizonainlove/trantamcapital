@@ -7,7 +7,7 @@ features:
   - "100+ assets"
   - "High payouts up to 98%"
   - "Social trading"
-reviewHref: "/binary-option/platform-b"
+reviewHref: "/binary-option/pocket-option"
 visitHref: "https://pocketoption.com/vt"
 gradient: "linear-gradient(135deg, #FF6F00 0%, #E65100 100%)"
 ---

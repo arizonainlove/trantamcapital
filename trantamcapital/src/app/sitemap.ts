@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/binary-option/platform-a", priority: 0.7 },
     { path: "/binary-option/platform-b", priority: 0.7 },
     { path: "/binary-option/platform-c", priority: 0.7 },
+    { path: "/binary-option/pocket-option", priority: 0.7 },
     { path: "/tools", priority: 0.7 },
     { path: "/about", priority: 0.6 },
     { path: "/contact", priority: 0.6 },
