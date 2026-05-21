@@ -280,121 +280,83 @@ Mọi thắc mắc, vui lòng liên hệ người phát triển để được h
 
 ---
 
-## 10. Hướng dẫn tự cập nhật — Dành cho khách hàng sau bàn giao
+## 10. Quy trình sửa code — Dành cho người phát triển sau bàn giao
 
-> Sau khi bàn giao, bạn có thể tự chỉnh sửa nội dung và code. Phần này hướng dẫn từ A-Z.
+> Sau khi bàn giao, **khách hàng tự quản lý nội dung qua Admin** (mục 3.6).
+> Còn bạn — **người phát triển** — vẫn là người sửa code khi có thay đổi mới.
+> 
+> Phần này hướng dẫn bạn cần làm gì để tiếp tục làm việc sau khi repo và Vercel đã thuộc về khách hàng.
 
-### 10.1 Cập nhật nội dung qua Admin (không cần chạy code)
+### 10.1 Sau khi repo được chuyển cho khách (Transfer ownership)
 
-Đây là cách đơn giản nhất — chỉ cần vào website:
+Khi khách hàng đã nhận repo (theo mục 5), bạn không còn quyền push vào repo cũ `arizonainlove/trantamcapital` nữa. Để tiếp tục sửa code:
 
-1. Vào `https://trantamcapital.com/admin`
-2. Đăng nhập GitHub
-3. Thêm/sửa/xóa **Bài viết**, **Broker**, **Review** tuỳ ý
-4. Lưu — tự động deploy sau ~1-2 phút
+#### Trường hợp 1 — Bạn được thêm làm Collaborator (khuyến nghị)
 
-Không cần cài đặt gì trên máy tính.
+Khách hàng vào GitHub → Settings → Collaborators → thêm username GitHub của bạn với quyền **Write**.
 
-### 10.2 Cập nhật hình ảnh (logo, ảnh bài viết)
-
-- Upload trực tiếp qua Admin (tab News/Brokers → chọn file ảnh)
-- Ảnh tự động lưu lên GitHub và hiển thị trên website
-
-### 10.3 Chỉnh sửa code trên máy tính (nâng cao)
-
-Nếu muốn tự sửa code (thay đổi màu sắc, thêm nội dung, sửa lỗi):
-
-#### Bước 1 — Cài đặt công cụ
-
-| Công cụ | Link tải | Ghi chú |
-|---------|----------|---------|
-| **Node.js** (bản LTS) | https://nodejs.org | Kiểm tra: mở CMD gõ `node --version` |
-| **VS Code** | https://code.visualstudio.com | Soạn thảo code |
-| **Git** | https://git-scm.com/downloads | Quản lý code, thường có sẵn trên Windows |
-
-#### Bước 2 — Clone code từ GitHub về máy
+Sau đó bạn clone lại từ repo mới:
 
 ```bash
-# Mở CMD hoặc Terminal, gõ:
-git clone https://github.com/arizonainlove/trantamcapital.git
+# Nếu repo chuyển sang tài khoản khách hàng
+git clone https://github.com/KHACH_HANG/trantamcapital.git
 cd trantamcapital/trantamcapital
 npm install
 ```
 
-> **Lưu ý:** Nếu đã chuyển repository sang tài khoản riêng, thay URL GitHub ở trên bằng URL repo của bạn.
-
-#### Bước 3 — Chạy thử trên máy tính
+Quy trình sửa code vẫn như cũ:
 
 ```bash
-npm run dev
-```
-
-Mở trình duyệt vào `http://localhost:3000` — bạn sẽ thấy website chạy local.
-
-#### Bước 4 — Chỉnh sửa code
-
-Dùng VS Code mở thư mục `trantamcapital` và sửa các file cần thay đổi:
-
-| Bạn muốn | Sửa file nào |
-|----------|-------------|
-| Đổi màu sắc, font chữ | `src/app/globals.css` |
-| Sửa nội dung trang chủ | `src/app/page.tsx` |
-| Sửa menu header | `src/components/Header.tsx` |
-| Sửa footer | `src/components/Footer.tsx` |
-| Thêm/xoá coin trong bảng giá | `src/components/MarketOverview.tsx` |
-| Thêm/xoá coin trong ticker | `src/components/PriceTicker.tsx` |
-| Sửa nội dung tĩnh (About, Tools...) | `src/app/about/page.tsx`, `src/app/tools/page.tsx` |
-
-> **Mẹo:** Cứ sửa file → lưu (Ctrl+S) → ra trình duyệt xem kết quả liền. `npm run dev` tự động reload.
-
-#### Bước 5 — Kiểm tra trước khi đưa lên website thật
-
-```bash
-npm run build
-```
-
-Phải thấy `✓ Compiled successfully` và không có lỗi. Nếu có lỗi, đọc dòng báo lỗi để sửa.
-
-#### Bước 6 — Đưa code lên website thật
-
-```bash
-# Trong thư mục trantamcapital (thư mục chứa file package.json)
+npm run dev          # Chạy local
+# ... sửa code ...
+npm run build        # Kiểm tra lỗi
 git add .
-git commit -m "Mô tả ngắn về thay đổi"
-git push
+git commit -m "Mô tả"
+git push             # Push lên repo của khách → Vercel auto-deploy
 ```
 
-Sau khi push, Vercel tự động build lại website. Đợi ~1-2 phút, vào website kiểm tra.
+#### Trường hợp 2 — Fork repo (không được cấp quyền trực tiếp)
 
-### 10.4 Lưu ý quan trọng
+1. Vào GitHub repo của khách hàng → **Fork** về tài khoản của bạn
+2. Clone fork về máy:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/trantamcapital.git
+   cd trantamcapital/trantamcapital
+   npm install
+   ```
+3. Sửa code, commit, push lên fork của bạn
+4. Tạo **Pull Request** từ fork của bạn → repo gốc của khách hàng
+5. Khách hàng (hoặc bạn nếu có quyền) merge PR → Vercel tự động deploy
 
-- **Luôn chạy `npm run build`** trước khi `git push` — nếu build lỗi thì website sẽ bị lỗi sau khi deploy
-- **Không sửa file trong `src/content/`** bằng tay — các file đó do Admin quản lý, sửa qua Admin là đủ
-- **Không xoá file `.gitkeep`** trong các thư mục content
-- **Sao lưu**: Code đã được lưu trên GitHub, nếu mất máy tính thì clone lại từ GitHub
-- **Cần hỗ trợ**: Nếu gặp lỗi không tự sửa được, liên hệ người phát triển
+### 10.2 Quy trình sửa code thường ngày
 
-### 10.5 Luồng làm việc đề xuất
+Dù repo ở đâu, quy trình vẫn giống nhau:
 
 ```
-Sửa nội dung (Admin) ──────────────────────→ Website cập nhật sau 1-2p
-                                              (không cần chạy code)
-
-Sửa giao diện/tính năng (Code + Commit) ───→ Vercel rebuild → Website mới
-  Clone → npm install → npm run dev
-  → Sửa code → npm run build (kiểm tra)
-  → git add / commit / push
+Bước 1: git pull                  → Lấy code mới nhất (nếu có người khác sửa)
+Bước 2: npm run dev               → Chạy local, sửa code
+Bước 3: npm run build             → Kiểm tra build không lỗi
+Bước 4: git add . && git commit   → Đóng gói thay đổi
+Bước 5: git push                  → Đẩy lên GitHub → Vercel auto-deploy
 ```
 
-### 10.6 Các lệnh thường dùng (tổng kết)
+### 10.3 Sau khi Vercel được chuyển cho khách
 
-| Lệnh | Chạy khi nào |
-|------|-------------|
-| `npm run dev` | Muốn chạy thử website trên máy tính |
-| `npm run build` | Muốn kiểm tra code có lỗi không |
-| `git add .` | Sau khi sửa code xong, chuẩn bị đẩy lên |
-| `git commit -m "nội dung"` | Đóng gói thay đổi kèm mô tả |
-| `git push` | Đẩy lên GitHub → Vercel tự động deploy |
+Khi khách hàng đã nhận Vercel project (mục 2.2), bạn không còn xem được log deploy hoặc domain settings trên Vercel nữa.
+
+Nếu cần debug lỗi deploy, bạn có 2 cách:
+
+- **Cách 1**: Khách hàng vào Vercel Dashboard → Deployment → copy log lỗi gửi bạn
+- **Cách 2**: Khách hàng thêm bạn vào Vercel team với quyền Viewer
+
+### 10.4 Tổng kết — Ai làm gì?
+
+| Việc | Ai làm | Công cụ |
+|------|--------|---------|
+| Đăng bài viết, sửa broker, upload logo | **Khách hàng** | Admin (`/admin`) |
+| Thay đổi giao diện, tính năng, code | **Người phát triển** | Code + git push |
+| Deploy sau khi đẩy code | **Tự động** | Vercel |
+| Quản lý domain, SSL | **Khách hàng** | Vercel Dashboard |
 
 ---
 
