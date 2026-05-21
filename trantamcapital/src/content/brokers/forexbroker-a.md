@@ -1,13 +1,13 @@
 ---
-name: "ForexBroker A"
+name: "Exness"
 type: "Forex Broker"
-rating: 4.8
+rating: "4.8"
 features:
-  - "Regulated by FCA & CySEC"
+  - "FCA & CySEC regulated"
   - "0.0 pip spreads"
-  - "MT4 & MT5 supported"
-  - "1:500 leverage"
+  - "Unlimited leverage"
+  - "Instant withdrawals"
 reviewHref: "/forex-broker/broker-a"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)"
+visitHref: "https://www.exness.com/"
+gradient: "linear-gradient(135deg, #1565C0 0%, #0D47A1 100%)"
 ---
