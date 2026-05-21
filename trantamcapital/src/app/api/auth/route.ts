@@ -50,65 +50,41 @@ export async function GET(request: Request) {
   var token = ${JSON.stringify(data.access_token)};
   var opener = window.opener;
   var status = document.getElementById('status');
-  var title = document.getElementById('title');
-  var desc = document.getElementById('desc');
 
   if (!opener) {
-    document.getElementById('spinner').style.display = 'none';
-    title.textContent = 'Error: no parent window';
-    title.style.color = '#C62828';
-    desc.textContent = 'Please close this tab and try again.';
-    status.textContent = 'window.opener is null';
+    status.textContent = 'ERROR: no parent window';
     return;
   }
 
-  // Phuong phap 1: Goi truc tiep ham __authComplete tren window.opener (cung origin)
-  status.textContent = 'Method 1: Direct function call via window.opener...';
+  // Luon luu token vao localStorage phong ho
   try {
     if (typeof opener.__authComplete === 'function') {
       opener.__authComplete(token);
-      status.textContent = 'Method 1: SUCCESS! Token sent via direct call. Closing...';
-      setTimeout(function() { window.close(); }, 500);
-      return;
-    } else {
-      status.textContent = 'Method 1: opener.__authComplete not found, trying postMessage...';
     }
-  } catch(e) {
-    status.textContent = 'Method 1 error: ' + e.message;
-  }
+  } catch(e) {}
 
-  // Phuong phap 2: postMessage protocol
+  // postMessage protocol — day la cach CMS xac thuc chinh thuc
+  // CMS lang nghe "authorizing:github", echo lai, roi minh gui token
+  status.textContent = 'Sending auth via postMessage...';
   try {
     opener.postMessage("authorizing:github", "*");
-    status.textContent = 'Method 2: postMessage sent. Waiting for echo...';
   } catch(e) {
-    status.textContent = 'Method 2 error: ' + e.message;
+    status.textContent = 'postMessage error: ' + e.message;
   }
 
-  // Lang nghe echo tu parent
   function handler(e) {
     if (e.data === "authorizing:github") {
       window.removeEventListener("message", handler);
-      try {
-        var authData = JSON.stringify({ token: token, provider: "github" });
-        opener.postMessage("authorization:github:success:" + authData, "*");
-        status.textContent = 'Method 2: SUCCESS! Token sent via postMessage. Closing...';
-        setTimeout(function() { window.close(); }, 200);
-      } catch(e) {
-        status.textContent = 'Method 2 error sending token: ' + e.message;
-      }
+      var authData = JSON.stringify({ token: token, provider: "github" });
+      opener.postMessage("authorization:github:success:" + authData, "*");
+      status.textContent = 'Token sent to CMS. Closing...';
+      setTimeout(function() { window.close(); }, 200);
     }
   }
   window.addEventListener("message", handler);
 
-  // Fallback: huong dan thu cong
-  setTimeout(function() {
-    document.getElementById('spinner').style.display = 'none';
-    title.textContent = 'Cannot connect to CMS';
-    title.style.color = '#C62828';
-    desc.innerHTML = 'Please close this tab, go back to the CMS page, and <b>reload the page</b>.';
-    status.textContent = 'Token obtained: ' + token.substring(0, 10) + '...';
-  }, 8000);
+  // Tu dong dong sau 5s neu CMS khong echo lai
+  setTimeout(function() { window.close(); }, 5000);
 })();
 <\/script>
 </body>

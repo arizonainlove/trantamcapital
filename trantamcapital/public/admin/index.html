@@ -11,34 +11,9 @@
 <body>
   <div id="cms-root"></div>
   <script>
-    // Áp dụng token vào CMS backend (chờ CMS sẵn sàng)
-    function applyToken(token) {
-      if (!token) return;
-      var retry = setInterval(function() {
-        if (window.CMS && window.CMS.getBackend) {
-          clearInterval(retry);
-          window.CMS.getBackend().then(function(backend) {
-            if (backend && backend.authenticate) {
-              backend.authenticate({ token: token }).catch(function(){});
-            }
-          });
-        }
-      }, 200);
-    }
-
-    // Hàm này được popup auth gọi trực tiếp (cùng origin)
     window.__authComplete = function(token) {
       localStorage.setItem('dcms_token', token);
-      applyToken(token);
     };
-
-    // Khi trang load, khôi phục token từ localStorage
-    (function() {
-      var savedToken = localStorage.getItem('dcms_token');
-      if (savedToken) {
-        applyToken(savedToken);
-      }
-    })();
   </script>
   <script>
     window.CMS_MANUAL_INIT = true;
