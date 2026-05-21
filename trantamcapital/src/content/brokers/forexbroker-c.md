@@ -1,13 +1,13 @@
 ---
-name: "ForexBroker C"
+name: "Pepperstone"
 type: "Forex Broker"
-rating: 4.5
+rating: "4.6"
 features:
-  - "FCA regulated"
-  - "Social trading"
-  - "Copy trading"
-  - "Competitive spreads"
+  - "ASIC/FCA/CMA regulated"
+  - "Razor spreads from 0.0 pips"
+  - "1200+ instruments"
+  - "Fast execution"
 reviewHref: "/forex-broker/broker-c"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)"
+visitHref: "https://pepperstone.com/vi-vn/"
+gradient: "linear-gradient(135deg, #E65100 0%, #BF360C 100%)"
 ---
