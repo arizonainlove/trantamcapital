@@ -1,13 +1,13 @@
 ---
-name: "Exchange C"
+name: "Bybit"
 type: "Crypto Exchange"
-rating: 4.4
+rating: "4.7"
 features:
-  - "Regulated EU & Asia"
-  - "Advanced charting"
-  - "OTC trading desk"
-  - "Cold storage assets"
+  - "400+ trading pairs"
+  - "Up to 100x leverage"
+  - "Copy trading"
+  - "Advanced derivatives"
 reviewHref: "/crypto-exchange/exchange-c"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)"
+visitHref: "https://www.bybit.com/vi-VN/"
+gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)"
 ---
