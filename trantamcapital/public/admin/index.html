@@ -7,19 +7,12 @@
 </head>
 <body>
   <script>
-    // Fix hash from OAuth callback (Vercel can add leading slash)
-    if (window.location.hash.startsWith("#/")) {
-      window.location.hash = window.location.hash.replace(/^#\//, "#");
-    }
-  </script>
-  <script>
     window.CMS_CONFIG = {
       backend: {
         name: "github",
         repo: "arizonainlove/trantamcapital",
         branch: "main",
-        base_url: "https://trantamcapital.vercel.app",
-        auth_endpoint: "api/auth",
+        auth_type: "implicit",
       },
       media_folder: "public/images/uploads",
       public_folder: "/images/uploads",
