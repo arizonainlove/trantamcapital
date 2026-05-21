@@ -1,9 +1,5 @@
 ---
 title: "Bitcoin Surges Past $100K for the First Time"
-date: "2026-05-20"
-category: "Cryptocurrency"
-author: "TrantamCapital"
-excerpt: "Bitcoin has reached a historic milestone, surging past the $100,000 mark for the first time in its history, driven by institutional adoption and favorable regulatory developments."
 ---
 
 Bitcoin has reached a historic milestone, surging past the $100,000 mark for the first time in its history. The flagship cryptocurrency hit the six-figure milestone during Asian trading hours on Wednesday.
