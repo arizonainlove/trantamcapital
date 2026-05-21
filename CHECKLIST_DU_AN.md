@@ -68,8 +68,8 @@
 
 ## PHẦN 5: CẤU HÌNH BẢO MẬT & HIỆU SUẤT
 
-### next.config.js
-- [x] `images.remotePatterns` cho assets.coingecko.com + coin-images.coingecko.com
+### next.config.js / next.config.ts
+- [x] `images.remotePatterns` cho assets.coingecko.com + coin-images.coingecko.com + raw.githubusercontent.com (broker logos)
 - [x] HSTS headers (Strict-Transport-Security)
 
 ### SEO
@@ -314,7 +314,7 @@
 - [ ] Tạo Open Graph image (Canva, 1200x630px)
 - [ ] Cài Google Analytics 4
 - [ ] Thêm Cookie Consent (nếu dùng GA)
-- [ ] Tích hợp Decap CMS
+- [x] Tích hợp Custom Admin UI (thay thế Decap CMS) — tại `/admin`, quản lý News + Brokers + Reviews
 
 ---
 
@@ -343,9 +343,9 @@
 | 19. Responsive | 5 | ✅ 5 / 5 |
 | 20. Deploy | 16 | ✅ 15 / 16 |
 | 21. Domain setup | 11 | ⬜ 0 / 11 |
-| 22. Sau deploy | 6 | ⬜ 0 / 6 |
-| 23. SEO & UX/UI | 18 | ✅ 14 / 18 |
-| **Tổng** | **154 mục** | **✅ 132 / 154** |
+| 22. Sau deploy | 6 | ✅ 1 / 6 |
+| 23. SEO & UX/UI | 18 | ✅ 16 / 18 |
+| **Tổng** | **154 mục** | **✅ 135 / 154** |
 
 ---
 
@@ -382,6 +382,6 @@
 
 ### Còn lại
 - [ ] Open Graph image (1200x630px) — cần thiết kế file ảnh
-- [ ] JSON-LD Article schema — cho trang news
-- [ ] JSON-LD BreadcrumbList schema — cho sub pages
+- [x] JSON-LD Article schema — cho trang news/[slug]
+- [x] JSON-LD BreadcrumbList schema — cho sub pages (đã có trong Breadcrumb component)
 - [ ] `loading="lazy"` — cho tất cả ảnh dưới fold
