@@ -34,12 +34,24 @@ export async function GET(request: Request) {
     const data = await tokenRes.json();
 
     if (data.access_token) {
-      // Redirect back to CMS with token in URL hash
-      const redirectTarget = `${origin}/admin#access_token=${data.access_token}&token_type=bearer`;
-      return new Response(
-        `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=${redirectTarget}"></head><body><script>window.location.replace("${redirectTarget}");</script></body></html>`,
-        { status: 200, headers: { "Content-Type": "text/html" } }
-      );
+      // Send token to parent CMS window via postMessage and close popup
+      const html = `<!DOCTYPE html>
+<html><body><script>
+(function() {
+  var token = ${JSON.stringify(data.access_token)};
+  var targetOrigin = ${JSON.stringify(origin)};
+  if (window.opener) {
+    window.opener.postMessage({ token: token, provider: "github" }, targetOrigin);
+    window.close();
+  } else {
+    window.location.replace(targetOrigin + "/admin#access_token=" + token + "&token_type=bearer");
+  }
+})();
+<\/script></body></html>`;
+      return new Response(html, {
+        status: 200,
+        headers: { "Content-Type": "text/html" },
+      });
     }
 
     return NextResponse.json({ error: "Failed to obtain access token from GitHub" }, { status: 400 });
