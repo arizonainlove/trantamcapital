@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllBrokers } from "@/lib/content";
 import { getReviewBySlug } from "@/lib/reviews";
+import { defaultBrokerData } from "@/data/brokers";
 import ReviewPage from "@/components/ReviewPage";
 
 export const dynamic = "force-static";
@@ -24,7 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const brokers = getAllBrokers();
   const review = getReviewBySlug(slug);
-  const broker = review ? brokers.find((b) => b.slug === review.brokerSlug) : undefined;
+  const broker = review
+    ? (brokers.find((b) => b.slug === review.brokerSlug) || defaultBrokerData.find((b) => b.slug === review.brokerSlug))
+    : undefined;
   return {
     title: `${broker?.name || "Binary Options Platform"} Review`,
     description: `Detailed review of ${broker?.name || "binary options platform"} — payouts, features, and trading experience.`,
@@ -36,7 +39,8 @@ export default async function BinaryOptionReview({ params }: Props) {
   const brokers = getAllBrokers();
   const review = getReviewBySlug(slug);
   if (!review) notFound();
-  const broker = brokers.find((b) => b.slug === review.brokerSlug);
+  let broker = brokers.find((b) => b.slug === review.brokerSlug);
+  if (!broker) broker = defaultBrokerData.find((b) => b.slug === review.brokerSlug);
   if (broker && broker.type !== "Binary Options") notFound();
 
   return (
