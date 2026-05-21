@@ -2,6 +2,7 @@
 name: "IQ Option"
 type: "Binary Options"
 rating: 4.5
+order: 7
 features:
   - "Intuitive platform"
   - "100+ assets"
