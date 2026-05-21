@@ -9,7 +9,7 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 ## Đăng nhập
 
 1. Click **Login with GitHub**
-2. Trình duyệt chuyển sang GitHub → Click **Authorize** (nếu được hỏi)
+2. Cửa sổ mới hiện ra yêu cầu cấp quyền — click **Authorize** (chỉ cần 1 lần)
 3. Tự động quay lại giao diện CMS
 
 ---
