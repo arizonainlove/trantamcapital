@@ -7,12 +7,22 @@
 </head>
 <body>
   <script>
+    // Fix OAuth hash — Vercel can add leading chars before access_token=
+    (function() {
+      var hash = window.location.hash;
+      if (hash.indexOf("access_token=") > 1) {
+        window.location.hash = "#" + hash.substring(hash.indexOf("access_token="));
+      }
+    })();
+  </script>
+  <script>
     window.CMS_CONFIG = {
       backend: {
         name: "github",
         repo: "arizonainlove/trantamcapital",
         branch: "main",
-        auth_type: "implicit",
+        base_url: "https://trantamcapital.vercel.app",
+        auth_endpoint: "api/auth",
       },
       media_folder: "public/images/uploads",
       public_folder: "/images/uploads",
@@ -37,5 +47,14 @@
     };
   </script>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
+  <script>
+    // If this is the auth callback popup, close it after CMS processes the token
+    (function() {
+      if (window.opener && window.location.hash.includes("access_token")) {
+        // CMS will send the token to the parent and we close
+        setTimeout(function() { window.close(); }, 500);
+      }
+    })();
+  </script>
 </body>
 </html>
