@@ -1,7 +1,7 @@
 ---
 name: "Exness"
 type: "Forex Broker"
-rating: "4.8"
+rating: 4.8
 features:
   - "FCA & CySEC regulated"
   - "0.0 pip spreads"
@@ -9,7 +9,7 @@ features:
   - "Instant withdrawals"
 reviewHref: "/forex-broker/broker-a"
 visitHref: "https://www.exness.com/"
-gradient: "linear-gradient(135deg, #1565C0 0%, #0D47A1 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367076494-logoexness.png"
 regulation: "FCA, CySEC, FSA"
 minDeposit: "$10"
 spread: "From 0.0 pips"
