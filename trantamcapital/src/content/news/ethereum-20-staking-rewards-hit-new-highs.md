@@ -3,6 +3,7 @@ title: "Ethereum 2.0: Staking Rewards Hit New Highs"
 date: "2026-05-16"
 category: "Cryptocurrency"
 author: "TrantamCapital Analysis Team"
+image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349908064-ethereum2.0.png"
 excerpt: "Ethereum staking rewards have reached unprecedented levels as more validators join the network. Learn what this means for ETH holders."
 ---
 Ethereum's transition to proof-of-stake has exceeded expectations, with staking rewards reaching new all-time highs. The network now boasts one of the highest staking participation rates among major blockchain platforms.
