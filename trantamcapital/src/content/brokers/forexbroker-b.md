@@ -1,7 +1,7 @@
 ---
 name: "IC Markets"
 type: "Forex Broker"
-rating: "4.7"
+rating: 4.7
 features:
   - "ASIC regulated"
   - "True ECN pricing"
@@ -9,7 +9,7 @@ features:
   - "60+ currency pairs"
 reviewHref: "/forex-broker/broker-b"
 visitHref: "https://www.icmarkets.com/global/en/"
-gradient: "linear-gradient(135deg, #00838F 0%, #006064 100%)"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367192104-logoicmarkets.png"
 regulation: "ASIC, CySEC"
 minDeposit: "$200"
 spread: "From 0.0 pips"
