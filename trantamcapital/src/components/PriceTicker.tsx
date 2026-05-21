@@ -12,18 +12,13 @@ interface CoinData {
   image: string;
 }
 
-const COIN_IDS =
-  "bitcoin,ethereum,binancecoin,solana,ripple,cardano,dogecoin,polkadot,avalanche-2,matic-network,chainlink,litecoin";
-
 export default function PriceTicker() {
   const [coins, setCoins] = useState<CoinData[]>([]);
   const [error, setError] = useState(false);
 
   const fetchPrices = useCallback(async () => {
     try {
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${COIN_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`,
-      );
+      const res = await fetch(`/api/crypto-prices`);
       if (!res.ok) throw new Error("Failed to fetch");
       const data: CoinData[] = await res.json();
       setCoins(data);
