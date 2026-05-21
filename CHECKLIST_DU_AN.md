@@ -316,6 +316,7 @@
 - [ ] Thêm Cookie Consent (nếu dùng GA)
 - [x] Tích hợp Custom Admin UI (thay thế Decap CMS) — tại `/admin`, quản lý News + Brokers + Reviews
 - [x] Tạo file bàn giao (`HƯỚNG_DẪN_BÀN_GIAO.md`) — hướng dẫn domain, admin, chuyển giao source
+- [x] Thêm trường `order` cho Broker — sắp xếp vị trí hiển thị broker trong admin
 
 ---
 
@@ -344,9 +345,9 @@
 | 19. Responsive | 5 | ✅ 5 / 5 |
 | 20. Deploy | 16 | ✅ 15 / 16 |
 | 21. Domain setup | 11 | ⬜ 0 / 11 |
-| 22. Sau deploy | 7 | ✅ 2 / 7 |
+| 22. Sau deploy | 8 | ✅ 3 / 8 |
 | 23. SEO & UX/UI | 18 | ✅ 16 / 18 |
-| **Tổng** | **155 mục** | **✅ 136 / 155** |
+| **Tổng** | **156 mục** | **✅ 137 / 156** |
 
 ---
 
