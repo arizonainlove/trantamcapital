@@ -1799,7 +1799,12 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     document.getElementById('broker-field-features').value = features;
     document.getElementById('broker-field-reviewHref').value = broker ? (broker.attrs.reviewHref || '') : '';
     document.getElementById('broker-field-visitHref').value = broker ? (broker.attrs.visitHref || '') : '';
-    document.getElementById('broker-field-gradient').value = broker ? (broker.attrs.gradient || '') : '';
+    document.getElementById('broker-field-logo').value = broker ? (broker.attrs.logo || '') : '';
+	    var logoUrl = broker ? (broker.attrs.logo || '') : '';
+	    if (logoUrl) {
+	      document.getElementById('broker-logo-preview-img').src = logoUrl;
+	      document.getElementById('broker-logo-preview').style.display = 'inline-flex';
+	    }
     // Comparison fields
     var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
     for (var ci = 0; ci < compareFields.length; ci++) {
@@ -1827,7 +1832,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       features: features,
       reviewHref: document.getElementById('broker-field-reviewHref').value.trim(),
       visitHref: document.getElementById('broker-field-visitHref').value.trim(),
-      gradient: document.getElementById('broker-field-gradient').value.trim(),
+      logo: document.getElementById('broker-field-logo').value.trim(),
       // Comparison fields
       regulation: document.getElementById('broker-field-regulation').value.trim(),
       minDeposit: document.getElementById('broker-field-minDeposit').value.trim(),
