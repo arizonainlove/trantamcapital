@@ -597,7 +597,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
                 <div class="upload-spinner"></div>
                 <span>Uploading...</span>
               </div>
-              <p class="form-help">Recommended 1200×630px (16:9), JPG/PNG, max 5MB. Uploaded to <code>public/images/uploads/</code> on GitHub.</p>
+              <p class="form-help">Recommended 1200×630px (16:9), JPG/PNG, max 5MB. Uploaded to <code>trantamcapital/public/images/uploads/</code> on GitHub.</p>
             </div>
           </div>
         </div>
@@ -1083,7 +1083,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       var ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
       if (!ext) ext = 'png';
       var filename = Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '').slice(0, 60);
-      var filePath = 'public/images/uploads/' + filename;
+      var filePath = 'trantamcapital/public/images/uploads/' + filename;
 
       apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
         method: 'PUT',
