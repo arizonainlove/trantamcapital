@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getAllNews, getArticleBySlug } from "@/lib/content";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: article.date,
       authors: article.author ? [article.author] : undefined,
+      images: article.image ? [{ url: article.image, width: 1200, height: 630 }] : undefined,
     },
   };
 }
@@ -61,6 +63,19 @@ export default async function NewsArticlePage({ params }: Props) {
           >
             &larr; Back to News
           </Link>
+
+          {article.image && (
+            <div className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden bg-dark">
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 800px) 100vw, 800px"
+                priority
+              />
+            </div>
+          )}
 
           <div className="prose prose-sm max-w-none text-text-secondary leading-relaxed whitespace-pre-line">
             {article.content}

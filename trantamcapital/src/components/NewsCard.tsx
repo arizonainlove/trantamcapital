@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface NewsCardProps {
   category: string;
@@ -6,6 +7,7 @@ interface NewsCardProps {
   title: string;
   excerpt: string;
   href: string;
+  image?: string;
   imageGradient?: string;
 }
 
@@ -15,19 +17,32 @@ export default function NewsCard({
   title,
   excerpt,
   href,
+  image,
   imageGradient = "linear-gradient(135deg, #0F1A2E 0%, #1A2A42 100%)",
 }: NewsCardProps) {
   return (
     <Link href={href} className="block group">
       <article className="rounded-lg border border-border bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_6px_rgba(0,0,0,0.1)] transition-shadow overflow-hidden">
-        {/* Image placeholder */}
-        <div
-          className="h-48 flex items-center justify-center"
-          style={{ background: imageGradient }}
-        >
-          <span className="text-white/80 text-sm font-medium uppercase tracking-wider">
-            {category}
-          </span>
+        {/* Image */}
+        <div className="h-48 relative flex items-center justify-center overflow-hidden bg-dark">
+          {image ? (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ background: imageGradient }}
+            >
+              <span className="text-white/80 text-sm font-medium uppercase tracking-wider">
+                {category}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content */}

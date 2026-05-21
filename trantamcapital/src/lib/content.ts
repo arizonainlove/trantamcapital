@@ -27,6 +27,7 @@ function loadCmsArticles(): NewsArticle[] {
       excerpt: data.excerpt || "",
       content: content.trim(),
       author: data.author || "TrantamCapital",
+      image: data.image || undefined,
     } as NewsArticle;
   });
 }

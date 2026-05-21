@@ -13,6 +13,7 @@ const featuredNews = getAllNews().slice(0, 3).map((a) => ({
   title: a.title,
   excerpt: a.excerpt,
   href: `/news/${a.slug}`,
+  image: a.image,
 }));
 
 const featuredBrokers = [

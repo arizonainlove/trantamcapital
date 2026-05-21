@@ -6,6 +6,7 @@ export interface NewsArticle {
   excerpt: string;
   content: string;
   author?: string;
+  image?: string;
 }
 
 function slugify(title: string): string {

@@ -83,6 +83,7 @@ export default function NewsContent({ allNews, categories, recentPosts }: Props)
                     title={article.title}
                     excerpt={article.excerpt}
                     href={`/news/${article.slug}`}
+                    image={article.image}
                   />
                 ))}
               </div>
