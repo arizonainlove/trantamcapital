@@ -1,13 +1,13 @@
 ---
-name: "ForexBroker B"
+name: "IC Markets"
 type: "Forex Broker"
-rating: 4.6
+rating: "4.7"
 features:
   - "ASIC regulated"
-  - "Negative balance protection"
-  - "Free education"
-  - "24/7 support"
+  - "True ECN pricing"
+  - "0.0 pip spreads"
+  - "60+ currency pairs"
 reviewHref: "/forex-broker/broker-b"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)"
+visitHref: "https://www.icmarkets.com/global/en/"
+gradient: "linear-gradient(135deg, #00838F 0%, #006064 100%)"
 ---
