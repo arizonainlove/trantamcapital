@@ -2,6 +2,7 @@
 name: "Bybit"
 type: "Crypto Exchange"
 rating: 4.7
+order: 2
 features:
   - "400+ trading pairs"
   - "Up to 100x leverage"
