@@ -1,13 +1,13 @@
 ---
-name: "BinaryPlatform A"
+name: "IQ Option"
 type: "Binary Options"
-rating: 4.3
+rating: "4.5"
 features:
-  - "User-friendly platform"
-  - "Multiple assets"
-  - "Demo account"
+  - "Intuitive platform"
+  - "100+ assets"
+  - "Demo account with $10K"
   - "Fast withdrawals"
 reviewHref: "/binary-option/platform-a"
-visitHref: "#"
-gradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)"
+visitHref: "https://iqoption.com/vi"
+gradient: "linear-gradient(135deg, #8E24AA 0%, #6A1B9A 100%)"
 ---
