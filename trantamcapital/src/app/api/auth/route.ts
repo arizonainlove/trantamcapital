@@ -35,12 +35,12 @@ export async function GET(request: Request) {
 
     if (data.access_token) {
       // Redirect back to CMS with token in URL hash
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: `${origin}/admin/#access_token=${data.access_token}&token_type=bearer`,
-        },
-      });
+      return new Response(
+        `<html><body><script>
+          window.location.href = "${origin}/admin#access_token=${data.access_token}&token_type=bearer";
+        </script></body></html>`,
+        { status: 200, headers: { "Content-Type": "text/html" } }
+      );
     }
 
     return NextResponse.json({ error: "Failed to obtain access token from GitHub" }, { status: 400 });
