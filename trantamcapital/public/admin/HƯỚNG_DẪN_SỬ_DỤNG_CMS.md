@@ -9,8 +9,23 @@ Vào **`https://trantamcapital.vercel.app/admin`**
 ## Đăng nhập
 
 1. Click **Login with GitHub**
-2. Cửa sổ mới hiện ra yêu cầu cấp quyền — click **Authorize** (chỉ cần 1 lần)
-3. Tự động quay lại giao diện CMS
+2. Cửa sổ hiện ra yêu cầu nhập **GitHub Personal Access Token**
+
+### Tạo token (làm 1 lần)
+
+1. Vào **GitHub.com** → Click avatar góc phải → **Settings**
+2. Kéo xuống cuối sidebar trái → **Developer settings**
+3. Click **Personal access tokens** → **Tokens (classic)**
+4. Click **Generate new token** → **Generate new token (classic)**
+5. Điền:
+   - **Note**: `TrantamCapital CMS`
+   - **Expiration**: chọn **No expiration**
+   - **Scopes**: tick **`repo`** (Full control of private repositories)
+6. Kéo xuống cuối → Click **Generate token**
+7. **Copy token** (dạng `ghp_...`) — Sau đó paste vào cửa sổ CMS
+8. Click **OK** → vào được giao diện CMS
+
+> Giữ token an toàn, không chia sẻ với ai. Nếu mất token, tạo cái mới.
 
 ---
 

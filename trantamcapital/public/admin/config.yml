@@ -2,7 +2,7 @@ backend:
   name: github
   repo: arizonainlove/trantamcapital
   branch: main
-  auth_type: pkce
+  auth_type: implicit
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
