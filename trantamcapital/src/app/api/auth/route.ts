@@ -40,8 +40,8 @@ export async function GET(request: Request) {
 <body style="font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#F7F8FA;">
 <div style="text-align:center;padding:40px;max-width:420px;">
   <div id="spinner" style="border:4px solid #E2E5EC;border-top-color:#E84910;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
-  <h2 style="color:#2E7D32;margin:0 0 8px;font-size:20px;">Authentication successful</h2>
-  <p style="color:#5A6377;margin:0;font-size:14px;">Connecting to CMS...</p>
+  <h2 id="title" style="color:#2E7D32;margin:0 0 8px;font-size:20px;">Authentication successful</h2>
+  <p id="desc" style="color:#5A6377;margin:0;font-size:14px;">Connecting to CMS...</p>
   <p id="status" style="color:#8E99B0;margin:12px 0 0;font-size:12px;"></p>
   <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 </div>
@@ -50,62 +50,65 @@ export async function GET(request: Request) {
   var token = ${JSON.stringify(data.access_token)};
   var opener = window.opener;
   var status = document.getElementById('status');
+  var title = document.getElementById('title');
+  var desc = document.getElementById('desc');
 
   if (!opener) {
     document.getElementById('spinner').style.display = 'none';
-    document.querySelector('h2').textContent = 'Error: no parent window';
-    document.querySelector('h2').style.color = '#C62828';
-    document.querySelector('p').textContent = 'Please close this tab, go back to the CMS page, and try logging in again.';
-    status.textContent = 'window.opener is null — popup was detached from parent.';
+    title.textContent = 'Error: no parent window';
+    title.style.color = '#C62828';
+    desc.textContent = 'Please close this tab and try again.';
+    status.textContent = 'window.opener is null';
     return;
   }
 
-  status.textContent = 'Step 1: Sending authorizing:github to parent...';
-
+  // Phuong phap 1: Goi truc tiep ham __authComplete tren window.opener (cung origin)
+  status.textContent = 'Method 1: Direct function call via window.opener...';
   try {
-    // Try with * target origin first, then exact origin as fallback
-    opener.postMessage("authorizing:github", "*");
-
-    setTimeout(function() {
-      status.textContent = 'Step 2: Sent. Waiting for echo from parent...';
-
-      // Retry with exact origin in case * didn't work
-      try {
-        opener.postMessage("authorizing:github", "${origin}");
-      } catch(e) {}
-    }, 100);
+    if (typeof opener.__authComplete === 'function') {
+      opener.__authComplete(token);
+      status.textContent = 'Method 1: SUCCESS! Token sent via direct call. Closing...';
+      setTimeout(function() { window.close(); }, 500);
+      return;
+    } else {
+      status.textContent = 'Method 1: opener.__authComplete not found, trying postMessage...';
+    }
   } catch(e) {
-    status.textContent = 'Error: ' + e.message;
-    return;
+    status.textContent = 'Method 1 error: ' + e.message;
   }
 
-  // Listen for echo from parent
+  // Phuong phap 2: postMessage protocol
+  try {
+    opener.postMessage("authorizing:github", "*");
+    status.textContent = 'Method 2: postMessage sent. Waiting for echo...';
+  } catch(e) {
+    status.textContent = 'Method 2 error: ' + e.message;
+  }
+
+  // Lang nghe echo tu parent
   function handler(e) {
     if (e.data === "authorizing:github") {
-      status.textContent = 'Step 3: Received echo from parent! Sending token...';
       window.removeEventListener("message", handler);
       try {
         var authData = JSON.stringify({ token: token, provider: "github" });
         opener.postMessage("authorization:github:success:" + authData, "*");
-        status.textContent = 'Step 4: Token sent! Closing...';
+        status.textContent = 'Method 2: SUCCESS! Token sent via postMessage. Closing...';
         setTimeout(function() { window.close(); }, 200);
       } catch(e) {
-        status.textContent = 'Error sending token: ' + e.message;
+        status.textContent = 'Method 2 error sending token: ' + e.message;
       }
-    } else if (typeof e.data === 'string' && e.data.includes('authorizing')) {
-      status.textContent = 'Received: ' + e.data.substring(0, 40);
     }
   }
   window.addEventListener("message", handler);
 
-  // Fallback after 10s
+  // Fallback: huong dan thu cong
   setTimeout(function() {
     document.getElementById('spinner').style.display = 'none';
-    document.querySelector('h2').textContent = 'No response from CMS';
-    document.querySelector('h2').style.color = '#C62828';
-    document.querySelector('p').textContent = 'Please close this tab, return to the CMS, and reload the page to try again.';
-    status.textContent = 'Parent did not echo back the authorizing message. The OAuth token exchange succeeded but the CMS did not respond.';
-  }, 10000);
+    title.textContent = 'Cannot connect to CMS';
+    title.style.color = '#C62828';
+    desc.innerHTML = 'Please close this tab, go back to the CMS page, and <b>reload the page</b>.';
+    status.textContent = 'Token obtained: ' + token.substring(0, 10) + '...';
+  }, 8000);
 })();
 <\/script>
 </body>
