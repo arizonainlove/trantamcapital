@@ -1092,11 +1092,9 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
           content: base64,
         }),
       }).then(function(result) {
-        var rawUrl = result.content.download_url;
-        // Use the path relative to site root
-        var sitePath = '/images/uploads/' + filename;
-        document.getElementById('field-image').value = sitePath;
-        document.getElementById('image-preview-img').src = sitePath;
+        var rawUrl = 'https://raw.githubusercontent.com/' + CONFIG.repo + '/main/' + filePath;
+        document.getElementById('field-image').value = rawUrl;
+        document.getElementById('image-preview-img').src = rawUrl;
         document.getElementById('image-preview').style.display = 'inline-flex';
         progress.style.display = 'none';
         showToast('Image uploaded', 'success');

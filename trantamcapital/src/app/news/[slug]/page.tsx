@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getAllNews, getArticleBySlug } from "@/lib/content";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -65,14 +64,11 @@ export default async function NewsArticlePage({ params }: Props) {
           </Link>
 
           {article.image && (
-            <div className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden bg-dark">
-              <Image
+            <div className="w-full mb-8 rounded-lg overflow-hidden bg-dark">
+              <img
                 src={article.image}
                 alt={article.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 800px) 100vw, 800px"
-                priority
+                className="w-full aspect-video object-cover"
               />
             </div>
           )}
