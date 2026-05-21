@@ -325,6 +325,70 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   color: var(--text-light);
   margin-top: 4px;
 }
+.form-help code {
+  background: var(--border);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Image Upload */
+.image-upload-area { display: flex; flex-direction: column; gap: 8px; }
+.image-upload-row { display: flex; gap: 8px; }
+.image-upload-row input { flex: 1; }
+.btn-sm-icon {
+  padding: 0 14px;
+  height: 40px;
+  white-space: nowrap;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.image-preview {
+  position: relative;
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 240px;
+}
+.image-preview img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+.image-preview-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.image-preview-remove:hover { background: rgba(0,0,0,0.8); }
+.image-upload-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.upload-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
 .markdown-hint {
   font-size: 12px;
   color: var(--text-light);
@@ -518,8 +582,23 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             <input type="text" id="field-author" placeholder="TrantamCapital">
           </div>
           <div class="form-group">
-            <label for="field-image">Image URL</label>
-            <input type="url" id="field-image" placeholder="https://example.com/image.jpg">
+            <label for="field-image">Image</label>
+            <div class="image-upload-area">
+              <input type="file" id="field-image-file" accept="image/*" style="display:none">
+              <div class="image-upload-row">
+                <input type="text" id="field-image" placeholder="https://example.com/image.jpg or upload below">
+                <button type="button" id="btn-upload-image" class="btn btn-secondary btn-sm-icon" onclick="document.getElementById('field-image-file').click()">Upload</button>
+              </div>
+              <div id="image-preview" class="image-preview" style="display:none">
+                <img id="image-preview-img" alt="Preview">
+                <button type="button" class="image-preview-remove" onclick="clearImage()">✕</button>
+              </div>
+              <div id="image-upload-progress" class="image-upload-progress" style="display:none">
+                <div class="upload-spinner"></div>
+                <span>Uploading...</span>
+              </div>
+              <p class="form-help">Supports JPG, PNG, GIF. Max 5MB. Images uploaded to <code>public/images/uploads/</code> on GitHub.</p>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -905,6 +984,16 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     document.getElementById('field-excerpt').value = article ? (article.attrs.excerpt || '') : '';
     document.getElementById('field-body').value = article ? (article.body || '') : '';
     saveBtn.disabled = false;
+    // Reset image preview
+    var preview = document.getElementById('image-preview');
+    var progress = document.getElementById('image-upload-progress');
+    preview.style.display = 'none';
+    progress.style.display = 'none';
+    var imgUrl = article ? (article.attrs.image || '') : '';
+    if (imgUrl) {
+      document.getElementById('image-preview-img').src = imgUrl;
+      preview.style.display = 'inline-flex';
+    }
   }
 
   function handleSave() {
@@ -970,6 +1059,63 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     }).catch(function(err) {
       showToast('Failed to delete: ' + err.message, 'error');
     });
+  }
+
+  // ======================== IMAGE UPLOAD ========================
+  document.getElementById('field-image-file').addEventListener('change', function() {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('Image must be under 5MB', 'error');
+      this.value = '';
+      return;
+    }
+    uploadImage(file);
+  });
+
+  function uploadImage(file) {
+    var progress = document.getElementById('image-upload-progress');
+    progress.style.display = 'flex';
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var base64 = e.target.result.split(',')[1]; // strip data:image/...;base64,
+      var ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!ext) ext = 'png';
+      var filename = Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '').slice(0, 60);
+      var filePath = 'public/images/uploads/' + filename;
+
+      apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
+        method: 'PUT',
+        body: JSON.stringify({
+          message: 'Upload image: ' + filename,
+          content: base64,
+        }),
+      }).then(function(result) {
+        var rawUrl = result.content.download_url;
+        // Use the path relative to site root
+        var sitePath = '/images/uploads/' + filename;
+        document.getElementById('field-image').value = sitePath;
+        document.getElementById('image-preview-img').src = sitePath;
+        document.getElementById('image-preview').style.display = 'inline-flex';
+        progress.style.display = 'none';
+        showToast('Image uploaded', 'success');
+      }).catch(function(err) {
+        progress.style.display = 'none';
+        showToast('Upload failed: ' + err.message, 'error');
+      });
+    };
+    reader.onerror = function() {
+      progress.style.display = 'none';
+      showToast('Failed to read file', 'error');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearImage() {
+    document.getElementById('field-image').value = '';
+    document.getElementById('image-preview').style.display = 'none';
+    document.getElementById('field-image-file').value = '';
   }
 
   // Expose functions for inline onclick handlers
