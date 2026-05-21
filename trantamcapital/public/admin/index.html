@@ -553,6 +553,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 <script>
 (function() {
   'use strict';
+  var W = window;
 
   // ======================== CONFIG ========================
   const CONFIG = {
@@ -970,6 +971,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       showToast('Failed to delete: ' + err.message, 'error');
     });
   }
+
+  // Expose functions for inline onclick handlers
+  W.login = login;
+  W.logout = logout;
+  W.showEditor = showEditor;
+  W.showDashboard = showDashboard;
+  W.handleSave = handleSave;
+  W.loadAndRenderArticles = loadAndRenderArticles;
 
   // ======================== INIT ========================
   if (token) {
