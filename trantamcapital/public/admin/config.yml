@@ -5,7 +5,7 @@ backend:
   base_url: https://trantamcapital.vercel.app
   auth_endpoint: api/auth
 
-media_folder: public/images/uploads
+media_folder: trantamcapital/public/images/uploads
 public_folder: /images/uploads
 
 collections:
@@ -13,12 +13,11 @@ collections:
     label: "News Articles"
     folder: "trantamcapital/src/content/news"
     create: true
-    slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Publish Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
       - { label: "Category", name: "category", widget: "select", options: ["Cryptocurrency", "Forex", "Binary Options", "Markets"] }
       - { label: "Author", name: "author", widget: "string", default: "TrantamCapital" }
       - { label: "Image", name: "image", widget: "image", required: false }
-      - { label: "Excerpt", name: "excerpt", widget: "text", pattern: ["^.{10,}$", "Must be at least 10 characters"] }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }

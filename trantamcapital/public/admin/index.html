@@ -15,40 +15,6 @@
       localStorage.setItem('dcms_token', token);
     };
   </script>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-    window.CMS_CONFIG = {
-      backend: {
-        name: "github",
-        repo: "arizonainlove/trantamcapital",
-        branch: "main",
-        base_url: "https://trantamcapital.vercel.app",
-        auth_endpoint: "api/auth",
-      },
-      media_folder: "trantamcapital/public/images/uploads",
-      public_folder: "/images/uploads",
-      collections: [
-        {
-          name: "news",
-          label: "News Articles",
-          folder: "trantamcapital/src/content/news",
-          create: true,
-          fields: [
-            { label: "Title", name: "title", widget: "string" },
-            { label: "Publish Date", name: "date", widget: "date", format: "YYYY-MM-DD" },
-            { label: "Category", name: "category", widget: "select", options: ["Cryptocurrency", "Forex", "Binary Options", "Markets"] },
-            { label: "Author", name: "author", widget: "string", default: "TrantamCapital" },
-            { label: "Image", name: "image", widget: "image", required: false },
-            { label: "Excerpt", name: "excerpt", widget: "text" },
-            { label: "Body", name: "body", widget: "markdown" },
-          ],
-        },
-      ],
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({ config: window.CMS_CONFIG });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
 </body>
 </html>
