@@ -11,39 +11,16 @@
 <body>
   <div id="cms-root"></div>
   <script>
+    // Redirect to trailing slash so config.yml resolves correctly
+    if (!window.location.pathname.endsWith('/')) {
+      window.location.href = window.location.pathname + '/' + window.location.hash;
+    }
+  </script>
+  <script>
     window.__authComplete = function(token) {
       localStorage.setItem('dcms_token', token);
     };
   </script>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-    window.CMS_CONFIG = {
-      backend: {
-        name: "github",
-        repo: "arizonainlove/trantamcapital",
-        branch: "main",
-        base_url: "https://trantamcapital.vercel.app",
-        auth_endpoint: "api/auth",
-      },
-      media_folder: "trantamcapital/public/images/uploads",
-      public_folder: "/images/uploads",
-      collections: [
-        {
-          name: "news",
-          label: "News Articles",
-          folder: "trantamcapital/src/content/news",
-          create: true,
-          fields: [
-            { label: "Title", name: "title", widget: "string" },
-            { label: "Body", name: "body", widget: "markdown" },
-          ],
-        },
-      ],
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
-  <script>
-    CMS.init({ config: window.CMS_CONFIG });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3/dist/decap-cms.js"></script>
 </body>
 </html>
