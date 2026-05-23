@@ -6,7 +6,7 @@ description: Global component library, file structure, and live price widget spe
 
 | File | Description |
 |------|-------------|
-| `Header.tsx` | Navigation bar (#FFCA00), 10 menu items, mobile hamburger toggle |
+| `Header.tsx` | Navigation bar (#FFCA00), 10 menu items, bold (700) nav links, mobile hamburger toggle |
 | `Footer.tsx` | 4-column footer (About, Quick Links, Markets, Contact) + risk disclaimer |
 | `PriceTicker.tsx` | Live crypto prices marquee, CoinGecko API, 60s refresh |
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |

@@ -17,9 +17,10 @@ Financial market information website covering cryptocurrency, forex, and binary 
 | Area | Summary |
 |------|---------|
 | Stack | Next.js 14 + TypeScript + Tailwind CSS |
-| Design | Premium Financial — cam `#E84910`, navy `#0F1A2E`, gold `#C8A84E` |
+| Design | Premium Financial — cam `#E84910`, navy `#0F1A2E`, gold `#C8A84E`, body text 16px |
 | Pages | 10 main + 7 sub + 9 news/[slug] + utility = 31 routes, English |
 | CMS | Custom Admin UI via `/admin` — GitHub OAuth + REST API (replaces Decap CMS) |
 | Live prices | CoinGecko API, 12 coins, 60s refresh |
+| Content inventory | `NOI_DUNG_WEBSITE.md` — all website text for editing reference |
 | Deploy | Vercel (free), GitHub auto-deploy |
 | Initial command | `npm run dev` in `trantamcapital/` |
