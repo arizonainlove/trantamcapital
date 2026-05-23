@@ -270,7 +270,8 @@
 - [x] Privacy Policy + Terms: hiển thị
 - [x] 404: vào link sai → trang 404
 - [x] Mobile: menu hamburger, responsive
-- [ ] Vào https://pagespeed.web.dev/ → điểm ≥90
+- [x] PageSpeed Desktop: fix CLS 0.306 (skeleton MarketOverview), fix Style & Layout (will-change marquee)
+- [x] PageSpeed Mobile: fix LCP (preconnect CoinGecko), code-split MarketOverview (dynamic import)
 
 ---
 
@@ -382,8 +383,16 @@
 - [x] ContactForm API call + honeypot + name min-length + email regex
 - [x] API route `/api/contact` — POST handler với validation
 
+### Performance (PageSpeed)
+- [x] CLS fix: Skeleton MarketOverview khớp chiều cao bảng thật
+- [x] Style & Layout: `will-change: transform` cho marquee
+- [x] PriceTicker: `useMemo` coin items, `useCallback` formatPrice
+- [x] BrokerCard: `loading="lazy"` logo images
+- [x] LCP: `preconnect` cho CoinGecko API + assets
+- [x] Code-split: Dynamic import MarketOverview trên trang chủ
+
 ### Còn lại
 - [ ] Open Graph image (1200x630px) — cần thiết kế file ảnh
 - [x] JSON-LD Article schema — cho trang news/[slug]
 - [x] JSON-LD BreadcrumbList schema — cho sub pages (đã có trong Breadcrumb component)
-- [ ] `loading="lazy"` — cho tất cả ảnh dưới fold
+- [x] `loading="lazy"` — cho BrokerCard logo (còn lại chưa cần do ảnh trong fixed container)

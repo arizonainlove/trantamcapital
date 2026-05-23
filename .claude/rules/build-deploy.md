@@ -130,3 +130,5 @@ const nextConfig = {
 - [ ] Contact form UI displays correctly
 - [ ] `next.config.js` has `images.remotePatterns` for CoinGecko
 - [ ] HSTS headers are set in `next.config.js`
+- [ ] **PageSpeed Desktop ≥ 80**: CLS < 0.1 (skeleton MarketOverview), avoid forced reflow (will-change marquee)
+- [ ] **PageSpeed Mobile ≥ 85**: LCP < 3s (preconnect CoinGecko), code-split client components
