@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { sanitize } from "@/lib/sanitize";
 import { defaultReviews, type ReviewContent, type ReviewFeature, type ReviewRating } from "@/data/reviews";
 
 function parseReviewFile(filePath: string): ReviewContent | null {
@@ -10,15 +11,25 @@ function parseReviewFile(filePath: string): ReviewContent | null {
 
     return {
       slug: path.basename(filePath, ".md"),
-      brokerSlug: data.brokerSlug || "",
-      brokerName: data.brokerName || undefined,
-      brokerType: data.brokerType || undefined,
-      pros: Array.isArray(data.pros) ? data.pros : [],
-      cons: Array.isArray(data.cons) ? data.cons : [],
-      keyFeatures: Array.isArray(data.keyFeatures) ? data.keyFeatures as ReviewFeature[] : [],
-      ratingSummary: Array.isArray(data.ratingSummary) ? data.ratingSummary as ReviewRating[] : [],
+      brokerSlug: sanitize(data.brokerSlug) || "",
+      brokerName: data.brokerName ? sanitize(data.brokerName) : undefined,
+      brokerType: data.brokerType ? sanitize(data.brokerType) : undefined,
+      pros: Array.isArray(data.pros) ? data.pros.map((p: string) => sanitize(p)) : [],
+      cons: Array.isArray(data.cons) ? data.cons.map((c: string) => sanitize(c)) : [],
+      keyFeatures: Array.isArray(data.keyFeatures)
+        ? (data.keyFeatures as ReviewFeature[]).map((f: ReviewFeature) => ({
+            label: sanitize(f.label),
+            value: sanitize(f.value),
+          }))
+        : [],
+      ratingSummary: Array.isArray(data.ratingSummary)
+        ? (data.ratingSummary as ReviewRating[]).map((r: ReviewRating) => ({
+            label: sanitize(r.label),
+            score: r.score,
+          }))
+        : [],
       trustScore: Number(data.trustScore) || 0,
-      content: content.trim(),
+      content: sanitize(content.trim()),
     };
   } catch {
     return null;

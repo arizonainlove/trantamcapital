@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { sanitize } from "@/lib/sanitize";
 import { allNews as staticNews, type NewsArticle } from "@/data/news";
 import type { Broker } from "@/data/brokers";
 
@@ -22,12 +23,12 @@ function loadCmsArticles(): NewsArticle[] {
     ];
     return {
       slug: file.replace(/\.md$/, ""),
-      title: data.title || "Untitled",
+      title: sanitize(data.title) || "Untitled",
       date: `${months[pubDate.getMonth()]} ${pubDate.getDate()}, ${pubDate.getFullYear()}`,
-      category: data.category || "Markets",
-      excerpt: data.excerpt || "",
-      content: content.trim(),
-      author: data.author || "TrantamCapital",
+      category: sanitize(data.category) || "Markets",
+      excerpt: sanitize(data.excerpt) || "",
+      content: sanitize(content.trim()),
+      author: sanitize(data.author) || "TrantamCapital",
       image: data.image || undefined,
     } as NewsArticle;
   });
@@ -64,10 +65,10 @@ export function getAllBrokers(): Broker[] {
     const { data } = matter(raw);
     return {
       slug: file.replace(/\.md$/, ""),
-      name: data.name || "Untitled",
-      type: data.type || "Forex Broker",
+      name: sanitize(data.name) || "Untitled",
+      type: sanitize(data.type) || "Forex Broker",
       rating: Number(data.rating) || 0,
-      features: Array.isArray(data.features) ? data.features : [],
+      features: Array.isArray(data.features) ? data.features.map((f: string) => sanitize(f)) : [],
       reviewHref: data.reviewHref || "#",
       visitHref: data.visitHref || "#",
       gradient: data.gradient || undefined,
