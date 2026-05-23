@@ -271,6 +271,85 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .data-table .rating-cell { white-space: nowrap; }
 .data-table .type-cell { white-space: nowrap; }
 
+/* Stats Bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-align: center;
+}
+.stat-card .stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.stat-card .stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.stat-card.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+/* Menu Editor */
+.menu-tree { list-style: none; padding: 0; margin: 0; }
+.menu-tree li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  cursor: move;
+  transition: box-shadow 0.15s;
+}
+.menu-tree li:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.menu-tree li.dragging { opacity: 0.5; outline: 2px dashed var(--primary); }
+.menu-tree li.drag-over { border-color: var(--primary); background: var(--primary-light); }
+.menu-tree .drag-handle { color: var(--text-light); font-size: 16px; cursor: grab; }
+.menu-tree .menu-item-label { flex: 1; font-weight: 600; font-size: 14px; }
+.menu-tree .menu-item-href { color: var(--text-light); font-size: 12px; }
+.menu-tree .menu-item-children { font-size: 11px; background: var(--primary-light); color: var(--primary); padding: 2px 8px; border-radius: 8px; }
+.menu-tree .menu-item-edit-btn {
+  background: none; border: none; cursor: pointer; color: var(--text-light); font-size: 14px; padding: 4px 8px; border-radius: 4px;
+}
+.menu-tree .menu-item-edit-btn:hover { background: var(--white); color: var(--primary); }
+.menu-tree .nested { padding-left: 32px; margin-top: 4px; }
+.menu-tree .nested li { background: var(--white); }
+
+/* Search */
+.search-bar {
+  margin-bottom: 16px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238E99B0'%3E%3Cpath fill-rule='evenodd' d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z' clip-rule='evenodd'/%3E%3C/svg%3E") 10px center no-repeat;
+  background-size: 16px;
+}
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(232,73,16,0.12);
+}
+
 /* Badge */
 .badge {
   display: inline-block;
@@ -538,6 +617,9 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   .tab { flex: 1; text-align: center; padding: 8px 12px; }
 }
 @media (max-width: 480px) {
+  .stats-bar { grid-template-columns: 1fr; gap: 8px; }
+  .stat-card { padding: 12px 16px; }
+  .stat-card .stat-number { font-size: 22px; }
   .data-table .date-cell { display: none; }
   .data-table .badge { font-size: 11px; padding: 1px 8px; }
   .data-table .rating-cell { display: none; }
@@ -583,13 +665,25 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         <button class="tab tab-active" data-tab="articles" onclick="switchTab('articles')">News Articles</button>
         <button class="tab" data-tab="brokers" onclick="switchTab('brokers')">Brokers</button>
         <button class="tab" data-tab="reviews" onclick="switchTab('reviews')">Reviews</button>
+        <button class="tab" data-tab="menu" onclick="switchTab('menu')">Menu</button>
       </div>
       <button class="btn btn-primary" id="btn-new-article" onclick="showEditor()">+ New Article</button>
       <button class="btn btn-primary" id="btn-new-broker" onclick="showBrokerEditor()" style="display:none">+ New Broker</button>
       <button class="btn btn-primary" id="btn-new-review" onclick="showReviewEditor()" style="display:none">+ New Review</button>
+      <button class="btn btn-primary" id="btn-add-menu-item" onclick="showMenuEditor()" style="display:none">+ Add Item</button>
     </div>
   </div>
   <div class="dashboard-content">
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-card" id="stat-articles"><div class="stat-number">-</div><div class="stat-label">Articles</div></div>
+      <div class="stat-card" id="stat-brokers"><div class="stat-number">-</div><div class="stat-label">Brokers</div></div>
+      <div class="stat-card" id="stat-reviews"><div class="stat-number">-</div><div class="stat-label">Reviews</div></div>
+    </div>
+    <!-- Search -->
+    <div class="search-bar" id="search-bar" style="display:none">
+      <input type="text" id="search-input" placeholder="Search..." oninput="handleSearch(this.value)">
+    </div>
     <div id="dashboard-list">
       <div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading...</div></div>
     </div>
@@ -826,6 +920,59 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   </div>
 </section>
 
+<!-- ============ MENU EDITOR SCREEN ============ -->
+<section id="screen-menu-editor" class="screen">
+  <div class="editor-header">
+    <h1 id="menu-editor-title">Edit Menu</h1>
+    <button class="btn btn-secondary" onclick="showDashboard()">Back to Dashboard</button>
+  </div>
+  <div class="editor-content">
+    <div class="form-card">
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">
+        Drag items to reorder. The first level is the navigation bar. Items with children become dropdown menus.
+      </p>
+      <div id="menu-list">
+        <div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading menu...</div></div>
+      </div>
+      <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px">
+        <button class="btn btn-secondary" onclick="addMenuItem()">+ Add Item</button>
+      </div>
+      <div class="form-actions" style="margin-top:16px">
+        <button class="btn btn-primary" onclick="saveMenu()">Save Menu</button>
+        <button class="btn btn-secondary" onclick="showDashboard()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ITEM EDITOR ============ -->
+<section id="screen-menu-item-editor" class="screen">
+  <div class="editor-header">
+    <h1 id="menu-item-editor-title">Edit Menu Item</h1>
+    <button class="btn btn-secondary" onclick="cancelMenuItemEdit()">Back</button>
+  </div>
+  <div class="editor-content">
+    <div class="form-card">
+      <form id="menu-item-form" onsubmit="return false">
+        <div class="form-group">
+          <label for="menu-item-label">Label <span class="required">*</span></label>
+          <input type="text" id="menu-item-label" placeholder="e.g. Home">
+        </div>
+        <div class="form-group">
+          <label for="menu-item-href">Link URL</label>
+          <input type="text" id="menu-item-href" placeholder="e.g. /news or https://example.com">
+          <p class="form-help">Leave empty to make this a dropdown parent (items with children).</p>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" onclick="saveMenuItem()">Save</button>
+          <button type="button" class="btn btn-secondary" onclick="cancelMenuItemEdit()">Cancel</button>
+          <button type="button" id="menu-item-delete-btn" class="btn btn-delete" style="margin-left:auto;display:none" onclick="deleteMenuItem()">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <script>
 (function() {
   'use strict';
@@ -837,6 +984,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     newsPath: 'trantamcapital/src/content/news',
     brokersPath: 'trantamcapital/src/content/brokers',
     reviewsPath: 'trantamcapital/src/content/reviews',
+    menuPath: 'trantamcapital/src/data/menu.json',
     apiBase: 'https://api.github.com',
     tokenKey: 'trantam_admin_token',
   };
@@ -850,6 +998,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   let reviews = [];
   let editingReview = null; // { slug, sha, attrs, body } when editing
   let activeTab = 'articles';
+  let searchQuery = '';
+  let menuItems = [];
+  let editingMenuItemIndex = null; // index in menuItems (or 'new')
+  let editingMenuItemParent = null; // parent index or null for root
+  let menuItemBeingEdited = null; // { label, href, children? }
 
   // ======================== UTILITY ========================
   function escapeHtml(text) {
@@ -878,6 +1031,31 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       .replace(/[\s_]+/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '') || 'untitled';
+  }
+
+  // ======================== STATS & SEARCH ========================
+  function updateStats(artCount, brokerCount, reviewCount) {
+    document.getElementById('stat-articles').querySelector('.stat-number').textContent = artCount;
+    document.getElementById('stat-brokers').querySelector('.stat-number').textContent = brokerCount;
+    document.getElementById('stat-reviews').querySelector('.stat-number').textContent = reviewCount;
+    // Highlight active tab stat
+    document.querySelectorAll('.stat-card').forEach(function(el) { el.classList.remove('active'); });
+    if (activeTab === 'articles') document.getElementById('stat-articles').classList.add('active');
+    else if (activeTab === 'brokers') document.getElementById('stat-brokers').classList.add('active');
+    else if (activeTab === 'reviews') document.getElementById('stat-reviews').classList.add('active');
+  }
+
+  function handleSearch(value) {
+    searchQuery = value.toLowerCase().trim();
+    // Re-render current tab
+    if (activeTab === 'articles') renderArticleList(articles);
+    else if (activeTab === 'brokers') renderBrokerList(brokers);
+    else renderReviewList(reviews);
+  }
+
+  function matchesSearch(text) {
+    if (!searchQuery) return true;
+    return String(text).toLowerCase().indexOf(searchQuery) !== -1;
   }
 
   function base64Encode(str) {
@@ -1331,6 +1509,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
   function switchTab(tab) {
     activeTab = tab;
+    searchQuery = '';
+    var searchBar = document.getElementById('search-bar');
+    var searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = '';
+    searchBar.style.display = (tab === 'articles' || tab === 'brokers') ? 'block' : 'none';
     // Update tab button styles
     var tabs = document.querySelectorAll('.tab');
     for (var i = 0; i < tabs.length; i++) {
@@ -1340,7 +1523,12 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     document.getElementById('btn-new-article').style.display = tab === 'articles' ? 'inline-flex' : 'none';
     document.getElementById('btn-new-broker').style.display = tab === 'brokers' ? 'inline-flex' : 'none';
     document.getElementById('btn-new-review').style.display = tab === 'reviews' ? 'inline-flex' : 'none';
-    showDashboard();
+    document.getElementById('btn-add-menu-item').style.display = tab === 'menu' ? 'inline-flex' : 'none';
+    if (tab === 'menu') {
+      showMenuEditor();
+    } else {
+      showDashboard();
+    }
   }
 
   // ======================== ARTICLES — DASHBOARD ========================
@@ -1367,14 +1555,31 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
   function renderArticleList(items) {
     var listEl = document.getElementById('dashboard-list');
+    var totalCount = items.length;
+    // Apply search filter
+    if (searchQuery) {
+      items = items.filter(function(a) {
+        return matchesSearch(a.attrs.title || a.slug) || matchesSearch(a.attrs.category || '');
+      });
+    }
+    updateStats(totalCount, brokers.length, reviews.length);
 
     if (!items || items.length === 0) {
-      listEl.innerHTML =
-        '<div class="state-box">' +
-        '<div class="state-icon">📝</div>' +
-        '<div class="state-text">No articles yet</div>' +
-        '<div class="state-sub">Create your first article to get started.</div>' +
-        '</div>';
+      if (searchQuery) {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">🔍</div>' +
+          '<div class="state-text">No articles match "' + escapeHtml(searchQuery) + '"</div>' +
+          '<div class="state-sub">Try a different search term.</div>' +
+          '</div>';
+      } else {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">📝</div>' +
+          '<div class="state-text">No articles yet</div>' +
+          '<div class="state-sub">Create your first article to get started.</div>' +
+          '</div>';
+      }
       return;
     }
 
@@ -1441,14 +1646,31 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
   function renderBrokerList(items) {
     var listEl = document.getElementById('dashboard-list');
+    var totalCount = items.length;
+    // Apply search filter
+    if (searchQuery) {
+      items = items.filter(function(b) {
+        return matchesSearch(b.attrs.name || b.slug) || matchesSearch(b.attrs.type || '');
+      });
+    }
+    updateStats(articles.length, totalCount, reviews.length);
 
     if (!items || items.length === 0) {
-      listEl.innerHTML =
-        '<div class="state-box">' +
-        '<div class="state-icon">🏢</div>' +
-        '<div class="state-text">No brokers yet</div>' +
-        '<div class="state-sub">Add your first broker/exchange to get started.</div>' +
-        '</div>';
+      if (searchQuery) {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">🔍</div>' +
+          '<div class="state-text">No brokers match "' + escapeHtml(searchQuery) + '"</div>' +
+          '<div class="state-sub">Try a different search term.</div>' +
+          '</div>';
+      } else {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">🏢</div>' +
+          '<div class="state-text">No brokers yet</div>' +
+          '<div class="state-sub">Add your first broker/exchange to get started.</div>' +
+          '</div>';
+      }
       return;
     }
 
@@ -1529,14 +1751,39 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
   function renderReviewList(items) {
     var listEl = document.getElementById('dashboard-list');
+    var totalCount = items.length;
+    // Apply search filter
+    if (searchQuery) {
+      items = items.filter(function(r) {
+        var brokerSlug = r.attrs.brokerSlug || '';
+        var brokerName = brokerSlug;
+        for (var bi = 0; bi < brokers.length; bi++) {
+          if (brokers[bi].slug === brokerSlug) {
+            brokerName = brokers[bi].attrs.name || brokerSlug;
+            break;
+          }
+        }
+        return matchesSearch(brokerName) || matchesSearch(brokerSlug);
+      });
+    }
+    updateStats(articles.length, brokers.length, totalCount);
 
     if (!items || items.length === 0) {
-      listEl.innerHTML =
-        '<div class="state-box">' +
-        '<div class="state-icon">📋</div>' +
-        '<div class="state-text">No reviews yet</div>' +
-        '<div class="state-sub">Add your first broker review to get started.</div>' +
-        '</div>';
+      if (searchQuery) {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">🔍</div>' +
+          '<div class="state-text">No reviews match "' + escapeHtml(searchQuery) + '"</div>' +
+          '<div class="state-sub">Try a different search term.</div>' +
+          '</div>';
+      } else {
+        listEl.innerHTML =
+          '<div class="state-box">' +
+          '<div class="state-icon">📋</div>' +
+          '<div class="state-text">No reviews yet</div>' +
+          '<div class="state-sub">Add your first broker review to get started.</div>' +
+          '</div>';
+      }
       return;
     }
 
@@ -2094,7 +2341,287 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   W.loadAndRenderBrokers = loadAndRenderBrokers;
   W.loadAndRenderReviews = loadAndRenderReviews;
   W.switchTab = switchTab;
+  W.handleSearch = handleSearch;
   W.clearBrokerLogo = clearBrokerLogo;
+  W.showMenuEditor = showMenuEditor;
+  W.addMenuItem = addMenuItem;
+  W.editMenuItem = editMenuItem;
+  W.saveMenuItem = saveMenuItem;
+  W.cancelMenuItemEdit = cancelMenuItemEdit;
+  W.deleteMenuItem = deleteMenuItem;
+
+  // ======================== MENU MANAGEMENT ========================
+  function loadMenu() {
+    return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.menuPath).then(function(data) {
+      var content = base64Decode(data.content);
+      menuItems = JSON.parse(content);
+      if (!Array.isArray(menuItems)) menuItems = [];
+      return { items: menuItems, sha: data.sha };
+    }).catch(function(err) {
+      menuItems = [];
+      throw err;
+    });
+  }
+
+  function showMenuEditor() {
+    activeTab = 'menu';
+    document.getElementById('header-actions').style.display = 'flex';
+    var saveBtn = document.getElementById('btn-add-menu-item');
+    saveBtn.style.display = 'inline-flex';
+    showScreen('screen-menu-editor');
+    document.getElementById('menu-list').innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading menu...</div></div>';
+    loadMenu().then(function() {
+      renderMenuTree();
+    }).catch(function(err) {
+      if (err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('Bad credentials') !== -1)) {
+        showToast('Session expired. Please login again.', 'error');
+        logout();
+        return;
+      }
+      // If menu.json doesn't exist yet, start with defaults
+      if (err.message && err.message.indexOf('404') !== -1) {
+        menuItems = [
+          { label: "Home", href: "/" },
+          { label: "News", href: "/news" },
+          { label: "For Beginners", href: "/for-beginners" },
+          { label: "Investment Analysis", href: "/investment-analysis" },
+          { label: "Platforms", children: [
+            { label: "Forex Broker", href: "/forex-broker" },
+            { label: "Crypto Exchange", href: "/crypto-exchange" },
+            { label: "Binary Option", href: "/binary-option" }
+          ]},
+          { label: "Tools", href: "/tools" },
+          { label: "About", href: "/about" },
+          { label: "Contact", href: "/contact" }
+        ];
+        renderMenuTree();
+        return;
+      }
+      document.getElementById('menu-list').innerHTML =
+        '<div class="error-box">' +
+        '<div class="error-icon">⚠</div>' +
+        '<div class="error-text">Failed to load menu: ' + escapeHtml(err.message) + '</div>' +
+        '<button class="error-retry" onclick="showMenuEditor()">Retry</button>' +
+        '</div>';
+    });
+  }
+
+  function renderMenuTree() {
+    var container = document.getElementById('menu-list');
+    if (!menuItems || menuItems.length === 0) {
+      container.innerHTML =
+        '<div class="state-box">' +
+        '<div class="state-text" style="font-size:24px">📋</div>' +
+        '<div class="state-text">No menu items yet</div>' +
+        '<div class="state-sub">Click "+ Add Item" to create your first navigation item.</div>' +
+        '</div>';
+      return;
+    }
+    var html = '<ul class="menu-tree" id="menu-sort-root">';
+    for (var i = 0; i < menuItems.length; i++) {
+      html += renderMenuItemHtml(menuItems[i], i, null);
+    }
+    html += '</ul>';
+    container.innerHTML = html;
+    // Attach drag handlers
+    attachDragHandlers();
+  }
+
+  function renderMenuItemHtml(item, index, parentIndex) {
+    var hasChildren = item.children && Array.isArray(item.children) && item.children.length > 0;
+    var href = item.href || '';
+    var childrenHtml = '';
+    if (hasChildren) {
+      childrenHtml = '<ul class="menu-tree nested">';
+      for (var ci = 0; ci < item.children.length; ci++) {
+        childrenHtml += renderMenuItemHtml(item.children[ci], ci, index);
+      }
+      childrenHtml += '</ul>';
+    }
+    var childBadge = hasChildren ? '<span class="menu-item-children">' + item.children.length + ' items</span>' : '';
+    var dataIndex = parentIndex !== null ? 'data-index="' + index + '" data-parent="' + parentIndex + '"' : 'data-index="' + index + '"';
+    return '<li draggable="true" ' + dataIndex + '>' +
+      '<span class="drag-handle">⠿</span>' +
+      '<span class="menu-item-label">' + escapeHtml(item.label) + '</span>' +
+      (href ? '<span class="menu-item-href">' + escapeHtml(href) + '</span>' : '') +
+      childBadge +
+      '<button class="menu-item-edit-btn" onclick="editMenuItem(' + index + ',' + (parentIndex !== null ? parentIndex : 'null') + ')" title="Edit">✎</button>' +
+      '</li>' + childrenHtml;
+  }
+
+  function attachDragHandlers() {
+    var items = document.querySelectorAll('#menu-sort-root > li[draggable], .nested > li[draggable]');
+    for (var i = 0; i < items.length; i++) {
+      items[i].addEventListener('dragstart', handleDragStart);
+      items[i].addEventListener('dragend', handleDragEnd);
+      items[i].addEventListener('dragover', handleDragOver);
+      items[i].addEventListener('drop', handleDrop);
+    }
+  }
+
+  var dragSrcIndex = null;
+  var dragSrcParent = null;
+
+  function handleDragStart(e) {
+    dragSrcIndex = parseInt(e.target.getAttribute('data-index'));
+    var parent = e.target.getAttribute('data-parent');
+    dragSrcParent = parent !== null ? parseInt(parent) : null;
+    e.target.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', '');
+  }
+
+  function handleDragEnd(e) {
+    e.target.classList.remove('dragging');
+    document.querySelectorAll('.drag-over').forEach(function(el) { el.classList.remove('drag-over'); });
+    dragSrcIndex = null;
+    dragSrcParent = null;
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var li = e.target.closest('li[draggable]');
+    if (li) li.classList.add('drag-over');
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    e.target.closest('li[draggable]')?.classList.remove('drag-over');
+    var targetLi = e.target.closest('li[draggable]');
+    if (!targetLi || dragSrcIndex === null) return;
+
+    var targetIndex = parseInt(targetLi.getAttribute('data-index'));
+    var targetParentAttr = targetLi.getAttribute('data-parent');
+    var targetParent = targetParentAttr !== null ? parseInt(targetParentAttr) : null;
+
+    var sourceList = dragSrcParent !== null ? menuItems[dragSrcParent].children : menuItems;
+    var targetList = targetParent !== null ? menuItems[targetParent].children : menuItems;
+
+    // If same list, reorder
+    if (dragSrcParent === targetParent) {
+      var item = sourceList.splice(dragSrcIndex, 1)[0];
+      targetList.splice(targetIndex, 0, item);
+    } else {
+      // Move between lists
+      var item = sourceList.splice(dragSrcIndex, 1)[0];
+      targetList.splice(targetIndex, 0, item);
+    }
+    renderMenuTree();
+  }
+
+  function addMenuItem(parentIndex) {
+    editingMenuItemIndex = 'new';
+    editingMenuItemParent = parentIndex !== undefined ? parentIndex : null;
+    menuItemBeingEdited = { label: '', href: '' };
+    document.getElementById('menu-item-editor-title').textContent = 'Add Menu Item';
+    document.getElementById('menu-item-delete-btn').style.display = 'none';
+    document.getElementById('menu-item-label').value = '';
+    document.getElementById('menu-item-href').value = '';
+    showScreen('screen-menu-item-editor');
+  }
+
+  function editMenuItem(index, parentIndex) {
+    var item;
+    if (parentIndex !== null) {
+      item = menuItems[parentIndex].children[index];
+    } else {
+      item = menuItems[index];
+    }
+    if (!item) return;
+    editingMenuItemIndex = index;
+    editingMenuItemParent = parentIndex;
+    menuItemBeingEdited = { label: item.label, href: item.href || '' };
+    document.getElementById('menu-item-editor-title').textContent = 'Edit Menu Item';
+    document.getElementById('menu-item-delete-btn').style.display = 'inline-flex';
+    document.getElementById('menu-item-label').value = item.label;
+    document.getElementById('menu-item-href').value = item.href || '';
+    showScreen('screen-menu-item-editor');
+  }
+
+  function saveMenuItem() {
+    var label = document.getElementById('menu-item-label').value.trim();
+    if (!label) { showToast('Label is required', 'error'); return; }
+    var href = document.getElementById('menu-item-href').value.trim();
+
+    if (editingMenuItemIndex === 'new') {
+      // Add new item
+      var newItem = { label: label };
+      if (href) newItem.href = href;
+      if (editingMenuItemParent !== null) {
+        if (!menuItems[editingMenuItemParent].children) menuItems[editingMenuItemParent].children = [];
+        menuItems[editingMenuItemParent].children.push(newItem);
+      } else {
+        menuItems.push(newItem);
+      }
+    } else {
+      // Update existing item
+      var item;
+      if (editingMenuItemParent !== null) {
+        item = menuItems[editingMenuItemParent].children[editingMenuItemIndex];
+      } else {
+        item = menuItems[editingMenuItemIndex];
+      }
+      item.label = label;
+      if (href) {
+        item.href = href;
+      } else {
+        delete item.href;
+        if (!item.children) item.children = [];
+      }
+    }
+    showToast('Menu item saved', 'success');
+    showMenuEditor();
+  }
+
+  function cancelMenuItemEdit() {
+    showMenuEditor();
+  }
+
+  function deleteMenuItem() {
+    if (!confirm('Delete this menu item?')) return;
+    if (editingMenuItemParent !== null) {
+      menuItems[editingMenuItemParent].children.splice(editingMenuItemIndex, 1);
+      if (menuItems[editingMenuItemParent].children.length === 0) {
+        delete menuItems[editingMenuItemParent].children;
+      }
+    } else {
+      menuItems.splice(editingMenuItemIndex, 1);
+    }
+    showToast('Menu item deleted', 'success');
+    showMenuEditor();
+  }
+
+  function saveMenu() {
+    var saveBtn = document.querySelector('#screen-menu-editor .btn-primary');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    // First get the current SHA
+    apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.menuPath).then(function(data) {
+      var sha = data.sha;
+      var content = JSON.stringify(menuItems, null, 2);
+      var encoded = base64Encode(content);
+
+      return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.menuPath, {
+        method: 'PUT',
+        body: JSON.stringify({
+          message: 'Update navigation menu',
+          content: encoded,
+          sha: sha,
+        }),
+      });
+    }).then(function() {
+      showToast('Menu saved successfully! The site will update on next deploy.', 'success');
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save Menu';
+      showDashboard();
+    }).catch(function(err) {
+      showToast('Failed to save menu: ' + err.message, 'error');
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save Menu';
+    });
+  }
 
   // ======================== INIT ========================
   if (token) {

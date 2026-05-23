@@ -4,37 +4,16 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
+import menuData from "@/data/menu.json";
 
-const menuItems = [
-  { label: "Home", href: "/" },
-  { label: "News", href: "/news" },
-  { label: "For Beginners", href: "/for-beginners" },
-  { label: "Investment Analysis", href: "/investment-analysis" },
-  {
-    label: "Platforms",
-    dropdown: [
-      { label: "Forex Broker", href: "/forex-broker" },
-      { label: "Crypto Exchange", href: "/crypto-exchange" },
-      { label: "Binary Option", href: "/binary-option" },
-    ],
-  },
-  { label: "Tools", href: "/tools" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+type MenuItem = { label: string; href?: string; children?: MenuItem[] };
+const menuItems: MenuItem[] = menuData;
 
-const mobileMenuItems = [
-  { label: "Home", href: "/" },
-  { label: "News", href: "/news" },
-  { label: "For Beginners", href: "/for-beginners" },
-  { label: "Investment Analysis", href: "/investment-analysis" },
-  { label: "Forex Broker", href: "/forex-broker" },
-  { label: "Crypto Exchange", href: "/crypto-exchange" },
-  { label: "Binary Option", href: "/binary-option" },
-  { label: "Tools", href: "/tools" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+const mobileMenuItems = menuItems.flatMap((item) =>
+  item.children
+    ? item.children.map((child) => ({ label: child.label, href: child.href! }))
+    : [{ label: item.label, href: item.href! }]
+);
 
 const searchablePages = [
   { label: "Home", href: "/" },
@@ -111,7 +90,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center h-full">
           {menuItems.map((item) =>
-            item.dropdown ? (
+            item.children ? (
               <div
                 key={item.label}
                 className="relative group h-full"
@@ -139,10 +118,10 @@ export default function Header() {
                     className="absolute top-full left-0 bg-white border border-border rounded-md shadow-lg min-w-[180px] z-50"
                     role="menu"
                   >
-                    {item.dropdown.map((sub) => (
+                    {item.children.map((sub) => (
                       <Link
-                        key={sub.href}
-                        href={sub.href}
+                        key={sub.href || sub.label}
+                        href={sub.href!}
                         role="menuitem"
                         className="block px-4 py-2.5 text-sm text-text-primary hover:text-primary hover:bg-primary-light transition-colors"
                         aria-current={pathname === sub.href ? "page" : undefined}
@@ -254,7 +233,7 @@ export default function Header() {
             <nav className="px-4 py-2">
               {mobileMenuItems.map((item) => (
                 <Link
-                  key={item.href}
+                  key={item.href || item.label}
                   href={item.href!}
                   className="block py-2.5 text-sm text-text-primary hover:text-primary border-b border-border last:border-0 transition-colors"
                   onClick={() => setMobileOpen(false)}

@@ -1,0 +1,14 @@
+[
+  { "label": "Home", "href": "/" },
+  { "label": "News", "href": "/news" },
+  { "label": "For Beginners", "href": "/for-beginners" },
+  { "label": "Investment Analysis", "href": "/investment-analysis" },
+  { "label": "Platforms", "children": [
+    { "label": "Forex Broker", "href": "/forex-broker" },
+    { "label": "Crypto Exchange", "href": "/crypto-exchange" },
+    { "label": "Binary Option", "href": "/binary-option" }
+  ]},
+  { "label": "Tools", "href": "/tools" },
+  { "label": "About", "href": "/about" },
+  { "label": "Contact", "href": "/contact" }
+]
