@@ -18,11 +18,11 @@ Financial market information website covering cryptocurrency, forex, and binary 
 
 #### Utility Pages (6)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
-- `/privacy-policy` — GDPR compliance, data collection (email), cookies, user rights
-- `/terms-of-service` — Risk disclaimer, no financial advice, liability limitation
+- `/privacy-policy` — GDPR compliance (legal basis, data retention, intl transfers, data subject rights)
+- `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
 - `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
-- `/api/contact` — Contact form POST endpoint with validation
+- `/api/contact` — Contact form POST endpoint with validation + rate limiting
 
 #### Main Pages (10)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
@@ -31,7 +31,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 4. Investment Analysis (`/investment-analysis`) — Market overview + reports + technical tools
 5. Forex Broker (`/forex-broker`) — **CMS-driven** brokers grid + auto comparison table
 6. Crypto Exchange (`/crypto-exchange`) — **CMS-driven** exchanges grid + auto comparison + security badges
-7. Binary Option (`/binary-option`) — **CMS-driven** platforms + risk warning + auto comparison + how it works
+7. Binary Option (`/binary-option`) — **CMS-driven** platforms + **enhanced risk warning** (geo-restriction: EU/UK/AU/CA) + auto comparison + how it works
 8. Tools (`/tools`) — 6 trading tools grid
 9. About (`/about`) — Story + Mission + Values + Team + Timeline
 10. Contact (`/contact`) — Form + company info
@@ -47,12 +47,24 @@ Financial market information website covering cryptocurrency, forex, and binary 
 #### Components
 - `BackToTop.tsx` — Floating button (appears after 400px scroll)
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
-- `NewsletterForm.tsx` — Email subscription form with validation
-- `ReviewPage.tsx` — Shared review page component for all broker review routes
+- `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox
+- `ReviewPage.tsx` — Shared review page component for all broker review routes (includes affiliate disclosure)
+- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + affiliate disclosure
+
+#### Middleware
+- `middleware.ts` — Rate limiting by IP for API routes: `/api/auth` (10/min), `/api/contact` (20/min)
+
+#### Security
+- `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content
+
+#### Backup & Recovery
+- `scripts/backup.js` — Timestamped snapshot of `src/content/` to `.backups/`
+- `scripts/restore.js` — Restore from backup (list + select)
+- `scripts/RECOVERY.md` — Recovery guide (backup, git, admin export)
 
 #### Shared Data
 - `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata
 - `data/brokers.ts` — Broker interface **+ comparison fields** + 15 default brokers (fallback when no CMS data)
 - `data/reviews.ts` — ReviewContent interface + 7 default reviews (fallback when no CMS data)
-- `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data
-- `lib/reviews.ts` — Reads review `.md` files from `src/content/reviews/` at build time
+- `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data (+ sanitize)
+- `lib/reviews.ts` — Reads review `.md` files from `src/content/reviews/` at build time (+ sanitize)

@@ -61,6 +61,13 @@ Every component must handle these states:
 - **Color contrast**: Text must meet WCAG AA (4.5:1 for normal text, 3:1 for large text). Text-light colors must only be used for decorative/non-informational content.
 - **Language**: `<html lang="en">` in root layout
 
+### Legal & GDPR
+- **Consent checkboxes**: Contact form and newsletter require explicit consent checkbox linked to Privacy Policy
+- **Affiliate disclosure**: Every "Visit Site" link on BrokerCard and ReviewPage must show "We may receive a commission"
+- **Binary options warning**: High-risk warning with geo-restriction info (EU/UK/AU/CA) on binary option listing and detail pages
+- **Terms of Service** must include: governing law, binary options clause, affiliate disclosure, class action waiver
+- **Privacy Policy** must include: legal basis (GDPR), data retention periods, international transfer safeguards, detailed data subject rights
+
 ### Performance
 - **next/font**: Use `next/font/google` with `display: swap`. No `@import` in CSS.
 - **next/image**: Use for all remote images. Configure `remotePatterns` in `next.config.ts`.

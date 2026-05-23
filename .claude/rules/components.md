@@ -12,11 +12,12 @@ description: Global component library, file structure, and live price widget spe
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
-| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros |
-| `ContactForm.tsx` | Contact form (name, email, subject, message) |
+| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros + affiliate disclosure |
+| `ContactForm.tsx` | Contact form (name, email, subject, message) + GDPR consent checkbox |
+| `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
 | `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
-| `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar) |
+| `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar, affiliate disclosure) |
 
 ### Live Price Widget — PriceTicker
 
@@ -65,9 +66,11 @@ trantamcapital/
 │   │   ├── news.ts
 │   │   ├── brokers.ts                # Broker interface + 15 defaults + comparison field sets
 │   │   └── reviews.ts                # ReviewContent interface + 16 defaults
+│   ├── middleware.ts                 # Rate limiting (API routes)
 │   ├── lib/
-│   │   ├── content.ts                # Reads news/broker .md files at build time
-│   │   └── reviews.ts                # Reads review .md files at build time
+│   │   ├── sanitize.ts               # XSS: stripHtml for CMS content
+│   │   ├── content.ts                # Reads news/broker .md files at build time (+ sanitize)
+│   │   └── reviews.ts                # Reads review .md files at build time (+ sanitize)
 │   └── components/
 │       ├── Header.tsx
 │       ├── Footer.tsx

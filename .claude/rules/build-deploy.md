@@ -14,6 +14,10 @@ npm run build        # Production build (must succeed before deploy)
 
 # Lint
 npm run lint         # Run ESLint
+
+# Backup / Restore (CMS content)
+npm run backup       # Snapshot src/content/ to .backups/<timestamp>/
+npm run restore      # List and restore from a backup
 ```
 
 ### Project Paths
@@ -25,16 +29,24 @@ npm run lint         # Run ESLint
 - Content (CMS): `trantamcapital\src\content\`
 - CMS config: `trantamcapital\public\admin\`
 
-### next.config.js — Required Config
+### next.config.ts — Required Config
 
-```js
-// next.config.js — PHẢI CÓ trước khi build/deploy
+```ts
+// next.config.ts — PHẢI CÓ trước khi build/deploy
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'assets.coingecko.com',  // CoinGecko icons
+      },
+      {
+        protocol: 'https',
+        hostname: 'coin-images.coingecko.com',  // CoinGecko images
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',  // Admin uploaded images
       },
     ],
   },
@@ -43,19 +55,41 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
-          // HSTS — bắt buộc HTTPS, chặn MITM
+          // HSTS
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          // Chặn clickjacking
+          { key: 'X-Frame-Options', value: 'DENY' },
+          // Chặn MIME sniffing
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          // Kiểm soát referrer
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          // Hạn chế quyền trình duyệt
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
+          // CSP
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "default-src 'self';" +
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval';" +
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;" +
+              "font-src 'self' https://fonts.gstatic.com;" +
+              "img-src 'self' https://assets.coingecko.com https://coin-images.coingecko.com https://raw.githubusercontent.com data:;" +
+              "connect-src 'self' https://api.github.com https://api.coingecko.com;" +
+              "frame-src 'none';" +
+              "object-src 'none';" +
+              "base-uri 'self'",
+          },
         ],
       },
-    ],
+    ];
   },
 };
 ```
 
 **Ghi chú:**
-- `images.remotePatterns` — 🔴 **bắt buộc** nếu dùng PriceTicker (CoinGecko icon)
-- HSTS — 🟡 nên có, nhất là website tài chính
-- CSP (Content Security Policy) — ⏸️ **chưa cần**, khi nào tích hợp Decap CMS mới thêm. Dễ block nhầm nếu config sai.
+- `images.remotePatterns` — 🔴 **bắt buộc** nếu dùng PriceTicker (CoinGecko icon) hoặc admin uploaded images
+- Security headers (HSTS, CSP, X-Frame-Options, etc.) — 🔴 nên có, nhất là website tài chính
+- CSP `connect-src` phải bao gồm `api.coingecko.com` (PriceTicker) và `api.github.com` (admin OAuth)
 
 ### Deployment (Vercel)
 1. Push code to GitHub repository
@@ -69,6 +103,12 @@ const nextConfig = {
 - Use semantic HTML (`<header>`, `<main>`, `<section>`, `<article>`, `<footer>`, `<nav>`, `<aside>`)
 - All interactive elements must have visible focus states (`:focus-visible` with 2px solid `#E84910`)
 - sitemap.ts generates `/sitemap.xml` automatically
+
+### Security
+- **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth` (10/min), `/api/contact` (20/min)
+- **XSS**: `src/lib/sanitize.ts` — stripHtml() applied to all CMS content at build time (content.ts, reviews.ts)
+- **Backup**: `scripts/backup.js` và `scripts/restore.js` — snapshot/restore CMS content (.backups/ bị gitignore)
+- **Recovery guide**: `scripts/RECOVERY.md`
 
 ### Performance Guidelines
 - Images: Use CSS gradients instead of real images for placeholders

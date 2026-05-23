@@ -19,8 +19,11 @@ Financial market information website covering cryptocurrency, forex, and binary 
 | Stack | Next.js 14 + TypeScript + Tailwind CSS |
 | Design | Premium Financial — cam `#E84910`, navy `#0F1A2E`, gold `#C8A84E`, body text 16px |
 | Pages | 10 main + 7 sub + 9 news/[slug] + utility = 31 routes, English |
-| CMS | Custom Admin UI via `/admin` — GitHub OAuth + REST API (replaces Decap CMS) |
+| CMS | Custom Admin UI via `/admin` — GitHub OAuth + REST API |
 | Live prices | CoinGecko API, 12 coins, 60s refresh |
+| Security | XSS sanitize (CMS), rate limiting (API), CSP + security headers, GDPR consent |
+| Legal | Binary options risk warning + geo-restriction, affiliate disclosure, governing law (Belize) |
+| Backup | `npm run backup` / `npm run restore` — CMS content snapshots |
 | Content inventory | `NOI_DUNG_WEBSITE.md` — all website text for editing reference |
 | Deploy | Vercel (free), GitHub auto-deploy |
 | Initial command | `npm run dev` in `trantamcapital/` |
