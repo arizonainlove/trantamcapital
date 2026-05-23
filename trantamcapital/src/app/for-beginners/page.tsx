@@ -14,18 +14,21 @@ const introCards = [
     description: "Digital or virtual currency that uses cryptography for security. Cryptocurrencies operate on decentralized networks based on blockchain technology, making them resistant to government interference or manipulation.",
     gradient: "from-primary to-primary-hover",
     newsCategory: "Cryptocurrency",
+    newsSlug: "cryptocurrency",
   },
   {
     title: "What is Forex Trading?",
     description: "The foreign exchange (forex) market is the global marketplace for trading national currencies. With $7.5 trillion in daily volume, it's the largest and most liquid financial market in the world.",
     gradient: "from-link to-blue-800",
     newsCategory: "Forex",
+    newsSlug: "forex",
   },
   {
     title: "What are Binary Options?",
     description: "Binary options are financial instruments that allow you to speculate on the price movement of an asset. You predict whether the price will be above or below a certain level at a specific time.",
     gradient: "from-gold to-yellow-800",
-    newsCategory: "Binary+Options",
+    newsCategory: "Binary Options",
+    newsSlug: "binary-options",
   },
 ];
 
@@ -82,10 +85,10 @@ export default function ForBeginners() {
                 <h3 className="text-lg font-bold text-text-primary mb-3">{card.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-5">{card.description}</p>
                 <Link
-                  href={`/news?category=${card.newsCategory}`}
+                  href={`/news/categories/${card.newsSlug}`}
                   className="inline-block text-sm font-bold text-white bg-primary hover:bg-primary-hover px-5 py-2.5 rounded min-h-[44px] transition-colors"
                 >
-                  Read {card.newsCategory === "Binary+Options" ? "Binary Options" : card.newsCategory} News
+                  Read {card.newsCategory} News
                 </Link>
               </Card>
             ))}
