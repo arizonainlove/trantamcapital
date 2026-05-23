@@ -8,6 +8,8 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 - Type: Self-contained SPA, no CMS dependency
 - Access URL: `/admin` on the live site
 - Authentication: GitHub OAuth via `/api/auth` route
+- Server-side protection: Route handler at `app/admin/route.ts` checks HTTP-only session cookie (`admin_token`). Visitors without cookie see a lightweight login page, not the admin UI.
+- Session cookie: Set via `POST /api/auth/session` after OAuth success, cleared on logout (`DELETE /api/auth/session`). Cookie is HTTP-only, secure, 24h expiry.
 - No database required — all content stored as Markdown files in the repo
 
 ### Content Storage
@@ -19,15 +21,17 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 - Workflow: Write in admin → auto-commits file to GitHub → Vercel rebuilds
 
 ### Key Files
-- `public/admin/index.html` — Single-file SPA with login, dashboard, editor (4 tabs)
 - `public/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md` — User guide (Vietnamese)
+- `src/admin-ui/index.html` — Single-file SPA with login, dashboard, editor (4 tabs). Served by route handler at `app/admin/route.ts` (not from `public/`)
+- `src/app/admin/route.ts` — Route handler that checks session cookie before serving admin SPA
+- `src/app/api/auth/session/route.ts` — API to set/clear HTTP-only session cookie
 - `src/lib/content.ts` — Reads `.md` files at build time for news + brokers
 - `src/lib/reviews.ts` — Reads review `.md` files at build time
 
 ### Admin Features
 | Feature | Description |
 |---------|-------------|
-| Login | GitHub OAuth via popup → saves token to localStorage |
+| Login | GitHub OAuth via popup → saves token to localStorage → server sets HTTP-only session cookie |
 | Dashboard | Tab-based: **News Articles**, **Brokers**, **Reviews**, and **Menu** tabs |
 | Statistics | Stats bar showing counts for articles, brokers, reviews |
 | Search | Filter articles and brokers by name/title |

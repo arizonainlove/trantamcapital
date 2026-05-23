@@ -1185,9 +1185,10 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   // ======================== AUTH ========================
-  window.__authComplete = function(t) {
+  window.__authComplete = async function(t) {
     token = t;
     localStorage.setItem(CONFIG.tokenKey, t);
+    try { await fetch('/api/auth/session', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({token: t}) }); } catch(e) {}
     showToast('Login successful', 'success');
     showDashboard();
   };
@@ -1204,6 +1205,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     editingArticle = null;
     editingBroker = null;
     localStorage.removeItem(CONFIG.tokenKey);
+    fetch('/api/auth/session', { method: 'DELETE' }).catch(function(){});
     document.getElementById('header-actions').style.display = 'none';
     showScreen('screen-login');
   }

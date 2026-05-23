@@ -89,9 +89,14 @@ trantamcapital/
 │   ├── news/
 │   ├── brokers/
 │   └── reviews/
+├── src/
+│   ├── app/
+│   │   ├── admin/route.ts             # Server-side gate for admin SPA
+│   │   └── api/auth/session/route.ts  # Session cookie API
+│   ├── admin-ui/index.html            # Admin SPA (served via route handler)
 ├── public/
 │   ├── images/
-│   └── admin/                         # Custom Admin SPA
+│   └── admin/                         # Admin guide only (HƯỚNG_DẪN_SỬ_DỤNG_CMS.md)
 ├── .claude/
 │   └── rules/
 ├── CLAUDE.md

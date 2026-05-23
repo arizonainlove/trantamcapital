@@ -14,15 +14,17 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
-### Site Structure (46 routes)
+### Site Structure (48 routes)
 
-#### Utility Pages (6)
+#### Utility Pages (8)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
 - `/privacy-policy` — GDPR compliance (legal basis, data retention, intl transfers, data subject rights)
 - `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
 - `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
 - `/api/contact` — Contact form POST endpoint with validation + rate limiting
+- `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
+- `/admin` — Admin SPA route handler, checks session cookie before serving
 
 #### Main Pages (10)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
@@ -56,6 +58,8 @@ Financial market information website covering cryptocurrency, forex, and binary 
 
 #### Security
 - `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content
+- `app/admin/route.ts` — Server-side gate for `/admin`: checks HTTP-only `admin_token` cookie before serving admin SPA. Visitors without cookie see a lightweight login page.
+- `app/api/auth/session/route.ts` — Session API: `POST` validates GitHub token and sets cookie; `DELETE` clears cookie on logout. Cookie is HTTP-only, secure, 24h expiry.
 
 #### Backup & Recovery
 - `scripts/backup.js` — Timestamped snapshot of `src/content/` to `.backups/`
