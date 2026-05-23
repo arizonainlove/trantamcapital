@@ -1500,7 +1500,17 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     var listEl = document.getElementById('dashboard-list');
     listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading reviews...</div></div>';
 
-    listReviews().then(function(items) {
+    // Ensure brokers list is loaded for name resolution
+    var ensureBrokers;
+    if (brokers.length === 0 || !window._brokersLoadedAtLeastOnce) {
+      ensureBrokers = listBrokers().then(function(b) { window._brokersLoadedAtLeastOnce = true; return b; });
+    } else {
+      ensureBrokers = Promise.resolve(brokers);
+    }
+
+    ensureBrokers.then(function() {
+      return listReviews();
+    }).then(function(items) {
       renderReviewList(items);
     }).catch(function(err) {
       if (err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('Bad credentials') !== -1)) {
@@ -1536,8 +1546,15 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     for (var i = 0; i < items.length; i++) {
       var r = items[i];
       var brokerSlug = r.attrs.brokerSlug || '—';
-      var brokerName = r.attrs.brokerName || '';
-      var displayName = brokerName ? brokerName + ' (' + brokerSlug + ')' : brokerSlug;
+      // Look up broker name from Brokers tab data (always up-to-date)
+      var brokerName = brokerSlug;
+      for (var bi = 0; bi < brokers.length; bi++) {
+        if (brokers[bi].slug === brokerSlug) {
+          brokerName = brokers[bi].attrs.name || brokerSlug;
+          break;
+        }
+      }
+      var displayName = brokerName + ' (' + brokerSlug + ')';
       var escapedBroker = escapeHtml(displayName);
 
       html += '<tr>' +
@@ -1707,7 +1724,17 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         break;
       }
     }
-    var label = review && review.attrs.brokerSlug ? review.attrs.brokerSlug : slug;
+    var label = slug;
+    if (review && review.attrs.brokerSlug) {
+      var bs = review.attrs.brokerSlug;
+      label = bs;
+      for (var bi = 0; bi < brokers.length; bi++) {
+        if (brokers[bi].slug === bs) {
+          label = (brokers[bi].attrs.name || bs) + ' (' + bs + ')';
+          break;
+        }
+      }
+    }
     if (!confirm('Are you sure you want to delete the review for "' + label + '"?\n\nThis action cannot be undone.')) return;
 
     var sha = review ? review.sha : null;

@@ -125,7 +125,7 @@ export default function Header() {
                 }}
               >
                 <button
-                  className="h-full px-3 text-sm text-text-primary hover:text-primary flex items-center gap-1 transition-colors"
+                  className="h-full px-3 text-sm font-bold text-text-primary hover:text-primary flex items-center gap-1 transition-colors"
                   aria-haspopup="true"
                   aria-expanded={platformOpen}
                 >
@@ -157,7 +157,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href!}
-                className="h-full px-3 text-sm text-text-primary hover:text-primary flex items-center transition-colors"
+                className="h-full px-3 text-sm font-bold text-text-primary hover:text-primary flex items-center transition-colors"
                 aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.label}
