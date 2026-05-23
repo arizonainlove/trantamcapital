@@ -2,7 +2,7 @@
 name: "IC Markets"
 type: "Forex Broker"
 rating: 4.7
-order: 5
+order: 2
 features:
   - "ASIC regulated"
   - "True ECN pricing"
@@ -11,9 +11,20 @@ features:
 reviewHref: "/forex-broker/broker-b"
 visitHref: "https://www.icmarkets.com/global/en/"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367192104-logoicmarkets.png"
+highlights:
+  - "Excellent Scalping"
+  - "Excellent EA/Bot Trading"
+  - "Very Low Spreads"
+  - "Very High Reputation"
 regulation: "ASIC, CySEC"
 minDeposit: "$200"
 spread: "From 0.0 pips"
 leverage: "1:500"
 platforms: "MT4, MT5, cTrader"
+scalping: "Excellent"
+eaBot: "Excellent"
+withdrawals: "Good"
+goldTrading: "Strong"
+bonusPrograms: "Weak"
+vietnamSuitability: "High"
 ---

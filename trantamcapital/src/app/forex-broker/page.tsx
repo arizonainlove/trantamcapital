@@ -10,6 +10,23 @@ export const metadata: Metadata = {
   description: "Compare top regulated forex brokers. Read expert reviews, compare spreads, leverage, and trading platforms.",
 };
 
+function RatingBadge({ value }: { value?: string }) {
+  if (!value) return <span className="text-text-secondary">—</span>;
+  const isTop = value === "Excellent" || value === "Very High" || value === "Very Strong";
+  const isHigh = value === "Very Good" || value === "High" || value === "Strong";
+  const isGood = value === "Good" || value === "Fairly Good";
+  const isMedium = value === "Medium";
+
+  let className = "text-xs font-semibold px-2 py-1 rounded ";
+  if (isTop) className += "bg-success/10 text-success";
+  else if (isHigh) className += "bg-link/10 text-link";
+  else if (isGood) className += "bg-primary-light text-primary";
+  else if (isMedium) className += "bg-warning/10 text-warning";
+  else className += "bg-text-light/10 text-text-light";
+
+  return <span className={className}>{value}</span>;
+}
+
 export default function ForexBroker() {
   const brokers = getAllBrokers().filter((b) => b.type === "Forex Broker");
 
@@ -44,14 +61,14 @@ export default function ForexBroker() {
       {brokers.length > 0 && (
         <section className="py-12 bg-section">
           <div className="max-w-[1200px] mx-auto px-4">
-            <SectionTitle title="Comparison Table" subtitle="Side-by-side comparison of key features" />
+            <SectionTitle title="Comparison Table" subtitle="Side-by-side comparison of key features and ratings" />
             <div className="overflow-x-auto">
               <table className="w-full text-sm bg-white rounded-lg border border-border">
                 <thead>
                   <tr className="bg-dark text-white">
                     <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Broker</th>
                     {forexComparisonFields.map((f) => (
-                      <th key={f.key} className="text-center py-3 px-4 font-semibold">{f.label}</th>
+                      <th key={f.key} className="text-center py-3 px-4 font-semibold whitespace-nowrap">{f.label}</th>
                     ))}
                   </tr>
                 </thead>
@@ -59,13 +76,19 @@ export default function ForexBroker() {
                   {brokers.map((row, i) => (
                     <tr key={row.slug} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
                       <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>
-                        {row.name}
+                        <Link href={row.reviewHref} className="hover:text-primary transition-colors">
+                          {row.name}
+                        </Link>
                       </td>
-                      {forexComparisonFields.map((f) => (
-                        <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
-                          {(row as unknown as Record<string, string | undefined>)[f.key] || "—"}
-                        </td>
-                      ))}
+                      {forexComparisonFields.map((f) => {
+                        const val = (row as unknown as Record<string, string | undefined>)[f.key];
+                        const isRatingField = ["scalping", "goldTrading", "withdrawals", "eaBot", "bonusPrograms", "vietnamSuitability"].includes(f.key);
+                        return (
+                          <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
+                            {isRatingField ? <RatingBadge value={val} /> : (val || "—")}
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))}
                 </tbody>

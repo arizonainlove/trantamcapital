@@ -1,20 +1,20 @@
 ---
 brokerSlug: "forexbroker-c"
-brokerName: "ForexBroker C"
+brokerName: "Pepperstone"
 brokerType: "Forex Broker"
 pros:
-  - "Multi-regulated (ASIC, FCA, CySEC)"
+  - "Multi-regulated (ASIC, FCA, CMA)"
   - "Razor spreads from 0.0 pips"
   - "1200+ tradable instruments"
-  - "Fast execution with No Dealing Desk"
-  - "Excellent customer support"
-  - "Advanced trading tools"
+  - "Very good scalping conditions"
+  - "Very good EA/bot compatibility"
+  - "TradingView integration"
 cons:
   - "Higher fees for inactive accounts"
   - "Limited product range for US clients"
-  - "No cTrader platform"
+  - "$200 minimum deposit"
 trustScore: 90
 ---
-ForexBroker C is a multi-regulated forex broker offering over 1,200 tradable instruments including forex, indices, commodities, cryptocurrencies, and shares. With razor-thin spreads starting from 0.0 pips on Razor accounts, they cater to both retail and institutional clients.
+Pepperstone is a multi-regulated forex broker (ASIC, FCA, CMA) with a Very High reputation, offering over 1,200 tradable instruments. Their Razor account spreads start from 0.0 pips with commission around $3.5/lot per side, delivering institutional-grade trading conditions.
 
-The broker is known for its fast execution speeds and No Dealing Desk (NDD) policy, ensuring traders get fair and transparent pricing. They support MetaTrader 4, MetaTrader 5, and TradingView, giving traders flexibility in their choice of platform.
+Pepperstone scores Very Good in both scalping and EA/bot trading, with strong gold trading capabilities. The broker uniquely supports TradingView alongside MT4 and MT5, giving traders access to advanced charting tools. With High suitability for the Vietnam market and reliable withdrawals, Pepperstone is an excellent all-round broker for both manual and automated traders.

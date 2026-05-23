@@ -36,7 +36,6 @@ function loadCmsArticles(): NewsArticle[] {
 
 export function getAllNews(): NewsArticle[] {
   const cmsArticles = loadCmsArticles();
-  // If CMS has articles, use ONLY CMS (static is fallback when no CMS)
   if (cmsArticles.length > 0) return cmsArticles;
   return staticNews;
 }
@@ -50,6 +49,12 @@ export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "
 function parseOptional(data: Record<string, unknown>, key: string): string | undefined {
   const val = data[key];
   return val && typeof val === "string" && val.length > 0 ? val : undefined;
+}
+
+function parseStringArray(data: Record<string, unknown>, key: string): string[] | undefined {
+  const val = data[key];
+  if (Array.isArray(val)) return val.map((v: string) => sanitize(v)).filter(Boolean);
+  return undefined;
 }
 
 export function getAllBrokers(): Broker[] {
@@ -73,7 +78,7 @@ export function getAllBrokers(): Broker[] {
       visitHref: data.visitHref || "#",
       gradient: data.gradient || undefined,
       logo: parseOptional(data, "logo"),
-      // Comparison fields
+      highlights: parseStringArray(data, "highlights"),
       regulation: parseOptional(data, "regulation"),
       minDeposit: parseOptional(data, "minDeposit"),
       spread: parseOptional(data, "spread"),
@@ -87,10 +92,24 @@ export function getAllBrokers(): Broker[] {
       expiryTypes: parseOptional(data, "expiryTypes"),
       assets: parseOptional(data, "assets"),
       order: data.order ? Number(data.order) : undefined,
+      // New Excel-derived fields
+      scalping: parseOptional(data, "scalping"),
+      eaBot: parseOptional(data, "eaBot"),
+      withdrawals: parseOptional(data, "withdrawals"),
+      goldTrading: parseOptional(data, "goldTrading"),
+      bonusPrograms: parseOptional(data, "bonusPrograms"),
+      vietnamSuitability: parseOptional(data, "vietnamSuitability"),
+      futures: parseOptional(data, "futures"),
+      spot: parseOptional(data, "spot"),
+      copyTrading: parseOptional(data, "copyTrading"),
+      web3: parseOptional(data, "web3"),
+      affiliateProgram: parseOptional(data, "affiliateProgram"),
+      popularity: parseOptional(data, "popularity"),
+      cryptoSupport: parseOptional(data, "cryptoSupport"),
+      binaryCopyTrading: parseOptional(data, "binaryCopyTrading"),
     } as Broker;
   });
 
-  // Sort by order field (ascending), fallback to name for items without order
   brokers.sort((a, b) => {
     if (a.order !== undefined && b.order !== undefined) return a.order - b.order;
     if (a.order !== undefined) return -1;

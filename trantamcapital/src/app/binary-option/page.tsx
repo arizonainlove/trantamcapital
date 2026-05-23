@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import BrokerCard from "@/components/BrokerCard";
 import Card from "@/components/Card";
@@ -9,6 +10,23 @@ export const metadata: Metadata = {
   title: "Binary Options Platforms",
   description: "Explore binary options trading platforms. Expert reviews, risk warnings, and educational resources for binary options traders.",
 };
+
+function RatingBadge({ value }: { value?: string }) {
+  if (!value) return <span className="text-text-secondary">—</span>;
+  const isTop = value === "Excellent" || value === "Very Strong";
+  const isHigh = value === "Strong" || value === "Long-established";
+  const isGood = value === "Good";
+  const isMedium = value === "Medium";
+
+  let className = "text-xs font-semibold px-2 py-1 rounded ";
+  if (isTop) className += "bg-success/10 text-success";
+  else if (isHigh) className += "bg-link/10 text-link";
+  else if (isGood) className += "bg-primary-light text-primary";
+  else if (isMedium) className += "bg-warning/10 text-warning";
+  else className += "bg-text-light/10 text-text-light";
+
+  return <span className={className}>{value}</span>;
+}
 
 const steps = [
   { number: "01", title: "Choose an Asset", description: "Select the asset you want to trade — currency pairs, stocks, commodities, or cryptocurrencies." },
@@ -84,14 +102,14 @@ export default function BinaryOption() {
       {platforms.length > 0 && (
         <section className="py-12 bg-section">
           <div className="max-w-[1200px] mx-auto px-4">
-            <SectionTitle title="Platform Comparison" subtitle="Key features at a glance" />
+            <SectionTitle title="Platform Comparison" subtitle="Key features and ratings at a glance" />
             <div className="overflow-x-auto">
               <table className="w-full text-sm bg-white rounded-lg border border-border">
                 <thead>
                   <tr className="bg-dark text-white">
                     <th className="text-left py-3 px-4 font-semibold sticky left-0 z-10 bg-dark">Platform</th>
                     {binaryComparisonFields.map((f) => (
-                      <th key={f.key} className="text-center py-3 px-4 font-semibold">{f.label}</th>
+                      <th key={f.key} className="text-center py-3 px-4 font-semibold whitespace-nowrap">{f.label}</th>
                     ))}
                   </tr>
                 </thead>
@@ -99,13 +117,19 @@ export default function BinaryOption() {
                   {platforms.map((row, i) => (
                     <tr key={row.slug} className={i % 2 === 0 ? "bg-white" : "bg-section"}>
                       <td className={`py-3 px-4 font-semibold text-text-primary sticky left-0 z-10 ${i % 2 === 0 ? "bg-white" : "bg-section"}`}>
-                        {row.name}
+                        <Link href={row.reviewHref} className="hover:text-primary transition-colors">
+                          {row.name}
+                        </Link>
                       </td>
-                      {binaryComparisonFields.map((f) => (
-                        <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
-                          {(row as unknown as Record<string, string | undefined>)[f.key] || "—"}
-                        </td>
-                      ))}
+                      {binaryComparisonFields.map((f) => {
+                        const val = (row as unknown as Record<string, string | undefined>)[f.key];
+                        const isRatingField = ["popularity", "binaryCopyTrading", "cryptoSupport", "affiliateProgram"].includes(f.key);
+                        return (
+                          <td key={f.key} className="py-3 px-4 text-center text-text-secondary">
+                            {isRatingField ? <RatingBadge value={val} /> : (val || "—")}
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))}
                 </tbody>

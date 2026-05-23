@@ -6,9 +6,10 @@ export interface Broker {
   features: string[];
   reviewHref: string;
   visitHref: string;
-  logo?: string;           // Broker's own brand logo (NOT the TrantamCapital website logo)
+  logo?: string;
   gradient?: string;
-  order?: number;          // Display order (lower = first)
+  order?: number;
+  highlights?: string[];   // Key selling points from Excel data, shown as badges on cards
   // Comparison fields — type-specific, used in auto comparison tables
   regulation?: string;
   minDeposit?: string;
@@ -22,45 +23,29 @@ export interface Broker {
   payout?: string;
   expiryTypes?: string;
   assets?: string;
+  // New Excel-derived fields — Forex
+  scalping?: string;
+  eaBot?: string;
+  withdrawals?: string;
+  goldTrading?: string;
+  bonusPrograms?: string;
+  vietnamSuitability?: string;
+  // New Excel-derived fields — Crypto
+  futures?: string;
+  spot?: string;
+  copyTrading?: string;
+  web3?: string;
+  affiliateProgram?: string;
+  // New Excel-derived fields — Binary
+  popularity?: string;
+  cryptoSupport?: string;
+  binaryCopyTrading?: string;
 }
 
+// ── Default broker data (fallback when no CMS .md file exists) ──
 const defaultBrokers: Omit<Broker, "slug">[] = [
-  // ── Forex Brokers ──
-  {
-    name: "ForexBroker A", type: "Forex Broker", rating: 4.8, order: 1,
-    features: ["Regulated by FCA & CySEC", "0.0 pip spreads", "MT4 & MT5 supported", "1:500 leverage"],
-    reviewHref: "/forex-broker/broker-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)",
-    regulation: "FCA, CySEC", minDeposit: "$100", spread: "0.0 pips", leverage: "1:500", platforms: "MT4, MT5, cTrader",
-  },
-  {
-    name: "ForexBroker B", type: "Forex Broker", rating: 4.6, order: 2,
-    features: ["ASIC regulated", "Negative balance protection", "Free education", "24/7 support"],
-    reviewHref: "/forex-broker/broker-b", visitHref: "#",
-    gradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)",
-    regulation: "ASIC", minDeposit: "$200", spread: "0.5 pips", leverage: "1:500", platforms: "MT4, MT5",
-  },
-  {
-    name: "ForexBroker C", type: "Forex Broker", rating: 4.5, order: 3,
-    features: ["FCA regulated", "Social trading", "Copy trading", "Competitive spreads"],
-    reviewHref: "/forex-broker/broker-c", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-    regulation: "FCA", minDeposit: "$50", spread: "0.8 pips", leverage: "1:30", platforms: "MT4, MT5, WebTrader",
-  },
-  {
-    name: "ForexBroker D", type: "Forex Broker", rating: 4.4, order: 4,
-    features: ["CySEC regulated", "Islamic accounts", "PAMM accounts", "Low minimum deposit"],
-    reviewHref: "/forex-broker/broker-d", visitHref: "#",
-    gradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)",
-    regulation: "CySEC", minDeposit: "$100", spread: "1.0 pips", leverage: "1:200", platforms: "MT4, MT5",
-  },
-  {
-    name: "ForexBroker E", type: "Forex Broker", rating: 4.3, order: 5,
-    features: ["FSA regulated", "Crypto CFDs available", "EA compatible", "Competitive commissions"],
-    reviewHref: "/forex-broker/broker-e", visitHref: "#",
-    gradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)",
-    regulation: "FSA", minDeposit: "$10", spread: "1.2 pips", leverage: "1:1000", platforms: "MT4, WebTrader",
-  },
+  // ── Forex Brokers (CMS-managed: Exness, IC Markets, Pepperstone, FxPro, XM) ──
+  // ForexBroker F — no CMS file, uses fallback
   {
     name: "ForexBroker F", type: "Forex Broker", rating: 4.2, order: 6,
     features: ["Offshore regulated", "High leverage 1:1000", "Instant withdrawals", "Multi-language support"],
@@ -69,42 +54,8 @@ const defaultBrokers: Omit<Broker, "slug">[] = [
     regulation: "Offshore", minDeposit: "$50", spread: "1.5 pips", leverage: "1:1000", platforms: "MT4, Mobile App",
   },
 
-  // ── Crypto Exchanges ──
-  {
-    name: "Exchange A", type: "Crypto Exchange", rating: 4.7, order: 7,
-    features: ["500+ cryptocurrencies", "Low fees 0.1%", "Futures & margin", "Security track record"],
-    reviewHref: "/crypto-exchange/exchange-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #F9A825 0%, #F57F17 100%)",
-    tradingFees: "0.1%", security: "Very High", exchangeFeatures: "Spot, Futures, Margin", coins: "500+",
-  },
-  {
-    name: "Exchange B", type: "Crypto Exchange", rating: 4.5, order: 8,
-    features: ["User-friendly interface", "Staking rewards", "NFT marketplace", "Institutional security"],
-    reviewHref: "/crypto-exchange/exchange-b", visitHref: "#",
-    gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)",
-    tradingFees: "0.2%", security: "High", exchangeFeatures: "Spot, Staking, NFT", coins: "350+",
-  },
-  {
-    name: "Exchange C", type: "Crypto Exchange", rating: 4.4, order: 9,
-    features: ["Regulated EU & Asia", "Advanced charting", "OTC trading desk", "Cold storage assets"],
-    reviewHref: "/crypto-exchange/exchange-c", visitHref: "#",
-    gradient: "linear-gradient(135deg, #00897B 0%, #00695C 100%)",
-    tradingFees: "0.15%", security: "Very High", exchangeFeatures: "Spot, OTC, Margin", coins: "200+",
-  },
-  {
-    name: "Exchange D", type: "Crypto Exchange", rating: 4.3, order: 10,
-    features: ["Decentralized exchange", "Self-custody funds", "Low gas fees", "Cross-chain swaps"],
-    reviewHref: "/crypto-exchange/exchange-d", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-    tradingFees: "0.3%", security: "High", exchangeFeatures: "DEX, Swaps", coins: "100+",
-  },
-  {
-    name: "Exchange E", type: "Crypto Exchange", rating: 4.2, order: 11,
-    features: ["Beginner friendly", "Recurring buys", "Educational content", "24/7 support"],
-    reviewHref: "/crypto-exchange/exchange-e", visitHref: "#",
-    gradient: "linear-gradient(135deg, #1E88E5 0%, #1565C0 100%)",
-    tradingFees: "0.5%", security: "High", exchangeFeatures: "Spot, Recurring", coins: "50+",
-  },
+  // ── Crypto Exchanges (CMS-managed: Binance, Coinbase, Bybit, OKX, Bitget) ──
+  // Exchange F — no CMS file, uses fallback
   {
     name: "Exchange F", type: "Crypto Exchange", rating: 4.1, order: 12,
     features: ["Copy trading", "Low futures fees", "API trading", "Active community"],
@@ -113,28 +64,7 @@ const defaultBrokers: Omit<Broker, "slug">[] = [
     tradingFees: "0.02%", security: "Medium", exchangeFeatures: "Futures, Copy", coins: "150+",
   },
 
-  // ── Binary Options Platforms ──
-  {
-    name: "BinaryPlatform A", type: "Binary Options", rating: 4.3, order: 13,
-    features: ["User-friendly platform", "Multiple asset classes", "Demo account available", "Fast withdrawals"],
-    reviewHref: "/binary-option/platform-a", visitHref: "#",
-    gradient: "linear-gradient(135deg, #C62828 0%, #B71C1C 100%)",
-    payout: "Up to 92%", expiryTypes: "60s — End of Day", assets: "Forex, Stocks, Crypto, Commodities",
-  },
-  {
-    name: "BinaryPlatform B", type: "Binary Options", rating: 4.1, order: 14,
-    features: ["High payouts up to 95%", "Mobile trading app", "60-second options", "24/7 support"],
-    reviewHref: "/binary-option/platform-b", visitHref: "#",
-    gradient: "linear-gradient(135deg, #E84910 0%, #C93D0A 100%)",
-    payout: "Up to 95%", expiryTypes: "60s — 1 Hour", assets: "Forex, Crypto, Indices",
-  },
-  {
-    name: "BinaryPlatform C", type: "Binary Options", rating: 4.0, order: 15,
-    features: ["Turbo options", "Range of expiry times", "Technical indicators", "Video tutorials"],
-    reviewHref: "/binary-option/platform-c", visitHref: "#",
-    gradient: "linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%)",
-    payout: "Up to 90%", expiryTypes: "5 mins — End of Day", assets: "Forex, Stocks, Commodities",
-  },
+  // ── Binary Options (CMS-managed: IQ Option, Pocket Option, Quotex, Binomo, Deriv) ──
 ];
 
 function slugify(name: string): string {
@@ -149,6 +79,7 @@ export const defaultBrokerData: Broker[] = defaultBrokers.map((b) => ({
   slug: slugify(b.name),
 }));
 
+// ── Comparison field definitions ──
 export type BrokerComparisonField = {
   key: keyof Broker;
   label: string;
@@ -160,6 +91,9 @@ export const forexComparisonFields: BrokerComparisonField[] = [
   { key: "spread", label: "Spread" },
   { key: "leverage", label: "Leverage" },
   { key: "platforms", label: "Platforms" },
+  { key: "scalping", label: "Scalping" },
+  { key: "goldTrading", label: "Gold Trading" },
+  { key: "withdrawals", label: "Withdrawals" },
 ];
 
 export const cryptoComparisonFields: BrokerComparisonField[] = [
@@ -167,10 +101,18 @@ export const cryptoComparisonFields: BrokerComparisonField[] = [
   { key: "security", label: "Security" },
   { key: "exchangeFeatures", label: "Features" },
   { key: "coins", label: "Coins" },
+  { key: "futures", label: "Futures" },
+  { key: "copyTrading", label: "Copy Trading" },
+  { key: "web3", label: "Web3" },
+  { key: "affiliateProgram", label: "Affiliate" },
 ];
 
 export const binaryComparisonFields: BrokerComparisonField[] = [
   { key: "payout", label: "Max Payout" },
   { key: "expiryTypes", label: "Expiry Times" },
   { key: "assets", label: "Asset Classes" },
+  { key: "popularity", label: "Popularity" },
+  { key: "binaryCopyTrading", label: "Copy Trading" },
+  { key: "cryptoSupport", label: "Crypto Support" },
+  { key: "affiliateProgram", label: "Affiliate" },
 ];
