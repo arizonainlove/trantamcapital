@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MarketOverview from "@/components/MarketOverview";
+import dynamic from "next/dynamic";
 import SectionTitle from "@/components/SectionTitle";
 import NewsCard from "@/components/NewsCard";
 import BrokerCard from "@/components/BrokerCard";
@@ -7,6 +7,10 @@ import Card from "@/components/Card";
 import NewsletterForm from "@/components/NewsletterForm";
 import { getAllNews, getAllBrokers } from "@/lib/content";
 import { defaultBrokerData } from "@/data/brokers";
+
+const MarketOverview = dynamic(() => import("@/components/MarketOverview"), {
+  ssr: true,
+});
 
 const featuredNews = getAllNews().slice(0, 3).map((a) => ({
   category: a.category,
