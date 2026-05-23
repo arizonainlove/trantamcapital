@@ -151,8 +151,8 @@
 ## PHẦN 10: FOREX BROKER (/forex-broker)
 
 - [x] Page Header
-- [x] 6 brokers grid: card + rating + features + "Read Review" + "Visit Site"
-- [x] Comparison table: Regulation, Min Deposit, Spread, Leverage, Platforms
+- [x] 5 brokers grid (Exness, IC Markets, Pepperstone, FxPro, XM) with highlight badges + "Read Review" + "Visit Site"
+- [x] Comparison table: Regulation, Min Deposit, Spread, Leverage, Platforms, Scalping, Gold Trading, Withdrawals + color-coded RatingBadges for rating fields
 - [x] How to Choose a Broker guide
 
 ---
@@ -160,34 +160,42 @@
 ## PHẦN 11: CRYPTO EXCHANGE (/crypto-exchange)
 
 - [x] Page Header
-- [x] 6 exchanges grid
-- [x] Comparison table
+- [x] 5 exchanges grid (Binance, Coinbase, Bybit, OKX, Bitget) with highlight badges
+- [x] Comparison table: Trading Fees, Security, Coins, Futures, Spot, Copy Trading, Web3, Affiliate Program + color-coded RatingBadges
 
 ---
 
 ## PHẦN 12: BINARY OPTION (/binary-option)
 
 - [x] Page Header
-- [x] Risk warning (nền vàng)
-- [x] 3 platforms grid
+- [x] Risk warning (nền vàng) + geo-restriction (EU/UK/AU/CA)
+- [x] 5 platforms grid (IQ Option, Pocket Option, Quotex, Binomo, Deriv) with highlight badges
 - [x] How Binary Options Work: 4 bước
 
 ---
 
 ## PHẦN 13: TRANG CHI TIẾT SÀN (Sub Pages)
 
-### Forex Broker Sub Pages
-- [x] `/forex-broker/broker-a` — Review + 3 bài viết
-- [x] `/forex-broker/broker-b` — Review + 3 bài viết
-- [x] `/forex-broker/broker-c` — Review + 3 bài viết
+### Forex Broker Sub Pages (5)
+- [x] `/forex-broker/forexbroker-a` — Exness review
+- [x] `/forex-broker/forexbroker-b` — IC Markets review
+- [x] `/forex-broker/forexbroker-c` — Pepperstone review
+- [x] `/forex-broker/forexbroker-d` — FxPro review
+- [x] `/forex-broker/forexbroker-e` — XM review
 
-### Crypto Exchange Sub Pages
-- [x] `/crypto-exchange/exchange-a` — Review + 3 bài viết
-- [x] `/crypto-exchange/exchange-b` — Review + 3 bài viết
-- [x] `/crypto-exchange/exchange-c` — Review + 3 bài viết
+### Crypto Exchange Sub Pages (5)
+- [x] `/crypto-exchange/exchange-a` — Binance review
+- [x] `/crypto-exchange/exchange-b` — Coinbase review
+- [x] `/crypto-exchange/exchange-c` — Bybit review
+- [x] `/crypto-exchange/exchange-d` — OKX review
+- [x] `/crypto-exchange/exchange-e` — Bitget review
 
-### Binary Option Sub Pages
-- [x] `/binary-option/platform-a` — Review + 3 bài viết
+### Binary Option Sub Pages (5)
+- [x] `/binary-option/binaryplatform-a` — IQ Option review
+- [x] `/binary-option/pocket-option` — Pocket Option review
+- [x] `/binary-option/quotex` — Quotex review
+- [x] `/binary-option/binomo` — Binomo review
+- [x] `/binary-option/deriv` — Deriv review
 
 ---
 
@@ -337,7 +345,7 @@
 | 10. Forex Broker | 4 | ✅ 4 / 4 |
 | 11. Crypto Exchange | 2 | ✅ 2 / 2 |
 | 12. Binary Option | 4 | ✅ 4 / 4 |
-| 13. Sub Pages | 7 | ✅ 7 / 7 |
+| 13. Sub Pages | 15 | ✅ 15 / 15 |
 | 14. Tools | 2 | ✅ 2 / 2 |
 | 15. About | 6 | ✅ 6 / 6 |
 | 16. Contact | 3 | ✅ 3 / 3 |
@@ -348,7 +356,7 @@
 | 21. Domain setup | 11 | ⬜ 0 / 11 |
 | 22. Sau deploy | 8 | ✅ 3 / 8 |
 | 23. SEO & UX/UI | 18 | ✅ 16 / 18 |
-| **Tổng** | **156 mục** | **✅ 137 / 156** |
+| **Tổng** | **164 mục** | **✅ 145 / 164** |
 
 ---
 

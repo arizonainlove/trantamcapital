@@ -22,7 +22,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 
 ### Key Files
 - `public/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md` — User guide (Vietnamese)
-- `src/admin-ui/index.html` — Single-file SPA with login, dashboard, editor (4 tabs). Served by route handler at `app/admin/route.ts` (not from `public/`)
+- `src/admin-ui/index.html` — Single-file SPA with login, dashboard, editor (4 tabs: News, Brokers, Reviews, Menu). Served by route handler at `app/admin/route.ts` (not from `public/`)
 - `src/app/admin/route.ts` — Route handler that checks session cookie before serving admin SPA
 - `src/app/api/auth/session/route.ts` — API to set/clear HTTP-only session cookie
 - `src/lib/content.ts` — Reads `.md` files at build time for news + brokers
@@ -36,7 +36,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Statistics | Stats bar showing counts for articles, brokers, reviews |
 | Search | Filter articles and brokers by name/title |
 | Article Editor | Form-based: title, date, category, author, image upload, excerpt, body |
-| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, **+12 comparison fields** |
+| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+26 comparison & rating fields** |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
@@ -72,22 +72,39 @@ type: enum [Forex Broker, Crypto Exchange, Binary Options]
 rating: number (0–5)
 features:
   - "Feature one"
+highlights:
+  - "Lowest Spread"       # Key selling points shown as colored badges on cards
 reviewHref: string (URL path)
 visitHref: string (URL path)
 logo: string (raw GitHub URL to uploaded broker logo)
+order: number             # Display order (lower = first)
 # Comparison fields (type-specific, used in auto comparison tables)
 regulation: string         # Forex
 minDeposit: string         # Forex
 spread: string             # Forex
 leverage: string           # Forex
 platforms: string          # Forex
+scalping: string           # Forex — rating (Excellent/Very Good/Good/Medium)
+eaBot: string              # Forex — rating
+withdrawals: string        # Forex — rating
+goldTrading: string        # Forex — rating
+bonusPrograms: string      # Forex — rating
+vietnamSuitability: string # Forex — rating
 tradingFees: string        # Crypto
-security: string           # Crypto
+security: string           # Crypto — rating
 exchangeFeatures: string   # Crypto
 coins: string              # Crypto
+futures: string            # Crypto — rating
+spot: string               # Crypto — rating
+copyTrading: string        # Crypto — rating
+web3: string               # Crypto — rating
+affiliateProgram: string   # Crypto — rating
 payout: string             # Binary Options
 expiryTypes: string        # Binary Options
 assets: string             # Binary Options
+popularity: string         # Binary — rating
+cryptoSupport: string      # Binary — rating
+binaryCopyTrading: string  # Binary — rating
 ---
 ```
 

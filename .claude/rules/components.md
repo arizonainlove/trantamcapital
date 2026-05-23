@@ -12,7 +12,7 @@ description: Global component library, file structure, and live price widget spe
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
-| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros |
+| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings |
 | `ContactForm.tsx` | Contact form (name, email, subject, message) + GDPR consent checkbox |
 | `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |

@@ -38,10 +38,10 @@ Financial market information website covering cryptocurrency, forex, and binary 
 9. About (`/about`) — Story + Mission + Values + Team + Timeline
 10. Contact (`/contact`) — Form + company info
 
-#### Sub Pages / Detail Pages — Dynamic Routes (3)
-- `/forex-broker/[slug]` — Broker review, CMS-managed
-- `/crypto-exchange/[slug]` — Exchange review, CMS-managed
-- `/binary-option/[slug]` — Platform review, CMS-managed
+#### Sub Pages / Detail Pages — Dynamic Routes (15)
+- `/forex-broker/[slug]` — 5 broker reviews: Exness, IC Markets, Pepperstone, FxPro, XM
+- `/crypto-exchange/[slug]` — 5 exchange reviews: Binance, Coinbase, Bybit, OKX, Bitget
+- `/binary-option/[slug]` — 5 platform reviews: IQ Option, Pocket Option, Quotex, Binomo, Deriv
 
 #### Dynamic Routes (10)
 - `/news/[slug]` — 9 article detail pages, statically generated via `generateStaticParams`
@@ -51,7 +51,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox
 - `ReviewPage.tsx` — Shared review page component for all broker review routes
-- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features
+- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + highlight badges (from Excel-derived ratings)
 
 #### Middleware
 - `middleware.ts` — Rate limiting by IP for API routes: `/api/auth` (10/min), `/api/contact` (20/min)
