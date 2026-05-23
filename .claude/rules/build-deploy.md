@@ -27,7 +27,8 @@ npm run restore      # List and restore from a backup
 - Pages: `trantamcapital\src\app\`
 - Public: `trantamcapital\public\`
 - Content (CMS): `trantamcapital\src\content\`
-- CMS config: `trantamcapital\public\admin\`
+- Admin SPA (served via route handler): `trantamcapital\src\admin-ui\`
+- CMS config: `trantamcapital\public\admin\` (guide only)
 
 ### next.config.ts — Required Config
 
@@ -106,6 +107,7 @@ const nextConfig = {
 
 ### Security
 - **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth` (10/min), `/api/contact` (20/min)
+- **Admin auth** (`src/app/admin/route.ts`): Server-side gate — checks HTTP-only `admin_token` cookie trước khi serve admin SPA. Cookie được set bởi `POST /api/auth/session` sau OAuth, xóa bởi `DELETE /api/auth/session` khi logout.
 - **XSS**: `src/lib/sanitize.ts` — stripHtml() applied to all CMS content at build time (content.ts, reviews.ts)
 - **Backup**: `scripts/backup.js` và `scripts/restore.js` — snapshot/restore CMS content (.backups/ bị gitignore)
 - **Recovery guide**: `scripts/RECOVERY.md`

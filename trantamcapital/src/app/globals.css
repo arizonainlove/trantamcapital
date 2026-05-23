@@ -51,3 +51,7 @@ html {
     transform: translateX(-50%);
   }
 }
+
+.animate-marquee {
+  will-change: transform;
+}

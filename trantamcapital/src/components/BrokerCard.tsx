@@ -27,7 +27,7 @@ export default function BrokerCard({
       {/* Logo */}
       {logo ? (
         <div className="w-16 h-16 rounded-lg flex items-center justify-center mb-4 bg-white border border-border overflow-hidden">
-          <img src={logo} alt={`${name} logo`} className="w-full h-full object-contain" />
+          <img src={logo} alt={`${name} logo`} className="w-full h-full object-contain" loading="lazy" />
         </div>
       ) : (
         <div

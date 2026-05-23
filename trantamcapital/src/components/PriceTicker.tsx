@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 
 interface CoinData {
@@ -34,12 +33,44 @@ export default function PriceTicker() {
     return () => clearInterval(interval);
   }, [fetchPrices]);
 
-  const formatPrice = (price: number | null) => {
+  const formatPrice = useCallback((price: number | null) => {
     if (price === null) return "$0.00";
     if (price >= 1) return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     if (price >= 0.01) return `$${price.toFixed(4)}`;
     return `$${price.toFixed(6)}`;
-  };
+  }, []);
+
+  const coinItems = useMemo(() => {
+    if (coins.length === 0) return null;
+    return [...coins, ...coins].map((coin, i) => (
+      <div key={`${coin.id}-${i}`} className="flex items-center gap-2 shrink-0">
+        <img
+          src={coin.image}
+          alt={coin.symbol}
+          width={16}
+          height={16}
+          className="rounded-full"
+          loading="lazy"
+        />
+        <span className="text-sm font-semibold text-white uppercase">
+          {coin.symbol}
+        </span>
+        <span className="text-sm text-white">{formatPrice(coin.current_price)}</span>
+        <span
+          className={`text-xs flex items-center gap-0.5 ${
+            coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
+          }`}
+        >
+          {coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? (
+            <HiArrowSmUp className="text-xs" />
+          ) : (
+            <HiArrowSmDown className="text-xs" />
+          )}
+          {coin.price_change_percentage_24h !== null ? `${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%` : "0.00%"}
+        </span>
+      </div>
+    ));
+  }, [coins, formatPrice]);
 
   if (error && coins.length === 0) {
     return null;
@@ -58,34 +89,7 @@ export default function PriceTicker() {
   return (
     <div className="bg-dark h-10 flex items-center overflow-hidden">
       <div className="flex whitespace-nowrap gap-16 animate-marquee px-4">
-        {/* Duplicate for seamless loop */}
-        {[...coins, ...coins].map((coin, i) => (
-          <div key={`${coin.id}-${i}`} className="flex items-center gap-2 shrink-0">
-            <Image
-              src={coin.image}
-              alt={coin.symbol}
-              width={16}
-              height={16}
-              className="rounded-full"
-            />
-            <span className="text-sm font-semibold text-white uppercase">
-              {coin.symbol}
-            </span>
-            <span className="text-sm text-white">{formatPrice(coin.current_price)}</span>
-            <span
-              className={`text-xs flex items-center gap-0.5 ${
-                coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
-              }`}
-            >
-              {coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? (
-                <HiArrowSmUp className="text-xs" />
-              ) : (
-                <HiArrowSmDown className="text-xs" />
-              )}
-              {coin.price_change_percentage_24h !== null ? `${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%` : "0.00%"}
-            </span>
-          </div>
-        ))}
+        {coinItems}
       </div>
     </div>
   );

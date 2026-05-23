@@ -63,9 +63,10 @@ export default function MarketOverview() {
 
   if (loading) {
     return (
-      <div className="animate-pulse space-y-3">
+      <div className="animate-pulse">
+        <div className="h-10 border-b border-border" />
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="h-12 bg-border rounded" />
+          <div key={i} className="h-[46px] border-b border-border" />
         ))}
       </div>
     );
