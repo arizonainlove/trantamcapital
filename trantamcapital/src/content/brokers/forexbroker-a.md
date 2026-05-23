@@ -10,7 +10,7 @@ features:
   - "Instant withdrawals"
 reviewHref: "/forex-broker/broker-a"
 visitHref: "https://www.exness.com/"
-logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367076494-logoexness.png"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779524229588-exnessyellow.svg"
 regulation: "FCA, CySEC, FSA"
 minDeposit: "$10"
 spread: "From 0.0 pips"
