@@ -2,7 +2,7 @@
 name: "Bitget"
 type: "Crypto Exchange"
 rating: 4.4
-order: 5
+order: 13
 features:
   - "Excellent copy trading"
   - "Very strong futures"
