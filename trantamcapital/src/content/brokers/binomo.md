@@ -10,16 +10,8 @@ features:
   - "Strong affiliate program"
 reviewHref: "/binary-option/platform-c"
 visitHref: "https://binomo.com/"
-highlights:
-  - "Strong Global Popularity"
-  - "Beginner-Friendly"
-  - "Strong Affiliate Program"
-  - "Payout up to 90%"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779545039191-binomoyellow.svg"
 payout: "Up to 90%"
 expiryTypes: "5 mins — End of Day"
 assets: "Forex, Stocks, Commodities"
-popularity: "Strong"
-binaryCopyTrading: "Medium"
-cryptoSupport: "Medium"
-affiliateProgram: "Strong"
 ---
