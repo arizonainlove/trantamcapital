@@ -14,11 +14,12 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 - News articles: `src/content/news/` (Markdown with frontmatter)
 - Brokers: `src/content/brokers/` (Markdown with frontmatter + comparison fields)
 - Reviews: `src/content/reviews/` (Markdown with frontmatter, 16 files — one per broker)
+- Navigation menu: `trantamcapital/src/data/menu.json` (JSON, editable via admin)
 - Image uploads: `trantamcapital/public/images/uploads/` (via GitHub API)
-- Workflow: Write in admin → auto-commits `.md` file to GitHub → Vercel rebuilds
+- Workflow: Write in admin → auto-commits file to GitHub → Vercel rebuilds
 
 ### Key Files
-- `public/admin/index.html` — Single-file SPA with login, dashboard, editor (3 tabs)
+- `public/admin/index.html` — Single-file SPA with login, dashboard, editor (4 tabs)
 - `public/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md` — User guide (Vietnamese)
 - `src/lib/content.ts` — Reads `.md` files at build time for news + brokers
 - `src/lib/reviews.ts` — Reads review `.md` files at build time
@@ -27,10 +28,13 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Feature | Description |
 |---------|-------------|
 | Login | GitHub OAuth via popup → saves token to localStorage |
-| Dashboard | Tab-based: **News Articles**, **Brokers**, and **Reviews** tabs |
+| Dashboard | Tab-based: **News Articles**, **Brokers**, **Reviews**, and **Menu** tabs |
+| Statistics | Stats bar showing counts for articles, brokers, reviews |
+| Search | Filter articles and brokers by name/title |
 | Article Editor | Form-based: title, date, category, author, image upload, excerpt, body |
 | Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, **+12 comparison fields** |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
+| Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
 | Create | Generates slug from title/name, creates `.md` with frontmatter |
 | Edit | Reads existing file, updates content via GitHub API |

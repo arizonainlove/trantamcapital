@@ -63,6 +63,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `scripts/RECOVERY.md` — Recovery guide (backup, git, admin export)
 
 #### Shared Data
+- `data/menu.json` — Navigation menu items (editable via admin Menu tab)
 - `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata
 - `data/brokers.ts` — Broker interface **+ comparison fields** + 15 default brokers (fallback when no CMS data)
 - `data/reviews.ts` — ReviewContent interface + 7 default reviews (fallback when no CMS data)
