@@ -50,7 +50,7 @@ export default function RootLayout({
       lang="en"
       className={`${openSans.variable} ${roboto.variable}`}
     >
-      <body className="min-h-screen flex flex-col font-sans text-text-primary">
+      <body className="min-h-screen flex flex-col font-sans text-base text-text-primary">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-bold"

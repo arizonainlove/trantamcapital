@@ -37,11 +37,11 @@ description: Design system — colors, typography, component specifications, res
 |------|------|------|--------|-------------|
 | Display | Open Sans | 32px | 700 | 35px |
 | H1 | Open Sans | 28px | 700 | 31px |
-| Body | Open Sans | 14px | 400 | 23px |
-| Small | Open Sans | 13px | 400 | 20px |
-| Navigation | Open Sans | 14px | 400 | — |
+| Body | Open Sans | 16px | 400 | 26px |
+| Small | Open Sans | 14px | 400 | 20px |
+| Navigation | Open Sans | 14px | 700 | — |
 | Button | Open Sans | 16px | 700 | — |
-| Metadata | Roboto | 13px | 400 | 25px |
+| Metadata | Roboto | 14px | 400 | 25px |
 
 ### Component Specifications
 
