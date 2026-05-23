@@ -12,12 +12,12 @@ description: Global component library, file structure, and live price widget spe
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
-| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros + affiliate disclosure |
+| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + pros |
 | `ContactForm.tsx` | Contact form (name, email, subject, message) + GDPR consent checkbox |
 | `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
 | `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
-| `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar, affiliate disclosure) |
+| `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar) |
 
 ### Live Price Widget — PriceTicker
 

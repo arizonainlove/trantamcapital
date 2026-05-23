@@ -48,8 +48,8 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `BackToTop.tsx` — Floating button (appears after 400px scroll)
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox
-- `ReviewPage.tsx` — Shared review page component for all broker review routes (includes affiliate disclosure)
-- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + affiliate disclosure
+- `ReviewPage.tsx` — Shared review page component for all broker review routes
+- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features
 
 #### Middleware
 - `middleware.ts` — Rate limiting by IP for API routes: `/api/auth` (10/min), `/api/contact` (20/min)
