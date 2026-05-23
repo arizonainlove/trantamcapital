@@ -176,11 +176,6 @@ export default function ReviewPage({
                 >
                   Visit {name}
                 </a>
-                {visitHref !== "#" && (
-                  <p className="text-[11px] text-text-light text-center mt-2">
-                    We may receive a commission when you visit a partner site.
-                  </p>
-                )}
               </Card>
             </div>
           </div>
