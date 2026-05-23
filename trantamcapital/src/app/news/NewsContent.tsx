@@ -14,13 +14,15 @@ type Props = {
   allNews: NewsArticle[];
   categories?: string[];
   recentPosts?: NewsArticle[];
+  initialCategory?: string;
 };
 
-export default function NewsContent({ allNews, categories, recentPosts }: Props) {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [currentPage, setCurrentPage] = useState(1);
-
+export default function NewsContent({ allNews, categories, recentPosts, initialCategory }: Props) {
   const cats = categories ?? defaultCategories;
+  const [activeCategory, setActiveCategory] = useState(
+    initialCategory && cats.includes(initialCategory) ? initialCategory : "All"
+  );
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredNews =
     activeCategory === "All"

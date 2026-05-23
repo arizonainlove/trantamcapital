@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: "Latest cryptocurrency, forex, and binary options news. Stay informed with market analysis and trading insights.",
 };
 
-export default function NewsPage() {
+export default function NewsPage({ searchParams }: { searchParams: { category?: string } }) {
   const allNews = getAllNews();
   const recentPosts = getRecentPosts(4);
-  return <NewsContent allNews={allNews} categories={categories} recentPosts={recentPosts} />;
+  return <NewsContent allNews={allNews} categories={categories} recentPosts={recentPosts} initialCategory={searchParams.category} />;
 }
