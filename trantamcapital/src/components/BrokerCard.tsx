@@ -26,8 +26,8 @@ export default function BrokerCard({
     <div className="rounded-lg border border-border bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_2px_6px_rgba(0,0,0,0.1)] transition-shadow p-6">
       {/* Logo */}
       {logo ? (
-        <div className="w-16 h-16 rounded-lg flex items-center justify-center mb-4 bg-white border border-border p-1">
-          <img src={logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+        <div className="w-16 h-16 rounded-lg flex items-center justify-center mb-4 bg-white border border-border overflow-hidden">
+          <img src={logo} alt={`${name} logo`} className="w-full h-full object-contain" />
         </div>
       ) : (
         <div

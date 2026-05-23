@@ -42,8 +42,8 @@ export default function ReviewPage({
           <Breadcrumb items={breadcrumbItems} />
           <div className="flex items-center gap-4 mb-4">
             {broker?.logo ? (
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-white border border-border p-1">
-                <img src={broker.logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" />
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-white border border-border overflow-hidden">
+                <img src={broker.logo} alt={`${name} logo`} className="w-full h-full object-contain" />
               </div>
             ) : (
               <div
