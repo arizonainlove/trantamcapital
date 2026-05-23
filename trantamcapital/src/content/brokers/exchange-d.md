@@ -2,7 +2,7 @@
 name: "OKX"
 type: "Crypto Exchange"
 rating: 4.5
-order: 4
+order: 12
 features:
   - "600+ trading pairs"
   - "Excellent Web3 & DeFi integration"
