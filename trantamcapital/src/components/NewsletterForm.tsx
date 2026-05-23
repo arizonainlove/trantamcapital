@@ -4,15 +4,12 @@ import { useState, FormEvent } from "react";
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "error" | "success">("idle");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) {
-      setStatus("error");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) {
       setStatus("error");
       return;
     }
@@ -52,9 +49,24 @@ export default function NewsletterForm() {
               Subscribe
             </button>
           </div>
+          <label className="flex items-start gap-2 mt-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => { setConsent(e.target.checked); if (status === "error") setStatus("idle"); }}
+              className="mt-0.5 shrink-0 w-4 h-4 rounded border-white/30 bg-white/10 focus:ring-white/50"
+            />
+            <span className="text-xs text-white/70 leading-relaxed">
+              I agree to receive emails and accept the{" "}
+              <a href="/privacy-policy" className="text-white/90 hover:text-white underline" target="_blank">
+                Privacy Policy
+              </a>
+              .
+            </span>
+          </label>
           {status === "error" && (
             <p id="newsletter-error" className="text-xs text-white/90 mt-1.5 text-left" role="alert">
-              Please enter a valid email address.
+              Please enter a valid email and agree to the Privacy Policy.
             </p>
           )}
         </form>

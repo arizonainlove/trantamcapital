@@ -7,6 +7,7 @@ interface FormData {
   email: string;
   subject: string;
   message: string;
+  consent: boolean;
 }
 
 interface FormErrors {
@@ -14,6 +15,7 @@ interface FormErrors {
   email?: string;
   subject?: string;
   message?: string;
+  consent?: string;
 }
 
 export default function ContactForm() {
@@ -22,6 +24,7 @@ export default function ContactForm() {
     email: "",
     subject: "",
     message: "",
+    consent: false,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -51,6 +54,10 @@ export default function ContactForm() {
       newErrors.message = "Message must be at least 10 characters";
     }
 
+    if (!form.consent) {
+      newErrors.consent = "You must agree to the Privacy Policy";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -74,9 +81,9 @@ export default function ContactForm() {
     }
   };
 
-  const handleChange = (field: keyof FormData, value: string) => {
+  const handleChange = (field: keyof FormData, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) {
+    if (errors[field as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
@@ -183,6 +190,30 @@ export default function ContactForm() {
           aria-describedby={errors.message ? "message-error" : undefined}
         />
         {errors.message && <p id="message-error" className="text-xs text-error mt-1" role="alert">{errors.message}</p>}
+      </div>
+
+      {/* Consent checkbox */}
+      <div>
+        <label className="flex items-start gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.consent}
+            onChange={(e) => {
+              handleChange("consent", e.target.checked ? "true" : "");
+              if (errors.consent) setErrors((prev) => ({ ...prev, consent: undefined }));
+            }}
+            className="mt-1 shrink-0 w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
+          />
+          <span className="text-xs text-text-secondary leading-relaxed">
+            I consent to TrantamCapital collecting my name and email for the purpose of responding
+            to my inquiry. View our{" "}
+            <a href="/privacy-policy" className="text-link hover:underline" target="_blank">
+              Privacy Policy
+            </a>
+            . <span className="text-error">*</span>
+          </span>
+        </label>
+        {errors.consent && <p className="text-xs text-error mt-1" role="alert">{errors.consent}</p>}
       </div>
 
       {/* Error banner */}

@@ -47,13 +47,38 @@ export default async function BinaryOptionReview({ params }: Props) {
   if (broker && broker.type !== "Binary Options") notFound();
 
   return (
-    <ReviewPage
-      review={review}
-      broker={broker}
-      categoryLink="/binary-option"
-      categoryName="Binary Options"
-      badgeGradient="linear-gradient(135deg, #C62828 0%, #B71C1C 100%)"
-      badgeLetter={broker?.name?.charAt(0) || "B"}
-    />
+    <>
+      <ReviewPage
+        review={review}
+        broker={broker}
+        categoryLink="/binary-option"
+        categoryName="Binary Options"
+        badgeGradient="linear-gradient(135deg, #C62828 0%, #B71C1C 100%)"
+        badgeLetter={broker?.name?.charAt(0) || "B"}
+      />
+
+      {/* Binary Options Risk Warning */}
+      <section className="py-8 bg-section">
+        <div className="max-w-[1200px] mx-auto px-4">
+          <div className="p-6 bg-error/5 border-2 border-error/40 rounded-lg max-w-[800px] mx-auto">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl shrink-0 mt-0.5" aria-hidden="true">&#9888;&#65079;</span>
+              <div className="space-y-3">
+                <h3 className="text-xl font-extrabold text-error uppercase tracking-wide">High Risk Warning</h3>
+                <p className="text-sm text-text-primary leading-relaxed font-semibold">
+                  Binary options trading carries an <span className="text-error">extremely high level of risk</span>.
+                  Most retail traders lose money. You could lose some or all of your invested capital.
+                </p>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  Binary options are banned or severely restricted for retail investors in the EU, UK, Australia, and Canada.
+                  This review is for informational purposes only and does not constitute financial advice or a recommendation
+                  to trade. Never invest money you cannot afford to lose.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

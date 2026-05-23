@@ -31,19 +31,32 @@ export default function BinaryOption() {
         </div>
       </section>
 
-      {/* Risk Warning */}
+      {/* Risk Warning — prominent warning before any platform listings */}
       <section className="py-8">
         <div className="max-w-[1200px] mx-auto px-4">
-          <div className="p-5 bg-warning/10 border-2 border-warning/50 rounded-lg">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">&#9888;&#65039;</span>
-              <div>
-                <h3 className="text-lg font-bold text-warning mb-1">High Risk Warning</h3>
+          <div className="p-6 bg-error/5 border-2 border-error/40 rounded-lg">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl shrink-0 mt-0.5" aria-hidden="true">&#9888;&#65079;</span>
+              <div className="space-y-3">
+                <h3 className="text-xl font-extrabold text-error uppercase tracking-wide">High Risk Warning</h3>
+                <p className="text-sm text-text-primary leading-relaxed font-semibold">
+                  Binary options trading carries an <span className="text-error">extremely high level of risk</span> and is not suitable for all investors.
+                  Most retail traders lose money trading binary options. You could lose some or all of your invested capital
+                  — potentially within minutes.
+                </p>
+                <div className="p-3 bg-error/5 border border-error/20 rounded text-sm text-text-secondary leading-relaxed">
+                  <p className="font-semibold text-error mb-1">Regulatory Restrictions</p>
+                  <p>
+                    Binary options are <strong>banned or severely restricted</strong> for retail investors in the
+                    European Union (ESMA), United Kingdom (FCA), Australia (ASIC), and Canada (CSA).
+                    If you are a resident of these jurisdictions, you may not be able to legally trade binary options.
+                  </p>
+                </div>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Binary options trading carries a high level of risk and may not be suitable for all investors.
-                  You could lose some or all of your invested capital. Never invest money you cannot afford to
-                  lose. Past performance does not guarantee future results. Please ensure you fully understand
-                  the risks involved and seek independent advice if necessary.
+                  Never invest money you cannot afford to lose. Past performance does not guarantee future results.
+                  Please ensure you fully understand the risks involved and seek independent financial advice if necessary.
+                  The platforms listed on this page are for informational purposes only and do not constitute a recommendation
+                  to trade.
                 </p>
               </div>
             </div>

@@ -80,6 +80,11 @@ export default function BrokerCard({
           Visit Site
         </Link>
       </div>
+      {visitHref !== "#" && (
+        <p className="text-[11px] text-text-light text-center mt-2">
+          We may receive a commission when you visit a partner site.
+        </p>
+      )}
     </div>
   );
 }
