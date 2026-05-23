@@ -10,7 +10,7 @@ features:
   - "Advanced derivatives"
 reviewHref: "/crypto-exchange/exchange-c"
 visitHref: "https://www.bybit.com/vi-VN/"
-logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779366818075-logobybit.png"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779524085183-bybitblack.svg"
 tradingFees: "0.1%"
 security: "High"
 exchangeFeatures: "Derivatives, Copy, Spot"
