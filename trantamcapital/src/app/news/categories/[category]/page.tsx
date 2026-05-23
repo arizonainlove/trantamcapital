@@ -16,8 +16,9 @@ export async function generateStaticParams() {
   return Object.keys(categorySlugs).map((slug) => ({ category: slug }));
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categoryName = categorySlugs[params.category];
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category } = await params;
+  const categoryName = categorySlugs[category];
   if (!categoryName) return {};
   return {
     title: `${categoryName} News`,
@@ -25,8 +26,9 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-export default async function NewsCategoryPage({ params }: { params: { category: string } }) {
-  const categoryName = categorySlugs[params.category];
+export default async function NewsCategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
+  const categoryName = categorySlugs[category];
   if (!categoryName) notFound();
 
   const allNews = getAllNews();
@@ -99,7 +101,7 @@ export default async function NewsCategoryPage({ params }: { params: { category:
                       <Link
                         href={`/news/categories/${cat.slug}`}
                         className={`flex justify-between w-full text-sm py-1 transition-colors ${
-                          cat.slug === params.category
+                          cat.slug === category
                             ? "text-primary font-semibold"
                             : "text-text-secondary hover:text-primary"
                         }`}
