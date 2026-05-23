@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { IconArrowSmUp as HiArrowSmUp, IconArrowSmDown as HiArrowSmDown } from "@/components/Icons";
+import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 
 interface MarketCoin {
   id: string;

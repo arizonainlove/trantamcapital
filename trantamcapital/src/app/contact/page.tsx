@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import SectionTitle from "@/components/SectionTitle";
 import ContactForm from "@/components/ContactForm";
-import { IconMail as HiMail, IconPhone as HiPhone, IconLocationMarker as HiLocationMarker, IconClock as HiClock } from "@/components/Icons";
+import { HiMail, HiPhone, HiLocationMarker, HiClock } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "Contact Us",

@@ -53,8 +53,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-sans text-base text-text-primary">
         <link rel="preconnect" href="https://api.coingecko.com" />
         <link rel="preconnect" href="https://assets.coingecko.com" />
-        <link rel="preconnect" href="https://coin-images.coingecko.com" />
-        <link rel="preconnect" href="https://raw.githubusercontent.com" />
+        <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-bold"
