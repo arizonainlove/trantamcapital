@@ -10,16 +10,8 @@ features:
   - "Very strong affiliate program"
 reviewHref: "/binary-option/platform-b"
 visitHref: "https://quotex.io/"
-highlights:
-  - "Very Strong Popularity"
-  - "Payout up to 95%"
-  - "Strong Crypto Support"
-  - "Very Strong Affiliate Program"
+logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779544870373-quotexblack.svg"
 payout: "Up to 95%"
 expiryTypes: "60s — End of Day"
 assets: "Forex, Crypto, Stocks, Commodities"
-popularity: "Very Strong"
-binaryCopyTrading: "Medium"
-cryptoSupport: "Strong"
-affiliateProgram: "Very Strong"
 ---
