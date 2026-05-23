@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
+import { IconArrowSmUp as HiArrowSmUp, IconArrowSmDown as HiArrowSmDown } from "@/components/Icons";
 
 interface CoinData {
   id: string;

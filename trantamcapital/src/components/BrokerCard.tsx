@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HiStar, HiCheckCircle } from "react-icons/hi";
+import { IconStar as HiStar, IconCheckCircle as HiCheckCircle } from "@/components/Icons";
 
 interface BrokerCardProps {
   name: string;

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
+import { IconMenu as HiMenu, IconX as HiX, IconSearch as HiSearch, IconChevronDown as HiChevronDown } from "@/components/Icons";
 import menuData from "@/data/menu.json";
 
 type MenuItem = { label: string; href?: string; children?: MenuItem[] };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
+import { IconMail as HiMail, IconPhone as HiPhone, IconLocationMarker as HiLocationMarker } from "@/components/Icons";
 
 export default function Footer() {
   return (

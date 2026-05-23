@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { HiArrowUp } from "react-icons/hi";
+import { IconArrowUp as HiArrowUp } from "@/components/Icons";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);

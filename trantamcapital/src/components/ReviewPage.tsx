@@ -2,7 +2,7 @@ import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import Card from "@/components/Card";
 import Breadcrumb from "@/components/Breadcrumb";
-import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
+import { IconStar as HiStar, IconCheckCircle as HiCheckCircle, IconShieldCheck as HiShieldCheck } from "@/components/Icons";
 import type { Broker } from "@/data/brokers";
 import type { ReviewContent } from "@/data/reviews";
 

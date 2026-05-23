@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HiChevronRight } from "react-icons/hi";
+import { IconChevronRight as HiChevronRight } from "@/components/Icons";
 
 interface Crumb {
   label: string;
