@@ -3,24 +3,33 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 
-interface CoinData {
+interface TickerItem {
   id: string;
   symbol: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-  image: string;
+  name: string;
+  price: number;
+  change24h: number | null;
+  image: string | null;
 }
 
+const PAIR_PREFIX: Record<string, string> = {
+  "EUR/USD": "$",
+  "GBP/USD": "$",
+  "USD/JPY": "¥",
+  "EUR/GBP": "£",
+  "XAU/USD": "$",
+};
+
 export default function PriceTicker() {
-  const [coins, setCoins] = useState<CoinData[]>([]);
+  const [items, setItems] = useState<TickerItem[]>([]);
   const [error, setError] = useState(false);
 
   const fetchPrices = useCallback(async () => {
     try {
       const res = await fetch(`/api/crypto-prices`);
       if (!res.ok) throw new Error("Failed to fetch");
-      const data: CoinData[] = await res.json();
-      setCoins(data);
+      const data: TickerItem[] = await res.json();
+      setItems(data);
       setError(false);
     } catch {
       setError(true);
@@ -33,50 +42,62 @@ export default function PriceTicker() {
     return () => clearInterval(interval);
   }, [fetchPrices]);
 
-  const formatPrice = useCallback((price: number | null) => {
-    if (price === null) return "$0.00";
-    if (price >= 1) return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    if (price >= 0.01) return `$${price.toFixed(4)}`;
-    return `$${price.toFixed(6)}`;
+  const formatPrice = useCallback((item: TickerItem) => {
+    const prefix = PAIR_PREFIX[item.symbol] || "$";
+    const price = item.price;
+    if (price === 0) return "$0.00";
+    if (price >= 1000)
+      return `${prefix}${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (price >= 1) return `${prefix}${price.toFixed(2)}`;
+    if (price >= 0.01) return `${prefix}${price.toFixed(4)}`;
+    return `${prefix}${price.toFixed(6)}`;
   }, []);
 
-  const coinItems = useMemo(() => {
-    if (coins.length === 0) return null;
-    return [...coins, ...coins].map((coin, i) => (
-      <div key={`${coin.id}-${i}`} className="flex items-center gap-2 shrink-0">
-        <img
-          src={coin.image}
-          alt={coin.symbol}
-          width={16}
-          height={16}
-          className="rounded-full"
-          loading="lazy"
-        />
-        <span className="text-sm font-semibold text-white uppercase">
-          {coin.symbol}
-        </span>
-        <span className="text-sm text-white">{formatPrice(coin.current_price)}</span>
-        <span
-          className={`text-xs flex items-center gap-0.5 ${
-            coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? "text-success" : "text-error"
-          }`}
-        >
-          {coin.price_change_percentage_24h !== null && coin.price_change_percentage_24h >= 0 ? (
-            <HiArrowSmUp className="text-xs" />
-          ) : (
-            <HiArrowSmDown className="text-xs" />
-          )}
-          {coin.price_change_percentage_24h !== null ? `${Math.abs(coin.price_change_percentage_24h).toFixed(2)}%` : "0.00%"}
-        </span>
+  const tickerItems = useMemo(() => {
+    if (items.length === 0) return null;
+    return [...items, ...items].map((item, i) => (
+      <div key={`${item.id}-${i}`} className="flex items-center gap-2 shrink-0">
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.symbol}
+            width={16}
+            height={16}
+            className="rounded-full"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-4 h-4 rounded-full bg-primary-light flex items-center justify-center shrink-0">
+            <span className="text-[9px] font-bold text-primary">
+              {item.symbol.charAt(0)}
+            </span>
+          </div>
+        )}
+        <span className="text-sm font-semibold text-white">{item.symbol}</span>
+        <span className="text-sm text-white">{formatPrice(item)}</span>
+        {item.change24h !== null && (
+          <span
+            className={`text-xs flex items-center gap-0.5 ${
+              item.change24h >= 0 ? "text-success" : "text-error"
+            }`}
+          >
+            {item.change24h >= 0 ? (
+              <HiArrowSmUp className="text-xs" />
+            ) : (
+              <HiArrowSmDown className="text-xs" />
+            )}
+            {Math.abs(item.change24h).toFixed(2)}%
+          </span>
+        )}
       </div>
     ));
-  }, [coins, formatPrice]);
+  }, [items, formatPrice]);
 
-  if (error && coins.length === 0) {
+  if (error && items.length === 0) {
     return null;
   }
 
-  if (coins.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="bg-dark h-10 flex items-center overflow-hidden">
         <div className="flex gap-8 animate-pulse px-4">
@@ -89,7 +110,7 @@ export default function PriceTicker() {
   return (
     <div className="bg-dark h-10 flex items-center overflow-hidden">
       <div className="flex whitespace-nowrap gap-16 animate-marquee px-4">
-        {coinItems}
+        {tickerItems}
       </div>
     </div>
   );

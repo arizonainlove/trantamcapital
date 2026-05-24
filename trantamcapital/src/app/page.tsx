@@ -154,7 +154,7 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionTitle
             title="Market Overview"
-            subtitle="Real-time cryptocurrency prices and market data"
+            subtitle="Real-time cryptocurrency, forex, and gold prices"
           />
           <MarketOverview />
         </div>

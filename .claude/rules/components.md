@@ -8,8 +8,9 @@ description: Global component library, file structure, and live price widget spe
 |------|-------------|
 | `Header.tsx` | Navigation bar (#FFCA00), dynamic menu from `src/data/menu.json`, bold (700) nav links, mobile hamburger toggle |
 | `Footer.tsx` | 4-column footer (About, Quick Links, Markets, Contact) + risk disclaimer |
-| `PriceTicker.tsx` | Live crypto prices marquee, CoinGecko API, 60s refresh |
+| `PriceTicker.tsx` | Live prices marquee — 10 pairs: 5 crypto + 4 forex + XAU/USD. Server API route aggregates CoinGecko + Frankfurter + GoldPrice.org, 60s refresh |
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
+| `MarketOverview.tsx` | Live price table — 5 crypto (CoinGecko), 4 forex (Frankfurter API), XAU/USD (GoldPrice.org proxy). 60s refresh, skeleton, responsive. |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
 | `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings |
@@ -21,11 +22,16 @@ description: Global component library, file structure, and live price widget spe
 
 ### Live Price Widget — PriceTicker
 
-- **API**: `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,solana,ripple,cardano,dogecoin,polkadot,avalanche-2,matic-network,chainlink,litecoin&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
-- **Coins**: BTC, ETH, BNB, SOL, XRP, ADA, DOGE, DOT, AVAX, MATIC, LINK, LTC
-- **Refresh**: Every 60 seconds (client-side fetch)
+- **API**: `/api/crypto-prices` (server-side aggregation)
+  - **Crypto**: CoinGecko — BTC, ETH, BNB, XRP, SOL
+  - **Forex**: Frankfurter API (ECB) — EUR/USD, GBP/USD, USD/JPY, EUR/GBP
+  - **Gold**: GoldPrice.org proxy — XAU/USD
+- **Pairs**: BTC/USD, ETH/USD, BNB/USD, XRP/USD, SOL/USD, EUR/USD, GBP/USD, USD/JPY, EUR/GBP, XAU/USD
+- **Refresh**: Every 60 seconds (client-side fetch, server cache 55s)
 - **Display**: Horizontal marquee animation
-  - Coin icon (img) + Symbol (uppercase) + Price (USD) + 24h change %
+  - Crypto: coin icon + Symbol + Price + 24h change %
+  - Forex/Gold: letter avatar + Symbol + Price (+ 24h change % for gold when available)
+  - Price prefix per pair: $ (USD pairs), ¥ (JPY), £ (GBP)
   - Green `#2E7D32` if positive, Red `#C62828` if negative
   - Change indicator: HiArrowSmUp / HiArrowSmDown from react-icons/hi
 - **Fallback**: Shows "Loading prices..." with pulse animation while fetching
@@ -61,7 +67,10 @@ trantamcapital/
 │   │   ├── error.tsx
 │   │   ├── loading.tsx
 │   │   ├── news/[slug]/page.tsx
-│   │   └── api/contact/route.ts
+│   │   ├── news/categories/[category]/page.tsx  # Filtered news by category
+│   │   └── api/
+│   │       ├── contact/route.ts
+│   │       └── gold/route.ts                   # Gold price (XAU/USD) proxy
 │   ├── data/
 │   │   ├── menu.json                 # Navigation menu (editable via admin)
 │   │   ├── news.ts
@@ -84,6 +93,7 @@ trantamcapital/
 │       ├── NewsletterForm.tsx
 │       ├── BackToTop.tsx
 │       ├── Breadcrumb.tsx
+│       ├── MarketOverview.tsx           # Live prices: crypto + forex + gold
 │       └── ReviewPage.tsx             # Shared review page component
 ├── content/                           # CMS content (.md files)
 │   ├── news/

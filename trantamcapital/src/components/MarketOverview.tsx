@@ -4,27 +4,49 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 
-interface MarketCoin {
+interface MarketRow {
   id: string;
   symbol: string;
   name: string;
-  image: string;
-  current_price: number | null;
-  price_change_percentage_24h: number | null;
-  market_cap: number | null;
+  price: number | null;
+  change24h: number | null;
+  marketCap: number | null;
+  image?: string;
 }
 
-const TOP_COINS = "bitcoin,ethereum,binancecoin,solana,ripple,cardano,dogecoin,polkadot";
+const PAIRS: { id: string; symbol: string; name: string; coinId?: string }[] = [
+  { id: "bitcoin", symbol: "BTC/USD", name: "Bitcoin", coinId: "bitcoin" },
+  { id: "ethereum", symbol: "ETH/USD", name: "Ethereum", coinId: "ethereum" },
+  { id: "binancecoin", symbol: "BNB/USD", name: "BNB", coinId: "binancecoin" },
+  { id: "ripple", symbol: "XRP/USD", name: "XRP", coinId: "ripple" },
+  { id: "solana", symbol: "SOL/USD", name: "Solana", coinId: "solana" },
+  { id: "eur-usd", symbol: "EUR/USD", name: "Euro" },
+  { id: "gbp-usd", symbol: "GBP/USD", name: "British Pound" },
+  { id: "usd-jpy", symbol: "USD/JPY", name: "Japanese Yen" },
+  { id: "eur-gbp", symbol: "EUR/GBP", name: "Euro/Pound" },
+  { id: "xau-usd", symbol: "XAU/USD", name: "Gold" },
+];
+
+const CRYPTO_IDS = PAIRS.filter((p) => p.coinId).map((p) => p.coinId).join(",");
+
+const FOREX_DISPLAY: Record<string, string> = {
+  "EUR/USD": "$",
+  "GBP/USD": "$",
+  "USD/JPY": "¥",
+  "EUR/GBP": "£",
+};
 
 const formatPrice = (price: number | null) => {
-  if (price === null) return "$0.00";
-  if (price >= 1) return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (price === null) return "-";
+  if (price >= 1000)
+    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (price >= 1) return `$${price.toFixed(2)}`;
   if (price >= 0.01) return `$${price.toFixed(4)}`;
   return `$${price.toFixed(6)}`;
 };
 
 const formatMarketCap = (cap: number | null) => {
-  if (cap === null) return "$0";
+  if (cap === null) return "-";
   if (cap >= 1e12) return `$${(cap / 1e12).toFixed(2)}T`;
   if (cap >= 1e9) return `$${(cap / 1e9).toFixed(2)}B`;
   if (cap >= 1e6) return `$${(cap / 1e6).toFixed(2)}M`;
@@ -32,40 +54,139 @@ const formatMarketCap = (cap: number | null) => {
 };
 
 export default function MarketOverview() {
-  const [coins, setCoins] = useState<MarketCoin[]>([]);
+  const [rows, setRows] = useState<MarketRow[]>(() =>
+    PAIRS.map((p) => ({
+      id: p.id,
+      symbol: p.symbol,
+      name: p.name,
+      price: null,
+      change24h: null,
+      marketCap: null,
+    })),
+  );
   const [loading, setLoading] = useState(true);
 
-  const fetchCoins = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${TOP_COINS}&order=market_cap_desc&sparkline=false&price_change_percentage_24h`,
-      );
-      if (!res.ok) throw new Error("Failed");
-      const data: MarketCoin[] = await res.json();
-      setCoins(data);
+      const [cryptoRes, usdForexRes, eurGbpRes] = await Promise.all([
+        fetch(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage_24h`,
+        ),
+        fetch("https://api.frankfurter.dev/latest?from=USD&to=EUR,GBP,JPY"),
+        fetch("https://api.frankfurter.dev/latest?from=EUR&to=GBP"),
+      ]);
+
+      const cryptoMap: Record<string, { price: number; change: number; cap: number; image: string }> = {};
+      if (cryptoRes.ok) {
+        const data = await cryptoRes.json();
+        for (const coin of data) {
+          cryptoMap[coin.id] = {
+            price: coin.current_price,
+            change: coin.price_change_percentage_24h,
+            cap: coin.market_cap,
+            image: coin.image,
+          };
+        }
+      }
+
+      const forexPrices: Record<string, number> = {};
+      if (usdForexRes.ok) {
+        const usdData = await usdForexRes.json();
+        if (usdData.rates?.EUR) forexPrices["EUR/USD"] = 1 / usdData.rates.EUR;
+        if (usdData.rates?.GBP) forexPrices["GBP/USD"] = 1 / usdData.rates.GBP;
+        if (usdData.rates?.JPY) forexPrices["USD/JPY"] = usdData.rates.JPY;
+      }
+      if (eurGbpRes.ok) {
+        const eurGbpData = await eurGbpRes.json();
+        if (eurGbpData.rates?.GBP) forexPrices["EUR/GBP"] = eurGbpData.rates.GBP;
+      }
+
+      let goldPrice: number | null = null;
+      let goldChange: number | null = null;
+      try {
+        const goldRes = await fetch("/api/gold");
+        if (goldRes.ok) {
+          const goldData = await goldRes.json();
+          goldPrice = goldData.price ?? null;
+          goldChange = goldData.change24h ?? null;
+        }
+      } catch {
+        // gold unavailable
+      }
+
+      const newRows: MarketRow[] = PAIRS.map((p) => {
+        if (p.coinId && cryptoMap[p.coinId]) {
+          const c = cryptoMap[p.coinId];
+          return {
+            id: p.id,
+            symbol: p.symbol,
+            name: p.name,
+            price: c.price,
+            change24h: c.change,
+            marketCap: c.cap,
+            image: c.image,
+          };
+        }
+        if (p.symbol in forexPrices) {
+          return {
+            id: p.id,
+            symbol: p.symbol,
+            name: p.name,
+            price: forexPrices[p.symbol],
+            change24h: null,
+            marketCap: null,
+          };
+        }
+        if (p.id === "xau-usd") {
+          return {
+            id: p.id,
+            symbol: p.symbol,
+            name: p.name,
+            price: goldPrice,
+            change24h: goldChange,
+            marketCap: null,
+          };
+        }
+        return { id: p.id, symbol: p.symbol, name: p.name, price: null, change24h: null, marketCap: null };
+      });
+
+      setRows(newRows);
     } catch {
-      // keep previous data if any
+      // keep previous data
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchCoins();
-    const interval = setInterval(fetchCoins, 60000);
+    fetchData();
+    const interval = setInterval(fetchData, 60_000);
     return () => clearInterval(interval);
-  }, [fetchCoins]);
+  }, [fetchData]);
 
   const changeIsPositive = (val: number | null) => val !== null && val >= 0;
-  const changeClass = (val: number | null) => changeIsPositive(val) ? "text-success" : "text-error";
-  const changeArrow = (val: number | null) => changeIsPositive(val) ? <HiArrowSmUp className="text-xs" /> : <HiArrowSmDown className="text-xs" />;
-  const changeText = (val: number | null) => val !== null ? `${Math.abs(val).toFixed(2)}%` : "0.00%";
+  const changeClass = (val: number | null) => (changeIsPositive(val) ? "text-success" : "text-error");
+  const changeArrow = (val: number | null) =>
+    changeIsPositive(val) ? <HiArrowSmUp className="text-xs" /> : <HiArrowSmDown className="text-xs" />;
+  const changeText = (val: number | null) =>
+    val !== null ? `${Math.abs(val).toFixed(2)}%` : "—";
+
+  const renderPrice = (row: MarketRow) => {
+    if (row.price === null) return "-";
+    const prefix = FOREX_DISPLAY[row.symbol] || "$";
+    const price = row.price;
+    if (price >= 1000)
+      return `${prefix}${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (price >= 1) return `${prefix}${price.toFixed(2)}`;
+    if (price >= 0.01) return `${prefix}${price.toFixed(4)}`;
+    return `${prefix}${price.toFixed(6)}`;
+  };
 
   if (loading) {
     return (
       <div className="animate-pulse">
         <div className="h-10 border-b border-border" />
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="h-[46px] border-b border-border" />
         ))}
       </div>
@@ -87,33 +208,46 @@ export default function MarketOverview() {
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin, i) => (
-              <tr key={coin.id} className="border-b border-border hover:bg-section transition-colors">
+            {rows.map((row, i) => (
+              <tr
+                key={row.id}
+                className="border-b border-border hover:bg-section transition-colors"
+              >
                 <td className="py-3 px-4 text-text-secondary">{i + 1}</td>
                 <td className="py-3 px-4">
                   <div className="flex items-center gap-2">
-                    <Image
-                      src={coin.image}
-                      alt={coin.symbol}
-                      width={22}
-                      height={22}
-                      className="rounded-full"
-                    />
-                    <span className="font-semibold text-text-primary">{coin.name}</span>
-                    <span className="text-xs text-text-light uppercase">{coin.symbol}</span>
+                    {row.image ? (
+                      <Image
+                        src={row.image}
+                        alt={row.symbol}
+                        width={22}
+                        height={22}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <div className="w-[22px] h-[22px] rounded-full bg-primary-light flex items-center justify-center">
+                        <span className="text-[10px] font-bold text-primary">
+                          {row.symbol.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    <span className="font-semibold text-text-primary">{row.name}</span>
+                    <span className="text-xs text-text-light">{row.symbol}</span>
                   </div>
                 </td>
                 <td className="py-3 px-4 text-right font-semibold text-text-primary">
-                  {formatPrice(coin.current_price)}
+                  {renderPrice(row)}
                 </td>
-                <td className={`py-3 px-4 text-right font-semibold ${changeClass(coin.price_change_percentage_24h)}`}>
+                <td
+                  className={`py-3 px-4 text-right font-semibold ${changeClass(row.change24h)}`}
+                >
                   <span className="flex items-center justify-end gap-1">
-                    {changeArrow(coin.price_change_percentage_24h)}
-                    {changeText(coin.price_change_percentage_24h)}
+                    {row.change24h !== null ? changeArrow(row.change24h) : null}
+                    {changeText(row.change24h)}
                   </span>
                 </td>
                 <td className="py-3 px-4 text-right text-text-secondary">
-                  {formatMarketCap(coin.market_cap)}
+                  {formatMarketCap(row.marketCap)}
                 </td>
               </tr>
             ))}
@@ -123,33 +257,43 @@ export default function MarketOverview() {
 
       {/* Mobile horizontal scroll */}
       <div className="md:hidden flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
-        {coins.map((coin) => (
+        {rows.map((row) => (
           <div
-            key={coin.id}
+            key={row.id}
             className="min-w-[200px] p-4 rounded-lg border border-border bg-white snap-start shrink-0"
           >
             <div className="flex items-center gap-2 mb-3">
-              <Image
-                src={coin.image}
-                alt={coin.symbol}
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
+              {row.image ? (
+                <Image
+                  src={row.image}
+                  alt={row.symbol}
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
+              ) : (
+                <div className="w-[24px] h-[24px] rounded-full bg-primary-light flex items-center justify-center">
+                  <span className="text-[11px] font-bold text-primary">
+                    {row.symbol.charAt(0)}
+                  </span>
+                </div>
+              )}
               <div>
-                <p className="font-semibold text-text-primary text-sm">{coin.name}</p>
-                <p className="text-xs text-text-light uppercase">{coin.symbol}</p>
+                <p className="font-semibold text-text-primary text-sm">{row.name}</p>
+                <p className="text-xs text-text-light">{row.symbol}</p>
               </div>
             </div>
-            <p className="text-lg font-bold text-text-primary mb-1">
-              {formatPrice(coin.current_price)}
-            </p>
+            <p className="text-lg font-bold text-text-primary mb-1">{renderPrice(row)}</p>
             <div className="flex items-center justify-between">
-              <span className={`text-sm font-semibold flex items-center gap-0.5 ${changeClass(coin.price_change_percentage_24h)}`}>
-                {changeArrow(coin.price_change_percentage_24h)}
-                {changeText(coin.price_change_percentage_24h)}
+              <span
+                className={`text-sm font-semibold flex items-center gap-0.5 ${changeClass(row.change24h)}`}
+              >
+                {row.change24h !== null ? changeArrow(row.change24h) : null}
+                {changeText(row.change24h)}
               </span>
-              <span className="text-xs text-text-light">{formatMarketCap(coin.market_cap)}</span>
+              {row.marketCap !== null && (
+                <span className="text-xs text-text-light">{formatMarketCap(row.marketCap)}</span>
+              )}
             </div>
           </div>
         ))}

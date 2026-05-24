@@ -127,13 +127,14 @@
 - [x] 9 bài viết dạng grid 2 cột (image + content)
 - [x] Sidebar: Categories + Recent Posts + Newsletter widget
 - [x] Pagination: [1] [2] [3]
+- [x] Dedicated category routes: /news/categories/{cryptocurrency, forex, binary-options, markets}
 
 ---
 
 ## PHẦN 8: DÀNH CHO NGƯỜI MỚI — For Beginners (/for-beginners)
 
 - [x] Page Header
-- [x] 3 cards giới thiệu: What is Crypto / Forex / Binary Options
+- [x] 3 cards giới thiệu: What is Crypto / Forex / Binary Options + "Read News" buttons
 - [x] Getting Started: 7 steps
 - [x] Glossary: 15+ thuật ngữ (Ask, Bid, Spread, Leverage...)
 
@@ -339,7 +340,7 @@
 | 4. Components | 8 | ✅ 8 / 8 |
 | 5. Config & SEO | 4 | ✅ 4 / 4 |
 | 6. Home | 20 | ✅ 20 / 20 |
-| 7. News | 5 | ✅ 5 / 5 |
+| 7. News | 6 | ✅ 6 / 6 |
 | 8. For Beginners | 4 | ✅ 4 / 4 |
 | 9. Investment Analysis | 4 | ✅ 4 / 4 |
 | 10. Forex Broker | 4 | ✅ 4 / 4 |
@@ -356,7 +357,7 @@
 | 21. Domain setup | 11 | ⬜ 0 / 11 |
 | 22. Sau deploy | 8 | ✅ 3 / 8 |
 | 23. SEO & UX/UI | 18 | ✅ 16 / 18 |
-| **Tổng** | **164 mục** | **✅ 145 / 164** |
+| **Tổng** | **165 mục** | **✅ 146 / 165** |
 
 ---
 

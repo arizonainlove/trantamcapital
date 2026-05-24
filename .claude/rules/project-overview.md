@@ -10,13 +10,13 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - **Framework**: Next.js 14 (App Router) + TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: react-icons (Hi prefix = Hero Icons)
-- **Live Prices**: CoinGecko API (free, no API key)
+- **Live Prices**: CoinGecko API (crypto), Frankfurter API (forex), GoldPrice.org (gold) — all free, no API key
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
-### Site Structure (48 routes)
+### Site Structure (52 routes)
 
-#### Utility Pages (8)
+#### Utility Pages (9)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
 - `/privacy-policy` — GDPR compliance (legal basis, data retention, intl transfers, data subject rights)
 - `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
@@ -24,12 +24,13 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
 - `/api/contact` — Contact form POST endpoint with validation + rate limiting
 - `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
+- `/api/gold` — Gold price (XAU/USD) proxy from GoldPrice.org, no API key needed
 - `/admin` — Admin SPA route handler, checks session cookie before serving
 
 #### Main Pages (10)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
 2. News (`/news`) — Articles grid + sidebar filters + categories
-3. For Beginners (`/for-beginners`) — Crypto/Forex/Binary intro + 7 steps + Glossary
+3. For Beginners (`/for-beginners`) — Crypto/Forex/Binary intro cards with "Read News" links + 7 steps + Glossary
 4. Investment Analysis (`/investment-analysis`) — Market overview + reports + technical tools
 5. Forex Broker (`/forex-broker`) — **CMS-driven** brokers grid + auto comparison table
 6. Crypto Exchange (`/crypto-exchange`) — **CMS-driven** exchanges grid + auto comparison + security badges
@@ -43,10 +44,12 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/crypto-exchange/[slug]` — 5 exchange reviews: Binance, Coinbase, Bybit, OKX, Bitget
 - `/binary-option/[slug]` — 5 platform reviews: IQ Option, Pocket Option, Quotex, Binomo, Deriv
 
-#### Dynamic Routes (10)
+#### Dynamic Routes (14)
 - `/news/[slug]` — 9 article detail pages, statically generated via `generateStaticParams`
+- `/news/categories/[category]` — 4 category-filtered news pages (cryptocurrency, forex, binary-options, markets), statically generated via `generateStaticParams`
 
 #### Components
+- `MarketOverview.tsx` — Live price table: 5 crypto pairs (CoinGecko), 4 forex pairs (Frankfurter API), XAU/USD (GoldPrice.org proxy). 60s auto-refresh, skeleton loading, responsive mobile/desktop.
 - `BackToTop.tsx` — Floating button (appears after 400px scroll)
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox

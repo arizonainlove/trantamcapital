@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;" +
               "font-src 'self' https://fonts.gstatic.com;" +
               "img-src 'self' https://assets.coingecko.com https://coin-images.coingecko.com https://raw.githubusercontent.com data:;" +
-              "connect-src 'self' https://api.github.com https://api.coingecko.com;" +
+              "connect-src 'self' https://api.github.com https://api.coingecko.com https://api.frankfurter.dev;" +
               "frame-src 'none';" +
               "object-src 'none';" +
               "base-uri 'self'",
