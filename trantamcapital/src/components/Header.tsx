@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { HiMenu, HiX, HiSearch, HiChevronDown } from "react-icons/hi";
 import menuData from "@/data/menu.json";
 
@@ -82,9 +83,14 @@ export default function Header() {
       <div className="max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="text-xl font-extrabold text-text-primary tracking-tight">
-            ProTrade<span className="text-primary">Vision</span>
-          </span>
+          <Image
+            src="/logo/logo.png"
+            alt="ProTradeVision"
+            width={120}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
