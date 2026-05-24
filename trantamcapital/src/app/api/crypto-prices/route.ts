@@ -28,10 +28,10 @@ export async function GET() {
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`,
         { headers: { Accept: "application/json" }, next: { revalidate: 55 } },
       ),
-      fetch("https://api.frankfurter.dev/latest?from=USD&to=EUR,GBP,JPY", {
+      fetch("https://api.frankfurter.dev/v1/latest?from=USD&to=EUR,GBP,JPY", {
         next: { revalidate: 3600 },
       }),
-      fetch("https://api.frankfurter.dev/latest?from=EUR&to=GBP", {
+      fetch("https://api.frankfurter.dev/v1/latest?from=EUR&to=GBP", {
         next: { revalidate: 3600 },
       }),
     ]);

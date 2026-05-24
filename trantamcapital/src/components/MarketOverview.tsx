@@ -72,8 +72,8 @@ export default function MarketOverview() {
         fetch(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage_24h`,
         ),
-        fetch("https://api.frankfurter.dev/latest?from=USD&to=EUR,GBP,JPY"),
-        fetch("https://api.frankfurter.dev/latest?from=EUR&to=GBP"),
+        fetch("https://api.frankfurter.dev/v1/latest?from=USD&to=EUR,GBP,JPY"),
+        fetch("https://api.frankfurter.dev/v1/latest?from=EUR&to=GBP"),
       ]);
 
       const cryptoMap: Record<string, { price: number; change: number; cap: number; image: string }> = {};
