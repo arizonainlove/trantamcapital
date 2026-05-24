@@ -17,8 +17,6 @@ const CRYPTO_IDS = PAIRS.filter((p) => p.coinId).map((p) => p.coinId).join(",");
 
 const yesterdayDate = () => {
   const d = new Date(Date.now() - 86400000);
-  // Frankfurter API (ECB data) only has business day data
-  d.setDate(d.getDate() - (d.getDay() === 0 ? 2 : d.getDay() === 6 ? 1 : 0));
   return d.toISOString().split("T")[0];
 };
 
@@ -53,8 +51,6 @@ export async function GET() {
 
   try {
     const dateStr = yesterdayDate();
-    const today = new Date();
-    const marketsClosed = today.getDay() === 0 || today.getDay() === 6;
 
     const [cryptoRes, forexRes, forexPrevRes, eurGbpRes, eurGbpPrevRes] = await Promise.all([
       fetch(
@@ -136,12 +132,12 @@ export async function GET() {
           symbol: p.symbol,
           name: p.name,
           price: f.price,
-          change24h: marketsClosed ? null : calcChange(f.price, f.prevPrice),
+          change24h: calcChange(f.price, f.prevPrice),
           image: null,
         };
       }
       if (p.id === "xau-usd") {
-        return { id: p.id, symbol: p.symbol, name: p.name, price: goldPrice ?? 0, change24h: marketsClosed ? null : goldChange, image: null };
+        return { id: p.id, symbol: p.symbol, name: p.name, price: goldPrice ?? 0, change24h: goldChange, image: null };
       }
       return { id: p.id, symbol: p.symbol, name: p.name, price: 0, change24h: null, image: null };
     });

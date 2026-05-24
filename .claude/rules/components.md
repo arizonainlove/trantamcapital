@@ -13,7 +13,7 @@ description: Global component library, file structure, and live price widget spe
 | `MarketOverview.tsx` | Live price table — 5 crypto (CoinGecko), 4 forex (Frankfurter API, 24h change included), XAU/USD (via gold-api.com proxy). 60s refresh, skeleton, responsive. |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
-| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings. Visit Site button opens affiliate link in new tab (`target="_blank"`). |
+| `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings |
 | `ContactForm.tsx` | Contact form (name, email, subject, message) + GDPR consent checkbox |
 | `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |

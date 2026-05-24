@@ -68,19 +68,8 @@ export default function MarketOverview() {
 
   const fetchData = useCallback(async () => {
     try {
-      const today = new Date();
       const yesterday = new Date(Date.now() - 86400000);
-
-      // Frankfurter API (ECB data) only updates on business days
-      // Find the last business day for historical comparison
-      const prevBusinessDay = new Date(yesterday);
-      const prevDay = prevBusinessDay.getDay();
-      if (prevDay === 0) prevBusinessDay.setDate(prevBusinessDay.getDate() - 2); // Sun → Fri
-      else if (prevDay === 6) prevBusinessDay.setDate(prevBusinessDay.getDate() - 1); // Sat → Fri
-      const dateStr = prevBusinessDay.toISOString().split("T")[0];
-
-      // On weekends, forex/gold markets are closed — skip 24h change
-      const marketsClosed = today.getDay() === 0 || today.getDay() === 6;
+      const dateStr = yesterday.toISOString().split("T")[0];
 
       const [cryptoRes, usdForexRes, usdForexPrevRes, eurGbpRes, eurGbpPrevRes] = await Promise.all([
         fetch(
@@ -156,7 +145,7 @@ export default function MarketOverview() {
         }
         if (p.symbol in forexData) {
           const f = forexData[p.symbol];
-          const change24h = marketsClosed ? null : calcChange(f.price, f.prevPrice);
+          const change24h = calcChange(f.price, f.prevPrice);
           return {
             id: p.id,
             symbol: p.symbol,
@@ -172,7 +161,7 @@ export default function MarketOverview() {
             symbol: p.symbol,
             name: p.name,
             price: goldPrice,
-            change24h: marketsClosed ? null : goldChange,
+            change24h: goldChange,
             marketCap: null,
           };
         }
