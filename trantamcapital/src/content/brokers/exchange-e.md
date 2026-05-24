@@ -15,4 +15,8 @@ tradingFees: "0.1%"
 security: "High"
 exchangeFeatures: "Spot, Futures, Copy Trading"
 coins: "600+"
+futures: "Very Good"
+copyTrading: "Excellent"
+web3: "Medium"
+affiliateProgram: "Very Good"
 ---

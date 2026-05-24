@@ -14,4 +14,8 @@ logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trant
 payout: "Up to 95%"
 expiryTypes: "60s — End of Day"
 assets: "Forex, Crypto, Stocks, Commodities"
+popularity: "Very Strong"
+binaryCopyTrading: "Good"
+cryptoSupport: "Good"
+affiliateProgram: "Very Strong"
 ---

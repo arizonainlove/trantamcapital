@@ -16,4 +16,7 @@ minDeposit: "$5"
 spread: "From 1.0 pips"
 leverage: "1:888"
 platforms: "MT4, MT5, WebTrader"
+scalping: "Very Good"
+goldTrading: "Good"
+withdrawals: "Very Good"
 ---

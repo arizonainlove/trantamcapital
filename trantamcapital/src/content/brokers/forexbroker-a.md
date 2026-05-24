@@ -16,4 +16,7 @@ minDeposit: "$10"
 spread: "From 0.0 pips"
 leverage: "Unlimited"
 platforms: "MT4, MT5, WebTerminal"
+scalping: "Excellent"
+goldTrading: "Excellent"
+withdrawals: "Excellent"
 ---

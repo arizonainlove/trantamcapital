@@ -16,4 +16,7 @@ minDeposit: "$200"
 spread: "From 0.0 pips"
 leverage: "1:200"
 platforms: "MT4, MT5, TradingView"
+scalping: "Excellent"
+goldTrading: "Very Good"
+withdrawals: "Very Good"
 ---

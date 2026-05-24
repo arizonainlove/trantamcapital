@@ -16,7 +16,7 @@ highlights:
   - "Multi-Asset Trading"
   - "Good Crypto Support"
   - "Low Forex Spreads"
-payout: "Up to 92%"
+payout: "Up to 90%"
 expiryTypes: "60s — End of Day"
 assets: "Forex, Stocks, Crypto, Commodities"
 popularity: "Long-established"
