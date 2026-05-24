@@ -126,8 +126,8 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-2">
               To exercise any of these rights, contact us at{" "}
-              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
-                contact@protradevision.com
+              <a href="mailto:contact@www.protradevision.com" className="text-link hover:underline">
+                contact@www.protradevision.com
               </a>
               . We will respond within 30 days as required by GDPR.
             </p>
@@ -136,8 +136,8 @@ export default function PrivacyPolicy() {
             <p>
               If you have questions about this Privacy Policy or wish to exercise your data protection
               rights, please contact us at{" "}
-              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
-                contact@protradevision.com
+              <a href="mailto:contact@www.protradevision.com" className="text-link hover:underline">
+                contact@www.protradevision.com
               </a>
               .
             </p>

@@ -1,4 +1,16 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "smtp.zoho.com",
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: false,
+  requireTLS: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function POST(request: Request) {
   try {
@@ -21,11 +33,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Message too short" }, { status: 400 });
     }
 
-    // TODO: Integrate with email service (Resend, SendGrid, etc.)
-    console.log("Contact form submission:", { name, email, subject, message });
+    await transporter.sendMail({
+      from: `"${name}" <${process.env.SMTP_USER}>`,
+      replyTo: email,
+      to: process.env.CONTACT_TO || "contact@www.protradevision.com",
+      subject: `[Contact] ${subject}`,
+      html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
 
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  } catch (err) {
+    console.error("Contact form error:", err);
+    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }

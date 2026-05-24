@@ -133,8 +133,8 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold text-text-primary">12. Contact</h2>
             <p>
               For questions about these Terms of Service, please contact us at{" "}
-              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
-                contact@protradevision.com
+              <a href="mailto:contact@www.protradevision.com" className="text-link hover:underline">
+                contact@www.protradevision.com
               </a>
             </p>
           </div>

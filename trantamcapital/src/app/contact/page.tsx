@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const contactInfo = [
-  { icon: HiMail, label: "Email", value: "contact@protradevision.com", href: "mailto:contact@protradevision.com" },
+  { icon: HiMail, label: "Email", value: "contact@www.protradevision.com", href: "mailto:contact@www.protradevision.com" },
   { icon: HiPhone, label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
   { icon: HiLocationMarker, label: "Address", value: "London, United Kingdom" },
   { icon: HiClock, label: "Business Hours", value: "Mon — Fri, 9:00 AM — 6:00 PM GMT" },

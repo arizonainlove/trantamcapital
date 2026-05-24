@@ -730,8 +730,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-sm opacity-80">
                 <HiMail className="text-primary flex-shrink-0" size={16} />
-                <a href="mailto:contact@protradevision.com" className="hover:text-primary transition-colors">
-                  contact@protradevision.com
+                <a href="mailto:contact@www.protradevision.com" className="hover:text-primary transition-colors">
+                  contact@www.protradevision.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm opacity-80">

@@ -63,7 +63,7 @@
 - Trading Tools
 
 **Cột 4 — Contact:**
-- contact@protradevision.com
+- contact@www.protradevision.com
 - +1 (555) 123-4567
 - London, United Kingdom
 
@@ -197,7 +197,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 - **Subtitle:** "Have a question or feedback? We'd love to hear from you"
 
 ### Contact Information
-- **Email:** contact@protradevision.com
+- **Email:** contact@www.protradevision.com
 - **Phone:** +1 (555) 123-4567
 - **Address:** London, United Kingdom
 - **Business Hours:** Mon — Fri, 9:00 AM — 6:00 PM GMT
@@ -439,7 +439,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 - Withdraw consent at any time
 
 **8. Contact**
-"If you have any questions about this Privacy Policy, please contact us at contact@protradevision.com."
+"If you have any questions about this Privacy Policy, please contact us at contact@www.protradevision.com."
 
 ---
 
@@ -475,7 +475,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 "We reserve the right to modify these terms at any time. Changes are effective immediately upon posting. Your continued use of the website after changes constitutes acceptance."
 
 **9. Contact**
-"For any questions about these Terms, please contact us at contact@protradevision.com."
+"For any questions about these Terms, please contact us at contact@www.protradevision.com."
 
 ---
 

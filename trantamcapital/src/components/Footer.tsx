@@ -75,7 +75,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-text-light">
                 <HiMail className="mt-0.5 shrink-0 text-gold" />
-                <span>contact@protradevision.com</span>
+                <span>contact@www.protradevision.com</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-text-light">
                 <HiPhone className="mt-0.5 shrink-0 text-gold" />
