@@ -1,0 +1,41 @@
+import { NextResponse } from "next/server";
+
+const PAIRS: { symbol: string; yahoo: string }[] = [
+  { symbol: "EUR/USD", yahoo: "EURUSD=X" },
+  { symbol: "GBP/USD", yahoo: "GBPUSD=X" },
+  { symbol: "USD/JPY", yahoo: "USDJPY=X" },
+  { symbol: "EUR/GBP", yahoo: "EURGBP=X" },
+  { symbol: "XAU/USD", yahoo: "XAUUSD=X" },
+];
+
+let cache: { data: Record<string, number | null>; expiry: number } | null = null;
+
+export async function GET() {
+  if (cache && Date.now() < cache.expiry) {
+    return NextResponse.json(cache.data);
+  }
+
+  const results: Record<string, number | null> = {};
+
+  await Promise.all(
+    PAIRS.map(async ({ symbol, yahoo }) => {
+      try {
+        const res = await fetch(
+          `https://query1.finance.yahoo.com/v8/finance/chart/${yahoo}?interval=1d&range=5d`,
+          { next: { revalidate: 3600 } },
+        );
+        if (!res.ok) { results[symbol] = null; return; }
+        const data = await res.json();
+        const quote = data?.chart?.result?.[0]?.indicators?.quote?.[0];
+        if (!quote?.volume) { results[symbol] = null; return; }
+        const volumes: number[] = quote.volume.filter((v: number) => v > 0);
+        results[symbol] = volumes.length ? volumes[volumes.length - 1] : null;
+      } catch {
+        results[symbol] = null;
+      }
+    }),
+  );
+
+  cache = { data: results, expiry: Date.now() + 300000 };
+  return NextResponse.json(results);
+}

@@ -12,6 +12,7 @@ interface MarketRow {
   change24h: number | null;
   marketCap: number | null;
   image?: string;
+  volume?: number | null;
 }
 
 const PAIRS: { id: string; symbol: string; name: string; coinId?: string }[] = [
@@ -51,6 +52,14 @@ const formatMarketCap = (cap: number | null) => {
   if (cap >= 1e9) return `$${(cap / 1e9).toFixed(2)}B`;
   if (cap >= 1e6) return `$${(cap / 1e6).toFixed(2)}M`;
   return `$${cap.toLocaleString()}`;
+};
+
+const formatVolume = (vol: number | null): string => {
+  if (vol === null || vol === 0) return "-";
+  if (vol >= 1e9) return `$${(vol / 1e9).toFixed(2)}B`;
+  if (vol >= 1e6) return `$${(vol / 1e6).toFixed(2)}M`;
+  if (vol >= 1e3) return `$${(vol / 1e3).toFixed(1)}K`;
+  return `$${vol.toLocaleString()}`;
 };
 
 export default function MarketOverview() {
@@ -130,6 +139,14 @@ export default function MarketOverview() {
         // gold unavailable
       }
 
+      let volumeData: Record<string, number | null> = {};
+      try {
+        const volRes = await fetch("/api/volume");
+        if (volRes.ok) volumeData = await volRes.json();
+      } catch {
+        // volume unavailable
+      }
+
       const newRows: MarketRow[] = PAIRS.map((p) => {
         if (p.coinId && cryptoMap[p.coinId]) {
           const c = cryptoMap[p.coinId];
@@ -153,6 +170,7 @@ export default function MarketOverview() {
             price: f.price,
             change24h,
             marketCap: null,
+            volume: volumeData[p.symbol] ?? null,
           };
         }
         if (p.id === "xau-usd") {
@@ -163,6 +181,7 @@ export default function MarketOverview() {
             price: goldPrice,
             change24h: goldChange,
             marketCap: null,
+            volume: volumeData[p.symbol] ?? null,
           };
         }
         return { id: p.id, symbol: p.symbol, name: p.name, price: null, change24h: null, marketCap: null };
@@ -222,7 +241,7 @@ export default function MarketOverview() {
               <th className="text-left py-3 px-4 text-text-secondary font-semibold">Name</th>
               <th className="text-right py-3 px-4 text-text-secondary font-semibold">Price</th>
               <th className="text-right py-3 px-4 text-text-secondary font-semibold">24h Change</th>
-              <th className="text-right py-3 px-4 text-text-secondary font-semibold">Market Cap</th>
+              <th className="text-right py-3 px-4 text-text-secondary font-semibold">Market Cap / Volume</th>
             </tr>
           </thead>
           <tbody>
@@ -265,7 +284,7 @@ export default function MarketOverview() {
                   </span>
                 </td>
                 <td className="py-3 px-4 text-right text-text-secondary">
-                  {formatMarketCap(row.marketCap)}
+                  {row.marketCap !== null ? formatMarketCap(row.marketCap) : formatVolume(row.volume ?? null)}
                 </td>
               </tr>
             ))}
@@ -309,9 +328,13 @@ export default function MarketOverview() {
                 {row.change24h !== null ? changeArrow(row.change24h) : null}
                 {changeText(row.change24h)}
               </span>
-              {row.marketCap !== null && (
-                <span className="text-xs text-text-light">{formatMarketCap(row.marketCap)}</span>
-              )}
+              <span className="text-xs text-text-light">
+                {row.marketCap !== null
+                  ? formatMarketCap(row.marketCap)
+                  : (row.volume ?? null) !== null && row.volume !== undefined
+                    ? formatVolume(row.volume)
+                    : null}
+              </span>
             </div>
           </div>
         ))}
