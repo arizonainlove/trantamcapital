@@ -83,7 +83,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <span className="text-xl font-extrabold text-text-primary tracking-tight">
-            Trantam<span className="text-primary">Capital</span>
+            ProTrade<span className="text-primary">Vision</span>
           </span>
         </Link>
 
