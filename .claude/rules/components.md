@@ -6,7 +6,7 @@ description: Global component library, file structure, and live price widget spe
 
 | File | Description |
 |------|-------------|
-| `Header.tsx` | Navigation bar (#FFCA00), dynamic menu from `src/data/menu.json`, bold (700) nav links, mobile hamburger toggle |
+| `Header.tsx` | Navigation bar (#FFCA00), dynamic menu from `src/data/menu.json`, bold (700) nav links, mobile hamburger toggle. Logo: PNG image (`/logo/logo.png`) via next/image, 132×44px |
 | `Footer.tsx` | 4-column footer (About, Quick Links, Markets, Contact) + risk disclaimer |
 | `PriceTicker.tsx` | Live prices marquee — 10 pairs: 5 crypto + 4 forex + XAU/USD. Server API route aggregates CoinGecko + Frankfurter + GoldPrice.org, 60s refresh |
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
