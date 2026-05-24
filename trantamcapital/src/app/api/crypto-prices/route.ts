@@ -15,6 +15,32 @@ const PAIRS: { id: string; symbol: string; name: string; coinId?: string }[] = [
 
 const CRYPTO_IDS = PAIRS.filter((p) => p.coinId).map((p) => p.coinId).join(",");
 
+const yesterdayDate = () => {
+  const d = new Date(Date.now() - 86400000);
+  return d.toISOString().split("T")[0];
+};
+
+function calcChange(today: number, yesterday: number | null): number | null {
+  if (yesterday === null || yesterday === 0) return null;
+  return ((today - yesterday) / yesterday) * 100;
+}
+
+interface ForexData {
+  price: number;
+  prevPrice: number | null;
+}
+
+function parseForexPrices(
+  todayData: { rates?: Record<string, number> } | null,
+  prevData: { rates?: Record<string, number> } | null,
+  symbol: string,
+  compute: (rates: Record<string, number>) => number | null,
+): ForexData {
+  const todayPrice = todayData?.rates ? compute(todayData.rates) : null;
+  const prevPrice = prevData?.rates ? compute(prevData.rates) : null;
+  return { price: todayPrice ?? 0, prevPrice };
+}
+
 let cache: { data: unknown; expiry: number } | null = null;
 
 export async function GET() {
@@ -23,7 +49,9 @@ export async function GET() {
   }
 
   try {
-    const [cryptoRes, forexRes, eurGbpRes] = await Promise.all([
+    const dateStr = yesterdayDate();
+
+    const [cryptoRes, forexRes, forexPrevRes, eurGbpRes, eurGbpPrevRes] = await Promise.all([
       fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`,
         { headers: { Accept: "application/json" }, next: { revalidate: 55 } },
@@ -31,7 +59,13 @@ export async function GET() {
       fetch("https://api.frankfurter.dev/v1/latest?from=USD&to=EUR,GBP,JPY", {
         next: { revalidate: 3600 },
       }),
+      fetch(`https://api.frankfurter.dev/v1/${dateStr}?from=USD&to=EUR,GBP,JPY`, {
+        next: { revalidate: 3600 },
+      }),
       fetch("https://api.frankfurter.dev/v1/latest?from=EUR&to=GBP", {
+        next: { revalidate: 3600 },
+      }),
+      fetch(`https://api.frankfurter.dev/v1/${dateStr}?from=EUR&to=GBP`, {
         next: { revalidate: 3600 },
       }),
     ]);
@@ -48,24 +82,35 @@ export async function GET() {
       }
     }
 
-    const forexPrices: Record<string, number> = {};
-    if (forexRes.ok) {
-      const usdData = await forexRes.json();
-      if (usdData.rates?.EUR) forexPrices["EUR/USD"] = 1 / usdData.rates.EUR;
-      if (usdData.rates?.GBP) forexPrices["GBP/USD"] = 1 / usdData.rates.GBP;
-      if (usdData.rates?.JPY) forexPrices["USD/JPY"] = usdData.rates.JPY;
-    }
-    if (eurGbpRes.ok) {
-      const eurGbpData = await eurGbpRes.json();
-      if (eurGbpData.rates?.GBP) forexPrices["EUR/GBP"] = eurGbpData.rates.GBP;
-    }
+    const todayForex = forexRes.ok ? await forexRes.json() : null;
+    const prevForex = forexPrevRes.ok ? await forexPrevRes.json() : null;
+    const todayEurGbp = eurGbpRes.ok ? await eurGbpRes.json() : null;
+    const prevEurGbp = eurGbpPrevRes.ok ? await eurGbpPrevRes.json() : null;
+
+    const eurUsd = parseForexPrices(todayForex, prevForex, "EUR/USD", (r) =>
+      r.EUR ? 1 / r.EUR : null,
+    );
+    const gbpUsd = parseForexPrices(todayForex, prevForex, "GBP/USD", (r) =>
+      r.GBP ? 1 / r.GBP : null,
+    );
+    const usdJpy = parseForexPrices(todayForex, prevForex, "USD/JPY", (r) => r.JPY ?? null);
+    const eurGbp = parseForexPrices(todayEurGbp, prevEurGbp, "EUR/GBP", (r) => r.GBP ?? null);
+
+    const forexMap: Record<string, ForexData> = {
+      "EUR/USD": eurUsd,
+      "GBP/USD": gbpUsd,
+      "USD/JPY": usdJpy,
+      "EUR/GBP": eurGbp,
+    };
 
     let goldPrice: number | null = null;
+    let goldChange: number | null = null;
     try {
       const goldRes = await fetch("https://data-asg.goldprice.org/dbXRates/USD");
       if (goldRes.ok) {
         const goldData = await goldRes.json();
         goldPrice = goldData.items?.[0]?.xauPrice ?? null;
+        goldChange = goldData.items?.[0]?.pcGold ?? null;
       }
     } catch {
       // gold unavailable
@@ -76,11 +121,19 @@ export async function GET() {
         const c = cryptoMap[p.coinId];
         return { id: p.id, symbol: p.symbol, name: p.name, price: c.price, change24h: c.change, image: c.image };
       }
-      if (p.symbol in forexPrices) {
-        return { id: p.id, symbol: p.symbol, name: p.name, price: forexPrices[p.symbol], change24h: null, image: null };
+      if (p.symbol in forexMap) {
+        const f = forexMap[p.symbol];
+        return {
+          id: p.id,
+          symbol: p.symbol,
+          name: p.name,
+          price: f.price,
+          change24h: calcChange(f.price, f.prevPrice),
+          image: null,
+        };
       }
-      if (p.id === "xau-usd" && goldPrice !== null) {
-        return { id: p.id, symbol: p.symbol, name: p.name, price: goldPrice, change24h: null, image: null };
+      if (p.id === "xau-usd") {
+        return { id: p.id, symbol: p.symbol, name: p.name, price: goldPrice ?? 0, change24h: goldChange, image: null };
       }
       return { id: p.id, symbol: p.symbol, name: p.name, price: 0, change24h: null, image: null };
     });

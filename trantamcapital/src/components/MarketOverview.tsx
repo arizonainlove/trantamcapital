@@ -68,12 +68,17 @@ export default function MarketOverview() {
 
   const fetchData = useCallback(async () => {
     try {
-      const [cryptoRes, usdForexRes, eurGbpRes] = await Promise.all([
+      const yesterday = new Date(Date.now() - 86400000);
+      const dateStr = yesterday.toISOString().split("T")[0];
+
+      const [cryptoRes, usdForexRes, usdForexPrevRes, eurGbpRes, eurGbpPrevRes] = await Promise.all([
         fetch(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${CRYPTO_IDS}&order=market_cap_desc&sparkline=false&price_change_percentage_24h`,
         ),
         fetch("https://api.frankfurter.dev/v1/latest?from=USD&to=EUR,GBP,JPY"),
+        fetch(`https://api.frankfurter.dev/v1/${dateStr}?from=USD&to=EUR,GBP,JPY`),
         fetch("https://api.frankfurter.dev/v1/latest?from=EUR&to=GBP"),
+        fetch(`https://api.frankfurter.dev/v1/${dateStr}?from=EUR&to=GBP`),
       ]);
 
       const cryptoMap: Record<string, { price: number; change: number; cap: number; image: string }> = {};
@@ -89,17 +94,28 @@ export default function MarketOverview() {
         }
       }
 
-      const forexPrices: Record<string, number> = {};
-      if (usdForexRes.ok) {
-        const usdData = await usdForexRes.json();
-        if (usdData.rates?.EUR) forexPrices["EUR/USD"] = 1 / usdData.rates.EUR;
-        if (usdData.rates?.GBP) forexPrices["GBP/USD"] = 1 / usdData.rates.GBP;
-        if (usdData.rates?.JPY) forexPrices["USD/JPY"] = usdData.rates.JPY;
-      }
-      if (eurGbpRes.ok) {
-        const eurGbpData = await eurGbpRes.json();
-        if (eurGbpData.rates?.GBP) forexPrices["EUR/GBP"] = eurGbpData.rates.GBP;
-      }
+      const calcChange = (today: number | null, yesterday: number | null): number | null => {
+        if (today === null || yesterday === null || yesterday === 0) return null;
+        return ((today - yesterday) / yesterday) * 100;
+      };
+
+      const todayForex = usdForexRes.ok ? await usdForexRes.json() : null;
+      const prevForex = usdForexPrevRes.ok ? await usdForexPrevRes.json() : null;
+      const todayEurGbp = eurGbpRes.ok ? await eurGbpRes.json() : null;
+      const prevEurGbp = eurGbpPrevRes.ok ? await eurGbpPrevRes.json() : null;
+
+      const getForexPrice = (data: { rates?: Record<string, number> } | null, key: string, invert: boolean): number | null => {
+        if (!data?.rates?.[key]) return null;
+        return invert ? 1 / data.rates[key] : data.rates[key];
+      };
+
+      interface ForexInfo { price: number | null; prevPrice: number | null }
+      const forexData: Record<string, ForexInfo> = {
+        "EUR/USD": { price: getForexPrice(todayForex, "EUR", true), prevPrice: getForexPrice(prevForex, "EUR", true) },
+        "GBP/USD": { price: getForexPrice(todayForex, "GBP", true), prevPrice: getForexPrice(prevForex, "GBP", true) },
+        "USD/JPY": { price: getForexPrice(todayForex, "JPY", false), prevPrice: getForexPrice(prevForex, "JPY", false) },
+        "EUR/GBP": { price: getForexPrice(todayEurGbp, "GBP", false), prevPrice: getForexPrice(prevEurGbp, "GBP", false) },
+      };
 
       let goldPrice: number | null = null;
       let goldChange: number | null = null;
@@ -127,13 +143,15 @@ export default function MarketOverview() {
             image: c.image,
           };
         }
-        if (p.symbol in forexPrices) {
+        if (p.symbol in forexData) {
+          const f = forexData[p.symbol];
+          const change24h = calcChange(f.price, f.prevPrice);
           return {
             id: p.id,
             symbol: p.symbol,
             name: p.name,
-            price: forexPrices[p.symbol],
-            change24h: null,
+            price: f.price,
+            change24h,
             marketCap: null,
           };
         }
