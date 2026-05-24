@@ -42,6 +42,7 @@ function parseForexPrices(
 }
 
 let cache: { data: unknown; expiry: number } | null = null;
+let prevGoldPrice: number | null = null;
 
 export async function GET() {
   if (cache && Date.now() < cache.expiry) {
@@ -106,11 +107,14 @@ export async function GET() {
     let goldPrice: number | null = null;
     let goldChange: number | null = null;
     try {
-      const goldRes = await fetch("https://data-asg.goldprice.org/dbXRates/USD");
+      const goldRes = await fetch("https://api.gold-api.com/price/XAU");
       if (goldRes.ok) {
         const goldData = await goldRes.json();
-        goldPrice = goldData.items?.[0]?.xauPrice ?? null;
-        goldChange = goldData.items?.[0]?.pcGold ?? null;
+        goldPrice = goldData.price ?? null;
+        if (goldPrice !== null && prevGoldPrice !== null && prevGoldPrice > 0) {
+          goldChange = ((goldPrice - prevGoldPrice) / prevGoldPrice) * 100;
+        }
+        if (goldPrice !== null) prevGoldPrice = goldPrice;
       }
     } catch {
       // gold unavailable
