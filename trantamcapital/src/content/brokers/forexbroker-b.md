@@ -9,7 +9,7 @@ features:
   - "0.0 pip spreads"
   - "60+ currency pairs"
 reviewHref: "/forex-broker/broker-b"
-visitHref: "https://www.icmarkets.com/global/en/"
+visitHref: "https://icmarkets.com/?camp=86100"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367192104-logoicmarkets.png"
 regulation: "ASIC, CySEC"
 minDeposit: "$200"

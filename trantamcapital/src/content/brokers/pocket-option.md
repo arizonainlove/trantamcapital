@@ -9,7 +9,7 @@ features:
   - "High payouts up to 98%"
   - "Social trading"
 reviewHref: "/binary-option/pocket-option"
-visitHref: "https://pocketoption.com/vt"
+visitHref: "https://pocket-friends.co/r/zbgfs66quv"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367563253-logopocketoption.png"
 highlights:
   - "Very Strong Popularity"

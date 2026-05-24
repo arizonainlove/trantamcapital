@@ -9,7 +9,7 @@ features:
   - "Futures & margin trading"
   - "Staking & earn"
 reviewHref: "/crypto-exchange/exchange-a"
-visitHref: "https://www.binance.com/vi"
+visitHref: "https://www.binance.com/join?ref=GHR4JTB6"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779523629370-binanceblack.svg"
 highlights:
   - "Excellent Futures Trading"

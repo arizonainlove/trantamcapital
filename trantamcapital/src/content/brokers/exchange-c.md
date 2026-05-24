@@ -9,7 +9,7 @@ features:
   - "Copy trading"
   - "Advanced derivatives"
 reviewHref: "/crypto-exchange/exchange-c"
-visitHref: "https://www.bybit.com/vi-VN/"
+visitHref: "https://partner.bybit.com/b/tybex86"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779524085183-bybitblack.svg"
 highlights:
   - "Excellent Futures Trading"

@@ -9,7 +9,7 @@ features:
   - "Very strong futures trading"
   - "Competitive fees 0.08%"
 reviewHref: "/crypto-exchange/exchange-d"
-visitHref: "https://www.okx.com/"
+visitHref: "https://okx.com/join/TAMHG18HH"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779544153133-okxblack.svg"
 tradingFees: "0.08%"
 security: "Very High"

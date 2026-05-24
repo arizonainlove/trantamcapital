@@ -106,12 +106,14 @@ export default function BrokerCard({
         >
           Read Review
         </Link>
-        <Link
+        <a
           href={visitHref}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex-1 text-center text-sm text-primary bg-primary-light border border-primary hover:bg-primary hover:text-white px-4 py-2.5 rounded transition-colors min-h-[44px] flex items-center justify-center"
         >
           Visit Site
-        </Link>
+        </a>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ features:
   - "Unlimited leverage"
   - "Instant withdrawals"
 reviewHref: "/forex-broker/broker-a"
-visitHref: "https://www.exness.com/"
+visitHref: "https://one.exness-track.com/a/gzmgj92tro"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779524229588-exnessyellow.svg"
 regulation: "FCA, CySEC, FSA"
 minDeposit: "$10"

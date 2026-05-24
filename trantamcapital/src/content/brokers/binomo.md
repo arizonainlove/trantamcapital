@@ -9,7 +9,7 @@ features:
   - "Beginner-friendly platform"
   - "Strong affiliate program"
 reviewHref: "/binary-option/platform-c"
-visitHref: "https://binomo.com/"
+visitHref: "https://binomo-invitefriend.com/auth?invite_code=b92655dfb6b9f1e1231fbfffaaeb11a9#SignUp"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779545039191-binomoyellow.svg"
 payout: "Up to 90%"
 expiryTypes: "60s — End of Day"

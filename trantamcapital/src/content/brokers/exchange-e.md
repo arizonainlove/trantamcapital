@@ -9,7 +9,7 @@ features:
   - "Very strong affiliate program"
   - "Low fees from 0.1%"
 reviewHref: "/crypto-exchange/exchange-e"
-visitHref: "https://www.bitget.com/"
+visitHref: "https://partner.bitget.com/bg/F4L70E"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779544425584-bitget.svg"
 tradingFees: "0.1%"
 security: "High"

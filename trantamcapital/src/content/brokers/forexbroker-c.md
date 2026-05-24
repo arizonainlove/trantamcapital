@@ -9,7 +9,7 @@ features:
   - "1200+ instruments"
   - "Fast execution"
 reviewHref: "/forex-broker/broker-c"
-visitHref: "https://pepperstone.com/vi-vn/"
+visitHref: "https://trk.pepperstonepartners.com/aff_c?offer_id=367&aff_id=40798"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779367308116-logopepperstone.png"
 regulation: "ASIC, FCA, CMA"
 minDeposit: "$200"

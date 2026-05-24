@@ -9,7 +9,7 @@ features:
   - "120+ instruments"
   - "No dealing desk execution"
 reviewHref: "/forex-broker/broker-d"
-visitHref: "https://www.fxpro.com/"
+visitHref: "https://direct-fxpro.com/en/partner/282z7eW8S"
 logo: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/logo-1779544290988-fxprored.svg"
 regulation: "FCA, CySEC, SCB"
 minDeposit: "$100"
