@@ -86,9 +86,9 @@ export default function Header() {
           <Image
             src="/logo/logo.png"
             alt="ProTradeVision"
-            width={120}
-            height={32}
-            className="h-8 w-auto"
+            width={132}
+            height={44}
+            className="h-11 w-auto"
             priority
           />
         </Link>
