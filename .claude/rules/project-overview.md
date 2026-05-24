@@ -10,7 +10,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - **Framework**: Next.js 14 (App Router) + TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: react-icons (Hi prefix = Hero Icons)
-- **Live Prices**: CoinGecko API (crypto), Frankfurter API (forex), GoldPrice.org (gold) — all free, no API key
+- **Live Prices**: CoinGecko API (crypto), Frankfurter API (forex), gold-api.com (gold) — all free, no API key
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
@@ -24,7 +24,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
 - `/api/contact` — Contact form POST endpoint with validation + rate limiting
 - `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
-- `/api/gold` — Gold price (XAU/USD) proxy from GoldPrice.org, no API key needed
+- `/api/gold` — Gold price (XAU/USD) proxy via gold-api.com, no API key needed
 - `/admin` — Admin SPA route handler, checks session cookie before serving
 
 #### Main Pages (10)

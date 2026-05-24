@@ -10,7 +10,7 @@ description: Global component library, file structure, and live price widget spe
 | `Footer.tsx` | 4-column footer (About, Quick Links, Markets, Contact) + risk disclaimer |
 | `PriceTicker.tsx` | Live prices marquee — 10 pairs: 5 crypto + 4 forex + XAU/USD. Server API route aggregates CoinGecko + Frankfurter + GoldPrice.org, 60s refresh |
 | `SectionTitle.tsx` | Section header with title + subtitle + orange underline |
-| `MarketOverview.tsx` | Live price table — 5 crypto (CoinGecko), 4 forex (Frankfurter API), XAU/USD (GoldPrice.org proxy). 60s refresh, skeleton, responsive. |
+| `MarketOverview.tsx` | Live price table — 5 crypto (CoinGecko), 4 forex (Frankfurter API, 24h change included), XAU/USD (via gold-api.com proxy). 60s refresh, skeleton, responsive. |
 | `Card.tsx` | Reusable card wrapper with standard styling |
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
 | `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings |
@@ -25,7 +25,7 @@ description: Global component library, file structure, and live price widget spe
 - **API**: `/api/crypto-prices` (server-side aggregation)
   - **Crypto**: CoinGecko — BTC, ETH, BNB, XRP, SOL
   - **Forex**: Frankfurter API (ECB) — EUR/USD, GBP/USD, USD/JPY, EUR/GBP
-  - **Gold**: GoldPrice.org proxy — XAU/USD
+  - **Gold**: gold-api.com proxy — XAU/USD
 - **Pairs**: BTC/USD, ETH/USD, BNB/USD, XRP/USD, SOL/USD, EUR/USD, GBP/USD, USD/JPY, EUR/GBP, XAU/USD
 - **Refresh**: Every 60 seconds (client-side fetch, server cache 55s)
 - **Display**: Horizontal marquee animation
