@@ -2,13 +2,13 @@
 
 ## Truy cập
 
-Vào **`https://trantamcapital.vercel.app/admin`**
+Vào **`https://protradevision.com/admin`**
 
 ---
 
 ## Đăng nhập
 
-1. Vào **`https://trantamcapital.vercel.app/admin`**
+1. Vào **`https://protradevision.com/admin`**
 2. Click nút **Login with GitHub**
 3. Cửa sổ mới hiện ra → Click **Authorize** để cấp quyền
 4. Cửa sổ tự động đóng → Trang admin hiện danh sách bài viết
@@ -48,13 +48,13 @@ Sau khi đăng nhập, tab **News Articles** hiện danh sách tất cả bài v
 | **Title** | ✅ Có | Tiêu đề bài viết |
 | **Publish Date** | ❌ Không | Ngày đăng, mặc định là hôm nay |
 | **Category** | ❌ Không | Chọn danh mục |
-| **Author** | ❌ Không | Tác giả, mặc định "TrantamCapital" |
+| **Author** | ❌ Không | Tác giả, mặc định "ProTradeVision" |
 | **Image URL** | ❌ Không | Link ảnh đại diện (nếu có). Khuyến nghị 1200×630px, 16:9 |
 | **Excerpt** | ❌ Không | Mô tả ngắn, 1-2 câu |
 | **Body** | ✅ Có | Nội dung chính — viết bằng Markdown |
 
 3. Click **Create Article** → Bài viết được lưu lên GitHub
-4. Đợi ~1-2 phút → Vào **`https://trantamcapital.vercel.app/news`** kiểm tra
+4. Đợi ~1-2 phút → Vào **`https://protradevision.com/news`** kiểm tra
 
 ---
 
@@ -162,7 +162,7 @@ Các trường hiển thị trong bảng so sánh ở trang danh sách. Chỉ c�
 
 ## Quản lý Reviews
 
-Tab **Reviews** cho phép quản lý nội dung trang review chi tiết cho từng broker (ví dụ: `trantamcapital.com/forex-broker/broker-a`).
+Tab **Reviews** cho phép quản lý nội dung trang review chi tiết cho từng broker (ví dụ: `protradevision.com/forex-broker/broker-a`).
 
 ### Xem danh sách Reviews
 

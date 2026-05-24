@@ -2,7 +2,7 @@
 title: "Central Bank Rate Decisions: Impact on Major Currency Pairs"
 date: "2026-05-19"
 category: "Forex"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349498074-centralbank.png"
 excerpt: "With multiple central banks announcing rate decisions this quarter, forex traders are bracing for increased volatility across major currency pairs. Our analysis covers the key levels to watch."
 ---

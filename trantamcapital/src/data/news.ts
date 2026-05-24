@@ -30,7 +30,7 @@ The surge past $100K represents a significant psychological barrier that many an
 Market analysts point to several key factors driving this rally. The recent approval of multiple spot Bitcoin ETFs has opened the door for traditional investors to gain exposure to the asset class. Additionally, the upcoming halving event has historically been a catalyst for price appreciation.
 
 For retail investors, this milestone raises important questions about portfolio allocation and risk management. While the long-term outlook remains positive, experts caution that volatility is likely to persist and investors should only risk capital they can afford to lose.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Central Bank Rate Decisions: Impact on Major Currency Pairs",
@@ -45,7 +45,7 @@ The Fed's stance on interest rates remains the primary driver of USD strength. A
 In Europe, the ECB continues to navigate a challenging economic environment with persistent inflation concerns. The EUR/USD pair remains highly sensitive to interest rate differentials between the two regions.
 
 Key levels to watch this week include the 1.0800 support for EUR/USD and the 150.00 resistance for USD/JPY. Breakouts above or below these levels could signal the beginning of new trends.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Binary Options Trading Strategies for Volatile Markets",
@@ -60,7 +60,7 @@ The straddle strategy is particularly effective in high-volatility environments.
 Trend-following strategies also perform well during volatile periods. Identifying strong trends and trading in their direction using short-term binary options can yield consistent results. Key indicators like moving averages and the Relative Strength Index (RSI) help confirm trend direction and strength.
 
 Risk management becomes even more critical during volatile conditions. Limiting each trade to 1-2% of your trading capital and using shorter expiry times can help preserve capital while taking advantage of price swings.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Global Market Outlook: Q3 2026 Forecast",
@@ -77,7 +77,7 @@ Forex markets are expected to remain highly sensitive to monetary policy diverge
 Commodity markets face headwinds from slowing global growth, but supply constraints in key sectors like energy and metals may keep prices elevated. Gold continues to benefit from its safe-haven status amid geopolitical uncertainties.
 
 Risk management should remain a top priority for traders. Position sizing, stop-losses, and portfolio diversification are essential tools for navigating the expected volatility in Q3 2026.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Ethereum 2.0: Staking Rewards Hit New Highs",
@@ -92,7 +92,7 @@ The increase in staking rewards can be attributed to several factors, including 
 For ETH holders, staking offers an opportunity to earn passive income while contributing to network security. Current annual percentage yields (APY) are competitive with traditional fixed-income products, making Ethereum an appealing alternative for yield-seeking investors.
 
 However, potential stakers should be aware of the lock-up periods and the risks associated with slashing penalties. Choosing a reliable staking provider or pool is essential for maximizing returns while minimizing risks.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "EUR/USD Analysis: Key Levels to Watch This Week",
@@ -107,7 +107,7 @@ On the daily chart, the pair is testing the 50-day moving average, which has act
 The RSI is currently hovering near the neutral 50 level, suggesting that momentum is balanced between buyers and sellers. A move above 60 would indicate strengthening bullish momentum, while a drop below 40 would signal increasing bearish pressure.
 
 Fundamentally, the interest rate differential between the Fed and the ECB remains the primary driver. Any surprises in upcoming economic data releases could trigger significant volatility in the pair.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "60-Second Binary Options: Pro Tips for Quick Trades",
@@ -122,7 +122,7 @@ Professional traders approach 60-second options with a focus on technical analys
 News trading is particularly effective for 60-second options. Major economic releases can cause immediate price spikes that experienced traders can capitalize on. The key is to predict the direction of the initial reaction rather than the long-term trend.
 
 Risk management is paramount with such short expiry times. Most professionals never risk more than 1% of their account on a single 60-second trade and avoid trading during low-liquidity periods when spreads are wide and price action can be erratic.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Commodity Prices Surge Amid Supply Chain Concerns",
@@ -139,7 +139,7 @@ Silver is outperforming gold in percentage terms, benefiting from both its monet
 Oil prices remain elevated as supply constraints from major producing nations coincide with steady demand. The energy market remains particularly sensitive to geopolitical developments that could further disrupt supply flows.
 
 For commodity traders, the current environment offers substantial opportunities but also requires careful risk management. Diversification across different commodity sectors can help mitigate the impact of sector-specific volatility.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
   {
     title: "Altcoin Season: Which Projects Are Gaining Momentum",
@@ -156,7 +156,7 @@ DeFi protocols are also seeing renewed interest as yields stabilize and new inno
 The AI and blockchain intersection remains a hot sector, with projects focused on decentralized computing and data verification gaining traction. These emerging narratives could drive the next wave of altcoin adoption.
 
 Investors should focus on projects with strong development teams, active communities, and clear use cases. Due diligence and proper position sizing remain essential for navigating the volatility of altcoin markets.`,
-    author: "TrantamCapital Analysis Team",
+    author: "ProTradeVision Analysis Team",
   },
 ];
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "TrantamCapital privacy policy explains how we collect, use, and protect your personal information.",
+  description: "ProTradeVision privacy policy explains how we collect, use, and protect your personal information.",
 };
 
 export default function PrivacyPolicy() {
@@ -20,12 +20,12 @@ export default function PrivacyPolicy() {
           <div className="space-y-6 text-sm text-text-secondary leading-relaxed">
             <h2 className="text-xl font-bold text-text-primary">1. Introduction</h2>
             <p>
-              TrantamCapital (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to
+              ProTradeVision (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to
               protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and
               safeguard your information when you visit our website.
             </p>
             <p className="mt-2">
-              TrantamCapital is the data controller responsible for your personal data. If you have
+              ProTradeVision is the data controller responsible for your personal data. If you have
               any questions, please contact us at the email address provided below.
             </p>
 
@@ -126,8 +126,8 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-2">
               To exercise any of these rights, contact us at{" "}
-              <a href="mailto:contact@trantamcapital.com" className="text-link hover:underline">
-                contact@trantamcapital.com
+              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
+                contact@protradevision.com
               </a>
               . We will respond within 30 days as required by GDPR.
             </p>
@@ -136,8 +136,8 @@ export default function PrivacyPolicy() {
             <p>
               If you have questions about this Privacy Policy or wish to exercise your data protection
               rights, please contact us at{" "}
-              <a href="mailto:contact@trantamcapital.com" className="text-link hover:underline">
-                contact@trantamcapital.com
+              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
+                contact@protradevision.com
               </a>
               .
             </p>

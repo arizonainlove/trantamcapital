@@ -2,7 +2,7 @@
 title: "EUR/USD Analysis: Key Levels to Watch This Week"
 date: "2026-05-15"
 category: "Forex"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779350053428-eurusd.png"
 excerpt: "Technical analysis of the EUR/USD pair with key support and resistance levels every trader should monitor."
 ---

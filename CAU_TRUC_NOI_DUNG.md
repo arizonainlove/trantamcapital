@@ -1,4 +1,4 @@
-# CẤU TRÚC & NỘI DUNG WEBSITE TRANTAMCAPITAL.COM
+# CẤU TRÚC & NỘI DUNG WEBSITE PROTRADEVISION.COM
 
 > Ngôn ngữ: Tiếng Anh | Thị trường: Quốc tế
 > Màu sắc: Phương án D (Premium Financial)
@@ -8,7 +8,7 @@
 ## SITEMAP TỔNG THỂ
 
 ```
-TRANTAMCAPITAL.COM
+PROTRADEVISION.COM
 │
 ├── 🏠 Home (/)                          # Trang chủ — giới thiệu tổng quan
 │
@@ -189,7 +189,7 @@ TRANTAMCAPITAL.COM
 - **Mỗi card**: Icon + Title + Mô tả ngắn
 - **Link**: đến trang tương ứng
 
-#### Section 5: Why TrantamCapital (4 lý do)
+#### Section 5: Why ProTradeVision (4 lý do)
 ```
 ┌──────────────────────────────────────────────────────┐
 │   [Background: Navy #0F1A2E]                         │
@@ -895,7 +895,7 @@ Get in touch with our team
 ┌────────────────────────┬────────────────────────┐
 │  GET IN TOUCH          │  CONTACT INFORMATION    │
 │                        │                         │
-│  [Your Name]           │  📧 info@trantamcapital │
+│  [Your Name]           │  📧 info@protradevision │
 │  [Email Address]       │     .com                │
 │  [Subject]             │                         │
 │  [Message]             │  📞 +1 (234) 567-890    │

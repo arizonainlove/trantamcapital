@@ -1,4 +1,4 @@
-# TrantamCapital Website
+# ProTradeVision Website
 
 Financial market information website covering cryptocurrency, forex, and binary options. Built for international audience (English).
 

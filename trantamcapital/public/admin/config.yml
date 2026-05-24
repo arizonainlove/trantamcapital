@@ -2,7 +2,7 @@ backend:
   name: github
   repo: arizonainlove/trantamcapital
   branch: main
-  base_url: https://trantamcapital.vercel.app
+  base_url: https://protradevision.com
   auth_endpoint: api/auth
 
 collections:

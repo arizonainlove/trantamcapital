@@ -1,5 +1,5 @@
 ---
-description: Project overview, tech stack, and complete site structure for TrantamCapital website
+description: Project overview, tech stack, and complete site structure for ProTradeVision website
 ---
 
 ## Project Overview
@@ -25,6 +25,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/api/contact` — Contact form POST endpoint with validation + rate limiting
 - `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
 - `/api/gold` — Gold price (XAU/USD) proxy via gold-api.com, no API key needed
+- `/api/volume` — Forex/gold trading volume via Yahoo Finance (free, no key)
 - `/admin` — Admin SPA route handler, checks session cookie before serving
 
 #### Main Pages (10)
@@ -49,7 +50,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/news/categories/[category]` — 4 category-filtered news pages (cryptocurrency, forex, binary-options, markets), statically generated via `generateStaticParams`
 
 #### Components
-- `MarketOverview.tsx` — Live price table: 5 crypto pairs (CoinGecko), 4 forex pairs (Frankfurter API), XAU/USD (GoldPrice.org proxy). 60s auto-refresh, skeleton loading, responsive mobile/desktop.
+- `MarketOverview.tsx` — Live price table: 5 crypto (CoinGecko), 4 forex (Frankfurter API), XAU/USD (gold-api.com proxy). Volume data for gold via `/api/volume`. 60s auto-refresh, skeleton loading, responsive mobile/desktop.
 - `BackToTop.tsx` — Floating button (appears after 400px scroll)
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox

@@ -7,7 +7,7 @@ let adminHtml: string | null = null;
 
 const LOGIN_PAGE = `<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>Access Restricted — TrantamCapital</title>
+<head><meta charset="utf-8"><title>Access Restricted — ProTradeVision</title>
 <style>
 body{font-family:'Open Sans',system-ui,sans-serif;background:#F7F8FA;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
 .card{background:#fff;border:1px solid #E2E5EC;border-radius:7px;box-shadow:0 4px 16px rgba(0,0,0,0.12);padding:48px 40px;text-align:center;max-width:420px;width:100%}
@@ -19,7 +19,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:#F7F8FA;display:fle
 </style></head>
 <body>
 <div class="card">
-  <div class="logo">TrantamCapital</div>
+  <div class="logo">ProTradeVision</div>
   <div class="subtitle">Content Management System</div>
   <p style="color:#C62828;font-size:13px;margin-bottom:16px">Authentication required</p>
   <button class="btn" onclick="login()">

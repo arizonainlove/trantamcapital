@@ -1,4 +1,4 @@
-# TƯ VẤN MÀU SẮC — TRANTAMCAPITAL.COM
+# TƯ VẤN MÀU SẮC — PROTRADEVISION.COM
 
 ---
 
@@ -77,7 +77,7 @@ Giống: sàn giao dịch crypto (Binance, Bybit).
 
 ### PHƯƠNG ÁN D: Đề xuất chính — Premium Financial (Cam đất + Xanh navy + Trắng)
 
-Đây là phương án tôi **khuyên dùng** cho trantamcapital.com.
+Đây là phương án tôi **khuyên dùng** cho protradevision.com.
 Pha giữa phong cách thuancapital nhưng tinh tế hơn, dễ nhìn hơn, có bản sắc riêng.
 
 ```css

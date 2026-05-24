@@ -2,7 +2,7 @@
 title: "Crypto Market Outlook: May 2026"
 date: "2026-05-21"
 category: "Cryptocurrency"
-author: "TrantamCapital"
+author: "ProTradeVision"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779336381909-anhtestcryto.png"
 excerpt: "A comprehensive look at the cryptocurrency market trends, key support levels, and what to watch in the coming weeks."
 ---

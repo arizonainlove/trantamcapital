@@ -2,7 +2,7 @@
 title: "Global Market Outlook: Q3 2026 Forecast"
 date: "2026-05-17"
 category: "Markets"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349786455-globalmarket.png"
 excerpt: "Our comprehensive Q3 2026 market outlook covers key trends, potential risks, and opportunities across cryptocurrency, forex, and traditional markets."
 ---

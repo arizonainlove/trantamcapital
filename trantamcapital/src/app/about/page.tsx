@@ -4,7 +4,7 @@ import Card from "@/components/Card";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about TrantamCapital's mission, team, and story. Your trusted source for forex, crypto, and binary options information.",
+  description: "Learn about ProTradeVision's mission, team, and story. Your trusted source for forex, crypto, and binary options information.",
 };
 
 const values = [
@@ -25,7 +25,7 @@ export default function About() {
     <>
       <section className="bg-dark py-16">
         <div className="max-w-[1200px] mx-auto px-4 text-center">
-          <h1 className="text-[28px] md:text-[36px] font-extrabold text-white">About TrantamCapital</h1>
+          <h1 className="text-[28px] md:text-[36px] font-extrabold text-white">About ProTradeVision</h1>
           <p className="text-sm text-text-light mt-2 max-w-[500px] mx-auto">
             Your trusted source for trading information since 2024
           </p>
@@ -35,10 +35,10 @@ export default function About() {
       {/* Our Story */}
       <section className="py-12">
         <div className="max-w-[800px] mx-auto px-4">
-          <SectionTitle title="Our Story" subtitle="How TrantamCapital began" />
+          <SectionTitle title="Our Story" subtitle="How ProTradeVision began" />
           <div className="space-y-4 text-sm text-text-secondary leading-relaxed">
             <p>
-              TrantamCapital was founded in 2024 with a simple mission: to provide traders with
+              ProTradeVision was founded in 2024 with a simple mission: to provide traders with
               honest, unbiased, and comprehensive information about forex brokers, cryptocurrency
               exchanges, and binary options platforms.
             </p>
@@ -49,7 +49,7 @@ export default function About() {
               educational content that actually helps people make informed decisions.
             </p>
             <p>
-              Today, TrantamCapital serves over 100,000 monthly readers worldwide, providing
+              Today, ProTradeVision serves over 100,000 monthly readers worldwide, providing
               expert analysis, market news, and trading education across all major markets.
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function About() {
       {/* Team */}
       <section className="py-12 bg-section">
         <div className="max-w-[1200px] mx-auto px-4">
-          <SectionTitle title="Meet Our Team" subtitle="The experts behind TrantamCapital" />
+          <SectionTitle title="Meet Our Team" subtitle="The experts behind ProTradeVision" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {team.map((member) => (
               <Card key={member.name} className="text-center">
@@ -118,7 +118,7 @@ export default function About() {
           <SectionTitle title="Our Journey" subtitle="Key milestones in our growth" />
           <div className="space-y-6">
             {[
-              { year: "2024", title: "Foundation", description: "TrantamCapital was founded with a mission to provide honest trading information." },
+              { year: "2024", title: "Foundation", description: "ProTradeVision was founded with a mission to provide honest trading information." },
               { year: "2025", title: "Growth", description: "Expanded to cover 50+ brokers and exchanges. Reached 50,000 monthly readers." },
               { year: "2026", title: "Milestone", description: "Surpassed 100,000 monthly readers. Launched comprehensive educational resources and trading tools." },
             ].map((item) => (

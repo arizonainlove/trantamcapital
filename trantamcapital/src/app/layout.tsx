@@ -21,15 +21,15 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://trantamcapital.vercel.app"),
+  metadataBase: new URL("https://protradevision.com"),
   title: {
-    default: "TrantamCapital — Trade Smarter, Invest Wiser",
-    template: "%s | TrantamCapital",
+    default: "ProTradeVision — Trade Smarter, Invest Wiser",
+    template: "%s | ProTradeVision",
   },
   description:
-    "Expert forex broker reviews, crypto exchange comparisons, binary options guides, and market analysis. Make informed trading decisions with TrantamCapital.",
+    "Expert forex broker reviews, crypto exchange comparisons, binary options guides, and market analysis. Make informed trading decisions with ProTradeVision.",
   openGraph: {
-    title: "TrantamCapital — Trade Smarter, Invest Wiser",
+    title: "ProTradeVision — Trade Smarter, Invest Wiser",
     description:
       "Expert forex broker reviews, crypto exchange comparisons, and market analysis.",
     type: "website",

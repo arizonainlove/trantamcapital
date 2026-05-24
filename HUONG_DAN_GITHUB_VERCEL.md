@@ -72,7 +72,7 @@ Repository (repo) = thư mục chứa code trên GitHub.
 2. Click nút **+** (góc phải trên) → **New repository**
 3. Điền thông tin:
    - **Repository name**: `trantamcapital` (quan trọng: đặt đúng tên này)
-   - **Description**: (tuỳ chọn) "TrantamCapital website"
+   - **Description**: (tuỳ chọn) "ProTradeVision website"
    - **Public** — chọn Public (để Vercel deploy được, bản free)
    - **README**: để trống (không tick)
    - **.gitignore**: để trống
@@ -110,7 +110,7 @@ git add .
 ### Bước 4.4: Tạo commit đầu tiên
 
 ```bash
-git commit -m "Initial commit - TrantamCapital website"
+git commit -m "Initial commit - ProTradeVision website"
 ```
 
 > Giải thích: commit = chụp ảnh code ở thời điểm hiện tại
@@ -179,7 +179,7 @@ Vercel là nơi host website (miễn phí).
 6. Chờ khoảng **2-3 phút**, Vercel sẽ build và deploy
 7. Khi xong, bạn sẽ thấy màn hình **Congratulations!** và link website:
    ```
-   https://trantamcapital.vercel.app
+   https://protradevision.com
    ```
 8. Click link đó — website của bạn đã live!
 
@@ -200,12 +200,12 @@ Làm theo hướng dẫn trong terminal. Xong là có link.
 
 ## 7. Tùy chỉnh domain (tuỳ chọn — khi muốn)
 
-Nếu bạn đã mua domain (VD: trantamcapital.com):
+Nếu bạn đã mua domain (VD: protradevision.com):
 
 1. Vào **https://vercel.com/dashboard**
 2. Click project **trantamcapital**
 3. Vào tab **Settings** → **Domains**
-4. Nhập tên miền: `trantamcapital.com`
+4. Nhập tên miền: `protradevision.com`
 5. Làm theo hướng dẫn trỏ DNS:
    - Vào trang quản lý domain (Namecheap, GoDaddy...)
    - Thay đổi Nameservers hoặc thêm CNAME record trỏ đến `cname.vercel-dns.com`

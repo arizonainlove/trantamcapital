@@ -81,13 +81,13 @@ const whyUs = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "TrantamCapital",
-  url: "https://trantamcapital.vercel.app",
+  name: "ProTradeVision",
+  url: "https://protradevision.com",
   description:
     "Expert forex broker reviews, crypto exchange comparisons, and binary options education.",
   provider: {
     "@type": "Organization",
-    name: "TrantamCapital",
+    name: "ProTradeVision",
     description: "Financial market information and education platform",
   },
 };
@@ -108,7 +108,7 @@ export default function Home() {
           </h1>
           <p className="text-sm md:text-base text-text-light max-w-[600px] mx-auto mb-6 leading-relaxed">
             Expert forex broker reviews, crypto exchange comparisons, and binary options
-            education. Make informed trading decisions with TrantamCapital.
+            education. Make informed trading decisions with ProTradeVision.
           </p>
 
           {/* Trust Bar */}
@@ -227,11 +227,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 6: Why TrantamCapital */}
+      {/* Section 6: Why ProTradeVision */}
       <section className="py-12 md:py-[52px] bg-dark">
         <div className="max-w-[1200px] mx-auto px-4">
           <SectionTitle
-            title="Why TrantamCapital"
+            title="Why ProTradeVision"
             subtitle="What sets us apart as your trusted trading resource"
             light
           />

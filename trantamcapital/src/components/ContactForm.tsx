@@ -205,7 +205,7 @@ export default function ContactForm() {
             className="mt-1 shrink-0 w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
           />
           <span className="text-xs text-text-secondary leading-relaxed">
-            I consent to TrantamCapital collecting my name and email for the purpose of responding
+            I consent to ProTradeVision collecting my name and email for the purpose of responding
             to my inquiry. View our{" "}
             <a href="/privacy-policy" className="text-link hover:underline" target="_blank">
               Privacy Policy

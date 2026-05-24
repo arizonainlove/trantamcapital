@@ -1,4 +1,4 @@
-# TRANTAMCAPITAL — DANH SÁCH CÔNG VIỆC CHI TIẾT
+# PROTRADEVISION — DANH SÁCH CÔNG VIỆC CHI TIẾT
 
 > Dùng để theo dõi tiến độ. Đánh dấu ✅ khi hoàn thành.
 
@@ -110,7 +110,7 @@
 - [x] Icon + Title + Description
 - [x] Link đến trang tương ứng
 
-### Section 6: Why TrantamCapital
+### Section 6: Why ProTradeVision
 - [x] 4 lý do: Expert Analysis, Coverage, Education, Trust
 - [x] Nền navy #0F1A2E
 
@@ -288,13 +288,13 @@
 
 ### 21.1 Mua domain
 - [ ] Chọn nhà cung cấp: Namecheap, GoDaddy, hoặc Nhân Hòa/PA Việt Nam
-- [ ] Tìm domain: `trantamcapital.com` (khoảng $10-15/năm)
+- [ ] Tìm domain: `protradevision.com` (khoảng $10-15/năm) (đã có)
 - [ ] Mua, thanh toán
 
 ### 21.2 Trỏ domain về Vercel
 - [ ] Vào https://vercel.com/ → Dashboard → Project trantamcapital
 - [ ] Vào tab Settings → Domains
-- [ ] Nhập `trantamcapital.com` → Add
+- [ ] Nhập `protradevision.com` → Add
 - [ ] Vercel hiện hướng dẫn: "Set the following record in your DNS provider:"
   - Thường là CNAME record: `www` → `cname.vercel-dns.com`
   - Hoặc A records trỏ đến IP của Vercel
@@ -307,19 +307,19 @@
 - [ ] Lưu lại, đợi 5-30 phút
 
 ### 21.3 Kiểm tra domain
-- [ ] Vào https://trantamcapital.com → website hiển thị
-- [ ] Vào https://www.trantamcapital.com → cũng hiển thị
+- [ ] Vào https://protradevision.com → website hiển thị
+- [ ] Vào https://www.protradevision.com → cũng hiển thị
 - [ ] Vercel tự động cấp SSL cho domain — check icon khóa trên trình duyệt
 
 ### 21.4 Chuyển hướng (Redirect)
 - [ ] Vào Vercel → Settings → Domains
-- [ ] Bật: "Redirect www.trantamcapital.com to trantamcapital.com" (hoặc ngược lại)
+- [ ] Bật: "Redirect www.protradevision.com to protradevision.com" (hoặc ngược lại)
 
 ---
 
 ## PHẦN 22: SAU KHI DEPLOY (TUỲ CHỌN)
 
-- [ ] Mua domain (trantamcapital.com) — Namecheap ~$12/năm
+- [ ] Mua domain (protradevision.com) (đã có)
 - [ ] Trỏ domain → Vercel
 - [ ] Tạo Open Graph image (Canva, 1200x630px)
 - [ ] Cài Google Analytics 4

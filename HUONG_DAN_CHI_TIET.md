@@ -1,4 +1,4 @@
-# HƯỚNG DẪN XÂY DỰNG WEBSITE TRANTAMCAPITAL.COM
+# HƯỚNG DẪN XÂY DỰNG WEBSITE PROTRADEVISION.COM
 
 > Phiên bản: 1.0
 > Ngày: 20/05/2026
@@ -30,7 +30,7 @@
 
 ### 1.1 Về dự án
 
-**trantamcapital.com** là website giới thiệu, chia sẻ thông tin về thị trường tài chính bao gồm:
+**protradevision.com** là website giới thiệu, chia sẻ thông tin về thị trường tài chính bao gồm:
 - **Tiền điện tử (Cryptocurrency)**
 - **Forex (Foreign Exchange)**
 - **Binary Option (Quyền chọn nhị phân)**
@@ -730,8 +730,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-sm opacity-80">
                 <HiMail className="text-primary flex-shrink-0" size={16} />
-                <a href="mailto:info@trantamcapital.com" className="hover:text-primary transition-colors">
-                  info@trantamcapital.com
+                <a href="mailto:contact@protradevision.com" className="hover:text-primary transition-colors">
+                  contact@protradevision.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm opacity-80">
@@ -749,7 +749,7 @@ export default function Footer() {
       <div className="border-t border-opacity-20 border-white">
         <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-xs opacity-60">
-            &copy; {new Date().getFullYear()} TrantamCapital. All rights reserved.
+            &copy; {new Date().getFullYear()} ProTradeVision. All rights reserved.
           </p>
           <div className="flex gap-4 text-xs opacity-60">
             <span>Risk Warning</span>
@@ -803,8 +803,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    default: 'TrantamCapital — Financial Markets & Crypto Insights',
-    template: '%s | TrantamCapital',
+    default: 'ProTradeVision — Financial Markets & Crypto Insights',
+    template: '%s | ProTradeVision',
   },
   description: 'Your trusted source for financial market insights, cryptocurrency analysis, forex trading education, and binary options information.',
 };
@@ -980,8 +980,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    default: 'TrantamCapital — Financial Markets & Crypto Insights',
-    template: '%s | TrantamCapital',
+    default: 'ProTradeVision — Financial Markets & Crypto Insights',
+    template: '%s | ProTradeVision',
   },
   description: 'Your trusted source for financial market insights, cryptocurrency analysis, forex trading education, and binary options information.',
 };
@@ -1433,7 +1433,7 @@ export default function HomePage() {
       <section className="section-padding" style={{ backgroundColor: '#051323' }}>
         <div className="container-custom">
           <SectionTitle
-            title="Why TrantamCapital?"
+            title="Why ProTradeVision?"
             subtitle="What sets us apart as your trusted financial information source"
             light
           />
@@ -2105,10 +2105,10 @@ Thêm vào `layout.tsx`:
 export const metadata: Metadata = {
   // ... các metadata khác
   openGraph: {
-    title: 'TrantamCapital',
+    title: 'ProTradeVision',
     description: 'Your trusted source for financial market insights.',
-    url: 'https://trantamcapital.com',
-    siteName: 'TrantamCapital',
+    url: 'https://protradevision.com',
+    siteName: 'ProTradeVision',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     locale: 'en_US',
     type: 'website',
@@ -2124,7 +2124,7 @@ Tạo file `src/app/sitemap.ts`:
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://trantamcapital.com';
+  const baseUrl = 'https://protradevision.com';
   
   const pages = [
     '', '/news', '/for-beginners', '/investment-analysis',
@@ -2162,7 +2162,7 @@ Kiểm tra không có lỗi. Nếu có lỗi, sửa theo thông báo.
 # Tạo repository trên GitHub trước
 git init
 git add .
-git commit -m "Initial commit - TrantamCapital website"
+git commit -m "Initial commit - ProTradeVision website"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/trantamcapital.git
 git push -u origin main
@@ -2174,7 +2174,7 @@ git push -u origin main
    - Click "Add New" → "Project"
    - Chọn repository `trantamcapital`
    - Click "Deploy"
-   - Chờ ~2 phút, website sẽ live tại `https://trantamcapital.vercel.app`
+   - Chờ ~2 phút, website sẽ live tại `https://protradevision.com`
 
 3. **(Tùy chọn) Thêm custom domain**:
    - Mua domain (Namecheap, GoDaddy, .com giá ~$10-15/năm)
@@ -2289,4 +2289,4 @@ Widget giá coin tự động cập nhật mỗi 60 giây từ CoinGecko API —
 
 ---
 
-*Chúc bạn xây dựng thành công website trantamcapital.com! Nếu có thắc mắc, hãy hỏi Claude nhé.*
+*Chúc bạn xây dựng thành công website protradevision.com! Nếu có thắc mắc, hãy hỏi Claude nhé.*

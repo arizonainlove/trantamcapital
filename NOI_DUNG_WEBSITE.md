@@ -1,6 +1,6 @@
 # NỘI DUNG WEBSITE TRAMCAPITAL
 
-> File này tổng hợp tất cả nội dung text hiển thị trên website TrantamCapital.
+> File này tổng hợp tất cả nội dung text hiển thị trên website ProTradeVision.
 > Dùng để tra cứu và chỉnh sửa nội dung.
 
 ---
@@ -28,7 +28,7 @@
 
 ### Navigation Bar (Header)
 
-**Logo:** `TrantamCapital` (chữ "Capital" màu cam #E84910)
+**Logo:** `ProTradeVision` (chữ "Capital" màu cam #E84910)
 
 **Desktop Menu:**
 - Home (`/`)
@@ -46,7 +46,7 @@
 ### Footer (4 cột)
 
 **Cột 1 — About:**
-- **Brand:** TrantamCapital (chữ "Capital" màu cam)
+- **Brand:** ProTradeVision (chữ "Capital" màu cam)
 - **Tagline:** "Your trusted source for forex broker reviews, crypto exchange comparisons, and binary options education. Making informed trading decisions since 2024."
 
 **Cột 2 — Quick Links:**
@@ -63,7 +63,7 @@
 - Trading Tools
 
 **Cột 4 — Contact:**
-- contact@trantamcapital.com
+- contact@protradevision.com
 - +1 (555) 123-4567
 - London, United Kingdom
 
@@ -75,7 +75,7 @@
 "Risk Warning: Trading forex, cryptocurrencies, and binary options carries a high level of risk and may not be suitable for all investors. You could lose some or all of your invested capital. Never invest money you cannot afford to lose. The information on this website is for educational purposes only and does not constitute financial advice. Always conduct your own research before making any trading decisions."
 
 **Copyright:**
-"© 2026 TrantamCapital. All rights reserved."
+"© 2026 ProTradeVision. All rights reserved."
 
 ---
 
@@ -83,7 +83,7 @@
 
 ### Hero Section
 - **Heading:** "Trade Smarter, Invest Wiser"
-- **Subtitle:** "Expert forex broker reviews, crypto exchange comparisons, and binary options education. Make informed trading decisions with TrantamCapital."
+- **Subtitle:** "Expert forex broker reviews, crypto exchange comparisons, and binary options education. Make informed trading decisions with ProTradeVision."
 - **CTA buttons:**
   - "Start Trading" → `/forex-broker`
   - "Compare Brokers" → `/crypto-exchange`
@@ -128,7 +128,7 @@
    - Mô tả: "Access essential trading tools including calculators, economic calendars, and market analysis resources."
    - Link: `/tools`
 
-### Why TrantamCapital (4 cards)
+### Why ProTradeVision (4 cards)
 
 1. **Expert Analysis**
    - "In-depth reviews and analysis from experienced traders who understand the markets inside out."
@@ -151,7 +151,7 @@
 
 ## 3. TRANG GIỚI THIỆU (About)
 
-- **Page Title:** "About TrantamCapital"
+- **Page Title:** "About ProTradeVision"
 - **Subtitle:** "Your trusted source for trading information since 2024"
 
 ### Our Story
@@ -185,7 +185,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 
 ### Our Journey Timeline
 
-- **2024 — Foundation:** "TrantamCapital was founded with a mission to provide honest trading information."
+- **2024 — Foundation:** "ProTradeVision was founded with a mission to provide honest trading information."
 - **2025 — Growth:** "Expanded to cover 50+ brokers and exchanges. Reached 50,000 monthly readers."
 - **2026 — Milestone:** "Surpassed 100,000 monthly readers. Launched comprehensive educational resources and trading tools."
 
@@ -197,7 +197,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 - **Subtitle:** "Have a question or feedback? We'd love to hear from you"
 
 ### Contact Information
-- **Email:** contact@trantamcapital.com
+- **Email:** contact@protradevision.com
 - **Phone:** +1 (555) 123-4567
 - **Address:** London, United Kingdom
 - **Business Hours:** Mon — Fri, 9:00 AM — 6:00 PM GMT
@@ -226,67 +226,67 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 **1. Crypto Market Outlook: May 2026**
 - Ngày: 2026-05-21
 - Danh mục: Cryptocurrency
-- Tác giả: TrantamCapital
+- Tác giả: ProTradeVision
 - Excerpt: "A comprehensive look at the cryptocurrency market trends, key support levels, and what to watch in the coming weeks."
 
 **2. Bitcoin Surges Past $100K for the First Time**
 - Ngày: 2026-05-21
 - Danh mục: Cryptocurrency
-- Tác giả: Trantamcapital
+- Tác giả: Protradevision
 - Excerpt: "The article covers a monumental milestone in cryptocurrency history: Bitcoin crossing the six-figure $100,000 threshold for the very first time"
 
 **3. Bitcoin Surges Past $100K: What This Means for the Market**
 - Ngày: 2026-05-20
 - Danh mục: Cryptocurrency
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Bitcoin has reached a new all-time high, crossing the $100,000 mark for the first time. Analysts weigh in on what this means for the broader cryptocurrency market and retail investors."
 
 **4. Central Bank Rate Decisions: Impact on Major Currency Pairs**
 - Ngày: 2026-05-19
 - Danh mục: Forex
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "With multiple central banks announcing rate decisions this quarter, forex traders are bracing for increased volatility across major currency pairs. Our analysis covers the key levels to watch."
 
 **5. Binary Options Trading Strategies for Volatile Markets**
 - Ngày: 2026-05-18
 - Danh mục: Binary Options
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Discover proven binary options trading strategies that perform well in volatile market conditions. From straddles to trend-following approaches, we cover the essentials."
 
 **6. Global Market Outlook: Q3 2026 Forecast**
 - Ngày: 2026-05-17
 - Danh mục: Markets
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Our comprehensive Q3 2026 market outlook covers key trends, potential risks, and opportunities across cryptocurrency, forex, and traditional markets."
 
 **7. Ethereum 2.0: Staking Rewards Hit New Highs**
 - Ngày: 2026-05-16
 - Danh mục: Cryptocurrency
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Ethereum staking rewards have reached unprecedented levels as more validators join the network. Learn what this means for ETH holders."
 
 **8. EUR/USD Analysis: Key Levels to Watch This Week**
 - Ngày: 2026-05-15
 - Danh mục: Forex
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Technical analysis of the EUR/USD pair with key support and resistance levels every trader should monitor."
 
 **9. 60-Second Binary Options: Pro Tips for Quick Trades**
 - Ngày: 2026-05-14
 - Danh mục: Binary Options
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Learn the strategies professional traders use for successful 60-second binary options trading."
 
 **10. Commodity Prices Surge Amid Supply Chain Concerns**
 - Ngày: 2026-05-13
 - Danh mục: Markets
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "Gold, silver, and oil prices are experiencing significant movements as global supply chain disruptions continue to impact commodity markets."
 
 **11. Altcoin Season: Which Projects Are Gaining Momentum**
 - Ngày: 2026-05-12
 - Danh mục: Cryptocurrency
-- Tác giả: TrantamCapital Analysis Team
+- Tác giả: ProTradeVision Analysis Team
 - Excerpt: "As Bitcoin stabilizes, several altcoins are showing strong momentum. We analyze which projects have the most potential."
 
 ---
@@ -405,7 +405,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 ### Sections
 
 **1. Introduction**
-"TrantamCapital ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website."
+"ProTradeVision ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website."
 
 **2. Information We Collect**
 - Information you voluntarily provide to us:
@@ -439,7 +439,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 - Withdraw consent at any time
 
 **8. Contact**
-"If you have any questions about this Privacy Policy, please contact us at contact@trantamcapital.com."
+"If you have any questions about this Privacy Policy, please contact us at contact@protradevision.com."
 
 ---
 
@@ -451,22 +451,22 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 ### Sections
 
 **1. Acceptance of Terms**
-"By accessing and using TrantamCapital, you agree to comply with and be bound by these Terms of Service."
+"By accessing and using ProTradeVision, you agree to comply with and be bound by these Terms of Service."
 
 **2. No Financial Advice**
-"TrantamCapital provides educational information and market analysis for informational purposes only. Nothing on this website constitutes financial advice, investment advice, or a recommendation to buy or sell any financial instrument. Trading forex, cryptocurrencies, and binary options carries significant risk. You should consult with a qualified financial advisor before making any trading decisions."
+"ProTradeVision provides educational information and market analysis for informational purposes only. Nothing on this website constitutes financial advice, investment advice, or a recommendation to buy or sell any financial instrument. Trading forex, cryptocurrencies, and binary options carries significant risk. You should consult with a qualified financial advisor before making any trading decisions."
 
 **3. Risk Disclaimer**
 "Trading forex, cryptocurrencies, and binary options involves substantial risk of loss and is not suitable for all investors. You could lose some or all of your invested capital. Never invest money you cannot afford to lose. Past performance does not guarantee future results."
 
 **4. Intellectual Property**
-"All content on this website, including text, graphics, logos, and images, is the property of TrantamCapital or its content creators and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our prior written consent."
+"All content on this website, including text, graphics, logos, and images, is the property of ProTradeVision or its content creators and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our prior written consent."
 
 **5. User Conduct**
 "You agree not to: use the website for any unlawful purpose; attempt to gain unauthorized access; interfere with the proper functioning of the website; submit false or misleading information."
 
 **6. Limitation of Liability**
-"TrantamCapital shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of your use of or inability to use the website."
+"ProTradeVision shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of your use of or inability to use the website."
 
 **7. External Links**
 "Our website may contain links to third-party websites. We are not responsible for the content, privacy policies, or practices of any third-party websites."
@@ -475,7 +475,7 @@ What started as a small blog has grown into a comprehensive resource trusted by 
 "We reserve the right to modify these terms at any time. Changes are effective immediately upon posting. Your continued use of the website after changes constitutes acceptance."
 
 **9. Contact**
-"For any questions about these Terms, please contact us at contact@trantamcapital.com."
+"For any questions about these Terms, please contact us at contact@protradevision.com."
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Bitcoin Surges Past $100K for the First Time"
 date: "2026-05-21"
 category: "Cryptocurrency"
-author: "Trantamcapital"
+author: "Protradevision"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779350746046-bitcoinsurga.png"
 excerpt: "The article covers a monumental milestone in cryptocurrency history: Bitcoin crossing the six-figure $100,000 threshold for the very first time"
 ---

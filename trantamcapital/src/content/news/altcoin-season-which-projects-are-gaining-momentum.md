@@ -2,7 +2,7 @@
 title: "Altcoin Season: Which Projects Are Gaining Momentum"
 date: "2026-05-12"
 category: "Cryptocurrency"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779350488454-altcoinseason.png"
 excerpt: "As Bitcoin stabilizes, several altcoins are showing strong momentum. We analyze which projects have the most potential."
 ---

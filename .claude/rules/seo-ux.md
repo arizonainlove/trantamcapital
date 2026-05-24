@@ -1,5 +1,5 @@
 ---
-description: SEO and UX/UI standards for TrantamCapital
+description: SEO and UX/UI standards for ProTradeVision
 ---
 
 ## SEO Standards

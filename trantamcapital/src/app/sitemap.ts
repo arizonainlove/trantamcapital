@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://trantamcapital.com";
+  const baseUrl = "https://protradevision.com";
 
   const pages = [
     { path: "", priority: 1.0 },

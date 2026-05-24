@@ -28,7 +28,7 @@ function loadCmsArticles(): NewsArticle[] {
       category: sanitize(data.category) || "Markets",
       excerpt: sanitize(data.excerpt) || "",
       content: sanitize(content.trim()),
-      author: sanitize(data.author) || "TrantamCapital",
+      author: sanitize(data.author) || "ProTradeVision",
       image: data.image || undefined,
     } as NewsArticle;
   });

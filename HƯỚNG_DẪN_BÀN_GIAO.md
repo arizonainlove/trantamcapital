@@ -1,4 +1,4 @@
-# Hướng Dẫn Bàn Giao Website TrantamCapital
+# Hướng Dẫn Bàn Giao Website ProTradeVision
 
 ---
 
@@ -6,9 +6,9 @@
 
 | Mục | Chi tiết |
 |-----|----------|
-| **Website** | TrantamCapital — Tin tức & đánh giá tài chính (Forex, Crypto, Binary Options) |
-| **URL hiện tại** | `https://trantamcapital.vercel.app` |
-| **URL chính thức** | Sẽ là `https://trantamcapital.com` sau khi mua domain và trỏ về |
+| **Website** | ProTradeVision — Tin tức & đánh giá tài chính (Forex, Crypto, Binary Options) |
+| **URL hiện tại** | `https://protradevision.com` |
+| **URL chính thức** | `https://protradevision.com` (đã active) |
 | **Nền tảng** | Vercel (hosting + tự động HTTPS) |
 | **Mã nguồn** | GitHub — `github.com/arizonainlove/trantamcapital` |
 | **Ngôn ngữ** | Tiếng Anh (toàn bộ nội dung trang) |
@@ -86,9 +86,9 @@ Sau khi khách hàng tạo GitHub OAuth App của họ (xem mục 3.3), tôi c�
 
    | Trường | Giá trị |
    |--------|---------|
-   | Application name | `TrantamCapital Admin` |
-   | Homepage URL | `https://trantamcapital.com` (hoặc URL thật sau khi có domain) |
-   | Authorization callback URL | `https://trantamcapital.com/api/auth` |
+   | Application name | `ProTradeVision Admin` |
+   | Homepage URL | `https://protradevision.com` |
+   | Authorization callback URL | `https://protradevision.com/api/auth` |
 
 4. Click **Register application**
 5. Màn hình hiện ra thông tin:
@@ -112,7 +112,7 @@ Mua domain tại một trong các nhà cung cấp:
 #### Bước 2 — Lấy thông tin DNS từ Vercel
 
 1. Vào Vercel Dashboard → Project `trantamcapital` → **Settings** → **Domains**
-2. Nhập domain (ví dụ: `trantamcapital.com`) → **Add**
+2. Nhập domain (ví dụ: `protradevision.com`) → **Add**
 3. Vercel hiển thị các bản ghi DNS cần thêm
 
 #### Bước 3 — Thêm bản ghi DNS
@@ -127,13 +127,13 @@ Vào trang quản lý DNS của nơi mua domain, thêm các bản ghi sau:
 #### Bước 4 — Kiểm tra
 
 - Đợi 5-30 phút
-- Vào `https://trantamcapital.com` — website hiển thị
+- Vào `https://protradevision.com` — website hiển thị
 - Kiểm tra icon ổ khóa trên trình duyệt (SSL tự động)
-- Vào `https://trantamcapital.com/admin` — đăng nhập được
+- Vào `https://protradevision.com/admin` — đăng nhập được
 
 ### 3.5 Cách đăng nhập Admin
 
-1. Vào `https://trantamcapital.com/admin`
+1. Vào `https://protradevision.com/admin`
 2. Click **Login with GitHub**
 3. Cửa sổ mới hiện ra → click **Authorize**
 4. Cửa sổ tự động đóng → vào được trang quản trị
@@ -148,7 +148,7 @@ Trang admin có 3 tab:
 | **Brokers** | Quản lý sàn giao dịch (Forex, Crypto, Binary) hiển thị trên trang chủ |
 | **Reviews** | Quản lý nội dung đánh giá chi tiết cho từng sàn |
 
-Hướng dẫn sử dụng chi tiết: `https://trantamcapital.com/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md`
+Hướng dẫn sử dụng chi tiết: `https://protradevision.com/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md`
 
 ---
 

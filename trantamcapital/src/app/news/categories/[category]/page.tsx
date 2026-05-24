@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   if (!categoryName) return {};
   return {
     title: `${categoryName} News`,
-    description: `Latest ${categoryName.toLowerCase()} news, analysis, and trading insights. Stay informed with TrantamCapital.`,
+    description: `Latest ${categoryName.toLowerCase()} news, analysis, and trading insights. Stay informed with ProTradeVision.`,
   };
 }
 

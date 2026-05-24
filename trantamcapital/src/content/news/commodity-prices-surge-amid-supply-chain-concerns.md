@@ -2,7 +2,7 @@
 title: "Commodity Prices Surge Amid Supply Chain Concerns"
 date: "2026-05-13"
 category: "Markets"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779350383215-commodity.png"
 excerpt: "Gold, silver, and oil prices are experiencing significant movements as global supply chain disruptions continue to impact commodity markets."
 ---

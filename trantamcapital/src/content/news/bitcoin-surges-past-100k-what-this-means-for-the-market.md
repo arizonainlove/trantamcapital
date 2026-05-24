@@ -2,7 +2,7 @@
 title: "Bitcoin Surges Past $100K: What This Means for the Market"
 date: "2026-05-20"
 category: "Cryptocurrency"
-author: "TrantamCapital Analysis Team"
+author: "ProTradeVision Analysis Team"
 image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779349319469-bitcoin100k.png"
 excerpt: "Bitcoin has reached a new all-time high, crossing the $100,000 mark for the first time. Analysts weigh in on what this means for the broader cryptocurrency market and retail investors."
 ---

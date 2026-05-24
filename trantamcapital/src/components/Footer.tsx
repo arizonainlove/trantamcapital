@@ -9,7 +9,7 @@ export default function Footer() {
           {/* About */}
           <div>
             <h3 className="text-lg font-bold mb-4">
-              Trantam<span className="text-primary">Capital</span>
+              ProTrade<span className="text-primary">Vision</span>
             </h3>
             <p className="text-sm text-text-light leading-relaxed">
               Your trusted source for forex broker reviews, crypto exchange
@@ -75,7 +75,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-text-light">
                 <HiMail className="mt-0.5 shrink-0 text-gold" />
-                <span>contact@trantamcapital.com</span>
+                <span>contact@protradevision.com</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-text-light">
                 <HiPhone className="mt-0.5 shrink-0 text-gold" />
@@ -93,7 +93,7 @@ export default function Footer() {
         <div className="border-t border-dark-card mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-text-light">
-              &copy; {new Date().getFullYear()} TrantamCapital. All rights reserved.
+              &copy; {new Date().getFullYear()} ProTradeVision. All rights reserved.
             </p>
             <div className="flex gap-4">
               <Link

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "TrantamCapital terms of service outline the conditions for using our website and content.",
+  description: "ProTradeVision terms of service outline the conditions for using our website and content.",
 };
 
 export default function TermsOfService() {
@@ -20,14 +20,14 @@ export default function TermsOfService() {
           <div className="space-y-6 text-sm text-text-secondary leading-relaxed">
             <h2 className="text-xl font-bold text-text-primary">1. Acceptance of Terms</h2>
             <p>
-              By accessing and using TrantamCapital (&ldquo;the Website&rdquo;), you agree to comply
+              By accessing and using ProTradeVision (&ldquo;the Website&rdquo;), you agree to comply
               with and be bound by these Terms of Service. If you do not agree with any part of these
               terms, you must not use our website.
             </p>
 
             <h2 className="text-xl font-bold text-text-primary">2. No Financial Advice</h2>
             <p>
-              <strong className="text-text-primary">Important:</strong> TrantamCapital provides
+              <strong className="text-text-primary">Important:</strong> ProTradeVision provides
               educational information and market analysis for informational purposes only. Nothing on
               this website constitutes financial advice, investment advice, or a recommendation to buy
               or sell any financial instrument.
@@ -51,7 +51,7 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold text-text-primary">4. Intellectual Property</h2>
             <p>
               All content on this website, including text, graphics, logos, images, and software, is
-              the property of TrantamCapital or its content creators and is protected by intellectual
+              the property of ProTradeVision or its content creators and is protected by intellectual
               property laws. You may not reproduce, distribute, or create derivative works without our
               prior written consent.
             </p>
@@ -67,7 +67,7 @@ export default function TermsOfService() {
 
             <h2 className="text-xl font-bold text-text-primary">6. Limitation of Liability</h2>
             <p>
-              TrantamCapital and its owners, employees, or affiliates shall not be liable for any
+              ProTradeVision and its owners, employees, or affiliates shall not be liable for any
               direct, indirect, incidental, consequential, or punitive damages arising from your use
               of or inability to use our website.
             </p>
@@ -95,7 +95,7 @@ export default function TermsOfService() {
 
             <h2 className="text-xl font-bold text-text-primary">8. Affiliate Disclosure</h2>
             <p>
-              TrantamCapital may receive compensation (commissions or referral fees) when you visit
+              ProTradeVision may receive compensation (commissions or referral fees) when you visit
               or sign up with brokers, exchanges, or platforms through links on this website. This
               compensation may influence the placement and ranking of these services. We strive to
               maintain objectivity in our reviews and comparisons, but you should assume that we
@@ -133,8 +133,8 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold text-text-primary">12. Contact</h2>
             <p>
               For questions about these Terms of Service, please contact us at{" "}
-              <a href="mailto:contact@trantamcapital.com" className="text-link hover:underline">
-                contact@trantamcapital.com
+              <a href="mailto:contact@protradevision.com" className="text-link hover:underline">
+                contact@protradevision.com
               </a>
             </p>
           </div>

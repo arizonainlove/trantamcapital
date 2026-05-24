@@ -5,11 +5,11 @@ import { HiMail, HiPhone, HiLocationMarker, HiClock } from "react-icons/hi";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with TrantamCapital. Send us a message or find our contact information.",
+  description: "Get in touch with ProTradeVision. Send us a message or find our contact information.",
 };
 
 const contactInfo = [
-  { icon: HiMail, label: "Email", value: "contact@trantamcapital.com", href: "mailto:contact@trantamcapital.com" },
+  { icon: HiMail, label: "Email", value: "contact@protradevision.com", href: "mailto:contact@protradevision.com" },
   { icon: HiPhone, label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
   { icon: HiLocationMarker, label: "Address", value: "London, United Kingdom" },
   { icon: HiClock, label: "Business Hours", value: "Mon — Fri, 9:00 AM — 6:00 PM GMT" },
