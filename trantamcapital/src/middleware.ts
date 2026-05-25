@@ -32,9 +32,10 @@ class RateLimiter {
   }
 }
 
-const authLimiter = new RateLimiter(60_000, 10);   // 10 requests/minute for auth
-const contactLimiter = new RateLimiter(60_000, 20); // 20 requests/minute for contact
-const generalLimiter = new RateLimiter(60_000, 60); // 60 requests/minute for general
+const authLimiter = new RateLimiter(60_000, 10);       // 10 requests/minute for auth
+const contactLimiter = new RateLimiter(60_000, 20);     // 20 requests/minute for contact
+const newsletterLimiter = new RateLimiter(60_000, 10);  // 10 requests/minute for newsletter (spam target)
+const generalLimiter = new RateLimiter(60_000, 60);     // 60 requests/minute for general
 
 function getClientIp(request: NextRequest): string {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
@@ -52,6 +53,8 @@ export function middleware(request: NextRequest) {
     limiter = authLimiter;
   } else if (pathname === "/api/contact") {
     limiter = contactLimiter;
+  } else if (pathname === "/api/newsletter") {
+    limiter = newsletterLimiter;
   } else if (pathname.startsWith("/api/")) {
     limiter = generalLimiter;
   }

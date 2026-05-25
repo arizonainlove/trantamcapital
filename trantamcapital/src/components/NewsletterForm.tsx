@@ -2,18 +2,52 @@
 
 import { useState, FormEvent } from "react";
 
+type FormStatus = "idle" | "loading" | "success" | "error-email" | "error-consent" | "error-server";
+
+const STATUS_MESSAGE: Record<FormStatus, string | null> = {
+  idle: null,
+  loading: null,
+  success: null,
+  "error-email": "Please enter a valid email address.",
+  "error-consent": "Please agree to the Privacy Policy.",
+  "error-server": "Something went wrong. Please try again later.",
+};
+
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
-  const [status, setStatus] = useState<"idle" | "error" | "success">("idle");
+  const [status, setStatus] = useState<FormStatus>("idle");
 
-  const handleSubmit = (e: FormEvent) => {
+  const errorMsg = STATUS_MESSAGE[status];
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) {
-      setStatus("error");
+    if (!EMAIL_REGEX.test(email.trim())) {
+      setStatus("error-email");
       return;
     }
-    setStatus("success");
+    if (!consent) {
+      setStatus("error-consent");
+      return;
+    }
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus(data?.error === "Invalid email" ? "error-email" : "error-server");
+        return;
+      }
+      setStatus("success");
+    } catch {
+      setStatus("error-server");
+    }
   };
 
   return (
@@ -34,26 +68,27 @@ export default function NewsletterForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                if (status === "error") setStatus("idle");
+                if (errorMsg) setStatus("idle");
               }}
               placeholder="Enter your email"
               className="flex-1 px-4 py-3 rounded text-sm text-text-primary bg-white focus:outline-none focus:ring-2 focus:ring-white/50 border border-transparent min-h-[44px]"
               required
-              aria-invalid={status === "error"}
-              aria-describedby={status === "error" ? "newsletter-error" : undefined}
+              aria-invalid={status === "error-email"}
+              aria-describedby={status === "error-email" ? "newsletter-error" : undefined}
             />
             <button
               type="submit"
-              className="text-sm font-bold text-primary bg-white hover:bg-gray-100 px-6 py-3 rounded transition-colors min-h-[44px] shrink-0"
+              disabled={status === "loading"}
+              className="text-sm font-bold text-primary bg-white hover:bg-gray-100 px-6 py-3 rounded transition-colors min-h-[44px] shrink-0 disabled:opacity-50"
             >
-              Subscribe
+              {status === "loading" ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
           <label className="flex items-start gap-2 mt-2 cursor-pointer">
             <input
               type="checkbox"
               checked={consent}
-              onChange={(e) => { setConsent(e.target.checked); if (status === "error") setStatus("idle"); }}
+              onChange={(e) => { setConsent(e.target.checked); if (errorMsg) setStatus("idle"); }}
               className="mt-0.5 shrink-0 w-4 h-4 rounded border-white/30 bg-white/10 focus:ring-white/50"
             />
             <span className="text-xs text-white/70 leading-relaxed">
@@ -64,9 +99,9 @@ export default function NewsletterForm() {
               .
             </span>
           </label>
-          {status === "error" && (
+          {errorMsg && (
             <p id="newsletter-error" className="text-xs text-white/90 mt-1.5 text-left" role="alert">
-              Please enter a valid email and agree to the Privacy Policy.
+              {errorMsg}
             </p>
           )}
         </form>
