@@ -115,6 +115,22 @@ export default function ReviewPage({
                           {children}
                         </a>
                       ),
+                      table: ({ children }) => (
+                        <div className="overflow-x-auto my-4">
+                          <table className="w-full border-collapse">{children}</table>
+                        </div>
+                      ),
+                      th: ({ children }) => (
+                        <th className="bg-section font-bold text-left px-3.5 py-2.5 border border-border text-sm">
+                          {children}
+                        </th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="px-3.5 py-2.5 border border-border text-sm">
+                          {children}
+                        </td>
+                      ),
+                      tr: ({ children }) => <tr className="even:[&_td]:bg-[#FAFBFC] hover:[&_td]:bg-primary-light">{children}</tr>,
                     }}
                   >
                     {review.content}
