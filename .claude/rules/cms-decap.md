@@ -35,7 +35,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Dashboard | Tab-based: **News Articles**, **Brokers**, **Reviews**, and **Menu** tabs |
 | Statistics | Stats bar showing counts for articles, brokers, reviews |
 | Search | Filter articles and brokers by name/title |
-| Article Editor | Form-based: title, date, category, author, image upload, excerpt, body |
+| Article Editor | Form-based: title, date, category, author, image upload, excerpt, body. **Body toolbar**: Insert Image (upload → auto-embed), Bold, Italic, Link |
 | Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+26 comparison & rating fields** |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
