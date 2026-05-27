@@ -163,7 +163,7 @@ If you are looking for a crypto exchange with top-tier futures trading, low fees
 
 The platform is especially ideal for futures traders, scalpers, affiliate marketers, and community-driven traders who can leverage the full Bybit ecosystem.
 
-For more comparisons, explore our full list of [crypto exchange reviews](/crypto-exchange).
+For more comparisons, explore our full list of [crypto exchange reviews](/crypto-exchange). You can also read our dedicated [Bybit review page](/crypto-exchange/exchange-c) for detailed ratings and comparison data.
 
 ---
 
