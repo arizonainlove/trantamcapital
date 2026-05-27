@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Content Manager — ProTradeVision</title>
+<title>Content Manager â€” ProTradeVision</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -365,6 +365,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .badge-forex-broker { background: #E8F0FF; color: #1E88E5; }
 .badge-crypto-exchange { background: #FFF0E8; color: var(--primary); }
 .badge-binary-options-plain { background: #FFF8E0; color: #B8860B; }
+.badge-proprietary-trading-firm { background: #E8F5E9; color: #1B5E20; }
 
 /* Editor */
 #screen-editor,
@@ -741,11 +742,12 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
           <div class="form-group">
             <label for="field-category">Category</label>
             <select id="field-category">
-              <option value="">— Select Category —</option>
+              <option value="">â€” Select Category â€”</option>
               <option value="Cryptocurrency">Cryptocurrency</option>
               <option value="Forex">Forex</option>
               <option value="Binary Options">Binary Options</option>
               <option value="Markets">Markets</option>
+              <option value="Proprietary Trading Firm">Proprietary Trading Firm</option>
             </select>
           </div>
         </div>
@@ -764,13 +766,13 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
               </div>
               <div id="image-preview" class="image-preview" style="display:none">
                 <img id="image-preview-img" alt="Preview">
-                <button type="button" class="image-preview-remove" onclick="clearImage()">✕</button>
+                <button type="button" class="image-preview-remove" onclick="clearImage()">âœ•</button>
               </div>
               <div id="image-upload-progress" class="image-upload-progress" style="display:none">
                 <div class="upload-spinner"></div>
                 <span>Uploading...</span>
               </div>
-              <p class="form-help">Recommended 1200×630px (16:9), JPG/PNG, max 5MB. Uploaded to <code>trantamcapital/public/images/uploads/</code> on GitHub.</p>
+              <p class="form-help">Recommended 1200Ã—630px (16:9), JPG/PNG, max 5MB. Uploaded to <code>trantamcapital/public/images/uploads/</code> on GitHub.</p>
             </div>
           </div>
         </div>
@@ -789,23 +791,23 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             <div class="toolbar-separator"></div>
             <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'**'+t.value.substring(t.selectionStart,t.selectionEnd)+'**')" title="Bold"><strong>B</strong></button>
             <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'*'+t.value.substring(t.selectionStart,t.selectionEnd)+'*')" title="Italic"><em>I</em></button>
-            <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'['+t.value.substring(t.selectionStart,t.selectionEnd)+'](url)')" title="Link">🔗</button>
+            <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'['+t.value.substring(t.selectionStart,t.selectionEnd)+'](url)')" title="Link">ðŸ”—</button>
           </div>
           <textarea id="field-body" rows="16" placeholder="Write your article content in Markdown..."></textarea>
           <div class="markdown-hint">
             <strong>Toolbar:</strong>
-            Click <b>Insert Image</b> to upload an image from your computer — it will be uploaded to GitHub and automatically inserted at cursor position.
-            Use <b>B</b>, <b><em>I</em></b>, and <b>🔗</b> to wrap selected text with bold, italic, or link Markdown.
+            Click <b>Insert Image</b> to upload an image from your computer â€” it will be uploaded to GitHub and automatically inserted at cursor position.
+            Use <b>B</b>, <b><em>I</em></b>, and <b>ðŸ”—</b> to wrap selected text with bold, italic, or link Markdown.
             <br><br>
             <strong>Markdown guide:</strong>
-            <code># Heading</code> ·
-            <code>**bold**</code> ·
-            <code>*italic*</code> ·
-            <code>[Link](url)</code> ·
-            <code>![alt](img-url)</code> ·
-            <code>- list item</code> ·
-            <code>1. numbered</code> ·
-            <code>&gt; quote</code> ·
+            <code># Heading</code> Â·
+            <code>**bold**</code> Â·
+            <code>*italic*</code> Â·
+            <code>[Link](url)</code> Â·
+            <code>![alt](img-url)</code> Â·
+            <code>- list item</code> Â·
+            <code>1. numbered</code> Â·
+            <code>&gt; quote</code> Â·
             <code>---</code> horizontal rule
           </div>
         </div>
@@ -838,10 +840,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
               <option value="Forex Broker">Forex Broker</option>
               <option value="Crypto Exchange">Crypto Exchange</option>
               <option value="Binary Options">Binary Options</option>
+              <option value="Proprietary Trading Firm">Proprietary Trading Firm</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="broker-field-rating">Rating (0–5)</label>
+            <label for="broker-field-rating">Rating (0â€“5)</label>
             <input type="number" id="broker-field-rating" min="0" max="5" step="0.1" placeholder="4.5">
           </div>
         </div>
@@ -877,13 +880,13 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             </div>
             <div id="broker-logo-preview" class="image-preview" style="display:none">
               <img id="broker-logo-preview-img" alt="Logo preview">
-              <button type="button" class="image-preview-remove" onclick="clearBrokerLogo()">✕</button>
+              <button type="button" class="image-preview-remove" onclick="clearBrokerLogo()">âœ•</button>
             </div>
             <div id="broker-logo-upload-progress" class="image-upload-progress" style="display:none">
               <div class="upload-spinner"></div>
               <span>Uploading...</span>
             </div>
-            <p class="form-help">Upload logo image (recommended 200×200px, JPG/PNG, max 2MB). Leave empty to show colored initial.</p>
+            <p class="form-help">Upload logo image (recommended 200Ã—200px, JPG/PNG, max 2MB). Leave empty to show colored initial.</p>
           </div>
         </div>
         <!-- Comparison Data -->
@@ -911,8 +914,29 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
             <div class="form-group"><label for="broker-field-payout">Max Payout (Binary)</label><input type="text" id="broker-field-payout" placeholder="e.g. Up to 92%"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label for="broker-field-expiryTypes">Expiry Times (Binary)</label><input type="text" id="broker-field-expiryTypes" placeholder="e.g. 60s — End of Day"></div>
+            <div class="form-group"><label for="broker-field-expiryTypes">Expiry Times (Binary)</label><input type="text" id="broker-field-expiryTypes" placeholder="e.g. 60s â€” End of Day"></div>
             <div class="form-group"><label for="broker-field-assets">Assets (Binary)</label><input type="text" id="broker-field-assets" placeholder="e.g. Forex, Stocks, Crypto"></div>
+          </div>
+          <!-- Proprietary Trading Firm Fields -->
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+            <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--success)">Prop Firm Fields</h3>
+            <p class="form-help" style="margin-bottom:12px">Fill these when broker type is &quot;Proprietary Trading Firm&quot;.</p>
+            <div class="form-row">
+              <div class="form-group"><label for="broker-field-profitSplit">Profit Split</label><input type="text" id="broker-field-profitSplit" placeholder="e.g. Up to 90%"></div>
+              <div class="form-group"><label for="broker-field-evaluationFee">Evaluation Fee</label><input type="text" id="broker-field-evaluationFee" placeholder="e.g. From $50"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="broker-field-maxCapital">Max Capital</label><input type="text" id="broker-field-maxCapital" placeholder="e.g. $400,000"></div>
+              <div class="form-group"><label for="broker-field-tradingPlatforms">Trading Platforms</label><input type="text" id="broker-field-tradingPlatforms" placeholder="e.g. MT5, Match-Trader"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="broker-field-instruments">Instruments</label><input type="text" id="broker-field-instruments" placeholder="e.g. Forex, Gold, Indices"></div>
+              <div class="form-group"><label for="broker-field-propLeverage">Leverage</label><input type="text" id="broker-field-propLeverage" placeholder="e.g. 1:30"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="broker-field-evaluationType">Evaluation Type</label><input type="text" id="broker-field-evaluationType" placeholder="e.g. 1-Step, 2-Step, Instant Funding"></div>
+              <div class="form-group"><label for="broker-field-refundPolicy">Refund Policy</label><input type="text" id="broker-field-refundPolicy" placeholder="e.g. No refund on challenge fees"></div>
+            </div>
           </div>
         </div>
 
@@ -937,7 +961,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         <div class="form-group">
           <label for="review-field-brokerSlug">Broker <span class="required">*</span></label>
           <select id="review-field-brokerSlug">
-            <option value="">— Select Broker —</option>
+            <option value="">â€” Select Broker â€”</option>
           </select>
         </div>
         <div class="form-group">
@@ -949,7 +973,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
           <textarea id="review-field-cons" rows="3" placeholder="Higher commission on ECN accounts"></textarea>
         </div>
         <div class="form-group">
-          <label for="review-field-trustScore">Trust Score (0–100)</label>
+          <label for="review-field-trustScore">Trust Score (0â€“100)</label>
           <input type="number" id="review-field-trustScore" min="0" max="100" placeholder="90">
         </div>
         <div class="form-group">
@@ -1198,7 +1222,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         }
       });
     } else {
-      // No order specified — just output all keys
+      // No order specified â€” just output all keys
       allKeys.forEach(function(key) {
         var val = attrs[key];
         if (val === undefined || val === null || val === '') return;
@@ -1280,7 +1304,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== ARTICLES — API ========================
+  // ======================== ARTICLES â€” API ========================
   function listArticles() {
     return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.newsPath).then(function(files) {
       if (!Array.isArray(files)) return [];
@@ -1352,7 +1376,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== BROKERS — API ========================
+  // ======================== BROKERS â€” API ========================
   function listBrokers() {
     return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.brokersPath).then(function(files) {
       if (!Array.isArray(files)) return [];
@@ -1397,7 +1421,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     if (brokerData.logo) attrs.logo = brokerData.logo;
     if (brokerData.order) attrs.order = brokerData.order;
     // Comparison fields
-    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
+    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets','profitSplit','evaluationFee','maxCapital','tradingPlatforms','instruments','propLeverage','evaluationType','refundPolicy'];
     for (var ci = 0; ci < compareFields.length; ci++) {
       var key = compareFields[ci];
       if (brokerData[key]) attrs[key] = brokerData[key];
@@ -1431,7 +1455,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== REVIEWS — API ========================
+  // ======================== REVIEWS â€” API ========================
   function listReviews() {
     return apiFetch('/repos/' + CONFIG.repo + '/contents/' + CONFIG.reviewsPath).then(function(files) {
       if (!Array.isArray(files)) return [];
@@ -1579,7 +1603,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     }
   }
 
-  // ======================== ARTICLES — DASHBOARD ========================
+  // ======================== ARTICLES â€” DASHBOARD ========================
   function loadAndRenderArticles() {
     var listEl = document.getElementById('dashboard-list');
     listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading articles...</div></div>';
@@ -1594,7 +1618,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       }
       listEl.innerHTML =
         '<div class="error-box">' +
-        '<div class="error-icon">⚠</div>' +
+        '<div class="error-icon">âš </div>' +
         '<div class="error-text">Failed to load articles: ' + escapeHtml(err.message) + '</div>' +
         '<button class="error-retry" onclick="loadAndRenderArticles()">Retry</button>' +
         '</div>';
@@ -1616,14 +1640,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       if (searchQuery) {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">🔍</div>' +
+          '<div class="state-icon">ðŸ”</div>' +
           '<div class="state-text">No articles match "' + escapeHtml(searchQuery) + '"</div>' +
           '<div class="state-sub">Try a different search term.</div>' +
           '</div>';
       } else {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">📝</div>' +
+          '<div class="state-icon">ðŸ“</div>' +
           '<div class="state-text">No articles yet</div>' +
           '<div class="state-sub">Create your first article to get started.</div>' +
           '</div>';
@@ -1640,7 +1664,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/-+$/, '');
-      var catLabel = a.attrs.category || '—';
+      var catLabel = a.attrs.category || 'â€”';
       var escapedTitle = escapeHtml(a.attrs.title || a.slug);
       var formattedDate = formatDate(a.attrs.date);
 
@@ -1670,7 +1694,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== BROKERS — DASHBOARD ========================
+  // ======================== BROKERS â€” DASHBOARD ========================
   function loadAndRenderBrokers() {
     var listEl = document.getElementById('dashboard-list');
     listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading brokers...</div></div>';
@@ -1685,7 +1709,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       }
       listEl.innerHTML =
         '<div class="error-box">' +
-        '<div class="error-icon">⚠</div>' +
+        '<div class="error-icon">âš </div>' +
         '<div class="error-text">Failed to load brokers: ' + escapeHtml(err.message) + '</div>' +
         '<button class="error-retry" onclick="loadAndRenderBrokers()">Retry</button>' +
         '</div>';
@@ -1707,14 +1731,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       if (searchQuery) {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">🔍</div>' +
+          '<div class="state-icon">ðŸ”</div>' +
           '<div class="state-text">No brokers match "' + escapeHtml(searchQuery) + '"</div>' +
           '<div class="state-sub">Try a different search term.</div>' +
           '</div>';
       } else {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">🏢</div>' +
+          '<div class="state-icon">ðŸ¢</div>' +
           '<div class="state-text">No brokers yet</div>' +
           '<div class="state-sub">Add your first broker/exchange to get started.</div>' +
           '</div>';
@@ -1730,12 +1754,12 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       var escapedName = escapeHtml(b.attrs.name || b.slug);
       var typeVal = b.attrs.type || '';
       var badgeClass = (typeVal || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '') || 'forex-broker';
-      var orderVal = b.attrs.order || '—';
+      var orderVal = b.attrs.order || 'â€”';
       var stars = '';
       var rating = parseFloat(b.attrs.rating) || 0;
       var fullStars = Math.floor(rating);
       for (var s = 0; s < 5; s++) {
-        stars += s < fullStars ? '★' : '☆';
+        stars += s < fullStars ? 'â˜…' : 'â˜†';
       }
 
       html += '<tr>' +
@@ -1765,7 +1789,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== REVIEWS — DASHBOARD ========================
+  // ======================== REVIEWS â€” DASHBOARD ========================
   function loadAndRenderReviews() {
     var listEl = document.getElementById('dashboard-list');
     listEl.innerHTML = '<div class="state-box"><div class="loading-spinner"></div><div class="state-text">Loading reviews...</div></div>';
@@ -1790,7 +1814,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       }
       listEl.innerHTML =
         '<div class="error-box">' +
-        '<div class="error-icon">⚠</div>' +
+        '<div class="error-icon">âš </div>' +
         '<div class="error-text">Failed to load reviews: ' + escapeHtml(err.message) + '</div>' +
         '<button class="error-retry" onclick="loadAndRenderReviews()">Retry</button>' +
         '</div>';
@@ -1820,14 +1844,14 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       if (searchQuery) {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">🔍</div>' +
+          '<div class="state-icon">ðŸ”</div>' +
           '<div class="state-text">No reviews match "' + escapeHtml(searchQuery) + '"</div>' +
           '<div class="state-sub">Try a different search term.</div>' +
           '</div>';
       } else {
         listEl.innerHTML =
           '<div class="state-box">' +
-          '<div class="state-icon">📋</div>' +
+          '<div class="state-icon">ðŸ“‹</div>' +
           '<div class="state-text">No reviews yet</div>' +
           '<div class="state-sub">Add your first broker review to get started.</div>' +
           '</div>';
@@ -1840,7 +1864,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
     for (var i = 0; i < items.length; i++) {
       var r = items[i];
-      var brokerSlug = r.attrs.brokerSlug || '—';
+      var brokerSlug = r.attrs.brokerSlug || 'â€”';
       // Look up broker name from Brokers tab data (always up-to-date)
       var brokerName = brokerSlug;
       for (var bi = 0; bi < brokers.length; bi++) {
@@ -1877,7 +1901,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== REVIEW — EDITOR ========================
+  // ======================== REVIEW â€” EDITOR ========================
   function populateReviewEditor(review) {
     var titleEl = document.getElementById('review-editor-title');
     var saveBtn = document.getElementById('btn-review-save');
@@ -2000,7 +2024,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== REVIEW — ACTIONS ========================
+  // ======================== REVIEW â€” ACTIONS ========================
   function editReview(slug) {
     for (var i = 0; i < reviews.length; i++) {
       if (reviews[i].slug === slug) {
@@ -2043,7 +2067,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== ARTICLE — EDITOR ========================
+  // ======================== ARTICLE â€” EDITOR ========================
   function populateEditor(article) {
     var titleEl = document.getElementById('editor-title');
     var saveBtn = document.getElementById('btn-save');
@@ -2109,7 +2133,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== BROKER — EDITOR ========================
+  // ======================== BROKER â€” EDITOR ========================
   function populateBrokerEditor(broker) {
     var titleEl = document.getElementById('broker-editor-title');
     var saveBtn = document.getElementById('btn-broker-save');
@@ -2140,7 +2164,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 	    }
 	    document.getElementById('broker-field-logo-file').value = '';
     // Comparison fields
-    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets'];
+    var compareFields = ['regulation','minDeposit','spread','leverage','platforms','tradingFees','security','exchangeFeatures','coins','payout','expiryTypes','assets','profitSplit','evaluationFee','maxCapital','tradingPlatforms','instruments','propLeverage','evaluationType','refundPolicy'];
     for (var ci = 0; ci < compareFields.length; ci++) {
       var fieldId = 'broker-field-' + compareFields[ci];
       var el = document.getElementById(fieldId);
@@ -2199,7 +2223,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== ARTICLE — ACTIONS ========================
+  // ======================== ARTICLE â€” ACTIONS ========================
   function editArticle(slug) {
     for (var i = 0; i < articles.length; i++) {
       if (articles[i].slug === slug) {
@@ -2232,7 +2256,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     });
   }
 
-  // ======================== BROKER — ACTIONS ========================
+  // ======================== BROKER â€” ACTIONS ========================
   function editBroker(slug) {
     for (var i = 0; i < brokers.length; i++) {
       if (brokers[i].slug === slug) {
@@ -2503,7 +2527,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       }
       document.getElementById('menu-list').innerHTML =
         '<div class="error-box">' +
-        '<div class="error-icon">⚠</div>' +
+        '<div class="error-icon">âš </div>' +
         '<div class="error-text">Failed to load menu: ' + escapeHtml(err.message) + '</div>' +
         '<button class="error-retry" onclick="showMenuEditor()">Retry</button>' +
         '</div>';
@@ -2515,7 +2539,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     if (!menuItems || menuItems.length === 0) {
       container.innerHTML =
         '<div class="state-box">' +
-        '<div class="state-text" style="font-size:24px">📋</div>' +
+        '<div class="state-text" style="font-size:24px">ðŸ“‹</div>' +
         '<div class="state-text">No menu items yet</div>' +
         '<div class="state-sub">Click "+ Add Item" to create your first navigation item.</div>' +
         '</div>';
@@ -2545,11 +2569,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     var childBadge = hasChildren ? '<span class="menu-item-children">' + item.children.length + ' items</span>' : '';
     var dataIndex = parentIndex !== null ? 'data-index="' + index + '" data-parent="' + parentIndex + '"' : 'data-index="' + index + '"';
     return '<li draggable="true" ' + dataIndex + '>' +
-      '<span class="drag-handle">⠿</span>' +
+      '<span class="drag-handle">â ¿</span>' +
       '<span class="menu-item-label">' + escapeHtml(item.label) + '</span>' +
       (href ? '<span class="menu-item-href">' + escapeHtml(href) + '</span>' : '') +
       childBadge +
-      '<button class="menu-item-edit-btn" onclick="editMenuItem(' + index + ',' + (parentIndex !== null ? parentIndex : 'null') + ')" title="Edit">✎</button>' +
+      '<button class="menu-item-edit-btn" onclick="editMenuItem(' + index + ',' + (parentIndex !== null ? parentIndex : 'null') + ')" title="Edit">âœŽ</button>' +
       '</li>' + childrenHtml;
   }
 
@@ -2739,3 +2763,5 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 </script>
 </body>
 </html>
+
+
