@@ -2,7 +2,7 @@
 name: "Blue Guardian"
 type: "Proprietary Trading Firm"
 rating: 4.5
-order: 1
+order: 16
 features:
   - "90% profit split"
   - "24-hour payout guarantee"
