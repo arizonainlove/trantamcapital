@@ -83,7 +83,7 @@ export default function ReviewPage({
               {/* Overview */}
               <div>
                 <SectionTitle title="Overview" />
-                <div className="text-sm text-text-secondary leading-relaxed">
+                <div className="text-base text-text-secondary leading-relaxed">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{

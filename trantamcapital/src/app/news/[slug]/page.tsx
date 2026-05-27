@@ -79,7 +79,7 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
           )}
 
-          <div className="prose prose-sm max-w-none text-text-secondary leading-relaxed">
+          <div className="prose max-w-none text-text-secondary leading-relaxed">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

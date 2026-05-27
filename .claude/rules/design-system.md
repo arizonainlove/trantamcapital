@@ -32,6 +32,7 @@ description: Design system — colors, typography, component specifications, res
 - **Secondary font**: Roboto (via `next/font/google`, CSS variable `--font-secondary`)
 - **Loading method**: `next/font` — tự động self-host, không gọi Google CDN, không render-blocking
 - **Setup**: Import trong `layout.tsx` → gán `variable` → className trên `<html>`
+- **Minimum body text**: **16px** for all article/review body content. Do not use `prose-sm` or `text-sm` for article text — they are 14px and harm readability on desktop.
 
 | Role | Font | Size | Weight | Line Height |
 |------|------|------|--------|-------------|
