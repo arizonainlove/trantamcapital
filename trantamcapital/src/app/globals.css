@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 html {
   scroll-behavior: smooth;
@@ -41,6 +42,31 @@ html {
   /* Fonts */
   --font-primary: "Open Sans", sans-serif;
   --font-secondary: Roboto, sans-serif;
+}
+
+/* Prose table styles (article body) */
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.prose table th {
+  background: #F7F8FA;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  border: 1px solid #E2E5EC;
+  font-size: 0.875rem;
+}
+.prose table td {
+  padding: 10px 14px;
+  border: 1px solid #E2E5EC;
+  font-size: 0.875rem;
+}
+.prose table tr:nth-child(even) td {
+  background: #FAFBFC;
+}
+.prose table tr:hover td {
+  background: #FFF0E8;
 }
 
 @keyframes marquee {
