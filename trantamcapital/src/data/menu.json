@@ -6,7 +6,8 @@
   { "label": "Platforms", "children": [
     { "label": "Forex Broker", "href": "/forex-broker" },
     { "label": "Crypto Exchange", "href": "/crypto-exchange" },
-    { "label": "Binary Option", "href": "/binary-option" }
+    { "label": "Binary Option", "href": "/binary-option" },
+    { "label": "Prop Trading Firm", "href": "/proprietary-trading-firm" }
   ]},
   { "label": "Tools", "href": "/tools" },
   { "label": "About", "href": "/about" },

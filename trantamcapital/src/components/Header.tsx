@@ -31,6 +31,7 @@ const searchablePages = [
   { label: "Exchange C", href: "/crypto-exchange/exchange-c" },
   { label: "Binary Option", href: "/binary-option" },
   { label: "Platform A", href: "/binary-option/platform-a" },
+  { label: "Prop Trading Firm", href: "/proprietary-trading-firm" },
   { label: "Tools", href: "/tools" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

@@ -44,7 +44,7 @@ export function getArticleBySlug(slug: string): NewsArticle | undefined {
   return getAllNews().find((a) => a.slug === slug);
 }
 
-export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets"];
+export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets", "Proprietary Trading Firm"];
 
 function parseOptional(data: Record<string, unknown>, key: string): string | undefined {
   const val = data[key];
@@ -107,6 +107,16 @@ export function getAllBrokers(): Broker[] {
       popularity: parseOptional(data, "popularity"),
       cryptoSupport: parseOptional(data, "cryptoSupport"),
       binaryCopyTrading: parseOptional(data, "binaryCopyTrading"),
+      profitSplit: parseOptional(data, "profitSplit"),
+      evaluationFee: parseOptional(data, "evaluationFee"),
+      maxCapital: parseOptional(data, "maxCapital"),
+      tradingPlatforms: parseOptional(data, "tradingPlatforms"),
+      instruments: parseOptional(data, "instruments"),
+      propLeverage: parseOptional(data, "propLeverage"),
+      evaluationType: parseOptional(data, "evaluationType"),
+      dailyLossLimit: parseOptional(data, "dailyLossLimit"),
+      profitTarget: parseOptional(data, "profitTarget"),
+      refundPolicy: parseOptional(data, "refundPolicy"),
     } as Broker;
   });
 

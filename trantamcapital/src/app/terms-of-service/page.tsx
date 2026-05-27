@@ -33,8 +33,9 @@ export default function TermsOfService() {
               or sell any financial instrument.
             </p>
             <p>
-              Trading forex, cryptocurrencies, and binary options carries significant risk. You should
-              consult with a qualified financial advisor before making any trading decisions.
+              Trading forex, cryptocurrencies, binary options, and participating in proprietary trading
+              firm evaluations carries significant risk. You should consult with a qualified financial
+              advisor before making any trading decisions.
             </p>
 
             <h2 className="text-xl font-bold text-text-primary">3. Risk Disclaimer</h2>
@@ -45,6 +46,13 @@ export default function TermsOfService() {
                 and is not suitable for all investors. You could lose some or all of your invested
                 capital. Never invest money you cannot afford to lose. Past performance does not
                 guarantee future results.
+              </p>
+              <p className="mt-2">
+                Proprietary trading firm evaluations carry their own risks. Evaluation fees are
+                non-refundable in most cases, and passing an evaluation does not guarantee a funded
+                account. Profit splits, drawdown limits, and trading rules vary between firms and
+                should be carefully reviewed before committing. Never pay for a prop firm evaluation
+                with money you cannot afford to lose.
               </p>
             </div>
 
@@ -96,10 +104,10 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold text-text-primary">8. Affiliate Disclosure</h2>
             <p>
               ProTradeVision may receive compensation (commissions or referral fees) when you visit
-              or sign up with brokers, exchanges, or platforms through links on this website. This
-              compensation may influence the placement and ranking of these services. We strive to
-              maintain objectivity in our reviews and comparisons, but you should assume that we
-              have a financial relationship with any listed platform.
+              or sign up with brokers, exchanges, proprietary trading firms, or platforms through
+              links on this website. This compensation may influence the placement and ranking of
+              these services. We strive to maintain objectivity in our reviews and comparisons, but
+              you should assume that we have a financial relationship with any listed platform.
             </p>
             <p className="mt-2">
               Always conduct your own due diligence before choosing a broker or trading platform.

@@ -10,6 +10,7 @@ const categorySlugs: Record<string, string> = {
   forex: "Forex",
   "binary-options": "Binary Options",
   markets: "Markets",
+  "proprietary-trading-firm": "Proprietary Trading Firm",
 };
 
 export async function generateStaticParams() {

@@ -2,7 +2,7 @@ export interface NewsArticle {
   slug: string;
   title: string;
   date: string;
-  category: "Cryptocurrency" | "Forex" | "Binary Options" | "Markets";
+  category: "Cryptocurrency" | "Forex" | "Binary Options" | "Markets" | "Proprietary Trading Firm";
   excerpt: string;
   content: string;
   author?: string;
@@ -165,7 +165,7 @@ export const allNews: NewsArticle[] = rawArticles.map((a) => ({
   slug: slugify(a.title),
 }));
 
-export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets"];
+export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets", "Proprietary Trading Firm"];
 
 export function getArticleBySlug(slug: string): NewsArticle | undefined {
   return allNews.find((a) => a.slug === slug);

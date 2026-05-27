@@ -387,4 +387,28 @@ export const defaultReviews: ReviewContent[] = [
     trustScore: 80,
     content: "Pocket Option is a popular binary options platform known for its exceptionally low minimum deposit of just $5 and high payouts of up to 98%. A standout feature is social trading, which allows users to follow and copy successful traders.",
   },
+
+  // ── Proprietary Trading Firms ──
+  {
+    slug: "propfirm-b", brokerSlug: "propfirm-b", brokerName: "PropFirm B", brokerType: "Proprietary Trading Firm",
+    pros: ["Competitive profit split", "Multiple evaluation account sizes", "Wide range of tradable instruments", "MT4 and MT5 platform support", "Fast payout processing", "24/7 customer support"],
+    cons: ["Two-phase evaluation can be time-consuming", "Strict daily loss limits", "Profit target must be met within trading days"],
+    keyFeatures: [
+      { label: "Profit Split", value: "80/20" },
+      { label: "Evaluation Fee", value: "From $100" },
+      { label: "Max Capital", value: "$200,000" },
+      { label: "Platforms", value: "MT4, MT5, cTrader" },
+      { label: "Instruments", value: "Forex, Crypto, Indices, Commodities" },
+      { label: "Evaluation Type", value: "Two-Phase" },
+    ],
+    ratingSummary: [
+      { label: "Profit Split", score: 8.0 },
+      { label: "Evaluation Process", score: 8.5 },
+      { label: "Customer Support", score: 8.0 },
+      { label: "Platform Quality", score: 8.5 },
+      { label: "Trading Conditions", score: 8.0 },
+    ],
+    trustScore: 82,
+    content: "PropFirm B is a proprietary trading firm that offers traders access to significant capital through a structured evaluation process. With competitive profit splits and multiple account sizes, they provide a pathway for talented traders to trade with firm capital.\n\nThe firm supports industry-standard platforms including MetaTrader 4 and 5, along with cTrader. Traders can access forex, crypto, indices, and commodity markets. The two-phase evaluation structure is designed to identify consistently profitable traders while managing risk effectively.",
+  },
 ];

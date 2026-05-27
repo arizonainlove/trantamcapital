@@ -1,7 +1,7 @@
 export interface Broker {
   slug: string;
   name: string;
-  type: "Forex Broker" | "Crypto Exchange" | "Binary Options";
+  type: "Forex Broker" | "Crypto Exchange" | "Binary Options" | "Proprietary Trading Firm";
   rating: number;
   features: string[];
   reviewHref: string;
@@ -40,6 +40,17 @@ export interface Broker {
   popularity?: string;
   cryptoSupport?: string;
   binaryCopyTrading?: string;
+  // New fields — Proprietary Trading Firm
+  profitSplit?: string;
+  evaluationFee?: string;
+  maxCapital?: string;
+  tradingPlatforms?: string;
+  instruments?: string;
+  propLeverage?: string;
+  evaluationType?: string;
+  dailyLossLimit?: string;
+  profitTarget?: string;
+  refundPolicy?: string;
 }
 
 // ── Default broker data (fallback when no CMS .md file exists) ──
@@ -65,6 +76,17 @@ const defaultBrokers: Omit<Broker, "slug">[] = [
   },
 
   // ── Binary Options (CMS-managed: IQ Option, Pocket Option, Quotex, Binomo, Deriv) ──
+
+  // ── Proprietary Trading Firms (CMS-managed: Blue Guardian, etc.) ──
+  // PropFirm B — no CMS file, uses fallback
+  {
+    name: "PropFirm B", type: "Proprietary Trading Firm", rating: 4.0, order: 1,
+    features: ["Competitive profit split", "Multiple evaluation options", "Wide instrument range", "Fast payouts"],
+    reviewHref: "/proprietary-trading-firm/propfirm-b", visitHref: "#",
+    gradient: "linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)",
+    profitSplit: "80/20", evaluationFee: "$100", maxCapital: "$200K", tradingPlatforms: "MT4, MT5, cTrader",
+    instruments: "Forex, Crypto, Indices, Commodities", propLeverage: "1:30", evaluationType: "Two-Phase",
+  },
 ];
 
 function slugify(name: string): string {
@@ -115,4 +137,15 @@ export const binaryComparisonFields: BrokerComparisonField[] = [
   { key: "binaryCopyTrading", label: "Copy Trading" },
   { key: "cryptoSupport", label: "Crypto Support" },
   { key: "affiliateProgram", label: "Affiliate" },
+];
+
+export const propFirmComparisonFields: BrokerComparisonField[] = [
+  { key: "profitSplit", label: "Profit Split" },
+  { key: "evaluationFee", label: "Evaluation Fee" },
+  { key: "maxCapital", label: "Max Capital" },
+  { key: "tradingPlatforms", label: "Platforms" },
+  { key: "instruments", label: "Instruments" },
+  { key: "propLeverage", label: "Leverage" },
+  { key: "evaluationType", label: "Evaluation Type" },
+  { key: "refundPolicy", label: "Refund Policy" },
 ];
