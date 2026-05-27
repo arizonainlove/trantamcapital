@@ -83,6 +83,21 @@ export default async function NewsArticlePage({ params }: Props) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
+                h2: ({ children }) => (
+                  <h2 className="text-xl font-bold text-text-primary mt-10 mb-4 pb-2 border-b border-border">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-lg font-bold text-text-primary mt-8 mb-3 pl-3 border-l-4 border-primary">
+                    {children}
+                  </h3>
+                ),
+                h4: ({ children }) => (
+                  <h4 className="text-base font-bold text-text-primary mt-6 mb-2">
+                    {children}
+                  </h4>
+                ),
                 img: ({ src, alt }) => (
                   <img
                     src={src}

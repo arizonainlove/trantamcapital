@@ -87,6 +87,16 @@ export default function ReviewPage({
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
+                      h2: ({ children }) => (
+                        <h2 className="text-lg font-bold text-text-primary mt-6 mb-3 pb-1 border-b border-border">
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-base font-bold text-text-primary mt-4 mb-2 pl-3 border-l-4 border-primary">
+                          {children}
+                        </h3>
+                      ),
                       img: ({ src, alt }) => (
                         <img
                           src={src}

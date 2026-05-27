@@ -1,5 +1,5 @@
 ---
-description: Vietnamese to English content conversion — native-level English articles with SEO optimization, NOT literal translation
+description: Vietnamese to English content conversion — native-level English articles with SEO optimization, formatting standards, and visual hierarchy. NOT literal translation.
 invoke: "chuyển (nội dung|bài viết|file) này sang (bài viết|tiếng Anh)"
 ---
 
@@ -19,6 +19,65 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 - **Vocabulary**: Use standard financial English terminology. Avoid translation-ese ("the above", "as for", "so-called")
 - **Sentence structure**: Varied length. Break long Vietnamese sentences into 2-3 shorter English ones. No run-ons
 - **Cultural adaptation**: Remove Vietnam-specific references unless relevant internationally. Replace with globally recognizable context
+
+
+### Formatting requirements (EVERY article must include these)
+
+#### Bold text
+- **Bold all key statistics, numbers, and percentages** — e.g. `**0.1%**`, `**10 / 10**`, `**$100K**`
+- **Bold important terms** on first mention — e.g. `**SAFU insurance fund**`
+- **Bold section keywords** that summarize a point — e.g. `**Fast order execution** — orders fill almost instantly`
+- Every paragraph should have at least one bolded term for visual scanning
+
+#### Tables
+- Use tables for: **comparisons, ratings, fees, features, pros/cons summaries**
+- Always add a header row with `| Header 1 | Header 2 |`
+- Example:
+  ```markdown
+  | Trading Type | Fee | Discount |
+  |-------------|-----|----------|
+  | **Spot Trading** | **0.1%** | Lower with BNB |
+  ```
+- Do NOT use tables for simple 2-3 item lists — use bullet points instead
+
+#### Bullet points
+- Use for: lists of features, supported items, suitable audiences
+- Use `-` at line start
+- Keep each bullet to 1 line (no wrapping paragraphs)
+- Bold the first word/phrase of each bullet where applicable
+
+#### Headings
+Follow semantic hierarchy — never skip levels (H2 → H3, not H2 → H4):
+
+| Heading | Rendered style on site |
+|---------|----------------------|
+| **H2** (`## Title`) | Large + Bold + **Bottom border line** |
+| **H3** (`### Title`) | Medium + Bold + **Orange left accent bar** (4px `#E84910`) |
+| **H4** (`#### Title`) | Bold only |
+
+- Use H2 for major sections (Introduction, Strengths, Conclusion)
+- Use H3 for sub-sections within each H2
+- Use descriptive heading text — not "Section 1" but "Unmatched Liquidity and Trading Volume"
+
+#### Internal links
+- Every article MUST include at least **2-3 internal links** to other pages on the site
+- Link relevant keywords to pages like:
+  - `/crypto-exchange/[slug]` — exchange reviews
+  - `/forex-broker/[slug]` — broker reviews
+  - `/binary-option/[slug]` — binary options reviews
+  - `/news` — news section
+  - `/tools` — trading tools
+  - `/for-beginners` — beginner guides
+
+#### Paragraphs
+- **Short paragraphs**: 2-3 sentences max
+- Each paragraph should cover ONE idea
+- Break long paragraphs into multiple short ones for scanability
+
+#### Visual elements
+- Mix formatting types within each section: heading + paragraph + table + bullet points
+- Do NOT write walls of text (4+ sentences without formatting)
+- Use `---` horizontal rule sparingly if needed for visual breaks
 
 
 ### SEO requirements (every article)
@@ -46,24 +105,32 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 
 ## Introduction / Overview
 - What is this about? Why should the reader care?
-- 2-3 paragraphs setting context
+- 2-3 short paragraphs setting context
+- **Bold a key statistic** if relevant
 
 
 ## [Main Topic Section] (H2)
-- Core content
+- Core content with **bold** for key terms
 - Sub-sections with H3 as needed
+- Mix: paragraphs + tables + bullet points + bold
 
 
 ## [Another Key Section] (H2)
 ...
 
 
+## Comparison / Rating Table (H2)
+| Criteria | Rating |
+|----------|--------|
+| **Category** | **Score** |
+
+
 ## Conclusion
-- Key takeaways
-- Call to action (if applicable)
+- Key takeaways with **bold** emphasis
+- Call to action with internal link (if applicable)
 
 
-*Disclaimer: This content is for informational purposes only and does not constitute financial advice. Trading cryptocurrencies, forex, and binary options carries significant risk.*
+*Disclaimer: ...*
 ```
 
 
@@ -74,7 +141,7 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 
 
 ### What to preserve
-- Facts, statistics, dates, numbers — keep exact
+- Facts, statistics, dates, numbers — keep exact, **bold them**
 - Quotes (translate to natural English)
 - KPIs, comparison data, review scores
 - Product/brand names — keep original capitalization
@@ -85,6 +152,7 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 - Vietnamese passive constructions → English active voice
 - Culturally specific references → international equivalents
 - Overly formal Vietnamese phrasing → natural English register
+- Plain text lists → formatted tables where appropriate
 
 
 ### How to invoke

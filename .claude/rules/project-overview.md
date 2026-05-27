@@ -55,6 +55,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox
 - `ReviewPage.tsx` — Shared review page component for all broker review routes
+- Article/review body content renders **Markdown** via `react-markdown` + `remark-gfm` — supports: styled headings (H2 bottom border, H3 orange left bar), bold, tables, images, links, bullet points. Content is sanitized for XSS at build time.
 - `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + highlight badges (from Excel-derived ratings)
 
 #### Middleware

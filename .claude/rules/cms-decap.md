@@ -123,6 +123,8 @@ Overview content (Markdown)
 
 ### Build Integration
 - Content fetched at build time using `gray-matter` to parse `.md` files
+- **Body content renders Markdown**: headings (H2 with bottom border, H3 with orange left accent), bold, italic, images, tables, links, and bullet points are all supported via `react-markdown` + `remark-gfm`
+- Content sanitized via `stripHtml()` for XSS defense (HTML tags stripped, Markdown syntax preserved)
 - Pages rebuilt on every git push to main
 - Uses Next.js static generation (SSG) for content pages
 - Broker data: `getAllBrokers()` in `lib/content.ts` + `defaultBrokerData` fallback
