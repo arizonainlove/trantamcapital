@@ -5,7 +5,7 @@
  * strategy changes (e.g. switching to dangerouslySetInnerHTML).
  */
 export function stripHtml(str: string): string {
-  return str.replace(/<[^>]*>/g, "");
+  return (str || "").replace(/<[^>]*>/g, "");
 }
 
 /**
