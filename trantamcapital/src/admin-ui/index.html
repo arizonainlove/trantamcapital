@@ -1759,7 +1759,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       var rating = parseFloat(b.attrs.rating) || 0;
       var fullStars = Math.floor(rating);
       for (var s = 0; s < 5; s++) {
-        stars += s < fullStars ? 'â˜…' : 'â˜†';
+        stars += s < fullStars ? '★' : '☆';
       }
 
       html += '<tr>' +
