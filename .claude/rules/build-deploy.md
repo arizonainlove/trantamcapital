@@ -96,7 +96,7 @@ const nextConfig = {
 1. Push code to GitHub repository
 2. Import repository in Vercel dashboard
 3. Vercel auto-detects Next.js configuration
-4. Environment variables: none required (static site)
+4. Environment variables (required): SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO for Zoho SMTP (contact + newsletter). Set via `vercel env add` or Vercel Dashboard.
 5. Auto-deploys on every push to main branch
 
 ### SEO Requirements
@@ -106,7 +106,7 @@ const nextConfig = {
 - sitemap.ts generates `/sitemap.xml` automatically
 
 ### Security
-- **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth` (10/min), `/api/contact` (20/min)
+- **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth` (10/min), `/api/contact` (20/min), `/api/newsletter` (10/min)
 - **Admin auth** (`src/app/admin/route.ts`): Server-side gate — checks HTTP-only `admin_token` cookie trước khi serve admin SPA. Cookie được set bởi `POST /api/auth/session` sau OAuth, xóa bởi `DELETE /api/auth/session` khi logout.
 - **XSS**: `src/lib/sanitize.ts` — stripHtml() applied to all CMS content at build time (content.ts, reviews.ts)
 - **Backup**: `scripts/backup.js` và `scripts/restore.js` — snapshot/restore CMS content (.backups/ bị gitignore)

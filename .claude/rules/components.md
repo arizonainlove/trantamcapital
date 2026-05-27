@@ -15,7 +15,7 @@ description: Global component library, file structure, and live price widget spe
 | `NewsCard.tsx` | News article card with image + category badge + date + excerpt |
 | `BrokerCard.tsx` | Broker/exchange card with logo + rating stars + features + highlight badges + color-coded ratings |
 | `ContactForm.tsx` | Contact form (name, email, subject, message) + GDPR consent checkbox |
-| `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox |
+| `NewsletterForm.tsx` | Email subscription + GDPR consent checkbox. Calls `POST /api/newsletter` (Zoho SMTP notification). 3 error states: invalid email, missing consent, server error. |
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
 | `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
 | `ReviewPage.tsx` | Shared review page for broker/exchange reviews (pros/cons, key features, rating sidebar) |
@@ -71,6 +71,7 @@ trantamcapital/
 │   │   └── api/
 │   │       ├── contact/route.ts
 │   │       ├── gold/route.ts                   # Gold price (XAU/USD) proxy
+│   │       ├── newsletter/route.ts            # Newsletter subscription (Zoho SMTP)
 │   │       └── volume/route.ts                 # Forex/gold volume via Yahoo Finance
 │   ├── data/
 │   │   ├── menu.json                 # Navigation menu (editable via admin)

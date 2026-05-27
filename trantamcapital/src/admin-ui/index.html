@@ -511,9 +511,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   color: var(--text-light);
   padding: 8px 12px;
   background: var(--bg);
-  border-radius: 4px;
-  margin-top: 4px;
+  border-radius: 0 0 4px 4px;
+  margin-top: 0;
   line-height: 1.6;
+  border: 1px solid var(--border);
+  border-top: none;
 }
 .markdown-hint code {
   background: var(--border);
@@ -521,6 +523,34 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   border-radius: 3px;
   font-size: 11px;
 }
+
+/* Editor Toolbar */
+.editor-toolbar {
+  display: flex;
+  gap: 2px;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s;
+}
+.toolbar-btn:hover { background: var(--white); color: var(--text); }
+.toolbar-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+.toolbar-separator { width: 1px; background: var(--border); margin: 4px 4px; }
 
 /* Loading / Empty / Error states */
 .state-box {
@@ -750,13 +780,29 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         </div>
         <div class="form-group">
           <label for="field-body">Body <span class="required">*</span></label>
+          <div class="editor-toolbar">
+            <button type="button" class="toolbar-btn" onclick="document.getElementById('field-body-image-file').click()" title="Upload and insert image">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm0 2h12v6.586l-2.293-2.293a1 1 0 00-1.414 0L10 11.586l-1.793-1.793a1 1 0 00-1.414 0L4 11.586V5zm4 2.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+              Insert Image
+            </button>
+            <input type="file" id="field-body-image-file" accept="image/*" style="display:none">
+            <div class="toolbar-separator"></div>
+            <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'**'+t.value.substring(t.selectionStart,t.selectionEnd)+'**')" title="Bold"><strong>B</strong></button>
+            <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'*'+t.value.substring(t.selectionStart,t.selectionEnd)+'*')" title="Italic"><em>I</em></button>
+            <button type="button" class="toolbar-btn" onclick="var t=document.getElementById('field-body');insertAtCursor(t,'['+t.value.substring(t.selectionStart,t.selectionEnd)+'](url)')" title="Link">🔗</button>
+          </div>
           <textarea id="field-body" rows="16" placeholder="Write your article content in Markdown..."></textarea>
           <div class="markdown-hint">
+            <strong>Toolbar:</strong>
+            Click <b>Insert Image</b> to upload an image from your computer — it will be uploaded to GitHub and automatically inserted at cursor position.
+            Use <b>B</b>, <b><em>I</em></b>, and <b>🔗</b> to wrap selected text with bold, italic, or link Markdown.
+            <br><br>
             <strong>Markdown guide:</strong>
             <code># Heading</code> ·
             <code>**bold**</code> ·
             <code>*italic*</code> ·
             <code>[Link](url)</code> ·
+            <code>![alt](img-url)</code> ·
             <code>- list item</code> ·
             <code>1. numbered</code> ·
             <code>&gt; quote</code> ·
@@ -2274,6 +2320,61 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     document.getElementById('field-image-file').value = '';
   }
 
+  // ======================== BODY IMAGE UPLOAD (INSERT INTO BODY) ========================
+  document.getElementById('field-body-image-file').addEventListener('change', function() {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('Image must be under 5MB', 'error');
+      this.value = '';
+      return;
+    }
+    uploadBodyImage(file);
+  });
+
+  function uploadBodyImage(file) {
+    showToast('Uploading image...', 'success');
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var base64 = e.target.result.split(',')[1];
+      var ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!ext) ext = 'png';
+      var filename = Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '').slice(0, 60);
+      var filePath = 'trantamcapital/public/images/uploads/' + filename;
+
+      apiFetch('/repos/' + CONFIG.repo + '/contents/' + filePath, {
+        method: 'PUT',
+        body: JSON.stringify({
+          message: 'Upload image: ' + filename,
+          content: base64,
+        }),
+      }).then(function(result) {
+        var rawUrl = 'https://raw.githubusercontent.com/' + CONFIG.repo + '/main/' + filePath;
+        var altText = file.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ').trim() || 'image';
+        var markdown = '![' + altText + '](' + rawUrl + ')';
+        var textarea = document.getElementById('field-body');
+        insertAtCursor(textarea, markdown);
+        showToast('Image inserted into body', 'success');
+      }).catch(function(err) {
+        showToast('Upload failed: ' + err.message, 'error');
+      });
+    };
+    reader.onerror = function() {
+      showToast('Failed to read file', 'error');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function insertAtCursor(textarea, text) {
+    var start = textarea.selectionStart;
+    var end = textarea.selectionEnd;
+    var before = textarea.value.substring(0, start);
+    var after = textarea.value.substring(end);
+    textarea.value = before + text + after;
+    textarea.selectionStart = textarea.selectionEnd = start + text.length;
+    textarea.focus();
+  }
+
   // ======================== BROKER LOGO UPLOAD ========================
   document.getElementById('broker-field-logo-file').addEventListener('change', function() {
     var file = this.files && this.files[0];
@@ -2345,6 +2446,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   W.switchTab = switchTab;
   W.handleSearch = handleSearch;
   W.clearBrokerLogo = clearBrokerLogo;
+  W.insertAtCursor = insertAtCursor;
   W.showMenuEditor = showMenuEditor;
   W.addMenuItem = addMenuItem;
   W.editMenuItem = editMenuItem;

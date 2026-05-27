@@ -11,6 +11,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - [Build & Deploy](.claude/rules/build-deploy.md) — Commands, next.config.js, paths, verification
 - [Code Reviewer](.claude/rules/code-reviewer.md) — Code quality & security review specs
 - [SEO & UX/UI](.claude/rules/seo-ux.md) — SEO, accessibility, and UX standards
+- [Content Conversion](.claude/rules/content-conversion.md) — Vietnamese → English article rewrite & SEO
 
 ## TL;DR
 
