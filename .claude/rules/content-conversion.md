@@ -23,11 +23,12 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 
 ### Formatting requirements (EVERY article must include these)
 
-#### Bold text
-- **Bold all key statistics, numbers, and percentages** — e.g. `**0.1%**`, `**10 / 10**`, `**$100K**`
-- **Bold important terms** on first mention — e.g. `**SAFU insurance fund**`
-- **Bold section keywords** that summarize a point — e.g. `**Fast order execution** — orders fill almost instantly`
-- Every paragraph should have at least one bolded term for visual scanning
+#### Bold text (use sparingly)
+- **Bold numbers and percentages only** — e.g. `**0.1%**`, `**10 / 10**`, `**$100K**`
+- **Bold product/brand names** on first mention — e.g. `**Binance Lite**`, `**SAFU**`
+- Do NOT bold descriptive phrases, adjectives, or full sentences — it makes the article cluttered
+- Max 2-3 bold items per section
+- Only bold in tables if the cell contains a number or product name
 
 #### Tables
 - Use tables for: **comparisons, ratings, fees, features, pros/cons summaries**
@@ -44,7 +45,6 @@ When the user says "chuyển nội dung này sang bài viết tiếng Anh" (or s
 - Use for: lists of features, supported items, suitable audiences
 - Use `-` at line start
 - Keep each bullet to 1 line (no wrapping paragraphs)
-- Bold the first word/phrase of each bullet where applicable
 
 #### Headings
 Follow semantic hierarchy — never skip levels (H2 → H3, not H2 → H4):

@@ -117,6 +117,7 @@ const nextConfig = {
 - Price ticker: Client component with 60s refresh interval
 - No `useEffect` or state management libraries needed beyond React built-ins
 - Fonts: Dùng `next/font/google` (Open Sans, Roboto) — tự động self-host, không render-blocking. KHÔNG dùng @import trong CSS.
+- **Dependencies**: `@tailwindcss/typography` required for `prose` class (article body). Installed via npm. Table styles (borders, alternating rows) defined in `globals.css`.
 
 ### Verification Checklist
 - [ ] `npm run build` completes without errors
