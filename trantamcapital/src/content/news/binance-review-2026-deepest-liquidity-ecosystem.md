@@ -88,7 +88,7 @@ Beginners should start with low leverage, use stop-losses, and learn proper risk
 
 Despite regulatory challenges, Binance remains the largest crypto exchange by volume with the deepest liquidity and the largest global user base.
 
-It is widely considered a top choice for spot traders, futures traders, altcoin investors, and affiliate marketers. For comparisons, see our reviews of [Coinbase](/crypto-exchange/exchange-a) and [Bybit](/crypto-exchange/exchange-b).
+It is widely considered a top choice for spot traders, futures traders, altcoin investors, and affiliate marketers. For comparisons, see our reviews of [Coinbase](/crypto-exchange/exchange-b) and [Bybit](/crypto-exchange/exchange-c).
 
 ## Who Should Use Binance?
 
