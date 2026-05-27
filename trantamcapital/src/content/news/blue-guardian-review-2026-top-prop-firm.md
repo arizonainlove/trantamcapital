@@ -1,11 +1,10 @@
 ---
 title: "Blue Guardian Review 2026: Top Prop Firm with 90% Profit Split"
 date: "2026-05-27"
-category: "Proprietary Trading Firm"
 author: "ProTradeVision"
+image: "https://raw.githubusercontent.com/arizonainlove/trantamcapital/main/trantamcapital/public/images/uploads/1779870402973-2705blueguadian.png"
 excerpt: "Blue Guardian is a rapidly growing prop firm offering up to 90% profit splits, fast payouts, and affordable challenges. This review covers its strengths, weaknesses, and overall rating."
 ---
-
 ## Introduction
 
 In recent years, the prop trading industry has grown rapidly, and **Blue Guardian** has emerged as one of the most talked-about names in the space. The firm attracts traders with high profit splits, affordable challenges, fast payouts, and multiple funded account options.
