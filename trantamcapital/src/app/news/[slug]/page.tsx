@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllNews, getArticleBySlug } from "@/lib/content";
 import NewsletterForm from "@/components/NewsletterForm";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const allNews = getAllNews();
 
@@ -77,8 +79,32 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
           )}
 
-          <div className="prose prose-sm max-w-none text-text-secondary leading-relaxed whitespace-pre-line">
-            {article.content}
+          <div className="prose prose-sm max-w-none text-text-secondary leading-relaxed">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ src, alt }) => (
+                  <img
+                    src={src}
+                    alt={alt || ""}
+                    className="w-full rounded-lg my-6"
+                    loading="lazy"
+                  />
+                ),
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target={href?.startsWith("http") ? "_blank" : undefined}
+                    rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-link hover:underline"
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {article.content}
+            </ReactMarkdown>
           </div>
 
           {/* Related News */}

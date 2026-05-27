@@ -5,6 +5,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { HiStar, HiCheckCircle, HiShieldCheck } from "react-icons/hi";
 import type { Broker } from "@/data/brokers";
 import type { ReviewContent } from "@/data/reviews";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ReviewPageProps {
   review: ReviewContent;
@@ -81,10 +83,32 @@ export default function ReviewPage({
               {/* Overview */}
               <div>
                 <SectionTitle title="Overview" />
-                <div className="text-sm text-text-secondary leading-relaxed space-y-3">
-                  {review.content.split("\n\n").map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
+                <div className="text-sm text-text-secondary leading-relaxed">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      img: ({ src, alt }) => (
+                        <img
+                          src={src}
+                          alt={alt || ""}
+                          className="w-full rounded-lg my-4"
+                          loading="lazy"
+                        />
+                      ),
+                      a: ({ href, children }) => (
+                        <a
+                          href={href}
+                          target={href?.startsWith("http") ? "_blank" : undefined}
+                          rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="text-link hover:underline"
+                        >
+                          {children}
+                        </a>
+                      ),
+                    }}
+                  >
+                    {review.content}
+                  </ReactMarkdown>
                 </div>
               </div>
 
