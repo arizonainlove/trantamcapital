@@ -36,7 +36,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Statistics | Stats bar showing counts for articles, brokers, reviews |
 | Search | Filter articles and brokers by name/title |
 | Article Editor | Form-based: title, date, category, author, image upload, excerpt, body. **Body toolbar**: Insert Image (upload → auto-embed), Bold, Italic, Link |
-| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+26 comparison & rating fields** |
+| Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+34 comparison & rating fields** (includes forex, crypto, binary, and prop firm fields) |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
@@ -56,7 +56,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 ---
 title: string
 date: date
-category: enum [Cryptocurrency, Forex, Binary Options, Markets]
+category: enum [Cryptocurrency, Forex, Binary Options, Markets, Proprietary Trading Firm]
 author: string
 image: string (raw GitHub URL to image)
 excerpt: text
@@ -68,7 +68,7 @@ Body content (Markdown)
 ```
 ---
 name: string
-type: enum [Forex Broker, Crypto Exchange, Binary Options]
+type: enum [Forex Broker, Crypto Exchange, Binary Options, Proprietary Trading Firm]
 rating: number (0–5)
 features:
   - "Feature one"
@@ -105,6 +105,16 @@ assets: string             # Binary Options
 popularity: string         # Binary — rating
 cryptoSupport: string      # Binary — rating
 binaryCopyTrading: string  # Binary — rating
+profitSplit: string        # Proprietary Trading Firm
+evaluationFee: string      # Proprietary Trading Firm
+maxCapital: string         # Proprietary Trading Firm
+tradingPlatforms: string   # Proprietary Trading Firm
+instruments: string        # Proprietary Trading Firm
+propLeverage: string       # Proprietary Trading Firm
+evaluationType: string     # Proprietary Trading Firm
+dailyLossLimit: string     # Proprietary Trading Firm
+profitTarget: string       # Proprietary Trading Firm
+refundPolicy: string       # Proprietary Trading Firm
 ---
 ```
 

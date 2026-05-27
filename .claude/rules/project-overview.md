@@ -4,7 +4,7 @@ description: Project overview, tech stack, and complete site structure for ProTr
 
 ## Project Overview
 
-Financial market information website covering cryptocurrency, forex, and binary options. Built for international audience (English).
+Financial market information website covering cryptocurrency, forex, binary options, and proprietary trading firms. Built for international audience (English).
 
 ### Tech Stack
 - **Framework**: Next.js 14 (App Router) + TypeScript
@@ -28,7 +28,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 - `/api/volume` — Forex/gold trading volume via Yahoo Finance (free, no key)
 - `/admin` — Admin SPA route handler, checks session cookie before serving
 
-#### Main Pages (10)
+#### Main Pages (11)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
 2. News (`/news`) — Articles grid + sidebar filters + categories
 3. For Beginners (`/for-beginners`) — Crypto/Forex/Binary intro cards with "Read News" links + 7 steps + Glossary
@@ -36,18 +36,20 @@ Financial market information website covering cryptocurrency, forex, and binary 
 5. Forex Broker (`/forex-broker`) — **CMS-driven** brokers grid + auto comparison table
 6. Crypto Exchange (`/crypto-exchange`) — **CMS-driven** exchanges grid + auto comparison + security badges
 7. Binary Option (`/binary-option`) — **CMS-driven** platforms + **enhanced risk warning** (geo-restriction: EU/UK/AU/CA) + auto comparison + how it works
-8. Tools (`/tools`) — 6 trading tools grid
-9. About (`/about`) — Story + Mission + Values + Team + Timeline
-10. Contact (`/contact`) — Form + company info
+8. Proprietary Trading Firm (`/proprietary-trading-firm`) — **CMS-driven** prop firms grid + auto comparison + "How to Choose" guide
+9. Tools (`/tools`) — 6 trading tools grid
+10. About (`/about`) — Story + Mission + Values + Team + Timeline
+11. Contact (`/contact`) — Form + company info
 
-#### Sub Pages / Detail Pages — Dynamic Routes (15)
+#### Sub Pages / Detail Pages — Dynamic Routes (16)
 - `/forex-broker/[slug]` — 5 broker reviews: Exness, IC Markets, Pepperstone, FxPro, XM
 - `/crypto-exchange/[slug]` — 5 exchange reviews: Binance, Coinbase, Bybit, OKX, Bitget
 - `/binary-option/[slug]` — 5 platform reviews: IQ Option, Pocket Option, Quotex, Binomo, Deriv
+- `/proprietary-trading-firm/[slug]` — 1 prop firm review: Blue Guardian
 
-#### Dynamic Routes (14)
-- `/news/[slug]` — 9 article detail pages, statically generated via `generateStaticParams`
-- `/news/categories/[category]` — 4 category-filtered news pages (cryptocurrency, forex, binary-options, markets), statically generated via `generateStaticParams`
+#### Dynamic Routes (16)
+- `/news/[slug]` — 12 article detail pages, statically generated via `generateStaticParams`
+- `/news/categories/[category]` — 5 category-filtered news pages (cryptocurrency, forex, binary-options, markets, proprietary-trading-firm), statically generated via `generateStaticParams`
 
 #### Components
 - `MarketOverview.tsx` — Live price table: 5 crypto (CoinGecko), 4 forex (Frankfurter API), XAU/USD (gold-api.com proxy). Volume data for gold via `/api/volume`. 60s auto-refresh, skeleton loading, responsive mobile/desktop.
@@ -74,7 +76,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 #### Shared Data
 - `data/menu.json` — Navigation menu items (editable via admin Menu tab)
 - `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata
-- `data/brokers.ts` — Broker interface **+ comparison fields** + 15 default brokers (fallback when no CMS data)
+- `data/brokers.ts` — Broker interface **+ comparison fields** (`Forex Broker` | `Crypto Exchange` | `Binary Options` | `Proprietary Trading Firm`) + 16 default brokers (fallback when no CMS data)
 - `data/reviews.ts` — ReviewContent interface + 7 default reviews (fallback when no CMS data)
 - `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data (+ sanitize)
 - `lib/reviews.ts` — Reads review `.md` files from `src/content/reviews/` at build time (+ sanitize)
