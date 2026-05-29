@@ -676,15 +676,20 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   <div class="login-card">
     <div class="logo">ProTradeVision</div>
     <div class="subtitle">Content Management System</div>
-    <button class="login-btn" onclick="login()">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      Login with GitHub
-    </button>
-    <p class="login-note">
-      Authorize with GitHub to manage content.<br>
-      Repository: <code>arizonainlove/trantamcapital</code><br>
-      Popup blockers must be disabled for this site.
-    </p>
+    <form id="login-form" onsubmit="return false" style="text-align:left">
+      <div class="form-group">
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" required autocomplete="username" placeholder="Enter username">
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" required autocomplete="current-password" placeholder="Enter password">
+      </div>
+      <div id="login-error" style="color:var(--error);font-size:13px;margin-bottom:12px;display:none"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;height:48px;font-size:16px" onclick="handleLogin()">
+        Sign In
+      </button>
+    </form>
   </div>
 </section>
 
@@ -696,7 +701,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         <button class="tab tab-active" data-tab="articles" onclick="switchTab('articles')">News Articles</button>
         <button class="tab" data-tab="brokers" onclick="switchTab('brokers')">Brokers</button>
         <button class="tab" data-tab="reviews" onclick="switchTab('reviews')">Reviews</button>
-        <button class="tab" data-tab="menu" onclick="switchTab('menu')">Menu</button>
+        <button class="tab" data-tab="menu" id="tab-menu" onclick="switchTab('menu')">Menu</button>
       </div>
       <button class="btn btn-primary" id="btn-new-article" onclick="showEditor()">+ New Article</button>
       <button class="btn btn-primary" id="btn-new-broker" onclick="showBrokerEditor()" style="display:none">+ New Broker</button>
@@ -1055,12 +1060,10 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     brokersPath: 'trantamcapital/src/content/brokers',
     reviewsPath: 'trantamcapital/src/content/reviews',
     menuPath: 'trantamcapital/src/data/menu.json',
-    apiBase: 'https://api.github.com',
-    tokenKey: 'trantam_admin_token',
   };
 
   // ======================== STATE ========================
-  let token = localStorage.getItem(CONFIG.tokenKey) || null;
+  let token = null; // kept for backward compat, auth uses session
   let articles = [];
   let editingArticle = null; // { slug, sha, attrs, body } when editing
   let brokers = [];
@@ -1255,52 +1258,84 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   // ======================== AUTH ========================
-  window.__authComplete = async function(t) {
-    token = t;
-    localStorage.setItem(CONFIG.tokenKey, t);
-    try { await fetch('/api/auth/session', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({token: t}) }); } catch(e) {}
-    showToast('Login successful', 'success');
-    showDashboard();
-  };
+  let userInfo = null; // { username, name, role }
 
-  function login() {
-    var w = window.open('/api/auth', 'login', 'width=800,height=700');
-    if (!w || w.closed) {
-      alert('Popup was blocked. Please allow popups for this site and try again.');
+  function handleLogin() {
+    var username = document.getElementById('login-username').value.trim();
+    var password = document.getElementById('login-password').value;
+    var errorEl = document.getElementById('login-error');
+    errorEl.style.display = 'none';
+
+    if (!username || !password) {
+      errorEl.textContent = 'Please enter username and password';
+      errorEl.style.display = 'block';
+      return;
     }
+
+    var btn = document.querySelector('#login-form .btn-primary');
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password }),
+    }).then(function(res) {
+      return res.json().then(function(data) {
+        if (!res.ok) {
+          errorEl.textContent = data.error || 'Login failed';
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Sign In';
+          return;
+        }
+        userInfo = data.user;
+        showToast('Welcome, ' + userInfo.name + '!', 'success');
+        showDashboard();
+      });
+    }).catch(function() {
+      errorEl.textContent = 'Connection error. Please try again.';
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    });
   }
 
   function logout() {
     token = null;
+    userInfo = null;
     editingArticle = null;
     editingBroker = null;
-    localStorage.removeItem(CONFIG.tokenKey);
     fetch('/api/auth/session', { method: 'DELETE' }).catch(function(){});
     document.getElementById('header-actions').style.display = 'none';
     showScreen('screen-login');
   }
 
-  // ======================== GITHUB API ========================
+  // ======================== GITHUB API (SERVER PROXY) ========================
   function apiFetch(path, options) {
     options = options || {};
-    return fetch(CONFIG.apiBase + path, {
-      method: options.method || 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-      },
-      body: options.body || null,
+    // Call the server proxy instead of GitHub API directly
+    return fetch('/api/admin/proxy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: options.method || 'GET',
+        path: path,
+        body: options.body ? JSON.parse(options.body) : null,
+      }),
     }).then(function(res) {
-      if (!res.ok) {
-        return res.json().then(function(err) {
-          var msg = (err && err.message) || ('HTTP ' + res.status);
+      return res.json().then(function(data) {
+        if (!res.ok) {
+          var msg = (data && data.error) || ('HTTP ' + res.status);
+          if (res.status === 401) {
+            showToast('Session expired. Please login again.', 'error');
+            logout();
+            throw new Error(msg);
+          }
           throw new Error(msg);
-        }, function() {
-          throw new Error('HTTP ' + res.status);
-        });
-      }
-      return res.json();
+        }
+        return data;
+      });
     });
   }
 
@@ -1538,11 +1573,32 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 
   function showLogin() {
     document.getElementById('header-actions').style.display = 'none';
+    // Reset login form
+    var usernameEl = document.getElementById('login-username');
+    var passwordEl = document.getElementById('login-password');
+    var errorEl = document.getElementById('login-error');
+    if (usernameEl) usernameEl.value = '';
+    if (passwordEl) passwordEl.value = '';
+    if (errorEl) errorEl.style.display = 'none';
     showScreen('screen-login');
   }
 
   function showDashboard() {
     document.getElementById('header-actions').style.display = 'flex';
+    if (userInfo) {
+      var badge = document.getElementById('user-badge');
+      badge.textContent = userInfo.name + ' (' + userInfo.role + ')';
+      badge.style.display = 'inline';
+    }
+    // Hide Menu tab for staff
+    var menuTab = document.getElementById('tab-menu');
+    if (menuTab) {
+      menuTab.style.display = (userInfo && userInfo.role === 'staff') ? 'none' : '';
+      if (activeTab === 'menu' && userInfo && userInfo.role === 'staff') {
+        activeTab = 'articles';
+        switchTab('articles');
+      }
+    }
     editingArticle = null;
     editingBroker = null;
     showScreen('screen-dashboard');
@@ -1580,6 +1636,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   function switchTab(tab) {
+    // Staff cannot access Menu tab
+    if (tab === 'menu' && userInfo && userInfo.role === 'staff') {
+      showToast('You do not have permission to edit the menu', 'error');
+      return;
+    }
     activeTab = tab;
     searchQuery = '';
     var searchBar = document.getElementById('search-bar');
@@ -1674,7 +1735,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         '<td class="date-cell">' + formattedDate + '</td>' +
         '<td class="actions-cell">' +
         '<button class="btn-sm btn-edit" data-slug="' + a.slug + '" data-type="article">Edit</button>' +
-        '<button class="btn-sm btn-delete" data-slug="' + a.slug + '" data-type="article">Delete</button>' +
+        (userInfo && userInfo.role !== 'staff' ? '<button class="btn-sm btn-delete" data-slug="' + a.slug + '" data-type="article">Delete</button>' : '') +
         '</td>' +
         '</tr>';
     }
@@ -1769,7 +1830,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         '<td class="rating-cell" title="' + rating + '/5"><span class="text-gold" style="color:var(--gold)">' + stars + '</span> <span style="color:var(--text-secondary);font-size:13px">' + rating + '</span></td>' +
         '<td class="actions-cell">' +
         '<button class="btn-sm btn-edit" data-slug="' + b.slug + '" data-type="broker">Edit</button>' +
-        '<button class="btn-sm btn-delete" data-slug="' + b.slug + '" data-type="broker">Delete</button>' +
+        (userInfo && userInfo.role !== 'staff' ? '<button class="btn-sm btn-delete" data-slug="' + b.slug + '" data-type="broker">Delete</button>' : '') +
         '</td>' +
         '</tr>';
     }
@@ -1881,7 +1942,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         '<td style="color:var(--text-secondary);font-size:13px">' + escapeHtml(r.slug) + '</td>' +
         '<td class="actions-cell">' +
         '<button class="btn-sm btn-edit" data-slug="' + r.slug + '" data-type="review">Edit</button>' +
-        '<button class="btn-sm btn-delete" data-slug="' + r.slug + '" data-type="review">Delete</button>' +
+        (userInfo && userInfo.role !== 'staff' ? '<button class="btn-sm btn-delete" data-slug="' + r.slug + '" data-type="review">Delete</button>' : '') +
         '</td>' +
         '</tr>';
     }
@@ -2455,7 +2516,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   // Expose functions for inline onclick handlers
-  W.login = login;
+  W.handleLogin = handleLogin;
   W.logout = logout;
   W.showEditor = showEditor;
   W.showBrokerEditor = showBrokerEditor;
@@ -2752,12 +2813,21 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   }
 
   // ======================== INIT ========================
-  if (token) {
-    document.getElementById('header-actions').style.display = 'flex';
-    showDashboard();
-  } else {
-    showLogin();
-  }
+  // Check if user has an active session
+  fetch('/api/auth/session')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data && data.user) {
+        userInfo = data.user;
+        document.getElementById('header-actions').style.display = 'flex';
+        showDashboard();
+      } else {
+        showLogin();
+      }
+    })
+    .catch(function() {
+      showLogin();
+    });
 
 })();
 </script>

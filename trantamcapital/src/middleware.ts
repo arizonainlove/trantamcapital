@@ -33,6 +33,7 @@ class RateLimiter {
 }
 
 const authLimiter = new RateLimiter(60_000, 10);       // 10 requests/minute for auth
+const loginLimiter = new RateLimiter(60_000, 5);       // 5 requests/minute for login (brute force protection)
 const contactLimiter = new RateLimiter(60_000, 20);     // 20 requests/minute for contact
 const newsletterLimiter = new RateLimiter(60_000, 10);  // 10 requests/minute for newsletter (spam target)
 const generalLimiter = new RateLimiter(60_000, 60);     // 60 requests/minute for general
@@ -49,7 +50,9 @@ export function middleware(request: NextRequest) {
 
   // Rate limiting by route
   let limiter: RateLimiter | null = null;
-  if (pathname === "/api/auth") {
+  if (pathname === "/api/auth/login") {
+    limiter = loginLimiter;
+  } else if (pathname === "/api/auth") {
     limiter = authLimiter;
   } else if (pathname === "/api/contact") {
     limiter = contactLimiter;

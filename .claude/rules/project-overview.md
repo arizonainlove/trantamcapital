@@ -22,7 +22,7 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
 - `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
-- `/api/contact` — Contact form POST endpoint with validation + rate limiting
+- `/api/contact` — Contact form POST endpoint with validation + rate limiting + CSRF origin check + XSS sanitize (stripHtml) + server-side consent validation
 - `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
 - `/api/gold` — Gold price (XAU/USD) proxy via gold-api.com, no API key needed
 - `/api/volume` — Forex/gold trading volume via Yahoo Finance (free, no key)
@@ -64,7 +64,8 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `middleware.ts` — Rate limiting by IP for API routes: `/api/auth` (10/min), `/api/contact` (20/min)
 
 #### Security
-- `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content
+- `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content and contact form
+- `app/api/contact/route.ts` — CSRF origin check (whitelist: protradevision.com + localhost:3000), XSS sanitize via stripHtml, server-side consent validation, rate limited (20/min via middleware)
 - `app/admin/route.ts` — Server-side gate for `/admin`: checks HTTP-only `admin_token` cookie before serving admin SPA. Visitors without cookie see a lightweight login page.
 - `app/api/auth/session/route.ts` — Session API: `POST` validates GitHub token and sets cookie; `DELETE` clears cookie on logout. Cookie is HTTP-only, secure, 24h expiry.
 

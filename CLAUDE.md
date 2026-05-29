@@ -22,7 +22,7 @@ Financial market information website covering cryptocurrency, forex, and binary 
 | Pages | 11 main + 8 sub + 12 news/[slug] + utility = 35 routes, English |
 | CMS | Custom Admin UI via `/admin` — GitHub OAuth + REST API |
 | Live prices | CoinGecko API, 12 coins, 60s refresh |
-| Security | XSS sanitize (CMS), rate limiting (API), CSP + security headers, GDPR consent, session cookie admin auth |
+| Security | XSS sanitize (CMS + contact), CSRF origin check (contact), rate limiting (API), CSP + security headers, GDPR consent, session cookie admin auth |
 | Legal | Binary options risk warning + geo-restriction, affiliate disclosure, governing law (Belize) |
 | Backup | `npm run backup` / `npm run restore` — CMS content snapshots |
 | Content inventory | `NOI_DUNG_WEBSITE.md` — all website text for editing reference |

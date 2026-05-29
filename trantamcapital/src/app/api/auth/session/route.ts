@@ -1,9 +1,50 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+interface SessionUser {
+  username: string;
+  role: "admin" | "staff";
+  name: string;
+}
+
+function decodeSession(token: string): SessionUser | null {
+  try {
+    const decoded = JSON.parse(Buffer.from(token, "base64").toString("utf-8"));
+    if (decoded && typeof decoded.username === "string" && typeof decoded.role === "string") {
+      return decoded as SessionUser;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * GET /api/auth/session
+ * Returns the current session user info (used by admin SPA on load).
+ */
+export async function GET() {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("admin_token")?.value;
+    if (!token) {
+      return NextResponse.json({ user: null }, { status: 200 });
+    }
+
+    const user = decodeSession(token);
+    if (!user) {
+      return NextResponse.json({ user: null }, { status: 200 });
+    }
+
+    return NextResponse.json({ user });
+  } catch {
+    return NextResponse.json({ user: null }, { status: 200 });
+  }
+}
 
 /**
  * POST /api/auth/session
- * Validates a GitHub token and sets an HTTP-only session cookie.
- * Called by the admin SPA after successful OAuth.
+ * Legacy: accepts a token and sets session cookie (kept for backward compatibility).
  */
 export async function POST(request: Request) {
   try {
@@ -12,12 +53,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Token required" }, { status: 400 });
     }
 
-    // Verify the token is valid by calling GitHub API
-    const userRes = await fetch("https://api.github.com/user", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!userRes.ok) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    const user = decodeSession(token);
+    if (!user) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 400 });
     }
 
     const response = NextResponse.json({ ok: true });
@@ -25,7 +63,7 @@ export async function POST(request: Request) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24, // 24 hours
+      maxAge: 60 * 60 * 8,
       path: "/",
     });
     return response;
