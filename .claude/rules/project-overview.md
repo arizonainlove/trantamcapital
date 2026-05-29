@@ -69,13 +69,13 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content and contact form
 - `app/api/contact/route.ts` — CSRF origin check (whitelist: protradevision.com + localhost:3000), XSS sanitize via stripHtml, server-side consent validation, rate limited (20/min via middleware)
 - **Admin authentication** (replaces old GitHub OAuth):
-  - `app/api/auth/login/route.ts` — Username/password login with bcrypt (12 salt rounds), input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, sets HTTP-only session cookie (8h expiry)
+  - `app/api/auth/login/route.ts` — Username/password login with bcrypt (12 salt rounds), input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, supports Remember Me checkbox (30-day cookie) or session-only (8h cookie), sets HTTP-only session cookie with sliding expiration
   - `src/data/admin-users.json` — JSON file with 2 users: admin (role: admin, full access) and nhanvien1 (role: staff, no delete, no menu). Passwords bcrypt hashed.
   - `scripts/hash-password.js` — Utility: `node scripts/hash-password.js <password>` outputs bcrypt hash for adding users
-  - `app/api/admin/proxy/route.ts` — Server-side GitHub API proxy. Checks session cookie, validates path, enforces role-based permissions. GitHub PAT stored in env variable `GITHUB_TOKEN`, never exposed to client.
-  - `app/api/auth/session/route.ts` — Session API: GET reads cookie and returns user info; POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h expiry.
-  - `app/admin/route.ts` — Serves admin SPA to all visitors (auth is client-side via GET /api/auth/session)
-  - Admin SPA (`src/admin-ui/index.html`): username/password login form, role-based UI (Menu tab hidden for staff, delete buttons hidden)
+  - `app/api/admin/proxy/route.ts` — Server-side GitHub API proxy. Checks session cookie, validates path, enforces role-based permissions. GitHub PAT stored in env variable `GITHUB_TOKEN`, never exposed to client. Refreshes session cookie (sliding expiration) on each successful request.
+  - `app/api/auth/session/route.ts` — Session API: GET reads cookie and returns user info (also refreshes cookie with sliding expiration); POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h (or 30d with Remember Me) expiry, sliding.
+  - `app/admin/route.ts` — Serves admin SPA to all visitors (auth is client-side via GET /api/auth/session). Reads HTML file fresh on each request (no server cache).
+  - Admin SPA (`src/admin-ui/index.html`): username/password login form with Remember Me checkbox, role-based UI (Menu tab hidden for staff, delete buttons hidden). Login button resets on logout and after successful login.
 
 #### Backup & Recovery
 - `scripts/backup.js` — Timestamped snapshot of `src/content/` to `.backups/`
