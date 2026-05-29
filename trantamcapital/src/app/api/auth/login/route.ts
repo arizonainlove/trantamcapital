@@ -12,7 +12,7 @@ interface AdminUser {
 
 export async function POST(request: Request) {
   try {
-    const { username, password } = await request.json();
+    const { username, password, rememberMe } = await request.json();
 
     // Validate input
     if (!username || !password) {
@@ -59,16 +59,23 @@ export async function POST(request: Request) {
       },
     });
 
-    // Encode user info into the session cookie (lightweight, no JWT needed)
+    // Encode user info into the session cookie
     const sessionPayload = Buffer.from(
-      JSON.stringify({ username: user.username, role: user.role, name: user.name })
+      JSON.stringify({
+        username: user.username,
+        role: user.role,
+        name: user.name,
+        rememberMe: rememberMe === true,
+      })
     ).toString("base64");
+
+    const maxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8; // 30 days or 8 hours
 
     response.cookies.set("admin_token", sessionPayload, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 8, // 8 hours
+      maxAge,
       path: "/",
     });
 

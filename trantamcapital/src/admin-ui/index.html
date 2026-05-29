@@ -77,8 +77,8 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
 .screen { display: none; }
 .screen.active { display: block; }
 
-/* Login Screen */
-#screen-login {
+/* Login Screen — only flex when active */
+#screen-login.screen.active {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -686,6 +686,10 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         <input type="password" id="login-password" required autocomplete="current-password" placeholder="Enter password">
       </div>
       <div id="login-error" style="color:var(--error);font-size:13px;margin-bottom:12px;display:none"></div>
+      <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;cursor:pointer;font-size:14px;color:var(--text-secondary);user-select:none">
+        <input type="checkbox" id="login-remember" style="width:16px;height:16px;cursor:pointer">
+        Remember Me
+      </label>
       <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;height:48px;font-size:16px" onclick="handleLogin()">
         Sign In
       </button>
@@ -1290,7 +1294,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        rememberMe: document.getElementById('login-remember').checked
+      }),
     }).then(function(res) {
       return res.json().then(function(data) {
         clearTimeout(loginTimeout);

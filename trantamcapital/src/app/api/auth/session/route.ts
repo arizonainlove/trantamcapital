@@ -5,6 +5,7 @@ interface SessionUser {
   username: string;
   role: "admin" | "staff";
   name: string;
+  rememberMe?: boolean;
 }
 
 function decodeSession(token: string): SessionUser | null {
@@ -36,7 +37,17 @@ export async function GET() {
       return NextResponse.json({ user: null }, { status: 200 });
     }
 
-    return NextResponse.json({ user });
+    // Sliding expiration: refresh cookie on every session check
+    const response = NextResponse.json({ user });
+    const maxAge = user.rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8;
+    response.cookies.set("admin_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge,
+      path: "/",
+    });
+    return response;
   } catch {
     return NextResponse.json({ user: null }, { status: 200 });
   }

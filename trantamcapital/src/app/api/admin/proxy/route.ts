@@ -7,6 +7,7 @@ interface SessionUser {
   username: string;
   role: "admin" | "staff";
   name: string;
+  rememberMe?: boolean;
 }
 
 function decodeSession(token: string): SessionUser | null {
@@ -94,7 +95,17 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json(data);
+    // Sliding expiration: refresh cookie on successful request
+    const response = NextResponse.json(data);
+    const maxAge = user.rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8;
+    response.cookies.set("admin_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge,
+      path: "/",
+    });
+    return response;
   } catch (err) {
     console.error("Admin proxy error:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
