@@ -16,17 +16,19 @@ Financial market information website covering cryptocurrency, forex, binary opti
 
 ### Site Structure (52 routes)
 
-#### Utility Pages (9)
+#### Utility Pages (11)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
 - `/privacy-policy` — GDPR compliance (legal basis, data retention, intl transfers, data subject rights)
 - `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
 - `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
 - `/api/contact` — Contact form POST endpoint with validation + rate limiting + CSRF origin check + XSS sanitize (stripHtml) + server-side consent validation
-- `/api/auth/session` — POST to set HTTP-only session cookie, DELETE to clear (admin auth)
+- `/api/auth/login` — POST username/password login with bcrypt verification, input validation, session cookie creation, rate limited (5/min via middleware)
+- `/api/auth/session` — GET reads session cookie and returns user info; POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h expiry.
+- `/api/admin/proxy` — POST proxy to GitHub API using server-side PAT. Checks session cookie, enforces role-based permissions (staff cannot DELETE or modify menu.json)
 - `/api/gold` — Gold price (XAU/USD) proxy via gold-api.com, no API key needed
 - `/api/volume` — Forex/gold trading volume via Yahoo Finance (free, no key)
-- `/admin` — Admin SPA route handler, checks session cookie before serving
+- `/admin` — Admin SPA route handler, serves SPA to all visitors (auth handled client-side via GET /api/auth/session)
 
 #### Main Pages (11)
 1. Home (`/`) — Hero + Market Overview + Featured Brokers + News + Platforms + Why Us + Newsletter
@@ -61,13 +63,19 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + highlight badges (from Excel-derived ratings)
 
 #### Middleware
-- `middleware.ts` — Rate limiting by IP for API routes: `/api/auth` (10/min), `/api/contact` (20/min)
+- `middleware.ts` — Rate limiting by IP for API routes: `/api/auth/login` (5/min — brute force protection), `/api/auth` (10/min), `/api/contact` (20/min), `/api/newsletter` (10/min), `/api/admin/proxy` (120/min), general `/api/` (60/min)
 
 #### Security
 - `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content and contact form
 - `app/api/contact/route.ts` — CSRF origin check (whitelist: protradevision.com + localhost:3000), XSS sanitize via stripHtml, server-side consent validation, rate limited (20/min via middleware)
-- `app/admin/route.ts` — Server-side gate for `/admin`: checks HTTP-only `admin_token` cookie before serving admin SPA. Visitors without cookie see a lightweight login page.
-- `app/api/auth/session/route.ts` — Session API: `POST` validates GitHub token and sets cookie; `DELETE` clears cookie on logout. Cookie is HTTP-only, secure, 24h expiry.
+- **Admin authentication** (replaces old GitHub OAuth):
+  - `app/api/auth/login/route.ts` — Username/password login with bcrypt (12 salt rounds), input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, sets HTTP-only session cookie (8h expiry)
+  - `src/data/admin-users.json` — JSON file with 2 users: admin (role: admin, full access) and nhanvien1 (role: staff, no delete, no menu). Passwords bcrypt hashed.
+  - `scripts/hash-password.js` — Utility: `node scripts/hash-password.js <password>` outputs bcrypt hash for adding users
+  - `app/api/admin/proxy/route.ts` — Server-side GitHub API proxy. Checks session cookie, validates path, enforces role-based permissions. GitHub PAT stored in env variable `GITHUB_TOKEN`, never exposed to client.
+  - `app/api/auth/session/route.ts` — Session API: GET reads cookie and returns user info; POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h expiry.
+  - `app/admin/route.ts` — Serves admin SPA to all visitors (auth is client-side via GET /api/auth/session)
+  - Admin SPA (`src/admin-ui/index.html`): username/password login form, role-based UI (Menu tab hidden for staff, delete buttons hidden)
 
 #### Backup & Recovery
 - `scripts/backup.js` — Timestamped snapshot of `src/content/` to `.backups/`

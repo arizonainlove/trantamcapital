@@ -686,7 +686,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         <input type="password" id="login-password" required autocomplete="current-password" placeholder="Enter password">
       </div>
       <div id="login-error" style="color:var(--error);font-size:13px;margin-bottom:12px;display:none"></div>
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;height:48px;font-size:16px" onclick="handleLogin()">
+      <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;height:48px;font-size:16px" onclick="handleLogin()">
         Sign In
       </button>
     </form>
@@ -1260,6 +1260,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
   // ======================== AUTH ========================
   let userInfo = null; // { username, name, role }
 
+  function resetLoginBtn() {
+    var btn = document.querySelector('#login-form .btn-primary');
+    if (btn) { btn.disabled = false; btn.textContent = 'Sign In'; }
+  }
+
   function handleLogin() {
     var username = document.getElementById('login-username').value.trim();
     var password = document.getElementById('login-password').value;
@@ -1276,28 +1281,40 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     btn.disabled = true;
     btn.textContent = 'Signing in...';
 
+    var loginTimeout = setTimeout(function() {
+      resetLoginBtn();
+      errorEl.textContent = 'Request timed out. Please try again.';
+      errorEl.style.display = 'block';
+    }, 15000);
+
     fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username, password: password }),
     }).then(function(res) {
       return res.json().then(function(data) {
+        clearTimeout(loginTimeout);
         if (!res.ok) {
           errorEl.textContent = data.error || 'Login failed';
           errorEl.style.display = 'block';
-          btn.disabled = false;
-          btn.textContent = 'Sign In';
+          resetLoginBtn();
           return;
         }
         userInfo = data.user;
-        showToast('Welcome, ' + userInfo.name + '!', 'success');
-        showDashboard();
+        document.getElementById('header-actions').style.display = 'flex';
+        try {
+          showDashboard();
+        } catch(e) {
+          errorEl.textContent = 'Dashboard error: ' + e.message;
+          errorEl.style.display = 'block';
+          resetLoginBtn();
+        }
       });
     }).catch(function() {
+      clearTimeout(loginTimeout);
+      resetLoginBtn();
       errorEl.textContent = 'Connection error. Please try again.';
       errorEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Sign In';
     });
   }
 
@@ -2630,11 +2647,11 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     var childBadge = hasChildren ? '<span class="menu-item-children">' + item.children.length + ' items</span>' : '';
     var dataIndex = parentIndex !== null ? 'data-index="' + index + '" data-parent="' + parentIndex + '"' : 'data-index="' + index + '"';
     return '<li draggable="true" ' + dataIndex + '>' +
-      '<span class="drag-handle">â ¿</span>' +
+      '<span class="drag-handle">&#9776;</span>' +
       '<span class="menu-item-label">' + escapeHtml(item.label) + '</span>' +
       (href ? '<span class="menu-item-href">' + escapeHtml(href) + '</span>' : '') +
       childBadge +
-      '<button class="menu-item-edit-btn" onclick="editMenuItem(' + index + ',' + (parentIndex !== null ? parentIndex : 'null') + ')" title="Edit">âœŽ</button>' +
+      '<button class="menu-item-edit-btn" onclick="editMenuItem(' + index + ',' + (parentIndex !== null ? parentIndex : 'null') + ')" title="Edit">&#9998;</button>' +
       '</li>' + childrenHtml;
   }
 

@@ -36,6 +36,7 @@ const authLimiter = new RateLimiter(60_000, 10);       // 10 requests/minute for
 const loginLimiter = new RateLimiter(60_000, 5);       // 5 requests/minute for login (brute force protection)
 const contactLimiter = new RateLimiter(60_000, 20);     // 20 requests/minute for contact
 const newsletterLimiter = new RateLimiter(60_000, 10);  // 10 requests/minute for newsletter (spam target)
+const adminProxyLimiter = new RateLimiter(60_000, 120); // 120 requests/minute for admin proxy
 const generalLimiter = new RateLimiter(60_000, 60);     // 60 requests/minute for general
 
 function getClientIp(request: NextRequest): string {
@@ -58,6 +59,8 @@ export function middleware(request: NextRequest) {
     limiter = contactLimiter;
   } else if (pathname === "/api/newsletter") {
     limiter = newsletterLimiter;
+  } else if (pathname === "/api/admin/proxy") {
+    limiter = adminProxyLimiter;
   } else if (pathname.startsWith("/api/")) {
     limiter = generalLimiter;
   }
