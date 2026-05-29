@@ -1310,6 +1310,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
         }
         userInfo = data.user;
         document.getElementById('header-actions').style.display = 'flex';
+        resetLoginBtn();
         try {
           showDashboard();
         } catch(e) {
@@ -1605,6 +1606,7 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
     if (usernameEl) usernameEl.value = '';
     if (passwordEl) passwordEl.value = '';
     if (errorEl) errorEl.style.display = 'none';
+    resetLoginBtn();
     showScreen('screen-login');
   }
 
