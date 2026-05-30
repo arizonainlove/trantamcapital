@@ -1,24 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-
-interface SessionUser {
-  username: string;
-  role: "admin" | "staff";
-  name: string;
-  rememberMe?: boolean;
-}
-
-function decodeSession(token: string): SessionUser | null {
-  try {
-    const decoded = JSON.parse(Buffer.from(token, "base64").toString("utf-8"));
-    if (decoded && typeof decoded.username === "string" && typeof decoded.role === "string") {
-      return decoded as SessionUser;
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
+import { verifySession, signSession } from "@/lib/session";
 
 /**
  * GET /api/auth/session
@@ -32,15 +14,16 @@ export async function GET() {
       return NextResponse.json({ user: null }, { status: 200 });
     }
 
-    const user = decodeSession(token);
+    const user = verifySession(token);
     if (!user) {
       return NextResponse.json({ user: null }, { status: 200 });
     }
 
-    // Sliding expiration: refresh cookie on every session check
+    // Sliding expiration: refresh signed cookie on every session check
+    const freshToken = signSession(user);
     const response = NextResponse.json({ user });
     const maxAge = user.rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8;
-    response.cookies.set("admin_token", token, {
+    response.cookies.set("admin_token", freshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -64,13 +47,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Token required" }, { status: 400 });
     }
 
-    const user = decodeSession(token);
+    const user = verifySession(token);
     if (!user) {
       return NextResponse.json({ error: "Invalid session" }, { status: 400 });
     }
 
+    const freshToken = signSession(user);
     const response = NextResponse.json({ ok: true });
-    response.cookies.set("admin_token", token, {
+    response.cookies.set("admin_token", freshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

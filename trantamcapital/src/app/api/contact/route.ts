@@ -23,7 +23,15 @@ function isAllowedOrigin(request: Request): boolean {
   const origin = request.headers.get("origin");
   const referer = request.headers.get("referer");
   const url = origin || referer || "";
-  return ALLOWED_ORIGINS.some((allowed) => url.startsWith(allowed));
+  try {
+    const parsed = new URL(url);
+    return ALLOWED_ORIGINS.some((allowed) => {
+      const allowedParsed = new URL(allowed);
+      return parsed.origin === allowedParsed.origin;
+    });
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: Request) {

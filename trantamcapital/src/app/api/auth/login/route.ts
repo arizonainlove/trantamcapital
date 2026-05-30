@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { stripHtml } from "@/lib/sanitize";
+import { signSession } from "@/lib/session";
 import users from "@/data/admin-users.json";
 
 interface AdminUser {
@@ -59,15 +60,13 @@ export async function POST(request: Request) {
       },
     });
 
-    // Encode user info into the session cookie
-    const sessionPayload = Buffer.from(
-      JSON.stringify({
-        username: user.username,
-        role: user.role,
-        name: user.name,
-        rememberMe: rememberMe === true,
-      })
-    ).toString("base64");
+    // Encode user info into a signed session cookie
+    const sessionPayload = signSession({
+      username: user.username,
+      role: user.role,
+      name: user.name,
+      rememberMe: rememberMe === true,
+    });
 
     const maxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8; // 30 days or 8 hours
 

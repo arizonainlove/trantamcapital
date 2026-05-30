@@ -1,26 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { verifySession, signSession } from "@/lib/session";
 
 const GITHUB_API = "https://api.github.com";
-
-interface SessionUser {
-  username: string;
-  role: "admin" | "staff";
-  name: string;
-  rememberMe?: boolean;
-}
-
-function decodeSession(token: string): SessionUser | null {
-  try {
-    const decoded = JSON.parse(Buffer.from(token, "base64").toString("utf-8"));
-    if (decoded && typeof decoded.username === "string" && typeof decoded.role === "string") {
-      return decoded as SessionUser;
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 export async function POST(request: Request) {
   try {
@@ -31,7 +13,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = decodeSession(token);
+    const user = verifySession(token);
     if (!user) {
       return NextResponse.json({ error: "Invalid session" }, { status: 401 });
     }
@@ -95,10 +77,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Sliding expiration: refresh cookie on successful request
+    // Sliding expiration: refresh signed cookie on successful request
+    const freshToken = signSession(user);
     const response = NextResponse.json(data);
     const maxAge = user.rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 8;
-    response.cookies.set("admin_token", token, {
+    response.cookies.set("admin_token", freshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

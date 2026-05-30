@@ -3,6 +3,27 @@ import nodemailer from "nodemailer";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 
+const ALLOWED_ORIGINS = [
+  "https://www.protradevision.com",
+  "https://protradevision.com",
+  "http://localhost:3000",
+];
+
+function isAllowedOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  const referer = request.headers.get("referer");
+  const url = origin || referer || "";
+  try {
+    const parsed = new URL(url);
+    return ALLOWED_ORIGINS.some((allowed) => {
+      const allowedParsed = new URL(allowed);
+      return parsed.origin === allowedParsed.origin;
+    });
+  } catch {
+    return false;
+  }
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.zoho.com",
   port: Number(process.env.SMTP_PORT) || 587,
@@ -16,6 +37,11 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   try {
+    // CSRF check: reject requests from unknown origins
+    if (!isAllowedOrigin(request)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const body = await request.json();
     const { email } = body;
 
