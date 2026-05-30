@@ -76,9 +76,19 @@ export default function PrivacyPolicy() {
             </p>
             <p>We use the following types of cookies:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Essential cookies:</strong> Required for the website to function properly</li>
-              <li><strong>Analytics cookies:</strong> Help us understand how visitors interact with our website</li>
+              <li><strong>Essential cookies:</strong> Required for the website to function properly. These include session cookies for admin authentication (admin_token). These cannot be disabled.</li>
+              <li><strong>Analytics cookies:</strong> Help us understand how visitors interact with our website (page views, traffic sources, user behavior). We use Vercel Analytics, which is a privacy-friendly analytics service that does not track users across websites.</li>
             </ul>
+            <p className="mt-2">
+              You can manage or disable non-essential cookies through our cookie consent banner
+              when you first visit our website, or by adjusting your browser settings. Note that
+              disabling essential cookies may affect the functionality of certain parts of the
+              website.
+            </p>
+            <p className="mt-2">
+              For more information about how to manage cookies in your browser, visit
+              aboutcookies.org or your browser&rsquo;s help documentation.
+            </p>
 
             <h2 className="text-xl font-bold text-text-primary">6. How We Use Your Information</h2>
             <p>We use the collected information for:</p>
@@ -123,16 +133,32 @@ export default function PrivacyPolicy() {
               <li><strong>Right to data portability:</strong> Receive your data in a machine-readable format</li>
               <li><strong>Right to object:</strong> Object to processing based on legitimate interests</li>
               <li><strong>Right to withdraw consent:</strong> Withdraw consent at any time</li>
+              <li><strong>Right to lodge a complaint:</strong> File a complaint with your local data protection supervisory authority (e.g., the ICO in the United Kingdom) if you believe we have violated your data protection rights</li>
             </ul>
             <p className="mt-2">
               To exercise any of these rights, contact us at{" "}
               <a href="mailto:contact@www.protradevision.com" className="text-link hover:underline">
                 contact@www.protradevision.com
               </a>
-              . We will respond within 30 days as required by GDPR.
+              . We will respond within one month of receiving your request. This period may be
+              extended by up to two months for complex requests or if we receive a high volume
+              of requests, and we will inform you of any such extension within the initial month.
             </p>
 
-            <h2 className="text-xl font-bold text-text-primary">11. Contact</h2>
+            <h2 className="text-xl font-bold text-text-primary">11. Data Breach Notification</h2>
+            <p>
+              In the event of a personal data breach that poses a risk to your rights and freedoms,
+              we will notify the relevant supervisory authority within 72 hours of becoming aware
+              of the breach, as required by Article 33 of the GDPR.
+            </p>
+            <p className="mt-2">
+              If the breach is likely to result in a high risk to your rights and freedoms, we will
+              also notify you without undue delay in accordance with Article 34 of the GDPR. Such
+              notification will include the nature of the breach, the categories of data affected,
+              recommended mitigation measures, and our contact point for further information.
+            </p>
+
+            <h2 className="text-xl font-bold text-text-primary">12. Contact</h2>
             <p>
               If you have questions about this Privacy Policy or wish to exercise your data protection
               rights, please contact us at{" "}

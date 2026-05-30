@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PriceTicker from "@/components/PriceTicker";
 import BackToTop from "@/components/BackToTop";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -65,6 +66,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
         <BackToTop />
+        <CookieConsent />
       </body>
     </html>
   );

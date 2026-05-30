@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
+import { HiMail } from "react-icons/hi";
 
 export default function Footer() {
   return (
@@ -76,14 +76,6 @@ export default function Footer() {
               <li className="flex items-start gap-2 text-sm text-text-light">
                 <HiMail className="mt-0.5 shrink-0 text-gold" />
                 <span>contact@www.protradevision.com</span>
-              </li>
-              <li className="flex items-start gap-2 text-sm text-text-light">
-                <HiPhone className="mt-0.5 shrink-0 text-gold" />
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-start gap-2 text-sm text-text-light">
-                <HiLocationMarker className="mt-0.5 shrink-0 text-gold" />
-                <span>London, United Kingdom</span>
               </li>
             </ul>
           </div>

@@ -133,9 +133,12 @@ export default function TermsOfService() {
 
             <h2 className="text-xl font-bold text-text-primary">11. Changes to Terms</h2>
             <p>
-              We reserve the right to modify these terms at any time. Changes will be effective
-              immediately upon posting. Your continued use of the website after changes constitutes
-              acceptance of the new terms.
+              We reserve the right to modify these terms at any time. We will notify
+              users of material changes by posting a notice on our website at least
+              30 days before the changes take effect. Your continued use of the
+              website after the effective date constitutes acceptance of the new
+              terms. If you do not agree with the changes, you must stop using the
+              website before the effective date.
             </p>
 
             <h2 className="text-xl font-bold text-text-primary">12. Contact</h2>
