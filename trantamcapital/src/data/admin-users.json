@@ -1,13 +1,13 @@
 [
   {
     "username": "admin",
-    "passwordHash": "$2b$12$17W2TcOkUYCXVARsCvX0wuaYPkUFKLXZXGTfpfjg4WEr8QXc0bTBG",
+    "passwordHash": "$2b$12$UKIXulzVgz0emzPTL98u2O4A73Km4FMjQNUjWXAkrqV7s6Fv1ANk2",
     "role": "admin",
     "name": "Admin"
   },
   {
     "username": "nhanvien1",
-    "passwordHash": "$2b$12$NqknaY41X4WAz8Az2XijZ.4jlk/DySYHu0VoR/mWYYUv2gjXs2DOO",
+    "passwordHash": "$2b$12$/O1h4vCZMPi5L/9gkCzfaeHqC/9xjakE8L/Q2NvOUkuZ.V/32IoO6",
     "role": "staff",
     "name": "Nhân viên 1"
   }
