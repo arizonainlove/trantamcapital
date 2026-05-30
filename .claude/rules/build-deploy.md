@@ -96,7 +96,11 @@ const nextConfig = {
 1. Push code to GitHub repository
 2. Import repository in Vercel dashboard
 3. Vercel auto-detects Next.js configuration
-4. Environment variables (required): SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO for Zoho SMTP (contact + newsletter). Set via `vercel env add` or Vercel Dashboard.
+4. Environment variables:
+   - **Required**: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO for Zoho SMTP (contact + newsletter)
+   - **Required**: SESSION_SECRET for HMAC-SHA256 signed admin session cookies — generate via `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+   - **Required**: GITHUB_TOKEN for admin content management via GitHub API (Fine-grained PAT, repo contents: read/write)
+   - Set via `vercel env add <name> production` or Vercel Dashboard.
 5. Auto-deploys on every push to main branch
 
 ### SEO Requirements
@@ -106,8 +110,9 @@ const nextConfig = {
 - sitemap.ts generates `/sitemap.xml` automatically
 
 ### Security
-- **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth` (10/min), `/api/contact` (20/min), `/api/newsletter` (10/min)
-- **Admin auth** (`src/app/admin/route.ts`): Server-side gate — checks HTTP-only `admin_token` cookie trước khi serve admin SPA. Cookie được set bởi `POST /api/auth/session` sau OAuth, xóa bởi `DELETE /api/auth/session` khi logout.
+- **Middleware** (`src/middleware.ts`): Rate limiting cho API routes — `/api/auth/login` (5/min), `/api/auth` (10/min), `/api/contact` (20/min), `/api/newsletter` (10/min), `/api/admin/proxy` (120/min), general `/api/` (60/min)
+- **Admin auth**: HMAC-SHA256 signed session (`src/lib/session.ts`) — `signSession()` tạo `base64(payload).hmac` token, `verifySession()` verify với `timingSafeEqual`. Cần `SESSION_SECRET` env var (production) hoặc fallback (dev).
+- **Admin SPA gate** (`src/app/admin/route.ts`): Server-side gate — checks HTTP-only `admin_token` cookie trước khi serve admin SPA. Cookie được set bởi `POST /api/auth/login`, xóa bởi `DELETE /api/auth/session` khi logout.
 - **XSS**: `src/lib/sanitize.ts` — stripHtml() applied to all CMS content at build time (content.ts, reviews.ts)
 - **Backup**: `scripts/backup.js` và `scripts/restore.js` — snapshot/restore CMS content (.backups/ bị gitignore)
 - **Recovery guide**: `scripts/RECOVERY.md`

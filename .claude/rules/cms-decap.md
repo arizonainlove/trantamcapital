@@ -7,9 +7,10 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 ### Overview
 - Type: Self-contained SPA, no CMS dependency
 - Access URL: `/admin` on the live site
-- Authentication: GitHub OAuth via `/api/auth` route
-- Server-side protection: Route handler at `app/admin/route.ts` checks HTTP-only session cookie (`admin_token`). Visitors without cookie see a lightweight login page, not the admin UI.
-- Session cookie: Set via `POST /api/auth/session` after OAuth success, cleared on logout (`DELETE /api/auth/session`). Cookie is HTTP-only, secure, 24h expiry.
+- Authentication: Username/password login via `POST /api/auth/login` with bcrypt password hashing + HMAC-SHA256 signed session cookie
+- Server-side protection: Route handler at `app/admin/route.ts` — serves admin SPA to all visitors (auth handled client-side via `GET /api/auth/session`)
+- Session cookie: HMAC-SHA256 signed (`base64(payload).hmac`), set via `POST /api/auth/login`, cleared on logout (`DELETE /api/auth/session`). Cookie is HTTP-only, secure, sameSite=lax. Supports Remember Me (30 days) or session-only (8 hours). Sliding expiration (re-signed on every request).
+- Requires `SESSION_SECRET` env var in production (generated via `crypto.randomBytes(32)`), fallback in development
 - No database required — all content stored as Markdown files in the repo
 
 ### Content Storage

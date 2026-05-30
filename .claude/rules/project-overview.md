@@ -7,7 +7,7 @@ description: Project overview, tech stack, and complete site structure for ProTr
 Financial market information website covering cryptocurrency, forex, binary options, and proprietary trading firms. Built for international audience (English).
 
 ### Tech Stack
-- **Framework**: Next.js 14 (App Router) + TypeScript
+- **Framework**: Next.js 16 (App Router) + TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: react-icons (Hi prefix = Hero Icons)
 - **Live Prices**: CoinGecko API (crypto), Frankfurter API (forex), gold-api.com (gold) — all free, no API key
@@ -22,9 +22,9 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `/terms-of-service` — Binary options warning, affiliate disclosure, governing law (Belize), class action waiver, risk disclaimer
 - `/robots.txt` — Robots exclusion standard, allow all, reference sitemap
 - `/sitemap.xml` — Auto-generated sitemap with 19+ URLs
-- `/api/contact` — Contact form POST endpoint with validation + rate limiting + CSRF origin check + XSS sanitize (stripHtml) + server-side consent validation
-- `/api/auth/login` — POST username/password login with bcrypt verification, input validation, session cookie creation, rate limited (5/min via middleware)
-- `/api/auth/session` — GET reads session cookie and returns user info; POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h expiry.
+- `/api/contact` — Contact form POST endpoint with validation + rate limiting + CSRF origin check (exact origin match via URL parsing) + XSS sanitize (stripHtml) + server-side consent validation
+- `/api/auth/login` — POST username/password login with bcrypt (12 salt rounds) verification, input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, HMAC-SHA256 signed session cookie creation, supports Remember Me (30-day cookie) or session-only (8h cookie), rate limited (5/min via middleware). Requires SESSION_SECRET env var in production.
+- `/api/auth/session` — GET reads signed session cookie and returns user info (sliding expiration — re-signs cookie on each request); POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, HMAC-SHA256 signed via lib/session.ts.
 - `/api/admin/proxy` — POST proxy to GitHub API using server-side PAT. Checks session cookie, enforces role-based permissions (staff cannot DELETE or modify menu.json)
 - `/api/gold` — Gold price (XAU/USD) proxy via gold-api.com, no API key needed
 - `/api/volume` — Forex/gold trading volume via Yahoo Finance (free, no key)
@@ -67,13 +67,15 @@ Financial market information website covering cryptocurrency, forex, binary opti
 
 #### Security
 - `lib/sanitize.ts` — stripHtml/sanitize functions for XSS defense-in-depth on CMS content and contact form
-- `app/api/contact/route.ts` — CSRF origin check (whitelist: protradevision.com + localhost:3000), XSS sanitize via stripHtml, server-side consent validation, rate limited (20/min via middleware)
-- **Admin authentication** (replaces old GitHub OAuth):
-  - `app/api/auth/login/route.ts` — Username/password login with bcrypt (12 salt rounds), input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, supports Remember Me checkbox (30-day cookie) or session-only (8h cookie), sets HTTP-only session cookie with sliding expiration
+- `lib/session.ts` — HMAC-SHA256 session signing and verification (`signSession`/`verifySession`). Uses `createHmac` with `timingSafeEqual` comparison. Requires `SESSION_SECRET` env var (production) or fallback (development).
+- `app/api/contact/route.ts` — CSRF origin check (whitelist: protradevision.com + localhost:3000, exact origin match via `new URL().origin`), XSS sanitize via stripHtml, server-side consent validation, rate limited (20/min via middleware)
+- `app/api/newsletter/route.ts` — CSRF origin check (same exact-match pattern as contact route)
+- **Admin authentication** (HMAC-SHA256 signed sessions, replaces old base64 encoding):
+  - `app/api/auth/login/route.ts` — Username/password login with bcrypt (12 salt rounds), input validation (2-50 chars username, 6-128 chars password), XSS sanitization via stripHtml, supports Remember Me checkbox (30-day cookie) or session-only (8h cookie), sets HMAC-SHA256 signed HTTP-only session cookie with sliding expiration
   - `src/data/admin-users.json` — JSON file with 2 users: admin (role: admin, full access) and nhanvien1 (role: staff, no delete, no menu). Passwords bcrypt hashed.
   - `scripts/hash-password.js` — Utility: `node scripts/hash-password.js <password>` outputs bcrypt hash for adding users
-  - `app/api/admin/proxy/route.ts` — Server-side GitHub API proxy. Checks session cookie, validates path, enforces role-based permissions. GitHub PAT stored in env variable `GITHUB_TOKEN`, never exposed to client. Refreshes session cookie (sliding expiration) on each successful request.
-  - `app/api/auth/session/route.ts` — Session API: GET reads cookie and returns user info (also refreshes cookie with sliding expiration); POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, 8h (or 30d with Remember Me) expiry, sliding.
+  - `app/api/admin/proxy/route.ts` — Server-side GitHub API proxy. Verifies HMAC-signed session cookie, validates path, enforces role-based permissions (staff cannot DELETE or modify menu.json). GitHub PAT stored in env variable `GITHUB_TOKEN`, never exposed to client. Re-signs session cookie (sliding expiration) on each successful request.
+  - `app/api/auth/session/route.ts` — Session API: GET reads signed cookie and returns user info (re-signs cookie on each request for sliding expiration); POST legacy backward compatibility; DELETE clears cookie on logout. Cookie is HTTP-only, secure, HMAC-SHA256 signed, 8h (or 30d with Remember Me) expiry, sliding.
   - `app/admin/route.ts` — Serves admin SPA to all visitors (auth is client-side via GET /api/auth/session). Reads HTML file fresh on each request (no server cache).
   - Admin SPA (`src/admin-ui/index.html`): username/password login form with Remember Me checkbox, role-based UI (Menu tab hidden for staff, delete buttons hidden). Login button resets on logout and after successful login.
 
