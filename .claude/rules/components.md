@@ -19,6 +19,8 @@ description: Global component library, file structure, and live price widget spe
 | `BackToTop.tsx` | Floating back-to-top button, visible after 400px scroll |
 | `Breadcrumb.tsx` | Breadcrumb navigation with schema.org aria-label |
 | `ReviewPage.tsx` | Shared review page for broker/exchange/prop firm reviews (pros/cons, key features, rating sidebar). Body content uses `react-markdown` with styled headings (H2: bottom border, H3: orange left accent) and styled tables (borders, alternating rows). |
+| `GuidesSection.tsx` | Paginated platform guides grid (2 cols desktop, 1 col mobile) with broker sidebar. Client component with `useState(1)` for page, 6 per page, top+bottom pagination. Sticky sidebar with compact BrokerCards. |
+| `Pagination.tsx` | Reusable pagination with ellipsis for large page counts (>7). Prev/Next buttons, aria-current, returns null when totalPages ≤ 1. |
 
 ### Live Price Widget — PriceTicker
 
@@ -99,11 +101,14 @@ trantamcapital/
 │       ├── BackToTop.tsx
 │       ├── Breadcrumb.tsx
 │       ├── MarketOverview.tsx           # Live prices: crypto + forex + gold
-│       └── ReviewPage.tsx             # Shared review page component
+│       ├── ReviewPage.tsx             # Shared review page component
+│       ├── GuidesSection.tsx          # Paginated guides grid + broker sidebar
+│       └── Pagination.tsx             # Reusable pagination with ellipsis
 ├── content/                           # CMS content (.md files)
 │   ├── news/
 │   ├── brokers/
-│   └── reviews/
+│   ├── reviews/
+│   └── guides/                        # Platform guides (crypto, forex, binary, prop)
 ├── src/
 │   ├── app/
 │   │   ├── admin/route.ts             # Server-side gate for admin SPA

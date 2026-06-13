@@ -14,7 +14,7 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - **Fonts**: Open Sans (primary), Roboto (secondary) — via Google Fonts
 - **Deploy**: Vercel (free tier)
 
-### Site Structure (52 routes)
+### Site Structure (59 routes)
 
 #### Utility Pages (11)
 - `/not-found` (`not-found.tsx`) — Custom 404 page with "Back to Home" button
@@ -36,7 +36,7 @@ Financial market information website covering cryptocurrency, forex, binary opti
 3. For Beginners (`/for-beginners`) — Crypto/Forex/Binary intro cards with "Read News" links + 7 steps + Glossary
 4. Investment Analysis (`/investment-analysis`) — Market overview + reports + technical tools
 5. Forex Broker (`/forex-broker`) — **CMS-driven** brokers grid + auto comparison table
-6. Crypto Exchange (`/crypto-exchange`) — **CMS-driven** exchanges grid + auto comparison + security badges
+6. Crypto Exchange (`/crypto-exchange`) — **CMS-driven** exchanges grid + auto comparison + security badges + **guides section** (paginated articles w/ broker sidebar)
 7. Binary Option (`/binary-option`) — **CMS-driven** platforms + **enhanced risk warning** (geo-restriction: EU/UK/AU/CA) + auto comparison + how it works
 8. Proprietary Trading Firm (`/proprietary-trading-firm`) — **CMS-driven** prop firms grid + auto comparison + "How to Choose" guide
 9. Tools (`/tools`) — 6 trading tools grid
@@ -49,8 +49,8 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `/binary-option/[slug]` — 5 platform reviews: IQ Option, Pocket Option, Quotex, Binomo, Deriv
 - `/proprietary-trading-firm/[slug]` — 1 prop firm review: Blue Guardian
 
-#### Dynamic Routes (16)
-- `/news/[slug]` — 12 article detail pages, statically generated via `generateStaticParams`
+#### Dynamic Routes (23)
+- `/news/[slug]` — 19 article detail pages (12 news + 7 platform guides), statically generated via `generateStaticParams`
 - `/news/categories/[category]` — 5 category-filtered news pages (cryptocurrency, forex, binary-options, markets, proprietary-trading-firm), statically generated via `generateStaticParams`
 
 #### Components
@@ -59,8 +59,10 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `Breadcrumb.tsx` — Navigation breadcrumb with aria-label
 - `NewsletterForm.tsx` — Email subscription form with validation + GDPR consent checkbox
 - `ReviewPage.tsx` — Shared review page component for all broker review routes
-- Article/review body content renders **Markdown** via `react-markdown` + `remark-gfm` — supports: styled headings (H2 bottom border, H3 orange left bar), bold, tables, images, links, bullet points. Content is sanitized for XSS at build time.
-- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + highlight badges (from Excel-derived ratings)
+- Article/review/guide body content renders **Markdown** via `react-markdown` + `remark-gfm` — supports: styled headings (H2 bottom border, H3 orange left bar), bold, tables, images, links, bullet points. Content is sanitized for XSS at build time.
+- `BrokerCard.tsx` — Broker/exchange card with logo + rating + features + highlight badges (from Excel-derived ratings). Supports `variant="compact"` for sidebar layout.
+- `GuidesSection.tsx` — Paginated platform guides grid (2-col desktop, 1-col mobile, 6 per page) with sticky broker sidebar (compact cards). Client component, used by platform listing pages (e.g. `/crypto-exchange`).
+- `Pagination.tsx` — Reusable pagination with ellipsis, Prev/Next, aria-current.
 
 #### Middleware
 - `middleware.ts` — Rate limiting by IP for API routes: `/api/auth/login` (5/min — brute force protection), `/api/auth` (10/min), `/api/contact` (20/min), `/api/newsletter` (10/min), `/api/admin/proxy` (120/min), general `/api/` (60/min)
@@ -89,5 +91,6 @@ Financial market information website covering cryptocurrency, forex, binary opti
 - `data/news.ts` — NewsArticle interface + 9 articles with slug, content, metadata
 - `data/brokers.ts` — Broker interface **+ comparison fields** (`Forex Broker` | `Crypto Exchange` | `Binary Options` | `Proprietary Trading Firm`) + 16 default brokers (fallback when no CMS data)
 - `data/reviews.ts` — ReviewContent interface + 7 default reviews (fallback when no CMS data)
-- `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data (+ sanitize)
+- `lib/content.ts` — Reads `.md` files from `src/content/` at build time, merges CMS + static data (+ sanitize). Includes `GuideArticle` interface, `getAllGuides()`, `getGuidesByPlatform()`, and `getArticleBySlug()` with guide fallback.
 - `lib/reviews.ts` — Reads review `.md` files from `src/content/reviews/` at build time (+ sanitize)
+- `src/content/guides/` — Platform guide `.md` files with frontmatter (title, platform, date, author, image, excerpt), editable via admin Platform Guides tab

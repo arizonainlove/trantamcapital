@@ -17,13 +17,13 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 - News articles: `src/content/news/` (Markdown with frontmatter)
 - Brokers: `src/content/brokers/` (Markdown with frontmatter + comparison fields)
 - Reviews: `src/content/reviews/` (Markdown with frontmatter, 16 files — one per broker)
+- Platform guides: `src/content/guides/` (Markdown with frontmatter — title, platform, date, author, image, excerpt)
 - Navigation menu: `trantamcapital/src/data/menu.json` (JSON, editable via admin)
 - Image uploads: `trantamcapital/public/images/uploads/` (via GitHub API)
 - Workflow: Write in admin → auto-commits file to GitHub → Vercel rebuilds
 
 ### Key Files
-- `public/admin/HƯỚNG_DẪN_SỬ_DỤNG_CMS.md` — User guide (Vietnamese)
-- `src/admin-ui/index.html` — Single-file SPA with login, dashboard, editor (4 tabs: News, Brokers, Reviews, Menu). Served by route handler at `app/admin/route.ts` (not from `public/`)
+- `src/admin-ui/index.html` — Single-file SPA with login, dashboard, editor (5 tabs: News, Brokers, Reviews, Menu, **Platform Guides**). Served by route handler at `app/admin/route.ts` (not from `public/`)
 - `src/app/admin/route.ts` — Route handler that checks session cookie before serving admin SPA
 - `src/app/api/auth/session/route.ts` — API to set/clear HTTP-only session cookie
 - `src/lib/content.ts` — Reads `.md` files at build time for news + brokers
@@ -33,13 +33,14 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Feature | Description |
 |---------|-------------|
 | Login | GitHub OAuth via popup → saves token to localStorage → server sets HTTP-only session cookie |
-| Dashboard | Tab-based: **News Articles**, **Brokers**, **Reviews**, and **Menu** tabs |
-| Statistics | Stats bar showing counts for articles, brokers, reviews |
+| Dashboard | Tab-based: **News Articles**, **Brokers**, **Reviews**, **Menu**, and **Platform Guides** tabs |
+| Statistics | Stats bar showing counts for articles, brokers, reviews, guides |
 | Search | Filter articles and brokers by name/title |
 | Article Editor | Form-based: title, date, category, author, image upload, excerpt, body. **Body toolbar**: Insert Image (upload → auto-embed), Bold, Italic, Link |
 | Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+34 comparison & rating fields** (includes forex, crypto, binary, and prop firm fields) |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
+| Guide Editor | Platform dropdown (crypto-exchange, forex-broker, binary-option, proprietry-trading-firm), title, date, author, image upload, excerpt, body. Same markdown toolbar (Bold/Italic/Link/Image). |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
 | Create | Generates slug from title/name, creates `.md` with frontmatter |
 | Edit | Reads existing file, updates content via GitHub API |
@@ -119,6 +120,25 @@ refundPolicy: string       # Proprietary Trading Firm
 ---
 ```
 
+### Guide Frontmatter (`src/content/guides/*.md`)
+```
+---
+title: string
+platform: enum [crypto-exchange, forex-broker, binary-option, proprietry-trading-firm]
+date: date
+author: string
+image: string (raw GitHub URL to image, optional)
+excerpt: text
+---
+Body content (Markdown, rendered via /news/[slug] route through getArticleBySlug fallback)
+```
+
+Platform is mapped to NewsArticle.category for rendering on /news/[slug]:
+- `crypto-exchange` → Cryptocurrency
+- `forex-broker` → Forex
+- `binary-option` → Binary Options
+- `proprietry-trading-firm` → Proprietary Trading Firm
+
 ### Review Frontmatter (`src/content/reviews/*.md`)
 ```
 ---
@@ -140,3 +160,5 @@ Overview content (Markdown)
 - Uses Next.js static generation (SSG) for content pages
 - Broker data: `getAllBrokers()` in `lib/content.ts` + `defaultBrokerData` fallback
 - Review data: `getAllReviews()` in `lib/reviews.ts` + `defaultReviews` fallback (16 entries)
+- Guide data: `getAllGuides()` / `getGuidesByPlatform()` in `lib/content.ts` — reads from `src/content/guides/`, sorted by date desc. Guide articles render via `/news/[slug]` through `getArticleBySlug()` fallback (maps guide platform to NewsArticle category). `generateStaticParams` in `/news/[slug]/page.tsx` includes guide slugs.
+- Guide rendering on platform pages: `GuidesSection` component (client component, paginated) with broker sidebar using `BrokerCard variant="compact"`. Currently used by `/crypto-exchange` page.

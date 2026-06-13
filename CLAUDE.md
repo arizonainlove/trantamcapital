@@ -19,8 +19,8 @@ Financial market information website covering cryptocurrency, forex, and binary 
 |------|---------|
 | Stack | Next.js 16 + TypeScript + Tailwind CSS |
 | Design | Premium Financial — cam `#E84910`, navy `#0F1A2E`, gold `#C8A84E`, body text 16px |
-| Pages | 11 main + 8 sub + 12 news/[slug] + utility = 35 routes, English |
-| CMS | Custom Admin UI via `/admin` — Username/password login + role-based access (admin/staff) + GitHub PAT proxy for content ops |
+| Pages | 11 main + 8 sub + 19 news/[slug] (12 news + 7 guides) + utility = 42 routes, English |
+| CMS | Custom Admin UI via `/admin` — Username/password login + role-based access (admin/staff) + GitHub PAT proxy for content ops. 4 tabs: News, Brokers, Reviews, Menu + **Platform Guides** (extensible for crypto/forex/binary/prop) |
 | Live prices | CoinGecko API, 12 coins, 60s refresh |
 | Security | XSS sanitize (CMS + contact), CSRF origin check (contact + newsletter), rate limiting (API: login 5/min, general 60/min, proxy 120/min), CSP + security headers, GDPR consent, HMAC-SHA256 signed session cookie admin auth with sliding expiration + Remember Me (30 days), role-based access (admin/staff), bcrypt password hashing, SESSION_SECRET env var |
 | Legal | Binary options risk warning + geo-restriction, affiliate disclosure, governing law (Belize) |
