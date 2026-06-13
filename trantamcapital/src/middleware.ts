@@ -33,9 +33,9 @@ class RateLimiter {
 }
 
 const authLimiter = new RateLimiter(60_000, 10);       // 10 requests/minute for auth
-const loginLimiter = new RateLimiter(60_000, 5);       // 5 requests/minute for login (brute force protection)
+const loginLimiter = new RateLimiter(60_000, 3);       // 3 requests/minute for login (brute force protection)
+const newsletterLimiter = new RateLimiter(120_000, 5); // 5 requests/2 minutes for newsletter (spam target)
 const contactLimiter = new RateLimiter(60_000, 20);     // 20 requests/minute for contact
-const newsletterLimiter = new RateLimiter(60_000, 10);  // 10 requests/minute for newsletter (spam target)
 const adminProxyLimiter = new RateLimiter(60_000, 120); // 120 requests/minute for admin proxy
 const generalLimiter = new RateLimiter(60_000, 60);     // 60 requests/minute for general
 

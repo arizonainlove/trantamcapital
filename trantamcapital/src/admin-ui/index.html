@@ -1385,7 +1385,23 @@ body { font-family: var(--font); color: var(--text); background: var(--bg); min-
       return res.json().then(function(data) {
         clearTimeout(loginTimeout);
         if (!res.ok) {
-          errorEl.textContent = data.error || 'Login failed';
+          if (res.status === 429 && data.retryAfterMinutes) {
+            var mins = data.retryAfterMinutes;
+            errorEl.textContent = 'Too many attempts. Please wait ' + mins + ' minute' + (mins > 1 ? 's' : '') + '.';
+            var btn = document.querySelector('#login-form .btn-primary');
+            if (btn) {
+              btn.disabled = true;
+              var totalSec = mins * 60;
+              btn.textContent = 'Wait ' + mins + 'm...';
+              var cd = setInterval(function() {
+                totalSec--;
+                if (totalSec <= 0) { clearInterval(cd); resetLoginBtn(); }
+                else { btn.textContent = 'Wait ' + Math.ceil(totalSec / 60) + 'm...'; }
+              }, 1000);
+            }
+          } else {
+            errorEl.textContent = data.error || 'Login failed';
+          }
           errorEl.style.display = 'block';
           resetLoginBtn();
           return;

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { stripHtml } from "@/lib/sanitize";
 import { signSession } from "@/lib/session";
+import { checkBruteForce, recordFailedAttempt, resetAttempts } from "@/lib/brute-force";
 import users from "@/data/admin-users.json";
 
 interface AdminUser {
@@ -11,9 +12,17 @@ interface AdminUser {
   name: string;
 }
 
+function getClientIp(request: Request): string {
+  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    || request.headers.get("x-real-ip")
+    || "127.0.0.1";
+}
+
 export async function POST(request: Request) {
   try {
     const { username, password, rememberMe } = await request.json();
+    const ip = getClientIp(request);
+    const safeUsername = typeof username === "string" ? stripHtml(username.trim().toLowerCase()) : "";
 
     // Validate input
     if (!username || !password) {
@@ -24,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    if (username.trim().length < 2 || username.trim().length > 50) {
+    if (safeUsername.length < 2 || safeUsername.length > 50) {
       return NextResponse.json({ error: "Invalid username" }, { status: 400 });
     }
 
@@ -32,8 +41,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
 
-    // Sanitize username (XSS prevention)
-    const safeUsername = stripHtml(username.trim().toLowerCase());
+    // Brute force check before credential validation
+    const { blocked, retryAfterMinutes } = checkBruteForce(safeUsername, ip);
+    if (blocked) {
+      return NextResponse.json({
+        error: `Too many failed attempts. Try again in ${retryAfterMinutes} minute${retryAfterMinutes > 1 ? "s" : ""}.`,
+        retryAfterMinutes,
+      }, {
+        status: 429,
+        headers: { "Retry-After": String(retryAfterMinutes * 60) },
+      });
+    }
 
     // Find user (case-insensitive lookup)
     const user = (users as AdminUser[]).find(
@@ -41,14 +59,37 @@ export async function POST(request: Request) {
     );
 
     if (!user) {
+      const { retryAfterMinutes: lockoutMin } = recordFailedAttempt(safeUsername, ip);
+      if (lockoutMin > 0) {
+        return NextResponse.json({
+          error: `Too many failed attempts. Try again in ${lockoutMin} minute${lockoutMin > 1 ? "s" : ""}.`,
+          retryAfterMinutes: lockoutMin,
+        }, {
+          status: 429,
+          headers: { "Retry-After": String(lockoutMin * 60) },
+        });
+      }
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
     // Verify password with bcrypt (hash + salt)
     const isValid = await bcrypt.compare(password, user.passwordHash);
     if (!isValid) {
+      const { retryAfterMinutes: lockoutMin } = recordFailedAttempt(safeUsername, ip);
+      if (lockoutMin > 0) {
+        return NextResponse.json({
+          error: `Too many failed attempts. Try again in ${lockoutMin} minute${lockoutMin > 1 ? "s" : ""}.`,
+          retryAfterMinutes: lockoutMin,
+        }, {
+          status: 429,
+          headers: { "Retry-After": String(lockoutMin * 60) },
+        });
+      }
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
+
+    // Successful login — reset brute force counters
+    resetAttempts(safeUsername, ip);
 
     // Create session with user info
     const response = NextResponse.json({
