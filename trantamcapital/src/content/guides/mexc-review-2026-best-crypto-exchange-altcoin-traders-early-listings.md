@@ -67,7 +67,7 @@ MEXC offers several ways to get in on new token launches: Launchpad, Kickstarter
 
 ### 6. Copy Trading and Automated Tools
 
-MEXC has expanded into social trading with Futures Copy Trading, strategy sharing, and professional trader rankings. Beginners can learn from experienced traders while keeping control over their risk settings.
+MEXC has expanded into social trading with Futures Copy Trading, strategy sharing, and professional trader rankings. For a full overview of automated trading tools, visit our [tools page](/tools). Beginners can learn from experienced traders while keeping control over their risk settings.
 
 ### 7. Global Accessibility
 
