@@ -45,12 +45,12 @@ Financial market information website covering cryptocurrency, forex, binary opti
 
 #### Sub Pages / Detail Pages — Dynamic Routes (16)
 - `/forex-broker/[slug]` — 5 broker reviews: Exness, IC Markets, Pepperstone, FxPro, XM
-- `/crypto-exchange/[slug]` — 5 exchange reviews: Binance, Coinbase, Bybit, OKX, Bitget
+- `/crypto-exchange/[slug]` — 6 exchange reviews: Binance, Coinbase, Bybit, OKX, Bitget, MEXC
 - `/binary-option/[slug]` — 5 platform reviews: IQ Option, Pocket Option, Quotex, Binomo, Deriv
 - `/proprietary-trading-firm/[slug]` — 1 prop firm review: Blue Guardian
 
 #### Dynamic Routes (23)
-- `/news/[slug]` — 19 article detail pages (12 news + 7 platform guides), statically generated via `generateStaticParams`
+- `/news/[slug]` — 17 article detail pages (12 news + 5 platform guides), statically generated via `generateStaticParams`
 - `/news/categories/[category]` — 5 category-filtered news pages (cryptocurrency, forex, binary-options, markets, proprietary-trading-firm), statically generated via `generateStaticParams`
 
 #### Components

@@ -40,7 +40,7 @@ description: Custom Admin UI for content management (replaces Decap CMS)
 | Broker Editor | Form-based: name, type, rating, features, review URL, visit URL, logo upload, highlights, **+34 comparison & rating fields** (includes forex, crypto, binary, and prop firm fields) |
 | Review Editor | Form-based: broker select, pros/cons, trust score, overview (markdown) |
 | Menu Editor | Drag-and-drop reorder, add/edit/delete items, supports dropdown children |
-| Guide Editor | Platform dropdown (crypto-exchange, forex-broker, binary-option, proprietry-trading-firm), title, date, author, image upload, excerpt, body. Same markdown toolbar (Bold/Italic/Link/Image). |
+| Guide Editor | Platform dropdown (crypto-exchange, forex-broker, binary-option, proprietry-trading-firm), title, date, author, image upload, excerpt, body. Same markdown toolbar (Bold/Italic/Link/Image). Note: all guide JS functions must be exported to `window` for inline onclick handlers to work. |
 | Image upload | File picker → base64 → GitHub API PUT to `public/images/uploads/` |
 | Create | Generates slug from title/name, creates `.md` with frontmatter |
 | Edit | Reads existing file, updates content via GitHub API |
