@@ -230,7 +230,7 @@ PROTRADEVISION.COM
 - Mobile: icon search trong hamburger menu
 - **Mục đích**: 25-40 tuổi có thói quen gõ tìm kiếm nhanh "best broker low spread", "ethereum price"
 
-#### Mobile Navigation — Gom nhóm Platforms
+#### Mobile Navigation — Gom nhóm Trading Platforms
 Hiện tại 10 mục menu trên mobile quá dài. Gom 3 mục thành dropdown:
 
 ```
@@ -238,7 +238,7 @@ Home
 News
 For Beginners
 Investment Analysis
-Platforms ▼           ← Dropdown mới
+Trading Platforms ▼           ← Dropdown mới
   ├─ Forex Broker
   ├─ Crypto Exchange
   └─ Binary Option

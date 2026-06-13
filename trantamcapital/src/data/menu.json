@@ -3,7 +3,7 @@
   { "label": "News", "href": "/news" },
   { "label": "For Beginners", "href": "/for-beginners" },
   { "label": "Investment Analysis", "href": "/investment-analysis" },
-  { "label": "Platforms", "children": [
+  { "label": "Trading Platforms", "children": [
     { "label": "Forex Broker", "href": "/forex-broker" },
     { "label": "Crypto Exchange", "href": "/crypto-exchange" },
     { "label": "Binary Option", "href": "/binary-option" },

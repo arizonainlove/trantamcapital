@@ -243,7 +243,7 @@
 ## PHẦN 19: MOBILE RESPONSIVE
 
 - [x] Mobile: hamburger menu hoạt động
-- [x] Mobile: nav gom Platforms ▼ thành dropdown
+- [x] Mobile: nav gom Trading Platforms ▼ thành dropdown
 - [x] Mobile: cards 1 cột, padding 16px
 - [x] Mobile: Market Overview thành card scroll ngang
 - [x] Tablet: 2-3 cột

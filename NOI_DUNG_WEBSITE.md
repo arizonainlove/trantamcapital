@@ -35,7 +35,7 @@
 - News (`/news`)
 - For Beginners (`/for-beginners`)
 - Investment Analysis (`/investment-analysis`)
-- Platforms ▼ (dropdown)
+- Trading Platforms ▼ (dropdown)
   - Forex Broker (`/forex-broker`)
   - Crypto Exchange (`/crypto-exchange`)
   - Binary Option (`/binary-option`)
