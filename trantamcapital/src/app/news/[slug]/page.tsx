@@ -2,15 +2,19 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllNews, getArticleBySlug } from "@/lib/content";
+import { getAllNews, getAllGuides, getArticleBySlug } from "@/lib/content";
 import NewsletterForm from "@/components/NewsletterForm";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const allNews = getAllNews();
+const allGuides = getAllGuides();
 
 export async function generateStaticParams() {
-  return allNews.map((article) => ({ slug: article.slug }));
+  return [
+    ...allNews.map((article) => ({ slug: article.slug })),
+    ...allGuides.map((guide) => ({ slug: guide.slug })),
+  ];
 }
 
 type Props = { params: Promise<{ slug: string }> };

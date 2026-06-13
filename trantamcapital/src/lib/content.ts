@@ -34,14 +34,90 @@ function loadCmsArticles(): NewsArticle[] {
   });
 }
 
+export interface GuideArticle {
+  slug: string;
+  title: string;
+  platform: string;
+  date: string;
+  author: string;
+  image?: string;
+  excerpt: string;
+  content: string;
+}
+
 export function getAllNews(): NewsArticle[] {
   const cmsArticles = loadCmsArticles();
   if (cmsArticles.length > 0) return cmsArticles;
   return staticNews;
 }
 
+export function getAllGuides(): GuideArticle[] {
+  const contentDir = path.join(process.cwd(), "src/content/guides");
+  if (!fs.existsSync(contentDir)) return [];
+
+  const files = fs
+    .readdirSync(contentDir)
+    .filter((f) => f.endsWith(".md"));
+
+  const guides = files.map((file) => {
+    const raw = fs.readFileSync(path.join(contentDir, file), "utf-8");
+    const { data, content } = matter(raw);
+    const pubDate = data.date ? new Date(data.date) : new Date();
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December",
+    ];
+    return {
+      slug: file.replace(/\.md$/, ""),
+      title: sanitize(data.title) || "Untitled",
+      platform: sanitize(data.platform) || "",
+      date: `${months[pubDate.getMonth()]} ${pubDate.getDate()}, ${pubDate.getFullYear()}`,
+      author: sanitize(data.author) || "ProTradeVision",
+      image: data.image || undefined,
+      excerpt: sanitize(data.excerpt) || "",
+      content: sanitize(content.trim()),
+    } as GuideArticle;
+  });
+
+  return guides.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  });
+}
+
+export function getGuidesByPlatform(platform: string): GuideArticle[] {
+  return getAllGuides().filter((g) => g.platform === platform);
+}
+
+function platformToCategory(platform: string): NewsArticle["category"] {
+  const map: Record<string, NewsArticle["category"]> = {
+    "crypto-exchange": "Cryptocurrency",
+    "forex-broker": "Forex",
+    "binary-option": "Binary Options",
+    "proprietry-trading-firm": "Proprietary Trading Firm",
+  };
+  return map[platform] || "Markets";
+}
+
 export function getArticleBySlug(slug: string): NewsArticle | undefined {
-  return getAllNews().find((a) => a.slug === slug);
+  const news = getAllNews().find((a) => a.slug === slug);
+  if (news) return news;
+  // Fallback to guides (e.g. crypto exchange guides rendered via news/[slug])
+  const guide = getAllGuides().find((g) => g.slug === slug);
+  if (guide) {
+    return {
+      slug: guide.slug,
+      title: guide.title,
+      date: guide.date,
+      category: platformToCategory(guide.platform),
+      excerpt: guide.excerpt,
+      content: guide.content,
+      author: guide.author,
+      image: guide.image,
+    };
+  }
+  return undefined;
 }
 
 export const categories = ["All", "Cryptocurrency", "Forex", "Binary Options", "Markets", "Proprietary Trading Firm"];

@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
 import BrokerCard from "@/components/BrokerCard";
-import { getAllBrokers } from "@/lib/content";
+import GuidesSection from "@/components/GuidesSection";
+import { getAllBrokers, getGuidesByPlatform } from "@/lib/content";
 import { cryptoComparisonFields, type Broker } from "@/data/brokers";
 
 export const metadata: Metadata = {
   title: "Crypto Exchange Reviews",
-  description: "Compare top cryptocurrency exchanges. Read expert reviews on fees, security, features, and trading experience.",
+  description: "Compare top cryptocurrency exchanges. Read expert reviews, guides, and comparisons on fees, security, features, and trading experience.",
 };
 
 function RatingBadge({ value }: { value?: string }) {
@@ -29,6 +30,7 @@ function RatingBadge({ value }: { value?: string }) {
 
 export default function CryptoExchange() {
   const exchanges = getAllBrokers().filter((b) => b.type === "Crypto Exchange");
+  const guides = getGuidesByPlatform("crypto-exchange");
 
   return (
     <>
@@ -40,6 +42,11 @@ export default function CryptoExchange() {
           </p>
         </div>
       </section>
+
+      {/* Guides + Brokers Sidebar */}
+      {guides.length > 0 && (
+        <GuidesSection guides={guides} brokers={exchanges} />
+      )}
 
       {/* Exchanges Grid */}
       <section className="py-12">
@@ -59,7 +66,7 @@ export default function CryptoExchange() {
 
       {/* Comparison Table */}
       {exchanges.length > 0 && (
-        <section className="py-12 bg-section">
+        <section id="exchange-comparison" className="py-12 bg-section">
           <div className="max-w-[1200px] mx-auto px-4">
             <SectionTitle title="Exchange Comparison" subtitle="Key features and ratings at a glance" />
             <div className="overflow-x-auto">
